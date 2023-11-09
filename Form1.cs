@@ -18,6 +18,17 @@ namespace TP2_Lab
         public Form1()
         {
             InitializeComponent();
+            if (File.Exists(miArchivo.Name))
+            {
+                FileStream archivo = new FileStream(miArchivo.Name,FileMode.Open, FileAccess.Read);
+                BinaryFormatter serUnser = new BinaryFormatter();
+                nuevoS = (Sistema)serUnser.Deserialize(miArchivo);
+                archivo.Close();
+            }
+            else
+            {
+                nuevoS = new Sistema();
+            }
         }
         FileStream miArchivo;
         Propietario propietario;
@@ -328,16 +339,30 @@ namespace TP2_Lab
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            
+            if (File.Exists(miArchivo.Name)) File.Delete(miArchivo.Name);
+            FileStream archivo = new FileStream(miArchivo.Name, FileMode.CreateNew, FileAccess.Write);
+            BinaryFormatter serUnser = new BinaryFormatter();
+            serUnser.Serialize(archivo, nuevoS);
+            archivo.Close();
         }
 
         private void btnExportar_Click(object sender, EventArgs e)
         {
-            if (File.Exist(nom)) FileDialog.Delete(nom);
-            FileStream archivo = new FileStream(nombrecito, FileMode.CreateNew, FileAccess.Write);
-            BinaryFormatter serUnser = new BinaryFormatter();
-            serUnser.Serialize(nombrecito, unareservan);
-            archivo.Close();
+            string archivo = "misDatos.txt";
+            saveFileDialog1.FileName = archivo;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                archivo = saveFileDialog1.FileName;
+                if (File.Exists(archivo)) File.Delete(archivo);
+                miArchivo = new FileStream(archivo, FileMode.CreateNew, FileAccess.Write);
+                StreamWriter sw = new StreamWriter(miArchivo);
+                foreach(string linea in lBcontenido.Items)
+                {
+                    sw.WriteLine(linea);
+                }
+                sw.Close();
+                miArchivo.Close();
+            }
         }
 
         private void btnImportar_Click(object sender, EventArgs e)

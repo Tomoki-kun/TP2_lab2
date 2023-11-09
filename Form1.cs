@@ -166,7 +166,7 @@ namespace TP2_Lab
             {
                 string nombre;
                 long dni;
-                if (nuevoC.tBnombreC.Text == "" || nuevoC.tBDNI.Text == "" || numCantHuespedes.Text == "")
+                if (nuevoC.tBnombreC.Text == "" || numCantHuespedes.Text == "")
                 {
                     MessageBox.Show("Faltan datos por rellenar");
                 }
@@ -175,7 +175,7 @@ namespace TP2_Lab
                     try
                     {
                         nombre = nuevoC.tBnombreC.Text;
-                        dni = Convert.ToInt64(nuevoC.tBDNI.Text);
+                        dni = (long)nuevoC.numDNI.Value;
                         Cliente miCliente = new Cliente(nombre, dni);
                         int huespedes = Convert.ToInt32(numCantHuespedes.Text);
                         DateTime inicio = Calendar.SelectionRange.Start;
@@ -334,7 +334,34 @@ namespace TP2_Lab
 
         private void btnEliminarReserva_Click(object sender, EventArgs e)
         {
-
+            FCliente vCliente = new FCliente();
+            if(vCliente.ShowDialog() == DialogResult.OK)
+            {
+                if (vCliente.tBnombreC.Text != "")
+                {
+                    string nombre;
+                    long dni;
+                    bool encontrada = false;
+                    foreach (Propiedad prop in nuevoS.ListaPropiedad)
+                    {
+                        foreach (Reserva resv in prop.ListaReservas)
+                        {
+                            nombre = resv.Cliente.ToString();
+                            dni = resv.Cliente.DNI;
+                            if (nombre == vCliente.tBnombreC.Text && dni == (long)vCliente.numDNI.Value)
+                            {
+                                prop.ListaReservas.Remove(resv);
+                                MessageBox.Show("Reserva Cancelada", "Cancelación exitosa");
+                                encontrada = true;
+                            }
+                        }
+                    }
+                    if (!encontrada)
+                        MessageBox.Show("No se encontró ninguna reserva de este cliente");
+                }
+                else
+                    MessageBox.Show("Complete los campos");
+            }
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)

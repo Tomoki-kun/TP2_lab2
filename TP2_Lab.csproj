@@ -73,6 +73,12 @@
     <Compile Include="Propiedad.cs" />
     <Compile Include="Propietario.cs" />
     <Compile Include="Reserva.cs" />
+    <Compile Include="FReservaImportada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FReservaImportada.Designer.cs">
+      <DependentUpon>FReservaImportada.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sistema.cs" />
     <EmbeddedResource Include="FCliente.resx">
       <DependentUpon>FCliente.cs</DependentUpon>
@@ -92,6 +98,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FReservaImportada.resx">
+      <DependentUpon>FReservaImportada.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

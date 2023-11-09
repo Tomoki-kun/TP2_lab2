@@ -356,9 +356,14 @@ namespace TP2_Lab
                 if (File.Exists(archivo)) File.Delete(archivo);
                 miArchivo = new FileStream(archivo, FileMode.CreateNew, FileAccess.Write);
                 StreamWriter sw = new StreamWriter(miArchivo);
-                foreach(string linea in lBcontenido.Items)
+                string linea;
+                foreach(Propiedad prop in nuevoS.ListaPropiedad)
                 {
-                    sw.WriteLine(linea);
+                    foreach(Reserva resv in prop.ListaReservas)
+                    {
+                        linea = resv.ToString();
+                        sw.WriteLine(linea);
+                    }
                 }
                 sw.Close();
                 miArchivo.Close();
@@ -367,19 +372,28 @@ namespace TP2_Lab
 
         private void btnImportar_Click(object sender, EventArgs e)
         {
+            FReservaImportada vReservaImportada = new FReservaImportada();
+            vReservaImportada.dGReservaImportada.RowHeadersVisible = false;
             openFileDialog1.Filter = "archivo de valores separados por coma (*.csv) | *.csv";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string archivo = openFileDialog1.FileName;
                 miArchivo = new FileStream(archivo, FileMode.Open, FileAccess.Read);
                 StreamReader sr = new StreamReader(miArchivo);
-                lBcontenido.Items.Clear();
+                
                 string renglon;
                 while (!sr.EndOfStream)
                 {
                     renglon = sr.ReadLine();
-                    lBcontenido.Items.Add(renglon);
+                    int filaIndex = vReservaImportada.dGReservaImportada.Rows.Add();
+                    DataGridViewRow fila = DGPropiedades.Rows[filaIndex];
+                    string[] datos = renglon.Split(';'); 
+                    for(int i=0;i<datos.Length;i++)
+                    {
+                        fila.Cells[i].Value = datos[i];
+                    }
                 }
+                vReservaImportada.ShowDialog();
                 sr.Close();
                 miArchivo.Close();
             }

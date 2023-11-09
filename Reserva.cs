@@ -11,13 +11,11 @@ namespace TP2_Lab
     [Serializable]
     public class Reserva : IComparable
     {
-        //List<Cliente> listaCliente=new List<Cliente>();
-        //private ArrayList listaCliente = new ArrayList();
-
         private Cliente cliente;
         private int numReserva;
         private DateTime fechaEntrada;
         private DateTime fechaSalida;
+        private DateTime realizado;
         private int cantPersonas;
         public Reserva(Cliente cliente, int numReserva, int cantidad, DateTime fechaEntrada, DateTime fechaSalida)
         {
@@ -52,6 +50,11 @@ namespace TP2_Lab
         public int CompareTo(object obj)
         {
             return numReserva.CompareTo(((Reserva)obj).numReserva);
+        }
+        public override string ToString()
+        {
+            return Cliente + ";" + numReserva.ToString() + ";" + FechaEntrada.ToString() + ";" + 
+                FechaSalida.ToString() + ";" + realizado.ToString() + ";" + cantPersonas.ToString();
         }
     }
 }

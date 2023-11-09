@@ -14,6 +14,10 @@ namespace TP2_Lab
     public class Sistema
     {
         private ArrayList listaPropiedad;
+        public ArrayList ListaPropiedad
+        {
+            get { return listaPropiedad; }
+        }
 
         public int CantPropiedades
         {

@@ -21,7 +21,7 @@ namespace TP2_Lab
 
         public override string ToString()
         {
-            return "Cliente: " + nombre;
+            return nombre;
         }
     }
 }

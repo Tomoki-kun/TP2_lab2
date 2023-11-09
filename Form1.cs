@@ -367,6 +367,7 @@ namespace TP2_Lab
 
         private void btnImportar_Click(object sender, EventArgs e)
         {
+            openFileDialog1.Filter = "archivo de valores separados por coma (*.csv) | *.csv";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string archivo = openFileDialog1.FileName;

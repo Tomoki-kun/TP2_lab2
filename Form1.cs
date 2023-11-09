@@ -18,17 +18,17 @@ namespace TP2_Lab
         public Form1()
         {
             InitializeComponent();
-            if (File.Exists(miArchivo.Name))
-            {
-                FileStream archivo = new FileStream(miArchivo.Name,FileMode.Open, FileAccess.Read);
-                BinaryFormatter serUnser = new BinaryFormatter();
-                nuevoS = (Sistema)serUnser.Deserialize(miArchivo);
-                archivo.Close();
-            }
-            else
-            {
-                nuevoS = new Sistema();
-            }
+            //if (File.Exists(miArchivo.Name))
+            //{
+            //    FileStream archivo = new FileStream(miArchivo.Name,FileMode.Open, FileAccess.Read);
+            //    BinaryFormatter serUnser = new BinaryFormatter();
+            //    nuevoS = (Sistema)serUnser.Deserialize(miArchivo);
+            //    archivo.Close();
+            //}
+            //else
+            //{
+            //    nuevoS = new Sistema();
+            //}
         }
         FileStream miArchivo;
         Propietario propietario;
@@ -339,11 +339,14 @@ namespace TP2_Lab
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (File.Exists(miArchivo.Name)) File.Delete(miArchivo.Name);
-            FileStream archivo = new FileStream(miArchivo.Name, FileMode.CreateNew, FileAccess.Write);
-            BinaryFormatter serUnser = new BinaryFormatter();
-            serUnser.Serialize(archivo, nuevoS);
-            archivo.Close();
+            if(miArchivo != null)
+            {
+                if (File.Exists(miArchivo.Name)) File.Delete(miArchivo.Name);
+                FileStream archivo = new FileStream(miArchivo.Name, FileMode.CreateNew, FileAccess.Write);
+                BinaryFormatter serUnser = new BinaryFormatter();
+                serUnser.Serialize(archivo, nuevoS);
+                archivo.Close();
+            }
         }
 
         private void btnExportar_Click(object sender, EventArgs e)

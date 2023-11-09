@@ -38,5 +38,17 @@ namespace TP2_Lab
             gBCasas.Visible = false;
             gBHoteles.Visible = true;
         }
+
+        private void rBcasaDia_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rBcasaDia.Checked)
+            {
+                gbCasaXDia.Visible = true;
+            }
+            else
+            {
+                gbCasaXDia.Visible = false;
+            }
+        }
     }
 }

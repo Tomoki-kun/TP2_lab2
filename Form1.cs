@@ -223,7 +223,7 @@ namespace TP2_Lab
             if (!string.IsNullOrWhiteSpace(cBLocalidad.Text))
             {
                 int cant = DGPropiedades.RowCount;
-                for (int i = 0; i < cant; i++)
+                for (int i = 0; i < cant-1; i++)
                 {
                     DataGridViewCell celda = DGPropiedades.Rows[i].Cells[0];
                     if (celda.Value != null && celda.Value is Propiedad)
@@ -236,7 +236,7 @@ namespace TP2_Lab
                         }
 
                         TimeSpan dias = Calendar.SelectionEnd - Calendar.SelectionStart;
-                        if (dias.Days > 1)
+                        if (dias.Days > 0)
                             if (nuevoS.Reservado(Calendar.SelectionStart, Calendar.SelectionEnd, propiedad))
                                 fechas = false;
 
@@ -427,6 +427,18 @@ namespace TP2_Lab
                 sr.Close();
                 miArchivo.Close();
             }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            foreach(Propiedad propiedad in nuevoS.ListaPropiedad)
+                DGAgregarPropiedad(propiedad);
+
+            cBLocalidad.ValueMember = "";
+            Calendar.SelectionRange.Start = DateTime.Now;
+            Calendar.SelectionRange.End = DateTime.Now;
+            numCantHuespedes.Value = 0;
+            cBTipoHabitaciones.ValueMember = "";
         }
     }
 }

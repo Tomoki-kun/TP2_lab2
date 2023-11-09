@@ -19,6 +19,10 @@ namespace TP2_Lab
             this.dni = dni;
         }
 
+        public long DNI
+        {
+            get { return dni; }
+        }
         public override string ToString()
         {
             return nombre;

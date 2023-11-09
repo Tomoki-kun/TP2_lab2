@@ -33,25 +33,28 @@ namespace TP2_Lab
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.tBnombreC = new System.Windows.Forms.TextBox();
-            this.tBDNI = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.numDNI = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numDNI)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(31, 51);
+            this.label1.Location = new System.Drawing.Point(46, 78);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.Size = new System.Drawing.Size(69, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre:";
             // 
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(34, 132);
+            this.button1.Location = new System.Drawing.Point(51, 203);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(112, 35);
             this.button1.TabIndex = 2;
             this.button1.Text = "Aceptar";
             this.button1.UseVisualStyleBackColor = true;
@@ -59,49 +62,69 @@ namespace TP2_Lab
             // button2
             // 
             this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.Location = new System.Drawing.Point(128, 132);
+            this.button2.Location = new System.Drawing.Point(192, 203);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(112, 35);
             this.button2.TabIndex = 3;
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // tBnombreC
             // 
-            this.tBnombreC.Location = new System.Drawing.Point(103, 48);
+            this.tBnombreC.Location = new System.Drawing.Point(154, 74);
+            this.tBnombreC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tBnombreC.Name = "tBnombreC";
-            this.tBnombreC.Size = new System.Drawing.Size(100, 20);
+            this.tBnombreC.Size = new System.Drawing.Size(148, 26);
             this.tBnombreC.TabIndex = 4;
-            // 
-            // tBDNI
-            // 
-            this.tBDNI.Location = new System.Drawing.Point(103, 74);
-            this.tBDNI.Name = "tBDNI";
-            this.tBDNI.Size = new System.Drawing.Size(100, 20);
-            this.tBDNI.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(43, 74);
+            this.label3.Location = new System.Drawing.Point(64, 114);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 13);
+            this.label3.Size = new System.Drawing.Size(41, 20);
             this.label3.TabIndex = 7;
             this.label3.Text = "DNI:";
             // 
+            // numDNI
+            // 
+            this.numDNI.Location = new System.Drawing.Point(154, 114);
+            this.numDNI.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
+            this.numDNI.Minimum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numDNI.Name = "numDNI";
+            this.numDNI.Size = new System.Drawing.Size(120, 26);
+            this.numDNI.TabIndex = 8;
+            this.numDNI.Value = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            // 
             // FCliente
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(229, 173);
+            this.ClientSize = new System.Drawing.Size(344, 266);
+            this.Controls.Add(this.numDNI);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.tBDNI);
             this.Controls.Add(this.tBnombreC);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FCliente";
             this.Text = "FCliente";
+            ((System.ComponentModel.ISupportInitialize)(this.numDNI)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -114,6 +137,6 @@ namespace TP2_Lab
         private System.Windows.Forms.Button button2;
         public System.Windows.Forms.TextBox tBnombreC;
         private System.Windows.Forms.Label label3;
-        public System.Windows.Forms.TextBox tBDNI;
+        public System.Windows.Forms.NumericUpDown numDNI;
     }
 }

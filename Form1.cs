@@ -181,7 +181,7 @@ namespace TP2_Lab
                         DateTime inicio = Calendar.SelectionRange.Start;
                         DateTime fin = Calendar.SelectionRange.End;
                         prop = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
-                        if (nuevoS.Reservado(inicio, fin, prop) && prop != null)
+                        if (!nuevoS.Reservado(inicio, fin, prop) && prop != null)
                         {
                             Reserva miReserva = new Reserva(miCliente, cantReservas, huespedes, inicio, fin);
                             cantReservas++;

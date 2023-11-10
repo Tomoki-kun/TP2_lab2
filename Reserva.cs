@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
+using System.Windows.Forms;
 
 namespace TP2_Lab
 {
@@ -16,6 +17,7 @@ namespace TP2_Lab
         private DateTime fechaEntrada;
         private DateTime fechaSalida;
         private DateTime realizado;
+        private double precioFinal;
         private int cantPersonas;
         public Reserva(Cliente cliente, int numReserva, int cantidad, DateTime fechaEntrada, DateTime fechaSalida)
         {
@@ -24,6 +26,11 @@ namespace TP2_Lab
             this.fechaEntrada = fechaEntrada;
             this.fechaSalida = fechaSalida;
             cantPersonas = cantidad;
+        }
+        public DateTime Realizado
+        {
+            get { return realizado; }
+            set { realizado = value; }
         }
         public Cliente Cliente
         {
@@ -40,12 +47,10 @@ namespace TP2_Lab
             get { return fechaSalida; }
             set { fechaSalida = value; }
         }
-
-        public int DiasAReservar(DateTime inicio, DateTime fin)
+        public double PrecioFinal
         {
-            TimeSpan duracionReserva = fin - inicio;
-            int numeroDias = duracionReserva.Days;
-            return numeroDias;
+            get { return precioFinal; }
+            set { precioFinal = value; }
         }
         public int CompareTo(object obj)
         {
@@ -55,6 +60,24 @@ namespace TP2_Lab
         {
             return Cliente + ";" + numReserva.ToString() + ";" + FechaEntrada.ToString() + ";" + 
                 FechaSalida.ToString() + ";" + realizado.ToString() + ";" + cantPersonas.ToString();
+        }
+        public void Comprobante(Propiedad prop)
+        {
+            string ss;
+            if (prop is Habitaciones)
+                ss = "\n\tNro de habitacion: " + prop.Nro.ToString() + "\n\tTipo de Habitacion" + ((Habitaciones)prop).TipoHabitacion;
+            else
+                ss = "\n\tNro: " + prop.Nro;
+            string ret = "Datos de alojamiento: \n\tDireccion:" + prop.Direccion + ss + 
+                "\nCantidad personas admitidos: " + cantPersonas + 
+                "\nDatos Cliente: \n\tNombre: " + cliente + "\n\tDNI: " + cliente.DNI.ToString() +
+                "\nFecha y Hora reserva: " + Realizado.ToString("U") +
+                "\nFecha CheckIn: " + fechaEntrada +
+                "\nFecha CheckOut: " + fechaSalida +
+                "\nCosto por día: " + prop.PrecioBasico.ToString() +
+                "\nCosto total: " + precioFinal;
+
+            MessageBox.Show(ret);
         }
     }
 }

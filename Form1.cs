@@ -75,6 +75,7 @@ namespace TP2_Lab
                         string direccion = nuevaP.tBdireccion.Text;
                         int cantCamas = Convert.ToInt32(nuevaP.numCamas.Text);
                         double precio = Convert.ToDouble(nuevaP.numPrecio.Value);
+                        int nro = Convert.ToInt32(nuevaP.numNro.Value);
 
                         if (nuevaP.rBCasas.Checked)
                         {
@@ -85,19 +86,18 @@ namespace TP2_Lab
                             int cantDiasPermitidos = Convert.ToInt32(nuevaP.numDiasPermitidos.Value);
                             if (nuevaP.rBcasaDia.Checked)
                             {
-                                prop = new Casa(cantDiasPermitidos, propietario, precio, direccion, localidad, cantCamas, servicios);
+                                prop = new Casa(nro, cantDiasPermitidos, propietario, precio, direccion, localidad, cantCamas, servicios);
                             }
                             else if (nuevaP.rBcasaFinde.Checked)
                             {
-                                prop = new CasaFindeSemana(0, propietario, precio, direccion, localidad, cantCamas, servicios);
+                                prop = new CasaFindeSemana(nro, 0, propietario, precio, direccion, localidad, cantCamas, servicios);
                             }
                         }
                         if (nuevaP.rBHoteles.Checked)
                         {
-                            int nroHabitacion = Convert.ToInt32(nuevaP.numNroHabitacion.Value);
                             int estrellas = Convert.ToInt32(nuevaP.numEstrellas.Text);
                             string tipoHabitacion = nuevaP.cBTipoHabitacion.ValueMember;
-                            prop = new Habitaciones(estrellas, precio, direccion, localidad, nroHabitacion, servicios, cantCamas, tipoHabitacion);
+                            prop = new Habitaciones(nro,estrellas, precio, direccion, localidad, servicios, cantCamas, tipoHabitacion);
                         }
                         nuevoS.AgregarPropiedad(prop);
                         DGAgregarPropiedad(prop);
@@ -180,11 +180,40 @@ namespace TP2_Lab
                         int huespedes = Convert.ToInt32(numCantHuespedes.Text);
                         DateTime inicio = Calendar.SelectionRange.Start;
                         DateTime fin = Calendar.SelectionRange.End;
+                        TimeSpan duracionReserva = fin - inicio;
+                        int numeroDias = duracionReserva.Days;
                         prop = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
                         if (!nuevoS.Reservado(inicio, fin, prop) && prop != null)
                         {
-                            Reserva miReserva = new Reserva(miCliente, cantReservas, huespedes, inicio, fin);
-                            cantReservas++;
+                            if (prop is CasaFindeSemana && inicio.DayOfWeek == DayOfWeek.Friday && fin.DayOfWeek == DayOfWeek.Sunday
+                                 || prop is Casa && numeroDias >= ((Casa)prop).DiasPermitidos || prop is Habitaciones)
+                            {
+                                Reserva miReserva = new Reserva(miCliente, cantReservas, huespedes, inicio, fin);
+                                cantReservas++;
+                                double costoFinal=0;
+                                if(prop is Habitaciones)
+                                {
+                                     costoFinal = (prop.CalcularPrecio()*numeroDias)+((prop.CalcularPrecio()*numeroDias*0.03));
+                                }
+                                if(prop is Casa)
+                                {
+                                     costoFinal = ((Casa)prop).DiasAReservar(numeroDias);
+
+                                }
+                                if(prop is CasaFindeSemana)
+                                {
+                                    costoFinal = prop.CalcularPrecio();
+                                }
+                                miReserva.PrecioFinal = costoFinal;
+                                miReserva.Realizado = DateTime.Now;
+                                miReserva.Comprobante(prop);
+                                prop.AgregarReserva(miReserva);
+                            }
+                            else
+                            {
+                                MessageBox.Show("No se pudo realizar la reserva","ERROR");
+                            }
+                            
                         }
                         else if (prop == null)
                         {
@@ -300,6 +329,7 @@ namespace TP2_Lab
             fila.Cells[2].Value = propiedad.Localidad;
             fila.Cells[5].Value = propiedad.PrecioBasico;
             fila.Cells[6].Value = propiedad.CantCamas;
+            fila.Cells[9].Value = propiedad.Nro;
 
             // Verificar el tipo de instancia y llenar las celdas correspondientes
             if (propiedad is Habitaciones)
@@ -309,7 +339,6 @@ namespace TP2_Lab
                 fila.Cells[4].Value = "---";
                 fila.Cells[7].Value = ((Habitaciones)propiedad).Estrellas;
                 fila.Cells[8].Value = ((Habitaciones)propiedad).TipoHabitacion;
-                fila.Cells[9].Value = ((Habitaciones)propiedad).NroHabitacion;
                 fila.Cells[10].Value = "Imagen";
             }
             else if (propiedad is Casa)

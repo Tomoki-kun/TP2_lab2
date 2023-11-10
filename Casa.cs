@@ -13,8 +13,8 @@ namespace TP2_Lab
         //private int diasTotales;     //dias totales
         Propietario miPropietario;
 
-        public Casa(int diasPermitidos, Propietario miPropietario, double precio, string direccion, string localidad, int cantCamas, bool[] servicios)
-            : base(precio, direccion, localidad, cantCamas, servicios)
+        public Casa(int nro,int diasPermitidos, Propietario miPropietario, double precio, string direccion, string localidad, int cantCamas, bool[] servicios)
+            : base(nro,precio, direccion, localidad, cantCamas, servicios)
         {
             this.diasPermitidos = diasPermitidos;
             this.miPropietario = miPropietario;

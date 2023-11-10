@@ -10,11 +10,12 @@ using System.Runtime.Serialization;
 namespace TP2_Lab
 {
     [Serializable]
-    public abstract class Propiedad: IComparable
+    public abstract class Propiedad : IComparable
     {
         protected double precioBasico;
         protected int cantCamas;
         protected bool estado;
+        protected int nro;
         private List<Reserva> listaReservas=new List<Reserva>();
         public List<Reserva> ListaReservas
         {
@@ -24,8 +25,9 @@ namespace TP2_Lab
         protected string direccion;
         protected string localidad;
         
-        public Propiedad(double precio,string direccion,string localidad, int cantCamas,bool[]servicios)
+        public Propiedad(int nro,double precio,string direccion,string localidad, int cantCamas,bool[]servicios)
         {
+            this.nro = nro;
             this.precioBasico = precio;
             this.direccion = direccion;
             this.cantCamas = cantCamas;
@@ -52,6 +54,14 @@ namespace TP2_Lab
         public string Localidad
         {
             get { return localidad; }
+        }
+        public int Nro
+        {
+            get { return nro; }
+        }
+        public string Direccion
+        {
+            get { return direccion; }
         }
 
         public int CompareTo(object obj)

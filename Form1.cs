@@ -36,23 +36,6 @@ namespace TP2_Lab
         Sistema nuevoS = new Sistema();
         int cantPropiedades = 0;
         int cantReservas = 0;
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            DGPropiedades.ColumnCount = 11;
-            DGPropiedades.Columns[0].HeaderCell.Value = "Objeto";
-            DGPropiedades.Columns[1].HeaderCell.Value = "Tipo";
-            DGPropiedades.Columns[2].HeaderCell.Value = "Localidad";
-            DGPropiedades.Columns[3].HeaderCell.Value = "Dias Permitidos";
-            DGPropiedades.Columns[4].HeaderCell.Value = "Propietario";
-            DGPropiedades.Columns[5].HeaderCell.Value = "Precio basico";
-            DGPropiedades.Columns[6].HeaderCell.Value = "Cantidad de camas";
-            DGPropiedades.Columns[7].HeaderCell.Value = "Estrellas";
-            DGPropiedades.Columns[8].HeaderCell.Value = "Tipo de Habitacion";
-            DGPropiedades.Columns[9].HeaderCell.Value = "N° Habitacion";
-            DGPropiedades.Columns[10].HeaderCell.Value = "Imagen";
-            DGPropiedades.Columns[0].Visible = false;
-            DGPropiedades.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        }
 
         private void btnAgregarPropiedad_Click(object sender, EventArgs e)
         {
@@ -76,7 +59,6 @@ namespace TP2_Lab
                         int cantCamas = Convert.ToInt32(nuevaP.numCamas.Text);
                         double precio = Convert.ToDouble(nuevaP.numPrecio.Value);
                         int nro = Convert.ToInt32(nuevaP.numNro.Value);
-
                         if (nuevaP.rBCasas.Checked)
                         {
                             string nombre = CapitalizarPalabras(nuevaP.tBnombre.Text);
@@ -327,19 +309,19 @@ namespace TP2_Lab
 
             fila.Cells[0].Value = propiedad;
             fila.Cells[2].Value = propiedad.Localidad;
-            fila.Cells[5].Value = propiedad.PrecioBasico;
-            fila.Cells[6].Value = propiedad.CantCamas;
-            fila.Cells[9].Value = propiedad.Nro;
+            fila.Cells[3].Value = propiedad.Direccion;
+            fila.Cells[4].Value = propiedad.Nro;
+            fila.Cells[6].Value = propiedad.PrecioBasico;
+            fila.Cells[7].Value = propiedad.CantCamas;
 
             // Verificar el tipo de instancia y llenar las celdas correspondientes
             if (propiedad is Habitaciones)
             {
                 fila.Cells[1].Value = "Habitaciones";
-                fila.Cells[3].Value = "---";
-                fila.Cells[4].Value = "---";
-                fila.Cells[7].Value = ((Habitaciones)propiedad).Estrellas;
-                fila.Cells[8].Value = ((Habitaciones)propiedad).TipoHabitacion;
-                fila.Cells[10].Value = "Imagen";
+                fila.Cells[5].Value = "---";
+                fila.Cells[8].Value = ((Habitaciones)propiedad).Estrellas;
+                fila.Cells[9].Value = ((Habitaciones)propiedad).TipoHabitacion;
+                fila.Cells[11].Value = ;
             }
             else if (propiedad is Casa)
             {
@@ -351,13 +333,11 @@ namespace TP2_Lab
                 else
                 {
                     fila.Cells[1].Value = "Casa Por Dia";
-                    fila.Cells[3].Value = ((Casa)propiedad).DiasPermitidos;
+                    fila.Cells[5].Value = ((Casa)propiedad).DiasPermitidos;
                 }
-                fila.Cells[4].Value = ((Casa)propiedad).Propietario;
-                fila.Cells[7].Value = "---";
                 fila.Cells[8].Value = "---";
                 fila.Cells[9].Value = "---";
-                fila.Cells[10].Value = "Imagen";
+                fila.Cells[10].Value = ((Casa)propiedad).Propietario;
             }
         }
 

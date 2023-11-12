@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TP2_Lab
 {
     [Serializable]
     internal class CasaFindeSemana:Casa
     {
-        public CasaFindeSemana(int nro, int diasPermitidos, Propietario miPropietario,double precio, string direccion,string localidad,int cantCamas, bool[]servicios)
-            :base(nro,diasPermitidos,miPropietario,precio,direccion, localidad, cantCamas,servicios)
+        public CasaFindeSemana(int nro, int diasPermitidos, Propietario miPropietario,double precio, string direccion,string localidad,int cantCamas, bool[]servicios, PictureBox pic)
+            :base(nro,diasPermitidos,miPropietario,precio,direccion, localidad, cantCamas,servicios, pic)
         {
 
         }

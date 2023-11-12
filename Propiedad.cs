@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.Drawing.Text;
 using System.Runtime.Serialization;
+using System.Windows.Forms;
 
 namespace TP2_Lab
 {
@@ -17,28 +18,36 @@ namespace TP2_Lab
         protected bool estado;
         protected int nro;
         private List<Reserva> listaReservas=new List<Reserva>();
+        PictureBox imagen;
         public List<Reserva> ListaReservas
         {
             get { return listaReservas; }
         }
         protected bool[] servicios = new bool[6];
-        protected string direccion;
-        protected string localidad;
+        private string direccion;
+        private string localidad;
         
-        public Propiedad(int nro,double precio,string direccion,string localidad, int cantCamas,bool[]servicios)
+        public Propiedad(int nro,double precio,string direccion,string localidad, int cantCamas,bool[]servicios, PictureBox pic)
         {
-            this.nro = nro;
-            this.precioBasico = precio;
-            this.direccion = direccion;
-            this.cantCamas = cantCamas;
-            this.localidad = localidad;
+            Nro = nro;
+            PrecioBasico = precio;
+            Direccion = direccion;
+            CantCamas = cantCamas;
+            Localidad = localidad;
             for(int i = 0; i < 6; i++)
             {
                 this.servicios[i] = servicios[i];
             }
+            Imagen = pic;
             
         }
         public abstract double CalcularPrecio();
+
+        public PictureBox Imagen
+        {
+            get { return imagen; }
+            private set { imagen = value; }
+        }
         public void AgregarReserva(Reserva miReserva)
         {
             listaReservas.Add(miReserva);
@@ -46,22 +55,27 @@ namespace TP2_Lab
         public int CantCamas
         {
             get { return cantCamas; }
+            private set { cantCamas = value;}
         }
         public double PrecioBasico
         {
             get { return precioBasico; }
+            private set { precioBasico = value;}
         }
         public string Localidad
         {
             get { return localidad; }
+            private set { localidad = value; }
         }
         public int Nro
         {
             get { return nro; }
+            private set { nro = value;}
         }
         public string Direccion
         {
             get { return direccion; }
+            private set { direccion = value;}
         }
 
         public int CompareTo(object obj)

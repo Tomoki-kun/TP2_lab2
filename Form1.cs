@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -52,6 +53,7 @@ namespace TP2_Lab
             DGPropiedades.Columns[10].HeaderCell.Value = "Imagen";
             DGPropiedades.Columns[0].Visible = false;
             DGPropiedades.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
         }
 
         private void btnAgregarPropiedad_Click(object sender, EventArgs e)
@@ -468,6 +470,53 @@ namespace TP2_Lab
             Calendar.SelectionRange.End = DateTime.Now;
             numCantHuespedes.Value = 0;
             cBTipoHabitaciones.ValueMember = "";
+        }
+
+        private void verAyudaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // en este no se implementa el web browser pero podriamos utilizarlo.
+            // Ruta de la página HTML en tu proyecto
+            string rutaPaginaHTML = "C:/Users/julim/source/repos/Tomoki-kun/TP2_lab2/Resources/Ayuda.html";
+
+            // Combina la ruta de la página HTML con la ruta del directorio de ejecución del programa
+            string rutaCompleta = Path.Combine(Application.StartupPath, rutaPaginaHTML);
+
+            // Verifica si el archivo existe antes de intentar abrirlo
+            if (File.Exists(rutaCompleta))
+            {
+                // Abre la página HTML con el navegador web predeterminado del sistema
+                Process.Start(rutaCompleta);
+            }
+            else
+            {
+                MessageBox.Show("La página HTML no se encuentra en la ruta especificada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void graficoDeBarraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FEstadisticas stats = new FEstadisticas();
+
+            stats.gBxTorta.Hide();
+            stats.ShowDialog();
+        }
+
+        private void graficoDeSectoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FEstadisticas stats = new FEstadisticas();
+            stats.gBxBarras.Hide();
+            stats.ShowDialog();
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void acercaDeToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Lorem Ipsum...");
         }
     }
 }

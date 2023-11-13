@@ -297,7 +297,7 @@
             this.Objeto.Name = "Objeto";
             this.Objeto.ReadOnly = true;
             this.Objeto.Visible = false;
-            this.Objeto.Width = 92;
+            this.Objeto.Width = 62;
             // 
             // Tipo
             // 
@@ -342,7 +342,7 @@
             this.DiasPermitidos.MinimumWidth = 8;
             this.DiasPermitidos.Name = "DiasPermitidos";
             this.DiasPermitidos.ReadOnly = true;
-            this.DiasPermitidos.Width = 143;
+            this.DiasPermitidos.Width = 155;
             // 
             // PrecioBasico
             // 
@@ -351,7 +351,7 @@
             this.PrecioBasico.MinimumWidth = 8;
             this.PrecioBasico.Name = "PrecioBasico";
             this.PrecioBasico.ReadOnly = true;
-            this.PrecioBasico.Width = 130;
+            this.PrecioBasico.Width = 141;
             // 
             // CantCamas
             // 
@@ -393,6 +393,7 @@
             this.Imagen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Imagen.FillWeight = 568.1818F;
             this.Imagen.HeaderText = "Imagen";
+            this.Imagen.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
             this.Imagen.MinimumWidth = 50;
             this.Imagen.Name = "Imagen";
             this.Imagen.ReadOnly = true;

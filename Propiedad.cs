@@ -7,6 +7,7 @@ using System.Collections;
 using System.Drawing.Text;
 using System.Runtime.Serialization;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace TP2_Lab
 {
@@ -18,7 +19,7 @@ namespace TP2_Lab
         protected bool estado;
         protected int nro;
         private List<Reserva> listaReservas=new List<Reserva>();
-        PictureBox imagen;
+        Image imagen;
         public List<Reserva> ListaReservas
         {
             get { return listaReservas; }
@@ -27,7 +28,7 @@ namespace TP2_Lab
         private string direccion;
         private string localidad;
         
-        public Propiedad(int nro,double precio,string direccion,string localidad, int cantCamas,bool[]servicios, PictureBox pic)
+        public Propiedad(int nro,double precio,string direccion,string localidad, int cantCamas,bool[]servicios, Image pic)
         {
             Nro = nro;
             PrecioBasico = precio;
@@ -43,7 +44,7 @@ namespace TP2_Lab
         }
         public abstract double CalcularPrecio();
 
-        public PictureBox Imagen
+        public Image Imagen
         {
             get { return imagen; }
             private set { imagen = value; }

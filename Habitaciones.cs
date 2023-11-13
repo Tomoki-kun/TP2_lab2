@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace TP2_Lab
 {
@@ -14,7 +15,7 @@ namespace TP2_Lab
         private string tipoHabitacion;
 
         public Habitaciones(int nro,int estrellas,double precio,string direccion,string localidad, bool[] servicios, int cantCamas,
-            string tipoHabitacion, PictureBox pic) : base(nro,precio,direccion, localidad, cantCamas,servicios, pic)
+            string tipoHabitacion, Image pic) : base(nro,precio,direccion, localidad, cantCamas,servicios, pic)
         {
             this.estrellas = estrellas;
             this.tipoHabitacion = tipoHabitacion;

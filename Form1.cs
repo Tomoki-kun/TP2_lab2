@@ -10,6 +10,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TP2_Lab.Properties;
 
 namespace TP2_Lab
 {
@@ -59,6 +60,7 @@ namespace TP2_Lab
                         int cantCamas = Convert.ToInt32(nuevaP.numCamas.Text);
                         double precio = Convert.ToDouble(nuevaP.numPrecio.Value);
                         int nro = Convert.ToInt32(nuevaP.numNro.Value);
+                        Image imagen = Image.FromFile(nuevaP.RutaImagen);
                         if (nuevaP.rBCasas.Checked)
                         {
                             string nombre = CapitalizarPalabras(nuevaP.tBnombre.Text);
@@ -68,18 +70,18 @@ namespace TP2_Lab
                             int cantDiasPermitidos = Convert.ToInt32(nuevaP.numDiasPermitidos.Value);
                             if (nuevaP.rBcasaDia.Checked)
                             {
-                                prop = new Casa(nro, cantDiasPermitidos, propietario, precio, direccion, localidad, cantCamas, servicios);
+                                prop = new Casa(nro, cantDiasPermitidos, propietario, precio, direccion, localidad, cantCamas, servicios, imagen);
                             }
                             else if (nuevaP.rBcasaFinde.Checked)
                             {
-                                prop = new CasaFindeSemana(nro, 0, propietario, precio, direccion, localidad, cantCamas, servicios);
+                                prop = new CasaFindeSemana(nro, 0, propietario, precio, direccion, localidad, cantCamas, servicios, imagen);
                             }
                         }
                         if (nuevaP.rBHoteles.Checked)
                         {
                             int estrellas = Convert.ToInt32(nuevaP.numEstrellas.Text);
                             string tipoHabitacion = nuevaP.cBTipoHabitacion.ValueMember;
-                            prop = new Habitaciones(nro,estrellas, precio, direccion, localidad, servicios, cantCamas, tipoHabitacion);
+                            prop = new Habitaciones(nro, estrellas, precio, direccion, localidad, servicios, cantCamas, tipoHabitacion, imagen);
                         }
                         nuevoS.AgregarPropiedad(prop);
                         DGAgregarPropiedad(prop);
@@ -172,17 +174,17 @@ namespace TP2_Lab
                             {
                                 Reserva miReserva = new Reserva(miCliente, cantReservas, huespedes, inicio, fin);
                                 cantReservas++;
-                                double costoFinal=0;
-                                if(prop is Habitaciones)
+                                double costoFinal = 0;
+                                if (prop is Habitaciones)
                                 {
-                                     costoFinal = (prop.CalcularPrecio()*numeroDias)+((prop.CalcularPrecio()*numeroDias*0.03));
+                                    costoFinal = (prop.CalcularPrecio() * numeroDias) + ((prop.CalcularPrecio() * numeroDias * 0.03));
                                 }
-                                if(prop is Casa)
+                                if (prop is Casa)
                                 {
-                                     costoFinal = ((Casa)prop).DiasAReservar(numeroDias);
+                                    costoFinal = ((Casa)prop).DiasAReservar(numeroDias);
 
                                 }
-                                if(prop is CasaFindeSemana)
+                                if (prop is CasaFindeSemana)
                                 {
                                     costoFinal = prop.CalcularPrecio();
                                 }
@@ -193,9 +195,9 @@ namespace TP2_Lab
                             }
                             else
                             {
-                                MessageBox.Show("No se pudo realizar la reserva","ERROR");
+                                MessageBox.Show("No se pudo realizar la reserva", "ERROR");
                             }
-                            
+
                         }
                         else if (prop == null)
                         {
@@ -234,7 +236,7 @@ namespace TP2_Lab
             if (!string.IsNullOrWhiteSpace(cBLocalidad.Text))
             {
                 int cant = DGPropiedades.RowCount;
-                for (int i = 0; i < cant-1; i++)
+                for (int i = 0; i < cant - 1; i++)
                 {
                     DataGridViewCell celda = DGPropiedades.Rows[i].Cells[0];
                     if (celda.Value != null && celda.Value is Propiedad)
@@ -306,6 +308,7 @@ namespace TP2_Lab
         {
             int filaIndex = DGPropiedades.Rows.Add();
             DataGridViewRow fila = DGPropiedades.Rows[filaIndex];
+            Bitmap bitmap;
 
             fila.Cells[0].Value = propiedad;
             fila.Cells[2].Value = propiedad.Localidad;
@@ -313,6 +316,12 @@ namespace TP2_Lab
             fila.Cells[4].Value = propiedad.Nro;
             fila.Cells[6].Value = propiedad.PrecioBasico;
             fila.Cells[7].Value = propiedad.CantCamas;
+            if (propiedad.Imagen != null)
+            {
+                bitmap = new Bitmap(propiedad.Imagen, 100, 100);
+                fila.Cells[11].Value = bitmap;
+            }
+
 
             // Verificar el tipo de instancia y llenar las celdas correspondientes
             if (propiedad is Habitaciones)
@@ -321,7 +330,7 @@ namespace TP2_Lab
                 fila.Cells[5].Value = "---";
                 fila.Cells[8].Value = ((Habitaciones)propiedad).Estrellas;
                 fila.Cells[9].Value = ((Habitaciones)propiedad).TipoHabitacion;
-                fila.Cells[11].Value = ;
+                fila.Cells[11].Value = propiedad.Imagen;
             }
             else if (propiedad is Casa)
             {
@@ -344,7 +353,7 @@ namespace TP2_Lab
         private void btnEliminarReserva_Click(object sender, EventArgs e)
         {
             FCliente vCliente = new FCliente();
-            if(vCliente.ShowDialog() == DialogResult.OK)
+            if (vCliente.ShowDialog() == DialogResult.OK)
             {
                 if (vCliente.tBnombreC.Text != "")
                 {
@@ -375,7 +384,7 @@ namespace TP2_Lab
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if(miArchivo != null)
+            if (miArchivo != null)
             {
                 if (File.Exists(miArchivo.Name)) File.Delete(miArchivo.Name);
                 FileStream archivo = new FileStream(miArchivo.Name, FileMode.CreateNew, FileAccess.Write);
@@ -396,9 +405,9 @@ namespace TP2_Lab
                 miArchivo = new FileStream(archivo, FileMode.CreateNew, FileAccess.Write);
                 StreamWriter sw = new StreamWriter(miArchivo);
                 string linea;
-                foreach(Propiedad prop in nuevoS.ListaPropiedad)
+                foreach (Propiedad prop in nuevoS.ListaPropiedad)
                 {
-                    foreach(Reserva resv in prop.ListaReservas)
+                    foreach (Reserva resv in prop.ListaReservas)
                     {
                         linea = resv.ToString();
                         sw.WriteLine(linea);
@@ -419,15 +428,15 @@ namespace TP2_Lab
                 string archivo = openFileDialog1.FileName;
                 miArchivo = new FileStream(archivo, FileMode.Open, FileAccess.Read);
                 StreamReader sr = new StreamReader(miArchivo);
-                
+
                 string renglon;
                 while (!sr.EndOfStream)
                 {
                     renglon = sr.ReadLine();
                     int filaIndex = vReservaImportada.dGReservaImportada.Rows.Add();
                     DataGridViewRow fila = DGPropiedades.Rows[filaIndex];
-                    string[] datos = renglon.Split(';'); 
-                    for(int i=0;i<datos.Length;i++)
+                    string[] datos = renglon.Split(';');
+                    for (int i = 0; i < datos.Length; i++)
                     {
                         fila.Cells[i].Value = datos[i];
                     }
@@ -440,7 +449,8 @@ namespace TP2_Lab
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            foreach(Propiedad propiedad in nuevoS.ListaPropiedad)
+            DGPropiedades.Rows.Clear();
+            foreach (Propiedad propiedad in nuevoS.ListaPropiedad)
                 DGAgregarPropiedad(propiedad);
 
             cBLocalidad.ValueMember = "";

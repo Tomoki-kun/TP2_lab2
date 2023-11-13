@@ -44,7 +44,7 @@ namespace TP2_Lab
         public string RutaImagen { get; private set; }
         private void btnImagen_Click(object sender, EventArgs e)
         {
-            FileImagen.Filter = "Imagenes (*.jpg;*.jpeg;*.png) || *.jpg;*.jpeg;*.png";
+            FileImagen.Filter = "Imagenes | *.jpg;*.jpeg;*.png";
             if (FileImagen.ShowDialog() == DialogResult.OK)
             {
                 RutaImagen = FileImagen.FileName;

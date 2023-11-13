@@ -11,6 +11,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace TP2_Lab
 {
@@ -37,6 +38,7 @@ namespace TP2_Lab
         Sistema nuevoS = new Sistema();
         int cantPropiedades = 0;
         int cantReservas = 0;
+        int reservasCasaFinde = 0, reservasCasaDia = 0, reservasHabitaciones = 0;
         private void Form1_Load(object sender, EventArgs e)
         {
             DGPropiedades.ColumnCount = 11;
@@ -185,6 +187,7 @@ namespace TP2_Lab
                         TimeSpan duracionReserva = fin - inicio;
                         int numeroDias = duracionReserva.Days;
                         prop = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
+                        
                         if (!nuevoS.Reservado(inicio, fin, prop) && prop != null)
                         {
                             if (prop is CasaFindeSemana && inicio.DayOfWeek == DayOfWeek.Friday && fin.DayOfWeek == DayOfWeek.Sunday
@@ -196,15 +199,18 @@ namespace TP2_Lab
                                 if(prop is Habitaciones)
                                 {
                                      costoFinal = (prop.CalcularPrecio()*numeroDias)+((prop.CalcularPrecio()*numeroDias*0.03));
+                                    reservasHabitaciones++;
                                 }
                                 if(prop is Casa)
                                 {
                                      costoFinal = ((Casa)prop).DiasAReservar(numeroDias);
+                                    reservasCasaDia++;
 
                                 }
                                 if(prop is CasaFindeSemana)
                                 {
                                     costoFinal = prop.CalcularPrecio();
+                                    reservasCasaFinde++;
                                 }
                                 miReserva.PrecioFinal = costoFinal;
                                 miReserva.Realizado = DateTime.Now;
@@ -508,6 +514,25 @@ namespace TP2_Lab
         {
             FEstadisticas stats = new FEstadisticas();
             stats.gBxBarras.Hide();
+
+            // Crea el área del gráfico
+            ChartArea areaReservas = new ChartArea();
+            stats.cTorta.ChartAreas.Add(areaReservas);
+
+            // Crea una serie para el gráfico de sectores
+            Series serieReservas = new Series();
+            serieReservas.ChartType = SeriesChartType.Pie;
+
+            // Agrega los puntos de datos a la serie
+            serieReservas.Points.AddXY("CasaPorDia", reservasCasaDia);
+            serieReservas.Points.AddXY("CasaFindeSemana", reservasCasaFinde);
+            serieReservas.Points.AddXY("Habitaciones", reservasHabitaciones);
+
+            // Agrega la serie al gráfico
+            stats.cTorta.Series.Add(serieReservas);
+
+            // Establece el tamaño de la ventana y muestra la forma
+            stats.Size = new System.Drawing.Size(600, 400); 
             stats.ShowDialog();
         }
 

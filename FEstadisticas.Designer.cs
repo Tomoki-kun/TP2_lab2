@@ -29,12 +29,12 @@ namespace TP2_Lab
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.cTorta = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cBarras = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.button1 = new System.Windows.Forms.Button();
@@ -48,34 +48,34 @@ namespace TP2_Lab
             // 
             // cTorta
             // 
-            chartArea3.Name = "ChartArea1";
-            this.cTorta.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.cTorta.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.cTorta.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.cTorta.Legends.Add(legend1);
             this.cTorta.Location = new System.Drawing.Point(42, 56);
             this.cTorta.Name = "cTorta";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.cTorta.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.cTorta.Series.Add(series1);
             this.cTorta.Size = new System.Drawing.Size(350, 222);
             this.cTorta.TabIndex = 0;
             this.cTorta.Text = "chart1";
             // 
             // cBarras
             // 
-            chartArea4.Name = "ChartArea1";
-            this.cBarras.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.cBarras.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            this.cBarras.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.cBarras.Legends.Add(legend2);
             this.cBarras.Location = new System.Drawing.Point(35, 37);
             this.cBarras.Name = "cBarras";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedColumn;
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.cBarras.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedColumn;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.cBarras.Series.Add(series2);
             this.cBarras.Size = new System.Drawing.Size(380, 232);
             this.cBarras.TabIndex = 1;
             this.cBarras.Text = "chart2";
@@ -92,9 +92,8 @@ namespace TP2_Lab
             // 
             // gBxTorta
             // 
-            this.gBxTorta.Controls.Add(this.gBxBarras);
             this.gBxTorta.Controls.Add(this.cTorta);
-            this.gBxTorta.Location = new System.Drawing.Point(108, 29);
+            this.gBxTorta.Location = new System.Drawing.Point(12, 44);
             this.gBxTorta.Name = "gBxTorta";
             this.gBxTorta.Size = new System.Drawing.Size(511, 329);
             this.gBxTorta.TabIndex = 3;
@@ -104,9 +103,9 @@ namespace TP2_Lab
             // gBxBarras
             // 
             this.gBxBarras.Controls.Add(this.cBarras);
-            this.gBxBarras.Location = new System.Drawing.Point(78, 9);
+            this.gBxBarras.Location = new System.Drawing.Point(547, 59);
             this.gBxBarras.Name = "gBxBarras";
-            this.gBxBarras.Size = new System.Drawing.Size(511, 314);
+            this.gBxBarras.Size = new System.Drawing.Size(506, 314);
             this.gBxBarras.TabIndex = 4;
             this.gBxBarras.TabStop = false;
             this.gBxBarras.Text = "Graficos Barras";
@@ -115,7 +114,8 @@ namespace TP2_Lab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(758, 450);
+            this.ClientSize = new System.Drawing.Size(1093, 450);
+            this.Controls.Add(this.gBxBarras);
             this.Controls.Add(this.gBxTorta);
             this.Controls.Add(this.button1);
             this.Name = "FEstadisticas";

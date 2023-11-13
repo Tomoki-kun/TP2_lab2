@@ -267,7 +267,7 @@
             this.acercaDeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1138, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1167, 24);
             this.menuStrip1.TabIndex = 16;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -289,7 +289,7 @@
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -307,20 +307,20 @@
             this.graficoDeBarraToolStripMenuItem,
             this.graficoDeSectoresToolStripMenuItem});
             this.graficoDeBarrasToolStripMenuItem.Name = "graficoDeBarrasToolStripMenuItem";
-            this.graficoDeBarrasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.graficoDeBarrasToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.graficoDeBarrasToolStripMenuItem.Text = "Graficos";
             // 
             // graficoDeBarraToolStripMenuItem
             // 
             this.graficoDeBarraToolStripMenuItem.Name = "graficoDeBarraToolStripMenuItem";
-            this.graficoDeBarraToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.graficoDeBarraToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.graficoDeBarraToolStripMenuItem.Text = "Grafico de barra";
             this.graficoDeBarraToolStripMenuItem.Click += new System.EventHandler(this.graficoDeBarraToolStripMenuItem_Click);
             // 
             // graficoDeSectoresToolStripMenuItem
             // 
             this.graficoDeSectoresToolStripMenuItem.Name = "graficoDeSectoresToolStripMenuItem";
-            this.graficoDeSectoresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.graficoDeSectoresToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.graficoDeSectoresToolStripMenuItem.Text = "Grafico de sectores";
             this.graficoDeSectoresToolStripMenuItem.Click += new System.EventHandler(this.graficoDeSectoresToolStripMenuItem_Click);
             // 
@@ -343,7 +343,7 @@
             // acercaDeToolStripMenuItem1
             // 
             this.acercaDeToolStripMenuItem1.Name = "acercaDeToolStripMenuItem1";
-            this.acercaDeToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.acercaDeToolStripMenuItem1.Size = new System.Drawing.Size(126, 22);
             this.acercaDeToolStripMenuItem1.Text = "Acerca de";
             this.acercaDeToolStripMenuItem1.Click += new System.EventHandler(this.acercaDeToolStripMenuItem1_Click);
             // 
@@ -353,7 +353,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1138, 512);
+            this.ClientSize = new System.Drawing.Size(1167, 512);
             this.Controls.Add(this.DGPropiedades);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnExportar);

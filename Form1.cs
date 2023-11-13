@@ -474,18 +474,20 @@ namespace TP2_Lab
 
         private void verAyudaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // en este no se implementa el web browser pero podriamos utilizarlo.
-            // Ruta de la página HTML en tu proyecto
-            string rutaPaginaHTML = "C:/Users/julim/source/repos/Tomoki-kun/TP2_lab2/Resources/Ayuda.html";
+            string rutaPaginaHTML = "Ayuda.html";
 
             // Combina la ruta de la página HTML con la ruta del directorio de ejecución del programa
-            string rutaCompleta = Path.Combine(Application.StartupPath, rutaPaginaHTML);
+            string rutaCompleta = Path.Combine(Application.StartupPath,"Resources", rutaPaginaHTML);
 
             // Verifica si el archivo existe antes de intentar abrirlo
             if (File.Exists(rutaCompleta))
             {
-                // Abre la página HTML con el navegador web predeterminado del sistema
-                Process.Start(rutaCompleta);
+                FWeb web = new FWeb(); 
+                web.wBrowser.Navigate(rutaCompleta);
+
+                // Establece el tamaño de la ventana y muestra la forma
+                web.Size = new Size(800, 600);
+                web.ShowDialog();
             }
             else
             {
@@ -516,7 +518,7 @@ namespace TP2_Lab
 
         private void acercaDeToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Lorem Ipsum...");
+            MessageBox.Show("Proyecto de alquileres de casas...");
         }
     }
 }

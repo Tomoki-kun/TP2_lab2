@@ -19,26 +19,19 @@ namespace TP2_Lab
     {
         public Form1()
         {
+           
             InitializeComponent();
-            //if (File.Exists(miArchivo.Name))
-            //{
-            //    FileStream archivo = new FileStream(miArchivo.Name,FileMode.Open, FileAccess.Read);
-            //    BinaryFormatter serUnser = new BinaryFormatter();
-            //    nuevoS = (Sistema)serUnser.Deserialize(miArchivo);
-            //    archivo.Close();
-            //}
-            //else
-            //{
-            //    nuevoS = new Sistema();
-            //}
+            log.ShowDialog();
         }
         FileStream miArchivo;
         Propietario propietario;
         Propiedad prop;
         Sistema nuevoS = new Sistema();
+        FLogin log = new FLogin();
         int cantPropiedades = 0;
         int cantReservas = 0;
         int reservasCasaFinde = 0, reservasCasaDia = 0, reservasHabitaciones = 0;
+
         private void Form1_Load(object sender, EventArgs e)
         {
             DGPropiedades.ColumnCount = 11;
@@ -519,6 +512,9 @@ namespace TP2_Lab
             ChartArea areaReservas = new ChartArea();
             stats.cTorta.ChartAreas.Add(areaReservas);
 
+            stats.cTorta.Width = 800;
+            stats.cTorta.Height = 600;
+
             // Crea una serie para el gráfico de sectores
             Series serieReservas = new Series();
             serieReservas.ChartType = SeriesChartType.Pie;
@@ -528,11 +524,14 @@ namespace TP2_Lab
             serieReservas.Points.AddXY("CasaFindeSemana", reservasCasaFinde);
             serieReservas.Points.AddXY("Habitaciones", reservasHabitaciones);
 
+            // Cambia los colores específicos si es necesario
+            serieReservas.Points[0].Color = Color.Red; 
+            serieReservas.Points[1].Color = Color.Green; 
+            serieReservas.Points[2].Color = Color.Blue; 
+
             // Agrega la serie al gráfico
             stats.cTorta.Series.Add(serieReservas);
 
-            // Establece el tamaño de la ventana y muestra la forma
-            stats.Size = new System.Drawing.Size(600, 400); 
             stats.ShowDialog();
         }
 

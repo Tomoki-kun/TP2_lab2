@@ -52,14 +52,14 @@ namespace TP2_Lab
             this.cTorta.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.cTorta.Legends.Add(legend1);
-            this.cTorta.Location = new System.Drawing.Point(42, 56);
+            this.cTorta.Location = new System.Drawing.Point(42, 42);
             this.cTorta.Name = "cTorta";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.cTorta.Series.Add(series1);
-            this.cTorta.Size = new System.Drawing.Size(350, 222);
+            this.cTorta.Size = new System.Drawing.Size(350, 252);
             this.cTorta.TabIndex = 0;
             this.cTorta.Text = "chart1";
             // 
@@ -83,9 +83,9 @@ namespace TP2_Lab
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(261, 397);
+            this.button1.Location = new System.Drawing.Point(182, 433);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(212, 23);
+            this.button1.Size = new System.Drawing.Size(607, 23);
             this.button1.TabIndex = 2;
             this.button1.Text = "Aceptar";
             this.button1.UseVisualStyleBackColor = true;
@@ -95,7 +95,7 @@ namespace TP2_Lab
             this.gBxTorta.Controls.Add(this.cTorta);
             this.gBxTorta.Location = new System.Drawing.Point(12, 44);
             this.gBxTorta.Name = "gBxTorta";
-            this.gBxTorta.Size = new System.Drawing.Size(511, 329);
+            this.gBxTorta.Size = new System.Drawing.Size(511, 372);
             this.gBxTorta.TabIndex = 3;
             this.gBxTorta.TabStop = false;
             this.gBxTorta.Text = "Grafico Torta";
@@ -103,9 +103,9 @@ namespace TP2_Lab
             // gBxBarras
             // 
             this.gBxBarras.Controls.Add(this.cBarras);
-            this.gBxBarras.Location = new System.Drawing.Point(547, 59);
+            this.gBxBarras.Location = new System.Drawing.Point(539, 44);
             this.gBxBarras.Name = "gBxBarras";
-            this.gBxBarras.Size = new System.Drawing.Size(506, 314);
+            this.gBxBarras.Size = new System.Drawing.Size(514, 372);
             this.gBxBarras.TabIndex = 4;
             this.gBxBarras.TabStop = false;
             this.gBxBarras.Text = "Graficos Barras";
@@ -114,7 +114,7 @@ namespace TP2_Lab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1093, 450);
+            this.ClientSize = new System.Drawing.Size(1093, 468);
             this.Controls.Add(this.gBxBarras);
             this.Controls.Add(this.gBxTorta);
             this.Controls.Add(this.button1);

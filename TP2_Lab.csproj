@@ -99,6 +99,7 @@
       <DependentUpon>FReservaImportada.cs</DependentUpon>
     </Compile>
     <Compile Include="Sistema.cs" />
+    <Compile Include="Usuario.cs" />
     <EmbeddedResource Include="FCliente.resx">
       <DependentUpon>FCliente.cs</DependentUpon>
     </EmbeddedResource>

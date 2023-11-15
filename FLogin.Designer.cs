@@ -31,8 +31,8 @@ namespace TP2_Lab
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tBusuario = new System.Windows.Forms.TextBox();
+            this.tBpasword = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -54,29 +54,29 @@ namespace TP2_Lab
             this.label2.TabIndex = 1;
             this.label2.Text = "Contraseña:";
             // 
-            // textBox1
+            // tBusuario
             // 
-            this.textBox1.Location = new System.Drawing.Point(74, 57);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(366, 20);
-            this.textBox1.TabIndex = 2;
+            this.tBusuario.Location = new System.Drawing.Point(74, 57);
+            this.tBusuario.Name = "tBusuario";
+            this.tBusuario.Size = new System.Drawing.Size(366, 20);
+            this.tBusuario.TabIndex = 2;
             // 
-            // textBox2
+            // tBpasword
             // 
-            this.textBox2.Location = new System.Drawing.Point(74, 138);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(366, 20);
-            this.textBox2.TabIndex = 3;
+            this.tBpasword.Location = new System.Drawing.Point(74, 138);
+            this.tBpasword.Name = "tBpasword";
+            this.tBpasword.Size = new System.Drawing.Size(366, 20);
+            this.tBpasword.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.button1.Location = new System.Drawing.Point(365, 183);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
             this.button1.Text = "Ingresar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FLogin
             // 
@@ -84,12 +84,13 @@ namespace TP2_Lab
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(563, 275);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tBpasword);
+            this.Controls.Add(this.tBusuario);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FLogin";
             this.Text = "FLogin";
+            this.Load += new System.EventHandler(this.FLogin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -99,8 +100,8 @@ namespace TP2_Lab
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.TextBox tBusuario;
+        public System.Windows.Forms.TextBox tBpasword;
     }
 }

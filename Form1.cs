@@ -28,6 +28,7 @@ namespace TP2_Lab
             InitializeComponent();
         }
 
+        #region Serializacion de datos
         private void Form1_Load(object sender, EventArgs e)
         {
             if (File.Exists(miArchivo))
@@ -48,7 +49,9 @@ namespace TP2_Lab
             serUnser.Serialize(archivo, nuevoS);
             archivo.Close();
         }
+        #endregion
 
+        #region Botones
         private void btnAgregarPropiedad_Click(object sender, EventArgs e)
         {
             FPropiedad nuevaP = new FPropiedad();
@@ -153,7 +156,7 @@ namespace TP2_Lab
             else
                 MessageBox.Show("no hay propiedades en la lista", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        
+
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             bool loc = true,
@@ -201,7 +204,7 @@ namespace TP2_Lab
                 }
             }
         }
-        
+
         private void btnReservar_Click(object sender, EventArgs e)
         {
             FCliente nuevoC = new FCliente();
@@ -284,7 +287,7 @@ namespace TP2_Lab
             }
             nuevoC.Dispose();
         }
-        
+
         private void btnEliminarReserva_Click(object sender, EventArgs e)
         {
             FCliente vCliente = new FCliente();
@@ -382,9 +385,9 @@ namespace TP2_Lab
                 miArchivo.Close();
             }
         }
+        #endregion
 
-
-        //Metodos del Form
+        #region Metodos del Form
         private bool VerificarCamposCompletos(FPropiedad form)
         {
             bool ret = true;
@@ -460,7 +463,7 @@ namespace TP2_Lab
                 fila.Cells[10].Value = ((Casa)propiedad).Propietario;
             }
         }
+        #endregion
 
-        
     }
 }

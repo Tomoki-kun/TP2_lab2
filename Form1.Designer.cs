@@ -46,8 +46,6 @@
             this.btnReservar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.DGPropiedades = new System.Windows.Forms.DataGridView();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.Objeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,6 +58,8 @@
             this.TipoHabitacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Dueño = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Imagen = new System.Windows.Forms.DataGridViewImageColumn();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCantHuespedes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGPropiedades)).BeginInit();
@@ -67,10 +67,9 @@
             // 
             // btnAgregarPropiedad
             // 
-            this.btnAgregarPropiedad.Location = new System.Drawing.Point(491, 735);
-            this.btnAgregarPropiedad.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnAgregarPropiedad.Location = new System.Drawing.Point(327, 478);
             this.btnAgregarPropiedad.Name = "btnAgregarPropiedad";
-            this.btnAgregarPropiedad.Size = new System.Drawing.Size(112, 74);
+            this.btnAgregarPropiedad.Size = new System.Drawing.Size(75, 48);
             this.btnAgregarPropiedad.TabIndex = 0;
             this.btnAgregarPropiedad.Text = "Agregar Propiedad";
             this.btnAgregarPropiedad.UseVisualStyleBackColor = true;
@@ -78,10 +77,9 @@
             // 
             // btnEliminarPropiedad
             // 
-            this.btnEliminarPropiedad.Location = new System.Drawing.Point(626, 735);
-            this.btnEliminarPropiedad.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnEliminarPropiedad.Location = new System.Drawing.Point(417, 478);
             this.btnEliminarPropiedad.Name = "btnEliminarPropiedad";
-            this.btnEliminarPropiedad.Size = new System.Drawing.Size(112, 75);
+            this.btnEliminarPropiedad.Size = new System.Drawing.Size(75, 49);
             this.btnEliminarPropiedad.TabIndex = 1;
             this.btnEliminarPropiedad.Text = "Eliminar Propiedad";
             this.btnEliminarPropiedad.UseVisualStyleBackColor = true;
@@ -89,10 +87,9 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(150, 578);
-            this.btnBuscar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnBuscar.Location = new System.Drawing.Point(100, 376);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(90, 62);
+            this.btnBuscar.Size = new System.Drawing.Size(60, 40);
             this.btnBuscar.TabIndex = 2;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -100,10 +97,9 @@
             // 
             // btnImportar
             // 
-            this.btnImportar.Location = new System.Drawing.Point(1544, 732);
-            this.btnImportar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnImportar.Location = new System.Drawing.Point(1029, 476);
             this.btnImportar.Name = "btnImportar";
-            this.btnImportar.Size = new System.Drawing.Size(112, 52);
+            this.btnImportar.Size = new System.Drawing.Size(75, 34);
             this.btnImportar.TabIndex = 3;
             this.btnImportar.Text = "Importar";
             this.btnImportar.UseVisualStyleBackColor = true;
@@ -111,10 +107,9 @@
             // 
             // btnExportar
             // 
-            this.btnExportar.Location = new System.Drawing.Point(1696, 735);
-            this.btnExportar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnExportar.Location = new System.Drawing.Point(1131, 478);
             this.btnExportar.Name = "btnExportar";
-            this.btnExportar.Size = new System.Drawing.Size(112, 49);
+            this.btnExportar.Size = new System.Drawing.Size(75, 32);
             this.btnExportar.TabIndex = 4;
             this.btnExportar.Text = "Exportar";
             this.btnExportar.UseVisualStyleBackColor = true;
@@ -122,8 +117,7 @@
             // 
             // Calendar
             // 
-            this.Calendar.Location = new System.Drawing.Point(18, 188);
-            this.Calendar.Margin = new System.Windows.Forms.Padding(14);
+            this.Calendar.Location = new System.Drawing.Point(12, 122);
             this.Calendar.MaxDate = new System.DateTime(2024, 1, 31, 0, 0, 0, 0);
             this.Calendar.MinDate = new System.DateTime(2023, 11, 1, 0, 0, 0, 0);
             this.Calendar.Name = "Calendar";
@@ -133,30 +127,27 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 46);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(6, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 20);
+            this.label1.Size = new System.Drawing.Size(56, 13);
             this.label1.TabIndex = 8;
             this.label1.Text = "Localidad:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 475);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(16, 309);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(182, 20);
+            this.label2.Size = new System.Drawing.Size(122, 13);
             this.label2.TabIndex = 10;
             this.label2.Text = "Cantidad de huespedes:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 545);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(16, 354);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(162, 20);
+            this.label3.Size = new System.Drawing.Size(111, 13);
             this.label3.TabIndex = 11;
             this.label3.Text = "Tipo de Habitaciones:";
             // 
@@ -175,11 +166,9 @@
             this.groupBox1.Controls.Add(this.Calendar);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Enabled = false;
-            this.groupBox1.Location = new System.Drawing.Point(18, 18);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(412, 791);
+            this.groupBox1.Size = new System.Drawing.Size(275, 514);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar:";
@@ -188,9 +177,10 @@
             // 
             this.btnLimpiar.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnLimpiar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnLimpiar.Location = new System.Drawing.Point(346, 42);
+            this.btnLimpiar.Location = new System.Drawing.Point(231, 27);
+            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(42, 38);
+            this.btnLimpiar.Size = new System.Drawing.Size(28, 25);
             this.btnLimpiar.TabIndex = 19;
             this.btnLimpiar.Text = "X";
             this.btnLimpiar.UseVisualStyleBackColor = false;
@@ -198,9 +188,10 @@
             // 
             // numCantHuespedes
             // 
-            this.numCantHuespedes.Location = new System.Drawing.Point(216, 475);
+            this.numCantHuespedes.Location = new System.Drawing.Point(144, 309);
+            this.numCantHuespedes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.numCantHuespedes.Name = "numCantHuespedes";
-            this.numCantHuespedes.Size = new System.Drawing.Size(120, 26);
+            this.numCantHuespedes.Size = new System.Drawing.Size(80, 20);
             this.numCantHuespedes.TabIndex = 18;
             // 
             // cBTipoHabitaciones
@@ -210,27 +201,24 @@
             "Simple",
             "Doble",
             "Triple"});
-            this.cBTipoHabitaciones.Location = new System.Drawing.Point(216, 540);
-            this.cBTipoHabitaciones.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cBTipoHabitaciones.Location = new System.Drawing.Point(144, 351);
             this.cBTipoHabitaciones.Name = "cBTipoHabitaciones";
-            this.cBTipoHabitaciones.Size = new System.Drawing.Size(120, 28);
+            this.cBTipoHabitaciones.Size = new System.Drawing.Size(81, 21);
             this.cBTipoHabitaciones.TabIndex = 16;
             // 
             // cBLocalidad
             // 
             this.cBLocalidad.FormattingEnabled = true;
-            this.cBLocalidad.Location = new System.Drawing.Point(14, 88);
-            this.cBLocalidad.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cBLocalidad.Location = new System.Drawing.Point(9, 57);
             this.cBLocalidad.Name = "cBLocalidad";
-            this.cBLocalidad.Size = new System.Drawing.Size(374, 28);
+            this.cBLocalidad.Size = new System.Drawing.Size(251, 21);
             this.cBLocalidad.TabIndex = 17;
             // 
             // btnEliminarReserva
             // 
-            this.btnEliminarReserva.Location = new System.Drawing.Point(216, 704);
-            this.btnEliminarReserva.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnEliminarReserva.Location = new System.Drawing.Point(144, 458);
             this.btnEliminarReserva.Name = "btnEliminarReserva";
-            this.btnEliminarReserva.Size = new System.Drawing.Size(112, 62);
+            this.btnEliminarReserva.Size = new System.Drawing.Size(75, 40);
             this.btnEliminarReserva.TabIndex = 16;
             this.btnEliminarReserva.Text = "Eliminar Reserva";
             this.btnEliminarReserva.UseVisualStyleBackColor = true;
@@ -238,10 +226,9 @@
             // 
             // btnReservar
             // 
-            this.btnReservar.Location = new System.Drawing.Point(74, 704);
-            this.btnReservar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnReservar.Location = new System.Drawing.Point(49, 458);
             this.btnReservar.Name = "btnReservar";
-            this.btnReservar.Size = new System.Drawing.Size(112, 62);
+            this.btnReservar.Size = new System.Drawing.Size(75, 40);
             this.btnReservar.TabIndex = 15;
             this.btnReservar.Text = "Reservar";
             this.btnReservar.UseVisualStyleBackColor = true;
@@ -250,10 +237,9 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(24, 149);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(16, 97);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(277, 20);
+            this.label4.Size = new System.Drawing.Size(188, 13);
             this.label4.TabIndex = 14;
             this.label4.Text = "Fecha de LLegada y Fecha de Salida:";
             // 
@@ -275,20 +261,15 @@
             this.TipoHabitacion,
             this.Dueño,
             this.Imagen});
-            this.DGPropiedades.Location = new System.Drawing.Point(438, 30);
-            this.DGPropiedades.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.DGPropiedades.Location = new System.Drawing.Point(292, 20);
             this.DGPropiedades.Name = "DGPropiedades";
             this.DGPropiedades.ReadOnly = true;
             this.DGPropiedades.RowHeadersVisible = false;
             this.DGPropiedades.RowHeadersWidth = 62;
             this.DGPropiedades.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.DGPropiedades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGPropiedades.Size = new System.Drawing.Size(1384, 692);
+            this.DGPropiedades.Size = new System.Drawing.Size(923, 450);
             this.DGPropiedades.TabIndex = 15;
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Objeto
             // 
@@ -306,7 +287,7 @@
             this.Tipo.MinimumWidth = 8;
             this.Tipo.Name = "Tipo";
             this.Tipo.ReadOnly = true;
-            this.Tipo.Width = 75;
+            this.Tipo.Width = 53;
             // 
             // Localidad
             // 
@@ -315,7 +296,7 @@
             this.Localidad.MinimumWidth = 8;
             this.Localidad.Name = "Localidad";
             this.Localidad.ReadOnly = true;
-            this.Localidad.Width = 113;
+            this.Localidad.Width = 78;
             // 
             // Direccion
             // 
@@ -324,7 +305,7 @@
             this.Direccion.MinimumWidth = 8;
             this.Direccion.Name = "Direccion";
             this.Direccion.ReadOnly = true;
-            this.Direccion.Width = 111;
+            this.Direccion.Width = 77;
             // 
             // Nro
             // 
@@ -333,7 +314,7 @@
             this.Nro.MinimumWidth = 8;
             this.Nro.Name = "Nro";
             this.Nro.ReadOnly = true;
-            this.Nro.Width = 61;
+            this.Nro.Width = 44;
             // 
             // DiasPermitidos
             // 
@@ -342,7 +323,7 @@
             this.DiasPermitidos.MinimumWidth = 8;
             this.DiasPermitidos.Name = "DiasPermitidos";
             this.DiasPermitidos.ReadOnly = true;
-            this.DiasPermitidos.Width = 155;
+            this.DiasPermitidos.Width = 106;
             // 
             // PrecioBasico
             // 
@@ -351,7 +332,7 @@
             this.PrecioBasico.MinimumWidth = 8;
             this.PrecioBasico.Name = "PrecioBasico";
             this.PrecioBasico.ReadOnly = true;
-            this.PrecioBasico.Width = 141;
+            this.PrecioBasico.Width = 97;
             // 
             // CantCamas
             // 
@@ -360,7 +341,7 @@
             this.CantCamas.MinimumWidth = 8;
             this.CantCamas.Name = "CantCamas";
             this.CantCamas.ReadOnly = true;
-            this.CantCamas.Width = 125;
+            this.CantCamas.Width = 124;
             // 
             // Estrellas
             // 
@@ -369,7 +350,7 @@
             this.Estrellas.MinimumWidth = 8;
             this.Estrellas.Name = "Estrellas";
             this.Estrellas.ReadOnly = true;
-            this.Estrellas.Width = 106;
+            this.Estrellas.Width = 71;
             // 
             // TipoHabitacion
             // 
@@ -378,7 +359,7 @@
             this.TipoHabitacion.MinimumWidth = 8;
             this.TipoHabitacion.Name = "TipoHabitacion";
             this.TipoHabitacion.ReadOnly = true;
-            this.TipoHabitacion.Width = 162;
+            this.TipoHabitacion.Width = 122;
             // 
             // Dueño
             // 
@@ -386,7 +367,7 @@
             this.Dueño.MinimumWidth = 8;
             this.Dueño.Name = "Dueño";
             this.Dueño.ReadOnly = true;
-            this.Dueño.Width = 121;
+            this.Dueño.Width = 82;
             // 
             // Imagen
             // 
@@ -398,23 +379,27 @@
             this.Imagen.Name = "Imagen";
             this.Imagen.ReadOnly = true;
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1832, 853);
+            this.ClientSize = new System.Drawing.Size(909, 487);
             this.Controls.Add(this.DGPropiedades);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnExportar);
             this.Controls.Add(this.btnImportar);
             this.Controls.Add(this.btnEliminarPropiedad);
             this.Controls.Add(this.btnAgregarPropiedad);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCantHuespedes)).EndInit();

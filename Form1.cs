@@ -16,27 +16,38 @@ namespace TP2_Lab
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-            //if (File.Exists(miArchivo.Name))
-            //{
-            //    FileStream archivo = new FileStream(miArchivo.Name,FileMode.Open, FileAccess.Read);
-            //    BinaryFormatter serUnser = new BinaryFormatter();
-            //    nuevoS = (Sistema)serUnser.Deserialize(miArchivo);
-            //    archivo.Close();
-            //}
-            //else
-            //{
-            //    nuevoS = new Sistema();
-            //}
-        }
-        FileStream miArchivo;
+        string miArchivo = "Datos.dat";
         Propietario propietario;
         Propiedad prop;
         Sistema nuevoS = new Sistema();
         int cantPropiedades = 0;
         int cantReservas = 0;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            if (File.Exists(miArchivo))
+            {
+                FileStream archivo = new FileStream(miArchivo, FileMode.Open, FileAccess.Read);
+                BinaryFormatter serUnser = new BinaryFormatter();
+                nuevoS = (Sistema)serUnser.Deserialize(archivo);
+                archivo.Close();
+            }
+        }
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+            if (File.Exists(miArchivo)) File.Delete(miArchivo);
+
+            FileStream archivo = new FileStream(miArchivo, FileMode.CreateNew, FileAccess.Write);
+            BinaryFormatter serUnser = new BinaryFormatter();
+            serUnser.Serialize(archivo, nuevoS);
+            archivo.Close();
+        }
 
         private void btnAgregarPropiedad_Click(object sender, EventArgs e)
         {
@@ -142,7 +153,55 @@ namespace TP2_Lab
             else
                 MessageBox.Show("no hay propiedades en la lista", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+        
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            bool loc = true,
+                 fechas = true,
+                 huespedes = true,
+                 tipoHabitacion = true;
+            ArrayList disponibles = new ArrayList();
+            if (!string.IsNullOrWhiteSpace(cBLocalidad.Text))
+            {
+                int cant = DGPropiedades.RowCount;
+                for (int i = 0; i < cant - 1; i++)
+                {
+                    DataGridViewCell celda = DGPropiedades.Rows[i].Cells[0];
+                    if (celda.Value != null && celda.Value is Propiedad)
+                    {
+                        Propiedad propiedad = (Propiedad)celda.Value;
 
+                        if (!(propiedad.Localidad == cBLocalidad.SelectedItem.ToString()))
+                        {
+                            loc = false;
+                        }
+
+                        TimeSpan dias = Calendar.SelectionEnd - Calendar.SelectionStart;
+                        if (dias.Days > 0)
+                            if (nuevoS.Reservado(Calendar.SelectionStart, Calendar.SelectionEnd, propiedad))
+                                fechas = false;
+
+                        if (numCantHuespedes.Value > 0 && numCantHuespedes.Value > propiedad.CantCamas)
+                            huespedes = false;
+
+                        if (cBTipoHabitaciones.ValueMember != "" && cBTipoHabitaciones.ValueMember != ((Habitaciones)propiedad).TipoHabitacion)
+                            tipoHabitacion = false;
+                        if (loc && fechas && huespedes && tipoHabitacion)
+                            disponibles.Add(propiedad);
+                    }
+                }
+                if (disponibles.Count != nuevoS.CantPropiedades)
+                {
+                    DGPropiedades.Rows.Clear();
+
+                    foreach (Propiedad propiedad in disponibles)
+                    {
+                        DGAgregarPropiedad(propiedad);
+                    }
+                }
+            }
+        }
+        
         private void btnReservar_Click(object sender, EventArgs e)
         {
             FCliente nuevoC = new FCliente();
@@ -225,55 +284,107 @@ namespace TP2_Lab
             }
             nuevoC.Dispose();
         }
-
-        private void btnBuscar_Click(object sender, EventArgs e)
+        
+        private void btnEliminarReserva_Click(object sender, EventArgs e)
         {
-            bool loc = true,
-                 fechas = true,
-                 huespedes = true,
-                 tipoHabitacion = true;
-            ArrayList disponibles = new ArrayList();
-            if (!string.IsNullOrWhiteSpace(cBLocalidad.Text))
+            FCliente vCliente = new FCliente();
+            if (vCliente.ShowDialog() == DialogResult.OK)
             {
-                int cant = DGPropiedades.RowCount;
-                for (int i = 0; i < cant - 1; i++)
+                if (vCliente.tBnombreC.Text != "")
                 {
-                    DataGridViewCell celda = DGPropiedades.Rows[i].Cells[0];
-                    if (celda.Value != null && celda.Value is Propiedad)
+                    string nombre;
+                    long dni;
+                    bool encontrada = false;
+                    foreach (Propiedad prop in nuevoS.ListaPropiedad)
                     {
-                        Propiedad propiedad = (Propiedad)celda.Value;
-
-                        if (!(propiedad.Localidad == cBLocalidad.SelectedItem.ToString()))
+                        foreach (Reserva resv in prop.ListaReservas)
                         {
-                            loc = false;
+                            nombre = resv.Cliente.ToString();
+                            dni = resv.Cliente.DNI;
+                            if (nombre == vCliente.tBnombreC.Text && dni == (long)vCliente.numDNI.Value)
+                            {
+                                prop.ListaReservas.Remove(resv);
+                                MessageBox.Show("Reserva Cancelada", "Cancelación exitosa");
+                                encontrada = true;
+                            }
                         }
-
-                        TimeSpan dias = Calendar.SelectionEnd - Calendar.SelectionStart;
-                        if (dias.Days > 0)
-                            if (nuevoS.Reservado(Calendar.SelectionStart, Calendar.SelectionEnd, propiedad))
-                                fechas = false;
-
-                        if (numCantHuespedes.Value > 0 && numCantHuespedes.Value > propiedad.CantCamas)
-                            huespedes = false;
-
-                        if (cBTipoHabitaciones.ValueMember != "" && cBTipoHabitaciones.ValueMember != ((Habitaciones)propiedad).TipoHabitacion)
-                            tipoHabitacion = false;
-                        if (loc && fechas && huespedes && tipoHabitacion)
-                            disponibles.Add(propiedad);
                     }
+                    if (!encontrada)
+                        MessageBox.Show("No se encontró ninguna reserva de este cliente");
                 }
-                if (disponibles.Count != nuevoS.CantPropiedades)
-                {
-                    DGPropiedades.Rows.Clear();
-
-                    foreach (Propiedad propiedad in disponibles)
-                    {
-                        DGAgregarPropiedad(propiedad);
-                    }
-                }
+                else
+                    MessageBox.Show("Complete los campos");
             }
         }
 
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            DGPropiedades.Rows.Clear();
+            foreach (Propiedad propiedad in nuevoS.ListaPropiedad)
+                DGAgregarPropiedad(propiedad);
+
+            cBLocalidad.ValueMember = "";
+            Calendar.SelectionRange.Start = DateTime.Now;
+            Calendar.SelectionRange.End = DateTime.Now;
+            numCantHuespedes.Value = 0;
+            cBTipoHabitaciones.ValueMember = "";
+        }
+
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            string archivo = "misDatos.txt";
+            saveFileDialog1.FileName = archivo;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                archivo = saveFileDialog1.FileName;
+                if (File.Exists(archivo)) File.Delete(archivo);
+                FileStream miArchivo = new FileStream(archivo, FileMode.CreateNew, FileAccess.Write);
+                StreamWriter sw = new StreamWriter(miArchivo);
+                string linea;
+                foreach (Propiedad prop in nuevoS.ListaPropiedad)
+                {
+                    foreach (Reserva resv in prop.ListaReservas)
+                    {
+                        linea = resv.ToString();
+                        sw.WriteLine(linea);
+                    }
+                }
+                sw.Close();
+                miArchivo.Close();
+            }
+        }
+
+        private void btnImportar_Click(object sender, EventArgs e)
+        {
+            FReservaImportada vReservaImportada = new FReservaImportada();
+            vReservaImportada.dGReservaImportada.RowHeadersVisible = false;
+            openFileDialog1.Filter = "archivo de valores separados por coma (*.csv) | *.csv";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string archivo = openFileDialog1.FileName;
+                FileStream miArchivo = new FileStream(archivo, FileMode.Open, FileAccess.Read);
+                StreamReader sr = new StreamReader(miArchivo);
+
+                string renglon;
+                while (!sr.EndOfStream)
+                {
+                    renglon = sr.ReadLine();
+                    int filaIndex = vReservaImportada.dGReservaImportada.Rows.Add();
+                    DataGridViewRow fila = DGPropiedades.Rows[filaIndex];
+                    string[] datos = renglon.Split(';');
+                    for (int i = 0; i < datos.Length; i++)
+                    {
+                        fila.Cells[i].Value = datos[i];
+                    }
+                }
+                vReservaImportada.ShowDialog();
+                sr.Close();
+                miArchivo.Close();
+            }
+        }
+
+
+        //Metodos del Form
         private bool VerificarCamposCompletos(FPropiedad form)
         {
             bool ret = true;
@@ -350,114 +461,6 @@ namespace TP2_Lab
             }
         }
 
-        private void btnEliminarReserva_Click(object sender, EventArgs e)
-        {
-            FCliente vCliente = new FCliente();
-            if (vCliente.ShowDialog() == DialogResult.OK)
-            {
-                if (vCliente.tBnombreC.Text != "")
-                {
-                    string nombre;
-                    long dni;
-                    bool encontrada = false;
-                    foreach (Propiedad prop in nuevoS.ListaPropiedad)
-                    {
-                        foreach (Reserva resv in prop.ListaReservas)
-                        {
-                            nombre = resv.Cliente.ToString();
-                            dni = resv.Cliente.DNI;
-                            if (nombre == vCliente.tBnombreC.Text && dni == (long)vCliente.numDNI.Value)
-                            {
-                                prop.ListaReservas.Remove(resv);
-                                MessageBox.Show("Reserva Cancelada", "Cancelación exitosa");
-                                encontrada = true;
-                            }
-                        }
-                    }
-                    if (!encontrada)
-                        MessageBox.Show("No se encontró ninguna reserva de este cliente");
-                }
-                else
-                    MessageBox.Show("Complete los campos");
-            }
-        }
-
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (miArchivo != null)
-            {
-                if (File.Exists(miArchivo.Name)) File.Delete(miArchivo.Name);
-                FileStream archivo = new FileStream(miArchivo.Name, FileMode.CreateNew, FileAccess.Write);
-                BinaryFormatter serUnser = new BinaryFormatter();
-                serUnser.Serialize(archivo, nuevoS);
-                archivo.Close();
-            }
-        }
-
-        private void btnExportar_Click(object sender, EventArgs e)
-        {
-            string archivo = "misDatos.txt";
-            saveFileDialog1.FileName = archivo;
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                archivo = saveFileDialog1.FileName;
-                if (File.Exists(archivo)) File.Delete(archivo);
-                miArchivo = new FileStream(archivo, FileMode.CreateNew, FileAccess.Write);
-                StreamWriter sw = new StreamWriter(miArchivo);
-                string linea;
-                foreach (Propiedad prop in nuevoS.ListaPropiedad)
-                {
-                    foreach (Reserva resv in prop.ListaReservas)
-                    {
-                        linea = resv.ToString();
-                        sw.WriteLine(linea);
-                    }
-                }
-                sw.Close();
-                miArchivo.Close();
-            }
-        }
-
-        private void btnImportar_Click(object sender, EventArgs e)
-        {
-            FReservaImportada vReservaImportada = new FReservaImportada();
-            vReservaImportada.dGReservaImportada.RowHeadersVisible = false;
-            openFileDialog1.Filter = "archivo de valores separados por coma (*.csv) | *.csv";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                string archivo = openFileDialog1.FileName;
-                miArchivo = new FileStream(archivo, FileMode.Open, FileAccess.Read);
-                StreamReader sr = new StreamReader(miArchivo);
-
-                string renglon;
-                while (!sr.EndOfStream)
-                {
-                    renglon = sr.ReadLine();
-                    int filaIndex = vReservaImportada.dGReservaImportada.Rows.Add();
-                    DataGridViewRow fila = DGPropiedades.Rows[filaIndex];
-                    string[] datos = renglon.Split(';');
-                    for (int i = 0; i < datos.Length; i++)
-                    {
-                        fila.Cells[i].Value = datos[i];
-                    }
-                }
-                vReservaImportada.ShowDialog();
-                sr.Close();
-                miArchivo.Close();
-            }
-        }
-
-        private void btnLimpiar_Click(object sender, EventArgs e)
-        {
-            DGPropiedades.Rows.Clear();
-            foreach (Propiedad propiedad in nuevoS.ListaPropiedad)
-                DGAgregarPropiedad(propiedad);
-
-            cBLocalidad.ValueMember = "";
-            Calendar.SelectionRange.Start = DateTime.Now;
-            Calendar.SelectionRange.End = DateTime.Now;
-            numCantHuespedes.Value = 0;
-            cBTipoHabitaciones.ValueMember = "";
-        }
+        
     }
 }

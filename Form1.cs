@@ -542,7 +542,21 @@ namespace TP2_Lab
 
         private void acercaDeToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Proyecto de alquileres de casas...");
+            MessageBox.Show(" **************************************************\n" +
+                "           Empresa de alquileres temporarios         \n" +
+                "***************************************************\n" +
+                "Versión: 1.0\n" +
+                "Autores: \n" +
+                "Acosta,Nicolas \n" +
+                "Bellini, Augusto \n" +
+                "Ferrari, Nahuel \n"+ 
+                "Millen, Julian \n"+
+                "Descripción: Proyecto de alquileres temporarios que facilita la gestion de reservas para habitaciones de hotel, casas por dias y casas de fin de semana. Ofreciendo caracteristicas de filtrado como importacion/exportacion de datos en formato CSV, graficos estadisticos y una interfaz de usuario intuitiva y facil de usar para quien lo desee. \n" +
+                "Fecha de creación: Noviembre 2023\n" + 
+                "*******************************",
+                "Acerca de",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
     }
 }

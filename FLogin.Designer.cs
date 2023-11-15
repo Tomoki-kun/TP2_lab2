@@ -65,6 +65,7 @@ namespace TP2_Lab
             // 
             this.tBpasword.Location = new System.Drawing.Point(74, 138);
             this.tBpasword.Name = "tBpasword";
+            this.tBpasword.PasswordChar = '*';
             this.tBpasword.Size = new System.Drawing.Size(366, 20);
             this.tBpasword.TabIndex = 3;
             // 

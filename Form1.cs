@@ -26,6 +26,7 @@ namespace TP2_Lab
         FileStream miArchivo;
         Propietario propietario;
         Propiedad prop;
+        Reserva miReserva;
         Sistema nuevoS = new Sistema();
         FLogin log = new FLogin();
         int cantPropiedades = 0;
@@ -186,7 +187,7 @@ namespace TP2_Lab
                             if (prop is CasaFindeSemana && inicio.DayOfWeek == DayOfWeek.Friday && fin.DayOfWeek == DayOfWeek.Sunday
                                  || prop is Casa && numeroDias >= ((Casa)prop).DiasPermitidos || prop is Habitaciones)
                             {
-                                Reserva miReserva = new Reserva(miCliente, cantReservas, huespedes, inicio, fin);
+                                miReserva = new Reserva(miCliente, cantReservas, huespedes, inicio, fin);
                                 cantReservas++;
                                 double costoFinal=0;
                                 if(prop is Habitaciones)
@@ -497,20 +498,20 @@ namespace TP2_Lab
 
         private void graficoDeBarraToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FEstadisticas stats = new FEstadisticas();
-
-            stats.gBxTorta.Hide();
-            stats.ShowDialog();
+            FEstadisticas2 stats2 = new FEstadisticas2();
+            stats2.ShowDialog();                    
         }
 
         private void graficoDeSectoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FEstadisticas stats = new FEstadisticas();
-            stats.gBxBarras.Hide();
 
             // Crea el área del gráfico
             ChartArea areaReservas = new ChartArea();
             stats.cTorta.ChartAreas.Add(areaReservas);
+
+            // Limpia cualquier serie existente
+            stats.cTorta.Series.Clear();
 
             stats.cTorta.Width = 800;
             stats.cTorta.Height = 600;

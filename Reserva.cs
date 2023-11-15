@@ -19,6 +19,7 @@ namespace TP2_Lab
         private DateTime realizado;
         private double precioFinal;
         private int cantPersonas;
+
         public Reserva(Cliente cliente, int numReserva, int cantidad, DateTime fechaEntrada, DateTime fechaSalida)
         {
             Cliente = cliente;
@@ -79,5 +80,7 @@ namespace TP2_Lab
 
             MessageBox.Show(ret);
         }
+
+
     }
 }

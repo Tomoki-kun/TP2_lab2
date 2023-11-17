@@ -506,7 +506,7 @@ namespace TP2_Lab
 
             // Crear una serie para el gráfico de barras
             Series series = new Series("Huéspedes");
-            series.ChartType = SeriesChartType.Column;
+            series.ChartType = SeriesChartType.Bar;
 
             // Contador para la cantidad de huéspedes
             int[] contadorHuespedes = new int[5]; 

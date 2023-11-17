@@ -31,7 +31,6 @@ namespace TP2_Lab
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cBarras = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -67,10 +66,6 @@ namespace TP2_Lab
             this.cBarras.Legends.Add(legend1);
             this.cBarras.Location = new System.Drawing.Point(3, 16);
             this.cBarras.Name = "cBarras";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.cBarras.Series.Add(series1);
             this.cBarras.Size = new System.Drawing.Size(807, 366);
             this.cBarras.TabIndex = 3;
             this.cBarras.Text = "chart1";
@@ -93,6 +88,6 @@ namespace TP2_Lab
         #endregion
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart cBarras;
+        public System.Windows.Forms.DataVisualization.Charting.Chart cBarras;
     }
 }

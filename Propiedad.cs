@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.Drawing.Text;
 using System.Runtime.Serialization;
+using System.Windows.Forms;
 
 namespace TP2_Lab
 {
@@ -43,6 +44,7 @@ namespace TP2_Lab
         {
             listaReservas.Add(miReserva);
         }
+
         public int CantCamas
         {
             get { return cantCamas; }

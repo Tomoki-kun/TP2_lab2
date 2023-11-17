@@ -53,6 +53,11 @@ namespace TP2_Lab
             get { return precioFinal; }
             set { precioFinal = value; }
         }
+
+        public int CantPersonas
+        {
+            get { return cantPersonas; }
+        }
         public int CompareTo(object obj)
         {
             return numReserva.CompareTo(((Reserva)obj).numReserva);

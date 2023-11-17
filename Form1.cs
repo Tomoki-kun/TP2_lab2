@@ -499,7 +499,65 @@ namespace TP2_Lab
         private void graficoDeBarraToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FEstadisticas2 stats2 = new FEstadisticas2();
-            stats2.ShowDialog();                    
+
+            // Crea el área del gráfico
+            ChartArea areaReservas = new ChartArea();
+            stats2.cBarras.ChartAreas.Add(areaReservas);
+
+            // Crear una serie para el gráfico de barras
+            Series series = new Series("Huéspedes");
+            series.ChartType = SeriesChartType.Column;
+
+            // Contador para la cantidad de huéspedes
+            int[] contadorHuespedes = new int[5]; 
+
+            // Inicializar todos los elementos en cero
+            for (int i = 0; i < contadorHuespedes.Length; i++)
+            {
+                contadorHuespedes[i] = 0;
+            }
+
+            // Iterar a través de las reservas y contar la cantidad de huéspedes
+            foreach (Reserva reserva in prop.ListaReservas)
+            {
+                int huesp = reserva.CantPersonas;
+                // Implementar contadores específicos para cada cantidad de huéspedes
+                if (huesp == 2)
+                {
+                    contadorHuespedes[0]++;
+                }
+                else if (huesp == 3)
+                {
+                    contadorHuespedes[1]++;
+                }
+                else if (huesp == 4)
+                {
+                    contadorHuespedes[2]++;
+                }
+                else if (huesp == 5)
+                {
+                    contadorHuespedes[3]++;
+                }
+                else
+                {
+                    contadorHuespedes[4]++;
+                }
+            }
+
+            // Agrega los puntos de datos a la serie
+            series.Points.AddXY("Huespedes 2", contadorHuespedes[0]);
+            series.Points.AddXY("Huespedes 3", contadorHuespedes[1]);
+            series.Points.AddXY("Huespedes 4", contadorHuespedes[2]);
+            series.Points.AddXY("Huespedes 5", contadorHuespedes[3]);
+            series.Points.AddXY("Huespedes 6 o mas", contadorHuespedes[4]);
+
+            // Agregar la serie al gráfico
+            stats2.cBarras.Series.Add(series);
+
+            stats2.cBarras.Palette = ChartColorPalette.Excel; //colores de las barras
+
+            // Mostrar el formulario con el gráfico
+            stats2.ShowDialog();                
         }
 
         private void graficoDeSectoresToolStripMenuItem_Click(object sender, EventArgs e)

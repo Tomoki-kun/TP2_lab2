@@ -32,8 +32,9 @@ namespace TP2_Lab
         int cantPropiedades = 0;
         int cantReservas = 0;
         int reservasCasaFinde = 0, reservasCasaDia = 0, reservasHabitaciones = 0;
-        private List<IExportable> lstReservas = new List<IExportable>();
-        private List<IExportable> lstClientes = new List<IExportable>();
+        //private List<IExportable> lstReservas = new List<IExportable>();
+        //private List<IExportable> lstClientes = new List<IExportable>();
+        private List<IExportable> lstDatosE = new List<IExportable>();
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -212,8 +213,10 @@ namespace TP2_Lab
                                 miReserva.Realizado = DateTime.Now;
                                 miReserva.Comprobante(prop);
                                 prop.AgregarReserva(miReserva);
-                                lstReservas.Add(miReserva);
-                                lstClientes.Add(miCliente);
+                                //lstReservas.Add(miReserva);
+                                //lstClientes.Add(miCliente);
+                                lstDatosE.Add(miReserva);
+                                lstDatosE.Add(miCliente);
                             }
                             else
                             {
@@ -386,7 +389,8 @@ namespace TP2_Lab
                             if (nombre == vCliente.tBnombreC.Text && dni == (long)vCliente.numDNI.Value)
                             {
                                 prop.ListaReservas.Remove(resv);
-                                lstReservas.Remove(resv);
+                                //lstReservas.Remove(resv);
+                                lstDatosE.Remove(resv);  // deberia eliminar la reserva
                                 MessageBox.Show("Reserva Cancelada", "Cancelación exitosa");
                                 encontrada = true;
                             }
@@ -599,19 +603,15 @@ namespace TP2_Lab
             stats.ShowDialog();
         }
 
-        private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ExportarDatos(lstClientes, "clientes.txt");
-        }
-
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void reservasToolStripMenuItem_Click(object sender, EventArgs e)
+        private void exportarDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ExportarDatos(lstReservas, "reservas.txt");
+            ExportarDatos(lstDatosE, "exportables.txt");
+            MessageBox.Show("Datos exportados correctamente");
         }
 
         private void acercaDeToolStripMenuItem1_Click(object sender, EventArgs e)

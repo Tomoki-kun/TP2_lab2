@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace TP2_Lab
 {
     [Serializable]
-    public class Reserva : IComparable
+    public class Reserva : IComparable,IExportable
     {
         private Cliente cliente;
         private int numReserva;
@@ -62,6 +62,12 @@ namespace TP2_Lab
         {
             return numReserva.CompareTo(((Reserva)obj).numReserva);
         }
+
+        public string Exportar()
+        {
+            return $"{numReserva},{cliente.DNI},{fechaEntrada},{fechaSalida}";
+        }
+
         public override string ToString()
         {
             return Cliente + ";" + numReserva.ToString() + ";" + FechaEntrada.ToString() + ";" + 

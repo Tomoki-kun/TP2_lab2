@@ -32,6 +32,8 @@ namespace TP2_Lab
         int cantPropiedades = 0;
         int cantReservas = 0;
         int reservasCasaFinde = 0, reservasCasaDia = 0, reservasHabitaciones = 0;
+        private List<IExportable> lstReservas = new List<IExportable>();
+        private List<IExportable> lstClientes = new List<IExportable>();
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -210,6 +212,8 @@ namespace TP2_Lab
                                 miReserva.Realizado = DateTime.Now;
                                 miReserva.Comprobante(prop);
                                 prop.AgregarReserva(miReserva);
+                                lstReservas.Add(miReserva);
+                                lstClientes.Add(miCliente);
                             }
                             else
                             {
@@ -382,6 +386,7 @@ namespace TP2_Lab
                             if (nombre == vCliente.tBnombreC.Text && dni == (long)vCliente.numDNI.Value)
                             {
                                 prop.ListaReservas.Remove(resv);
+                                lstReservas.Remove(resv);
                                 MessageBox.Show("Reserva Cancelada", "Cancelación exitosa");
                                 encontrada = true;
                             }
@@ -594,9 +599,19 @@ namespace TP2_Lab
             stats.ShowDialog();
         }
 
+        private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportarDatos(lstClientes, "clientes.txt");
+        }
+
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void reservasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportarDatos(lstReservas, "reservas.txt");
         }
 
         private void acercaDeToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -616,6 +631,21 @@ namespace TP2_Lab
                 "Acerca de",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
+        }
+
+
+        static void ExportarDatos(List<IExportable> datos, string nombreArchivo)
+        {
+            FileStream archivoExportar = new FileStream(nombreArchivo, FileMode.OpenOrCreate, FileAccess.Write);
+            StreamWriter sW = new StreamWriter(archivoExportar);
+            
+                foreach (IExportable dato in datos)
+                {
+                    sW.WriteLine(dato.Exportar());
+                }
+            sW.Dispose();
+            archivoExportar.Close();
+
         }
     }
 }

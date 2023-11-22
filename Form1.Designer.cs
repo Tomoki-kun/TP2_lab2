@@ -46,18 +46,6 @@
             this.btnReservar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.DGPropiedades = new System.Windows.Forms.DataGridView();
-            this.Objeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiasPermitidos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrecioBasico = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CantCamas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estrellas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoHabitacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dueño = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Imagen = new System.Windows.Forms.DataGridViewImageColumn();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -80,9 +68,7 @@
             // 
             // btnAgregarPropiedad
             // 
-            
-            this.btnAgregarPropiedad.Location = new System.Drawing.Point(327, 478); //Main
-            this.btnAgregarPropiedad.Location = new System.Drawing.Point(1051, 42); //Julian
+            this.btnAgregarPropiedad.Location = new System.Drawing.Point(1051, 42);
             this.btnAgregarPropiedad.Name = "btnAgregarPropiedad";
             this.btnAgregarPropiedad.Size = new System.Drawing.Size(75, 48);
             this.btnAgregarPropiedad.TabIndex = 0;
@@ -92,7 +78,7 @@
             // 
             // btnEliminarPropiedad
             // 
-            this.btnEliminarPropiedad.Location = new System.Drawing.Point(417, 478);
+            this.btnEliminarPropiedad.Location = new System.Drawing.Point(1051, 111);
             this.btnEliminarPropiedad.Name = "btnEliminarPropiedad";
             this.btnEliminarPropiedad.Size = new System.Drawing.Size(75, 49);
             this.btnEliminarPropiedad.TabIndex = 1;
@@ -102,8 +88,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(100, 376); //main
-            this.btnBuscar.Location = new System.Drawing.Point(18, 403);  //Julian
+            this.btnBuscar.Location = new System.Drawing.Point(18, 403);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(60, 40);
             this.btnBuscar.TabIndex = 2;
@@ -113,7 +98,7 @@
             // 
             // btnImportar
             // 
-            this.btnImportar.Location = new System.Drawing.Point(1029, 476);
+            this.btnImportar.Location = new System.Drawing.Point(1051, 336);
             this.btnImportar.Name = "btnImportar";
             this.btnImportar.Size = new System.Drawing.Size(75, 34);
             this.btnImportar.TabIndex = 3;
@@ -123,8 +108,7 @@
             // 
             // btnExportar
             // 
-            this.btnExportar.Location = new System.Drawing.Point(1131, 478);//main
-            this.btnExportar.Location = new System.Drawing.Point(1051, 415);//julian
+            this.btnExportar.Location = new System.Drawing.Point(1051, 415);
             this.btnExportar.Name = "btnExportar";
             this.btnExportar.Size = new System.Drawing.Size(75, 32);
             this.btnExportar.TabIndex = 4;
@@ -183,31 +167,28 @@
             this.groupBox1.Controls.Add(this.Calendar);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Enabled = false;
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 42);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(275, 514);
+            this.groupBox1.Size = new System.Drawing.Size(275, 471);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar:";
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnLimpiar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnLimpiar.Location = new System.Drawing.Point(231, 27);
-            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLimpiar.Location = new System.Drawing.Point(75, 373);
+            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(2);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(28, 25);
+            this.btnLimpiar.Size = new System.Drawing.Size(102, 25);
             this.btnLimpiar.TabIndex = 19;
-            this.btnLimpiar.Text = "X";
-            this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Text = "Limpiar selección";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // numCantHuespedes
             // 
-                        //Main
             this.numCantHuespedes.Location = new System.Drawing.Point(144, 309);
-            this.numCantHuespedes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numCantHuespedes.Margin = new System.Windows.Forms.Padding(2);
             this.numCantHuespedes.Name = "numCantHuespedes";
             this.numCantHuespedes.Size = new System.Drawing.Size(80, 20);
             this.numCantHuespedes.TabIndex = 18;
@@ -234,7 +215,7 @@
             // 
             // btnEliminarReserva
             // 
-            this.btnEliminarReserva.Location = new System.Drawing.Point(144, 458);
+            this.btnEliminarReserva.Location = new System.Drawing.Point(169, 403);
             this.btnEliminarReserva.Name = "btnEliminarReserva";
             this.btnEliminarReserva.Size = new System.Drawing.Size(75, 40);
             this.btnEliminarReserva.TabIndex = 16;
@@ -244,7 +225,7 @@
             // 
             // btnReservar
             // 
-            this.btnReservar.Location = new System.Drawing.Point(49, 458);
+            this.btnReservar.Location = new System.Drawing.Point(85, 403);
             this.btnReservar.Name = "btnReservar";
             this.btnReservar.Size = new System.Drawing.Size(75, 40);
             this.btnReservar.TabIndex = 15;
@@ -263,139 +244,17 @@
             // 
             // DGPropiedades
             // 
-            this.DGPropiedades.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.DGPropiedades.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGPropiedades.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.DGPropiedades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGPropiedades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Objeto,
-            this.Tipo,
-            this.Localidad,
-            this.Direccion,
-            this.Nro,
-            this.DiasPermitidos,
-            this.PrecioBasico,
-            this.CantCamas,
-            this.Estrellas,
-            this.TipoHabitacion,
-            this.Dueño,
-            this.Imagen});
-            this.DGPropiedades.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.DGPropiedades.Location = new System.Drawing.Point(293, 42);
             this.DGPropiedades.Name = "DGPropiedades";
             this.DGPropiedades.ReadOnly = true;
             this.DGPropiedades.RowHeadersVisible = false;
             this.DGPropiedades.RowHeadersWidth = 62;
             this.DGPropiedades.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.DGPropiedades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGPropiedades.Size = new System.Drawing.Size(897, 692);
+            this.DGPropiedades.Size = new System.Drawing.Size(752, 420);
             this.DGPropiedades.TabIndex = 15;
-            // 
-            // Objeto
-            // 
-            this.Objeto.HeaderText = "Objeto";
-            this.Objeto.MinimumWidth = 8;
-            this.Objeto.Name = "Objeto";
-            this.Objeto.ReadOnly = true;
-            this.Objeto.Visible = false;
-            this.Objeto.Width = 62;
-            // 
-            // Tipo
-            // 
-            this.Tipo.FillWeight = 47.9798F;
-            this.Tipo.HeaderText = "Tipo";
-            this.Tipo.MinimumWidth = 8;
-            this.Tipo.Name = "Tipo";
-            this.Tipo.ReadOnly = true;
-            this.Tipo.Width = 53;
-            // 
-            // Localidad
-            // 
-            this.Localidad.FillWeight = 47.9798F;
-            this.Localidad.HeaderText = "Localidad";
-            this.Localidad.MinimumWidth = 8;
-            this.Localidad.Name = "Localidad";
-            this.Localidad.ReadOnly = true;
-            this.Localidad.Width = 78;
-            // 
-            // Direccion
-            // 
-            this.Direccion.FillWeight = 47.9798F;
-            this.Direccion.HeaderText = "Dirección";
-            this.Direccion.MinimumWidth = 8;
-            this.Direccion.Name = "Direccion";
-            this.Direccion.ReadOnly = true;
-            this.Direccion.Width = 77;
-            // 
-            // Nro
-            // 
-            this.Nro.FillWeight = 47.9798F;
-            this.Nro.HeaderText = "N°";
-            this.Nro.MinimumWidth = 8;
-            this.Nro.Name = "Nro";
-            this.Nro.ReadOnly = true;
-            this.Nro.Width = 44;
-            // 
-            // DiasPermitidos
-            // 
-            this.DiasPermitidos.FillWeight = 47.9798F;
-            this.DiasPermitidos.HeaderText = "Días Permitidos";
-            this.DiasPermitidos.MinimumWidth = 8;
-            this.DiasPermitidos.Name = "DiasPermitidos";
-            this.DiasPermitidos.ReadOnly = true;
-            this.DiasPermitidos.Width = 106;
-            // 
-            // PrecioBasico
-            // 
-            this.PrecioBasico.FillWeight = 47.9798F;
-            this.PrecioBasico.HeaderText = "Precio Básico";
-            this.PrecioBasico.MinimumWidth = 8;
-            this.PrecioBasico.Name = "PrecioBasico";
-            this.PrecioBasico.ReadOnly = true;
-            this.PrecioBasico.Width = 97;
-            // 
-            // CantCamas
-            // 
-            this.CantCamas.FillWeight = 47.9798F;
-            this.CantCamas.HeaderText = "Cantidad de Camas";
-            this.CantCamas.MinimumWidth = 8;
-            this.CantCamas.Name = "CantCamas";
-            this.CantCamas.ReadOnly = true;
-            this.CantCamas.Width = 124;
-            // 
-            // Estrellas
-            // 
-            this.Estrellas.FillWeight = 47.9798F;
-            this.Estrellas.HeaderText = "Estrellas";
-            this.Estrellas.MinimumWidth = 8;
-            this.Estrellas.Name = "Estrellas";
-            this.Estrellas.ReadOnly = true;
-            this.Estrellas.Width = 71;
-            // 
-            // TipoHabitacion
-            // 
-            this.TipoHabitacion.FillWeight = 47.9798F;
-            this.TipoHabitacion.HeaderText = "Tipo de Habitación";
-            this.TipoHabitacion.MinimumWidth = 8;
-            this.TipoHabitacion.Name = "TipoHabitacion";
-            this.TipoHabitacion.ReadOnly = true;
-            this.TipoHabitacion.Width = 122;
-            // 
-            // Dueño
-            // 
-            this.Dueño.HeaderText = "Propietario";
-            this.Dueño.MinimumWidth = 8;
-            this.Dueño.Name = "Dueño";
-            this.Dueño.ReadOnly = true;
-            this.Dueño.Width = 82;
-            // 
-            // Imagen
-            // 
-            this.Imagen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Imagen.FillWeight = 568.1818F;
-            this.Imagen.HeaderText = "Imagen";
-            this.Imagen.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
-            this.Imagen.MinimumWidth = 50;
-            this.Imagen.Name = "Imagen";
-            this.Imagen.ReadOnly = true;
             // 
             // openFileDialog1
             // 
@@ -503,7 +362,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1644, 725);
+            this.ClientSize = new System.Drawing.Size(1167, 512);
             this.Controls.Add(this.DGPropiedades);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnExportar);
@@ -511,8 +370,9 @@
             this.Controls.Add(this.btnEliminarPropiedad);
             this.Controls.Add(this.btnAgregarPropiedad);
             this.Controls.Add(this.menuStrip1);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -548,21 +408,6 @@
         private System.Windows.Forms.NumericUpDown numCantHuespedes;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        //main
-        private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Objeto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Localidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nro;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DiasPermitidos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrecioBasico;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CantCamas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Estrellas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TipoHabitacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Dueño;
-
-        //Julian
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
@@ -575,7 +420,7 @@
         private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem verAyudaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem1;
-        private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.ToolStripMenuItem exportarDatosToolStripMenuItem;
     }
 }
 

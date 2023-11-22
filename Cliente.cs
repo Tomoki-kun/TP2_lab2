@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 namespace TP2_Lab
 {
     [Serializable]
-    public class Cliente
+    public class Cliente:IExportable
     {
         private string nombre;
         private long dni;
@@ -26,6 +26,11 @@ namespace TP2_Lab
         public override string ToString()
         {
             return nombre;
+        }
+
+        public string Exportar()
+        {
+            return $"{nombre},{dni}";
         }
     }
 }

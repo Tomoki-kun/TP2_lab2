@@ -17,6 +17,16 @@ namespace TP2_Lab
             InitializeComponent();
         }
 
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void rBCasas_CheckedChanged(object sender, EventArgs e)
         {
             gBCasas.Visible = true;
@@ -38,16 +48,6 @@ namespace TP2_Lab
             else
             {
                 gbCasaXDia.Visible = false;
-            }
-        }
-
-        public string RutaImagen { get; private set; }
-        private void btnImagen_Click(object sender, EventArgs e)
-        {
-            FileImagen.Filter = "Imagenes | *.jpg;*.jpeg;*.png";
-            if (FileImagen.ShowDialog() == DialogResult.OK)
-            {
-                RutaImagen = FileImagen.FileName;
             }
         }
     }

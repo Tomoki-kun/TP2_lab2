@@ -39,46 +39,41 @@ namespace TP2_Lab
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(106, 49);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(71, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 20);
+            this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Usuario:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(106, 169);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(71, 110);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 20);
+            this.label2.Size = new System.Drawing.Size(64, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Contraseña:";
             // 
             // tBusuario
             // 
-            this.tBusuario.Location = new System.Drawing.Point(111, 88);
-            this.tBusuario.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tBusuario.Location = new System.Drawing.Point(74, 57);
             this.tBusuario.Name = "tBusuario";
-            this.tBusuario.Size = new System.Drawing.Size(547, 26);
+            this.tBusuario.Size = new System.Drawing.Size(366, 20);
             this.tBusuario.TabIndex = 2;
             // 
             // tBpasword
             // 
-            this.tBpasword.Location = new System.Drawing.Point(111, 212);
-            this.tBpasword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tBpasword.Location = new System.Drawing.Point(74, 138);
             this.tBpasword.Name = "tBpasword";
             this.tBpasword.PasswordChar = '*';
-            this.tBpasword.Size = new System.Drawing.Size(547, 26);
+            this.tBpasword.Size = new System.Drawing.Size(366, 20);
             this.tBpasword.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(548, 282);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button1.Location = new System.Drawing.Point(365, 183);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(112, 35);
+            this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
             this.button1.Text = "Ingresar";
             this.button1.UseVisualStyleBackColor = true;
@@ -86,16 +81,14 @@ namespace TP2_Lab
             // 
             // FLogin
             // 
-            this.AcceptButton = this.button1;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 423);
+            this.ClientSize = new System.Drawing.Size(563, 275);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tBpasword);
             this.Controls.Add(this.tBusuario);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FLogin";
             this.Text = "FLogin";
             this.Load += new System.EventHandler(this.FLogin_Load);

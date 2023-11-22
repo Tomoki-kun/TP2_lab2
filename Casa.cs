@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Drawing;
 
 namespace TP2_Lab
 {
@@ -13,8 +15,8 @@ namespace TP2_Lab
         //private int diasTotales;     //dias totales
         Propietario miPropietario;
 
-        public Casa(int nro,int diasPermitidos, Propietario miPropietario, double precio, string direccion, string localidad, int cantCamas, bool[] servicios)
-            : base(nro,precio, direccion, localidad, cantCamas, servicios)
+        public Casa(int nro,int diasPermitidos, Propietario miPropietario, double precio, string direccion, string localidad, int cantCamas, bool[] servicios, Image pic)
+            : base(nro,precio, direccion, localidad, cantCamas, servicios, pic)
         {
             this.diasPermitidos = diasPermitidos;
             this.miPropietario = miPropietario;

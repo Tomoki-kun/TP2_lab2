@@ -47,9 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administrador.cs" />
     <Compile Include="Casa.cs" />
     <Compile Include="CasaFindeSemana.cs" />
     <Compile Include="Cliente.cs" />
+    <Compile Include="Empleado.cs" />
+    <Compile Include="FActualizarContra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FActualizarContra.Designer.cs">
+      <DependentUpon>FActualizarContra.cs</DependentUpon>
+    </Compile>
     <Compile Include="FCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +115,9 @@
     </Compile>
     <Compile Include="Sistema.cs" />
     <Compile Include="Usuario.cs" />
+    <EmbeddedResource Include="FActualizarContra.resx">
+      <DependentUpon>FActualizarContra.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FCliente.resx">
       <DependentUpon>FCliente.cs</DependentUpon>
     </EmbeddedResource>

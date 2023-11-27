@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnAgregarPropiedad = new System.Windows.Forms.Button();
             this.btnEliminarPropiedad = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -46,8 +47,6 @@
             this.btnReservar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.DGPropiedades = new System.Windows.Forms.DataGridView();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.Objeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,14 +59,33 @@
             this.TipoHabitacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Dueño = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Imagen = new System.Windows.Forms.DataGridViewImageColumn();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imprimirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportarDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verAyudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.crearUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cambiarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.graficosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sectoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.barraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCantHuespedes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGPropiedades)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAgregarPropiedad
             // 
-            this.btnAgregarPropiedad.Location = new System.Drawing.Point(327, 478);
+            this.btnAgregarPropiedad.Location = new System.Drawing.Point(367, 521);
             this.btnAgregarPropiedad.Name = "btnAgregarPropiedad";
             this.btnAgregarPropiedad.Size = new System.Drawing.Size(75, 48);
             this.btnAgregarPropiedad.TabIndex = 0;
@@ -77,7 +95,7 @@
             // 
             // btnEliminarPropiedad
             // 
-            this.btnEliminarPropiedad.Location = new System.Drawing.Point(417, 478);
+            this.btnEliminarPropiedad.Location = new System.Drawing.Point(457, 521);
             this.btnEliminarPropiedad.Name = "btnEliminarPropiedad";
             this.btnEliminarPropiedad.Size = new System.Drawing.Size(75, 49);
             this.btnEliminarPropiedad.TabIndex = 1;
@@ -87,7 +105,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(100, 376);
+            this.btnBuscar.Location = new System.Drawing.Point(97, 423);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(60, 40);
             this.btnBuscar.TabIndex = 2;
@@ -97,7 +115,7 @@
             // 
             // btnImportar
             // 
-            this.btnImportar.Location = new System.Drawing.Point(1029, 476);
+            this.btnImportar.Location = new System.Drawing.Point(1069, 519);
             this.btnImportar.Name = "btnImportar";
             this.btnImportar.Size = new System.Drawing.Size(75, 34);
             this.btnImportar.TabIndex = 3;
@@ -107,7 +125,7 @@
             // 
             // btnExportar
             // 
-            this.btnExportar.Location = new System.Drawing.Point(1131, 478);
+            this.btnExportar.Location = new System.Drawing.Point(1171, 521);
             this.btnExportar.Name = "btnExportar";
             this.btnExportar.Size = new System.Drawing.Size(75, 32);
             this.btnExportar.TabIndex = 4;
@@ -117,7 +135,7 @@
             // 
             // Calendar
             // 
-            this.Calendar.Location = new System.Drawing.Point(12, 122);
+            this.Calendar.Location = new System.Drawing.Point(6, 138);
             this.Calendar.MaxDate = new System.DateTime(2024, 1, 31, 0, 0, 0, 0);
             this.Calendar.MinDate = new System.DateTime(2023, 11, 1, 0, 0, 0, 0);
             this.Calendar.Name = "Calendar";
@@ -129,25 +147,25 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 13);
+            this.label1.Size = new System.Drawing.Size(64, 15);
             this.label1.TabIndex = 8;
             this.label1.Text = "Localidad:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 309);
+            this.label2.Location = new System.Drawing.Point(13, 356);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 13);
+            this.label2.Size = new System.Drawing.Size(140, 15);
             this.label2.TabIndex = 10;
             this.label2.Text = "Cantidad de huespedes:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 354);
+            this.label3.Location = new System.Drawing.Point(13, 401);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(111, 13);
+            this.label3.Size = new System.Drawing.Size(126, 15);
             this.label3.TabIndex = 11;
             this.label3.Text = "Tipo de Habitaciones:";
             // 
@@ -166,9 +184,9 @@
             this.groupBox1.Controls.Add(this.Calendar);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Enabled = false;
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 31);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(275, 514);
+            this.groupBox1.Size = new System.Drawing.Size(305, 550);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar:";
@@ -188,7 +206,7 @@
             // 
             // numCantHuespedes
             // 
-            this.numCantHuespedes.Location = new System.Drawing.Point(144, 309);
+            this.numCantHuespedes.Location = new System.Drawing.Point(141, 356);
             this.numCantHuespedes.Margin = new System.Windows.Forms.Padding(2);
             this.numCantHuespedes.Name = "numCantHuespedes";
             this.numCantHuespedes.Size = new System.Drawing.Size(80, 20);
@@ -201,7 +219,7 @@
             "Simple",
             "Doble",
             "Triple"});
-            this.cBTipoHabitaciones.Location = new System.Drawing.Point(144, 351);
+            this.cBTipoHabitaciones.Location = new System.Drawing.Point(141, 398);
             this.cBTipoHabitaciones.Name = "cBTipoHabitaciones";
             this.cBTipoHabitaciones.Size = new System.Drawing.Size(81, 21);
             this.cBTipoHabitaciones.TabIndex = 16;
@@ -216,7 +234,7 @@
             // 
             // btnEliminarReserva
             // 
-            this.btnEliminarReserva.Location = new System.Drawing.Point(144, 458);
+            this.btnEliminarReserva.Location = new System.Drawing.Point(141, 505);
             this.btnEliminarReserva.Name = "btnEliminarReserva";
             this.btnEliminarReserva.Size = new System.Drawing.Size(75, 40);
             this.btnEliminarReserva.TabIndex = 16;
@@ -226,7 +244,7 @@
             // 
             // btnReservar
             // 
-            this.btnReservar.Location = new System.Drawing.Point(49, 458);
+            this.btnReservar.Location = new System.Drawing.Point(46, 505);
             this.btnReservar.Name = "btnReservar";
             this.btnReservar.Size = new System.Drawing.Size(75, 40);
             this.btnReservar.TabIndex = 15;
@@ -239,7 +257,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(16, 97);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(188, 13);
+            this.label4.Size = new System.Drawing.Size(213, 15);
             this.label4.TabIndex = 14;
             this.label4.Text = "Fecha de LLegada y Fecha de Salida:";
             // 
@@ -264,20 +282,15 @@
             this.TipoHabitacion,
             this.Dueño,
             this.Imagen});
-            this.DGPropiedades.Location = new System.Drawing.Point(292, 20);
+            this.DGPropiedades.Location = new System.Drawing.Point(333, 23);
             this.DGPropiedades.MaximumSize = new System.Drawing.Size(923, 450);
             this.DGPropiedades.Name = "DGPropiedades";
             this.DGPropiedades.ReadOnly = true;
             this.DGPropiedades.RowHeadersVisible = false;
             this.DGPropiedades.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.DGPropiedades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGPropiedades.Size = new System.Drawing.Size(923, 439);
+            this.DGPropiedades.Size = new System.Drawing.Size(923, 450);
             this.DGPropiedades.TabIndex = 15;
-
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Objeto
             // 
@@ -306,7 +319,7 @@
             this.Localidad.MinimumWidth = 8;
             this.Localidad.Name = "Localidad";
             this.Localidad.ReadOnly = true;
-            this.Localidad.Width = 78;
+            this.Localidad.Width = 90;
             // 
             // Direccion
             // 
@@ -325,7 +338,7 @@
             this.Nro.MinimumWidth = 8;
             this.Nro.Name = "Nro";
             this.Nro.ReadOnly = true;
-            this.Nro.Width = 44;
+            this.Nro.Width = 50;
             // 
             // DiasPermitidos
             // 
@@ -383,7 +396,7 @@
             this.Dueño.MinimumWidth = 8;
             this.Dueño.Name = "Dueño";
             this.Dueño.ReadOnly = true;
-            this.Dueño.Width = 82;
+            this.Dueño.Width = 96;
             // 
             // Imagen
             // 
@@ -396,19 +409,144 @@
             this.Imagen.ReadOnly = true;
             this.Imagen.Width = 332;
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.archivoToolStripMenuItem,
+            this.ayudaToolStripMenuItem,
+            this.usuarioToolStripMenuItem,
+            this.verToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1278, 28);
+            this.menuStrip1.TabIndex = 16;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // archivoToolStripMenuItem
+            // 
+            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.imprimirToolStripMenuItem,
+            this.exportarDatosToolStripMenuItem,
+            this.salirToolStripMenuItem});
+            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(73, 24);
+            this.archivoToolStripMenuItem.Text = "Archivo";
+            // 
+            // ayudaToolStripMenuItem
+            // 
+            this.ayudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.verAyudaToolStripMenuItem,
+            this.acercaDeToolStripMenuItem});
+            this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
+            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(65, 24);
+            this.ayudaToolStripMenuItem.Text = "Ayuda";
+            // 
+            // usuarioToolStripMenuItem
+            // 
+            this.usuarioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.crearUsuarioToolStripMenuItem,
+            this.cambiarContraseñaToolStripMenuItem});
+            this.usuarioToolStripMenuItem.Name = "usuarioToolStripMenuItem";
+            this.usuarioToolStripMenuItem.Size = new System.Drawing.Size(73, 24);
+            this.usuarioToolStripMenuItem.Text = "Usuario";
+            // 
+            // verToolStripMenuItem
+            // 
+            this.verToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.graficosToolStripMenuItem});
+            this.verToolStripMenuItem.Name = "verToolStripMenuItem";
+            this.verToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+            this.verToolStripMenuItem.Text = "Ver";
+            // 
+            // imprimirToolStripMenuItem
+            // 
+            this.imprimirToolStripMenuItem.Name = "imprimirToolStripMenuItem";
+            this.imprimirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.imprimirToolStripMenuItem.Text = "Imprimir";
+            // 
+            // exportarDatosToolStripMenuItem
+            // 
+            this.exportarDatosToolStripMenuItem.Name = "exportarDatosToolStripMenuItem";
+            this.exportarDatosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.exportarDatosToolStripMenuItem.Text = "Exportar datos";
+            // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.salirToolStripMenuItem.Text = "Salir";
+            // 
+            // verAyudaToolStripMenuItem
+            // 
+            this.verAyudaToolStripMenuItem.Name = "verAyudaToolStripMenuItem";
+            this.verAyudaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.verAyudaToolStripMenuItem.Text = "Ver ayuda";
+            // 
+            // acercaDeToolStripMenuItem
+            // 
+            this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.acercaDeToolStripMenuItem.Text = "Acerca de";
+            // 
+            // crearUsuarioToolStripMenuItem
+            // 
+            this.crearUsuarioToolStripMenuItem.Name = "crearUsuarioToolStripMenuItem";
+            this.crearUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.crearUsuarioToolStripMenuItem.Text = "Crear Usuario";
+            // 
+            // cambiarContraseñaToolStripMenuItem
+            // 
+            this.cambiarContraseñaToolStripMenuItem.Name = "cambiarContraseñaToolStripMenuItem";
+            this.cambiarContraseñaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.cambiarContraseñaToolStripMenuItem.Text = "Cambiar contraseña";
+            // 
+            // graficosToolStripMenuItem
+            // 
+            this.graficosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sectoresToolStripMenuItem,
+            this.barraToolStripMenuItem});
+            this.graficosToolStripMenuItem.Name = "graficosToolStripMenuItem";
+            this.graficosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.graficosToolStripMenuItem.Text = "Graficos";
+            // 
+            // sectoresToolStripMenuItem
+            // 
+            this.sectoresToolStripMenuItem.Name = "sectoresToolStripMenuItem";
+            this.sectoresToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.sectoresToolStripMenuItem.Text = "Sectores";
+            // 
+            // barraToolStripMenuItem
+            // 
+            this.barraToolStripMenuItem.Name = "barraToolStripMenuItem";
+            this.barraToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.barraToolStripMenuItem.Text = "Barra";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1221, 527);
+            this.ClientSize = new System.Drawing.Size(1278, 627);
             this.Controls.Add(this.DGPropiedades);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnExportar);
             this.Controls.Add(this.btnImportar);
             this.Controls.Add(this.btnEliminarPropiedad);
             this.Controls.Add(this.btnAgregarPropiedad);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
@@ -417,7 +555,10 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCantHuespedes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGPropiedades)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -455,6 +596,22 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoHabitacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Dueño;
         private System.Windows.Forms.DataGridViewImageColumn Imagen;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem imprimirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportarDatosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem verAyudaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem usuarioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem verToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem crearUsuarioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cambiarContraseñaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem graficosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sectoresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem barraToolStripMenuItem;
     }
 }
 

@@ -46,9 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administrador.cs" />
     <Compile Include="Casa.cs" />
     <Compile Include="CasaFindeSemana.cs" />
     <Compile Include="Cliente.cs" />
+    <Compile Include="Empleado.cs" />
     <Compile Include="FCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +70,7 @@
       <DependentUpon>FPropiedad.cs</DependentUpon>
     </Compile>
     <Compile Include="Habitaciones.cs" />
+    <Compile Include="IExportable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Propiedad.cs" />
@@ -80,6 +83,7 @@
       <DependentUpon>FReservaImportada.cs</DependentUpon>
     </Compile>
     <Compile Include="Sistema.cs" />
+    <Compile Include="Usuario.cs" />
     <EmbeddedResource Include="FCliente.resx">
       <DependentUpon>FCliente.cs</DependentUpon>
     </EmbeddedResource>

@@ -232,7 +232,7 @@ namespace TP2_Lab
                         if (!nuevoS.Reservado(inicio, fin, prop) && prop != null)
                         {
                             if (prop is CasaFindeSemana && inicio.DayOfWeek == DayOfWeek.Friday && fin.DayOfWeek == DayOfWeek.Sunday
-                                 || prop is Casa && numeroDias >= ((Casa)prop).DiasPermitidos || prop is Habitaciones)
+                                 || prop is Casa && !(prop is CasaFindeSemana) && numeroDias >= ((Casa)prop).DiasPermitidos || prop is Habitaciones)
                             {
                                 Reserva miReserva = new Reserva(miCliente, cantReservas, huespedes, inicio, fin);
                                 cantReservas++;
@@ -323,8 +323,13 @@ namespace TP2_Lab
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             DGPropiedades.Rows.Clear();
-            foreach (Propiedad propiedad in nuevoS.ListaPropiedad)
+            int cant = nuevoS.ListaPropiedad.Count;
+            for (int i = 0; i < cant; i++)
+            {
+                Propiedad propiedad = (Propiedad)nuevoS.ListaPropiedad[i];
                 DGAgregarPropiedad(propiedad);
+
+            }
 
             cBLocalidad.ValueMember = "";
             Calendar.SelectionRange.Start = DateTime.Now;
@@ -430,11 +435,8 @@ namespace TP2_Lab
             fila.Cells[4].Value = propiedad.Nro;
             fila.Cells[6].Value = propiedad.PrecioBasico;
             fila.Cells[7].Value = propiedad.CantCamas;
-            if (propiedad.Imagen != null)
-            {
-                bitmap = new Bitmap(propiedad.Imagen, 100, 100);
-                fila.Cells[11].Value = bitmap;
-            }
+            bitmap = new Bitmap(propiedad.Imagen, 50, 25);
+            fila.Cells[11].Value = bitmap;
 
 
             // Verificar el tipo de instancia y llenar las celdas correspondientes

@@ -50,5 +50,20 @@ namespace TP2_Lab
                 RutaImagen = FileImagen.FileName;
             }
         }
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            if (RutaImagen == null)
+            {
+                if (rBCasas.Checked)
+                {
+                    RutaImagen = Application.StartupPath + "\\Resource\\CasaDefault.jpg";
+                }
+                if (rBHoteles.Checked)
+                {
+                    RutaImagen = Application.StartupPath + "\\Resource\\HotelDefault.jpg";
+                }
+            }
+        }
     }
 }

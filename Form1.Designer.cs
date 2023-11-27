@@ -46,6 +46,8 @@
             this.btnReservar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.DGPropiedades = new System.Windows.Forms.DataGridView();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.Objeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,8 +60,6 @@
             this.TipoHabitacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Dueño = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Imagen = new System.Windows.Forms.DataGridViewImageColumn();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCantHuespedes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGPropiedades)).BeginInit();
@@ -178,7 +178,7 @@
             this.btnLimpiar.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnLimpiar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnLimpiar.Location = new System.Drawing.Point(231, 27);
-            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(2);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(28, 25);
             this.btnLimpiar.TabIndex = 19;
@@ -189,7 +189,7 @@
             // numCantHuespedes
             // 
             this.numCantHuespedes.Location = new System.Drawing.Point(144, 309);
-            this.numCantHuespedes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numCantHuespedes.Margin = new System.Windows.Forms.Padding(2);
             this.numCantHuespedes.Name = "numCantHuespedes";
             this.numCantHuespedes.Size = new System.Drawing.Size(80, 20);
             this.numCantHuespedes.TabIndex = 18;
@@ -245,9 +245,12 @@
             // 
             // DGPropiedades
             // 
+            this.DGPropiedades.AllowUserToAddRows = false;
             this.DGPropiedades.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DGPropiedades.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.DGPropiedades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGPropiedades.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
+            this.DGPropiedades.ColumnHeadersHeight = 50;
+            this.DGPropiedades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DGPropiedades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Objeto,
             this.Tipo,
@@ -262,32 +265,39 @@
             this.Dueño,
             this.Imagen});
             this.DGPropiedades.Location = new System.Drawing.Point(292, 20);
+            this.DGPropiedades.MaximumSize = new System.Drawing.Size(923, 450);
             this.DGPropiedades.Name = "DGPropiedades";
             this.DGPropiedades.ReadOnly = true;
             this.DGPropiedades.RowHeadersVisible = false;
-            this.DGPropiedades.RowHeadersWidth = 62;
-            this.DGPropiedades.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.DGPropiedades.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.DGPropiedades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGPropiedades.Size = new System.Drawing.Size(923, 450);
+            this.DGPropiedades.Size = new System.Drawing.Size(923, 439);
             this.DGPropiedades.TabIndex = 15;
+
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Objeto
             // 
+            this.Objeto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Objeto.FillWeight = 2F;
             this.Objeto.HeaderText = "Objeto";
             this.Objeto.MinimumWidth = 8;
             this.Objeto.Name = "Objeto";
             this.Objeto.ReadOnly = true;
             this.Objeto.Visible = false;
-            this.Objeto.Width = 62;
             // 
             // Tipo
             // 
-            this.Tipo.FillWeight = 47.9798F;
+            this.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Tipo.FillWeight = 48F;
             this.Tipo.HeaderText = "Tipo";
             this.Tipo.MinimumWidth = 8;
             this.Tipo.Name = "Tipo";
             this.Tipo.ReadOnly = true;
-            this.Tipo.Width = 53;
+            this.Tipo.Width = 78;
             // 
             // Localidad
             // 
@@ -300,6 +310,7 @@
             // 
             // Direccion
             // 
+            this.Direccion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Direccion.FillWeight = 47.9798F;
             this.Direccion.HeaderText = "Dirección";
             this.Direccion.MinimumWidth = 8;
@@ -318,48 +329,53 @@
             // 
             // DiasPermitidos
             // 
+            this.DiasPermitidos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.DiasPermitidos.FillWeight = 47.9798F;
             this.DiasPermitidos.HeaderText = "Días Permitidos";
             this.DiasPermitidos.MinimumWidth = 8;
             this.DiasPermitidos.Name = "DiasPermitidos";
             this.DiasPermitidos.ReadOnly = true;
-            this.DiasPermitidos.Width = 106;
+            this.DiasPermitidos.Width = 44;
             // 
             // PrecioBasico
             // 
+            this.PrecioBasico.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.PrecioBasico.FillWeight = 47.9798F;
             this.PrecioBasico.HeaderText = "Precio Básico";
             this.PrecioBasico.MinimumWidth = 8;
             this.PrecioBasico.Name = "PrecioBasico";
             this.PrecioBasico.ReadOnly = true;
-            this.PrecioBasico.Width = 97;
+            this.PrecioBasico.Width = 50;
             // 
             // CantCamas
             // 
+            this.CantCamas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.CantCamas.FillWeight = 47.9798F;
             this.CantCamas.HeaderText = "Cantidad de Camas";
             this.CantCamas.MinimumWidth = 8;
             this.CantCamas.Name = "CantCamas";
             this.CantCamas.ReadOnly = true;
-            this.CantCamas.Width = 124;
+            this.CantCamas.Width = 40;
             // 
             // Estrellas
             // 
+            this.Estrellas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Estrellas.FillWeight = 47.9798F;
             this.Estrellas.HeaderText = "Estrellas";
             this.Estrellas.MinimumWidth = 8;
             this.Estrellas.Name = "Estrellas";
             this.Estrellas.ReadOnly = true;
-            this.Estrellas.Width = 71;
+            this.Estrellas.Width = 35;
             // 
             // TipoHabitacion
             // 
+            this.TipoHabitacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.TipoHabitacion.FillWeight = 47.9798F;
             this.TipoHabitacion.HeaderText = "Tipo de Habitación";
             this.TipoHabitacion.MinimumWidth = 8;
             this.TipoHabitacion.Name = "TipoHabitacion";
             this.TipoHabitacion.ReadOnly = true;
-            this.TipoHabitacion.Width = 122;
+            this.TipoHabitacion.Width = 60;
             // 
             // Dueño
             // 
@@ -371,17 +387,14 @@
             // 
             // Imagen
             // 
-            this.Imagen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Imagen.FillWeight = 568.1818F;
+            this.Imagen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Imagen.FillWeight = 568.2F;
             this.Imagen.HeaderText = "Imagen";
-            this.Imagen.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
-            this.Imagen.MinimumWidth = 50;
+            this.Imagen.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Imagen.MinimumWidth = 2;
             this.Imagen.Name = "Imagen";
             this.Imagen.ReadOnly = true;
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.Imagen.Width = 332;
             // 
             // Form1
             // 
@@ -389,7 +402,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(909, 487);
+            this.ClientSize = new System.Drawing.Size(1221, 527);
             this.Controls.Add(this.DGPropiedades);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnExportar);

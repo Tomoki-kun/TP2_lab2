@@ -55,6 +55,7 @@ namespace TP2_Lab
             this.rBCasas = new System.Windows.Forms.RadioButton();
             this.rBHoteles = new System.Windows.Forms.RadioButton();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnImagen = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.numNro = new System.Windows.Forms.NumericUpDown();
             this.gBCasas = new System.Windows.Forms.GroupBox();
@@ -71,7 +72,6 @@ namespace TP2_Lab
             this.label11 = new System.Windows.Forms.Label();
             this.numPrecio = new System.Windows.Forms.NumericUpDown();
             this.FileImagen = new System.Windows.Forms.OpenFileDialog();
-            this.btnImagen = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDNI)).BeginInit();
@@ -90,10 +90,9 @@ namespace TP2_Lab
             // rBcasaFinde
             // 
             this.rBcasaFinde.AutoSize = true;
-            this.rBcasaFinde.Location = new System.Drawing.Point(183, 34);
-            this.rBcasaFinde.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.rBcasaFinde.Location = new System.Drawing.Point(122, 22);
             this.rBcasaFinde.Name = "rBcasaFinde";
-            this.rBcasaFinde.Size = new System.Drawing.Size(202, 24);
+            this.rBcasaFinde.Size = new System.Drawing.Size(136, 17);
             this.rBcasaFinde.TabIndex = 15;
             this.rBcasaFinde.Text = "Casa de Fin de semana";
             this.rBcasaFinde.UseVisualStyleBackColor = true;
@@ -102,10 +101,9 @@ namespace TP2_Lab
             // 
             this.rBcasaDia.AutoSize = true;
             this.rBcasaDia.Checked = true;
-            this.rBcasaDia.Location = new System.Drawing.Point(16, 35);
-            this.rBcasaDia.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.rBcasaDia.Location = new System.Drawing.Point(11, 23);
             this.rBcasaDia.Name = "rBcasaDia";
-            this.rBcasaDia.Size = new System.Drawing.Size(126, 24);
+            this.rBcasaDia.Size = new System.Drawing.Size(86, 17);
             this.rBcasaDia.TabIndex = 14;
             this.rBcasaDia.TabStop = true;
             this.rBcasaDia.Text = "Casa por Dia";
@@ -120,11 +118,9 @@ namespace TP2_Lab
             this.groupBox2.Controls.Add(this.cbxWifi);
             this.groupBox2.Controls.Add(this.cbxPileta);
             this.groupBox2.Controls.Add(this.cbxCochera);
-            this.groupBox2.Location = new System.Drawing.Point(18, 102);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox2.Location = new System.Drawing.Point(12, 66);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox2.Size = new System.Drawing.Size(414, 255);
+            this.groupBox2.Size = new System.Drawing.Size(276, 166);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Servicios:";
@@ -132,10 +128,9 @@ namespace TP2_Lab
             // cbxMascotas
             // 
             this.cbxMascotas.AutoSize = true;
-            this.cbxMascotas.Location = new System.Drawing.Point(64, 211);
-            this.cbxMascotas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxMascotas.Location = new System.Drawing.Point(43, 137);
             this.cbxMascotas.Name = "cbxMascotas";
-            this.cbxMascotas.Size = new System.Drawing.Size(205, 24);
+            this.cbxMascotas.Size = new System.Drawing.Size(140, 17);
             this.cbxMascotas.TabIndex = 8;
             this.cbxMascotas.Text = "Posibilidad de Mascotas";
             this.cbxMascotas.UseVisualStyleBackColor = true;
@@ -143,10 +138,9 @@ namespace TP2_Lab
             // cbxDesayuno
             // 
             this.cbxDesayuno.AutoSize = true;
-            this.cbxDesayuno.Location = new System.Drawing.Point(64, 175);
-            this.cbxDesayuno.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxDesayuno.Location = new System.Drawing.Point(43, 114);
             this.cbxDesayuno.Name = "cbxDesayuno";
-            this.cbxDesayuno.Size = new System.Drawing.Size(107, 24);
+            this.cbxDesayuno.Size = new System.Drawing.Size(74, 17);
             this.cbxDesayuno.TabIndex = 7;
             this.cbxDesayuno.Text = "Desayuno";
             this.cbxDesayuno.UseVisualStyleBackColor = true;
@@ -154,10 +148,9 @@ namespace TP2_Lab
             // cbxLimpieza
             // 
             this.cbxLimpieza.AutoSize = true;
-            this.cbxLimpieza.Location = new System.Drawing.Point(64, 140);
-            this.cbxLimpieza.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxLimpieza.Location = new System.Drawing.Point(43, 91);
             this.cbxLimpieza.Name = "cbxLimpieza";
-            this.cbxLimpieza.Size = new System.Drawing.Size(157, 24);
+            this.cbxLimpieza.Size = new System.Drawing.Size(108, 17);
             this.cbxLimpieza.TabIndex = 6;
             this.cbxLimpieza.Text = "Servicio Limpieza";
             this.cbxLimpieza.UseVisualStyleBackColor = true;
@@ -165,10 +158,9 @@ namespace TP2_Lab
             // cbxWifi
             // 
             this.cbxWifi.AutoSize = true;
-            this.cbxWifi.Location = new System.Drawing.Point(64, 105);
-            this.cbxWifi.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxWifi.Location = new System.Drawing.Point(43, 68);
             this.cbxWifi.Name = "cbxWifi";
-            this.cbxWifi.Size = new System.Drawing.Size(61, 24);
+            this.cbxWifi.Size = new System.Drawing.Size(44, 17);
             this.cbxWifi.TabIndex = 5;
             this.cbxWifi.Text = "Wifi";
             this.cbxWifi.UseVisualStyleBackColor = true;
@@ -176,10 +168,9 @@ namespace TP2_Lab
             // cbxPileta
             // 
             this.cbxPileta.AutoSize = true;
-            this.cbxPileta.Location = new System.Drawing.Point(64, 69);
-            this.cbxPileta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxPileta.Location = new System.Drawing.Point(43, 45);
             this.cbxPileta.Name = "cbxPileta";
-            this.cbxPileta.Size = new System.Drawing.Size(74, 24);
+            this.cbxPileta.Size = new System.Drawing.Size(52, 17);
             this.cbxPileta.TabIndex = 4;
             this.cbxPileta.Text = "Pileta";
             this.cbxPileta.UseVisualStyleBackColor = true;
@@ -187,10 +178,9 @@ namespace TP2_Lab
             // cbxCochera
             // 
             this.cbxCochera.AutoSize = true;
-            this.cbxCochera.Location = new System.Drawing.Point(64, 29);
-            this.cbxCochera.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxCochera.Location = new System.Drawing.Point(43, 19);
             this.cbxCochera.Name = "cbxCochera";
-            this.cbxCochera.Size = new System.Drawing.Size(95, 24);
+            this.cbxCochera.Size = new System.Drawing.Size(66, 17);
             this.cbxCochera.TabIndex = 3;
             this.cbxCochera.Text = "Cochera";
             this.cbxCochera.UseVisualStyleBackColor = true;
@@ -203,19 +193,16 @@ namespace TP2_Lab
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Location = new System.Drawing.Point(434, 29);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox3.Location = new System.Drawing.Point(289, 19);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox3.Size = new System.Drawing.Size(414, 181);
+            this.groupBox3.Size = new System.Drawing.Size(276, 118);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Datos Propietario:";
             // 
             // numDNI
             // 
-            this.numDNI.Location = new System.Drawing.Point(159, 121);
-            this.numDNI.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numDNI.Location = new System.Drawing.Point(106, 79);
             this.numDNI.Maximum = new decimal(new int[] {
             99999999,
             0,
@@ -227,7 +214,7 @@ namespace TP2_Lab
             0,
             0});
             this.numDNI.Name = "numDNI";
-            this.numDNI.Size = new System.Drawing.Size(150, 26);
+            this.numDNI.Size = new System.Drawing.Size(100, 20);
             this.numDNI.TabIndex = 18;
             this.numDNI.Value = new decimal(new int[] {
             10000000,
@@ -237,68 +224,62 @@ namespace TP2_Lab
             // 
             // tBApellido
             // 
-            this.tBApellido.Location = new System.Drawing.Point(159, 85);
-            this.tBApellido.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tBApellido.Location = new System.Drawing.Point(106, 55);
             this.tBApellido.Name = "tBApellido";
-            this.tBApellido.Size = new System.Drawing.Size(148, 26);
+            this.tBApellido.Size = new System.Drawing.Size(100, 20);
             this.tBApellido.TabIndex = 17;
             // 
             // tBnombre
             // 
-            this.tBnombre.Location = new System.Drawing.Point(159, 49);
-            this.tBnombre.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tBnombre.Location = new System.Drawing.Point(106, 32);
             this.tBnombre.Name = "tBnombre";
-            this.tBnombre.Size = new System.Drawing.Size(148, 26);
+            this.tBnombre.Size = new System.Drawing.Size(100, 20);
             this.tBnombre.TabIndex = 16;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(88, 123);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(59, 80);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 20);
+            this.label3.Size = new System.Drawing.Size(29, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "DNI:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(60, 85);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(40, 55);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 20);
+            this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Apellido:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(60, 49);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(40, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 20);
+            this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre:";
             // 
             // btnAceptar
             // 
             this.btnAceptar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnAceptar.Location = new System.Drawing.Point(18, 500);
-            this.btnAceptar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnAceptar.Location = new System.Drawing.Point(12, 325);
             this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(112, 35);
+            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 19;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // button2
             // 
             this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.Location = new System.Drawing.Point(320, 500);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button2.Location = new System.Drawing.Point(213, 325);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(112, 35);
+            this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 20;
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
@@ -306,38 +287,34 @@ namespace TP2_Lab
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 97);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(17, 63);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 20);
+            this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 5;
             this.label4.Text = "Direccion:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(24, 195);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(16, 127);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(150, 20);
+            this.label5.Size = new System.Drawing.Size(101, 13);
             this.label5.TabIndex = 6;
             this.label5.Text = "Cantidad de camas:";
             // 
             // tBdireccion
             // 
-            this.tBdireccion.Location = new System.Drawing.Point(231, 97);
-            this.tBdireccion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tBdireccion.Location = new System.Drawing.Point(154, 63);
             this.tBdireccion.Name = "tBdireccion";
-            this.tBdireccion.Size = new System.Drawing.Size(148, 26);
+            this.tBdireccion.Size = new System.Drawing.Size(100, 20);
             this.tBdireccion.TabIndex = 11;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 42);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(5, 27);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(123, 20);
+            this.label6.Size = new System.Drawing.Size(82, 13);
             this.label6.TabIndex = 10;
             this.label6.Text = "Dias Permitidos:";
             // 
@@ -345,11 +322,9 @@ namespace TP2_Lab
             // 
             this.groupBox4.Controls.Add(this.rBCasas);
             this.groupBox4.Controls.Add(this.rBHoteles);
-            this.groupBox4.Location = new System.Drawing.Point(18, 5);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox4.Location = new System.Drawing.Point(12, 3);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox4.Size = new System.Drawing.Size(254, 65);
+            this.groupBox4.Size = new System.Drawing.Size(169, 42);
             this.groupBox4.TabIndex = 11;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Propiedad";
@@ -358,10 +333,9 @@ namespace TP2_Lab
             // 
             this.rBCasas.AutoSize = true;
             this.rBCasas.Checked = true;
-            this.rBCasas.Location = new System.Drawing.Point(9, 29);
-            this.rBCasas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.rBCasas.Location = new System.Drawing.Point(6, 19);
             this.rBCasas.Name = "rBCasas";
-            this.rBCasas.Size = new System.Drawing.Size(79, 24);
+            this.rBCasas.Size = new System.Drawing.Size(54, 17);
             this.rBCasas.TabIndex = 1;
             this.rBCasas.TabStop = true;
             this.rBCasas.Text = "Casas";
@@ -371,10 +345,9 @@ namespace TP2_Lab
             // rBHoteles
             // 
             this.rBHoteles.AutoSize = true;
-            this.rBHoteles.Location = new System.Drawing.Point(146, 29);
-            this.rBHoteles.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.rBHoteles.Location = new System.Drawing.Point(97, 19);
             this.rBHoteles.Name = "rBHoteles";
-            this.rBHoteles.Size = new System.Drawing.Size(89, 24);
+            this.rBHoteles.Size = new System.Drawing.Size(61, 17);
             this.rBHoteles.TabIndex = 2;
             this.rBHoteles.Text = "Hoteles";
             this.rBHoteles.UseVisualStyleBackColor = true;
@@ -394,31 +367,38 @@ namespace TP2_Lab
             this.groupBox5.Controls.Add(this.label4);
             this.groupBox5.Controls.Add(this.label5);
             this.groupBox5.Controls.Add(this.tBdireccion);
-            this.groupBox5.Location = new System.Drawing.Point(450, 5);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox5.Location = new System.Drawing.Point(300, 3);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox5.Size = new System.Drawing.Size(886, 609);
+            this.groupBox5.Size = new System.Drawing.Size(591, 396);
             this.groupBox5.TabIndex = 12;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Datos Propiedad";
             // 
+            // btnImagen
+            // 
+            this.btnImagen.Location = new System.Drawing.Point(242, 177);
+            this.btnImagen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnImagen.Name = "btnImagen";
+            this.btnImagen.Size = new System.Drawing.Size(89, 27);
+            this.btnImagen.TabIndex = 21;
+            this.btnImagen.Text = "Cargar Imagen";
+            this.btnImagen.UseVisualStyleBackColor = true;
+            this.btnImagen.Click += new System.EventHandler(this.btnImagen_Click);
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(24, 52);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Location = new System.Drawing.Point(16, 34);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(81, 20);
+            this.label10.Size = new System.Drawing.Size(56, 13);
             this.label10.TabIndex = 14;
             this.label10.Text = "Localidad:";
             // 
             // numNro
             // 
-            this.numNro.Location = new System.Drawing.Point(230, 151);
-            this.numNro.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numNro.Location = new System.Drawing.Point(153, 98);
             this.numNro.Name = "numNro";
-            this.numNro.Size = new System.Drawing.Size(150, 26);
+            this.numNro.Size = new System.Drawing.Size(100, 20);
             this.numNro.TabIndex = 13;
             // 
             // gBCasas
@@ -427,11 +407,9 @@ namespace TP2_Lab
             this.gBCasas.Controls.Add(this.rBcasaFinde);
             this.gBCasas.Controls.Add(this.rBcasaDia);
             this.gBCasas.Controls.Add(this.groupBox3);
-            this.gBCasas.Location = new System.Drawing.Point(8, 342);
-            this.gBCasas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gBCasas.Location = new System.Drawing.Point(5, 222);
             this.gBCasas.Name = "gBCasas";
-            this.gBCasas.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gBCasas.Size = new System.Drawing.Size(856, 238);
+            this.gBCasas.Size = new System.Drawing.Size(571, 155);
             this.gBCasas.TabIndex = 0;
             this.gBCasas.TabStop = false;
             // 
@@ -439,36 +417,35 @@ namespace TP2_Lab
             // 
             this.gbCasaXDia.Controls.Add(this.numDiasPermitidos);
             this.gbCasaXDia.Controls.Add(this.label6);
-            this.gbCasaXDia.Location = new System.Drawing.Point(16, 71);
+            this.gbCasaXDia.Location = new System.Drawing.Point(11, 46);
+            this.gbCasaXDia.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbCasaXDia.Name = "gbCasaXDia";
-            this.gbCasaXDia.Size = new System.Drawing.Size(328, 75);
+            this.gbCasaXDia.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbCasaXDia.Size = new System.Drawing.Size(219, 49);
             this.gbCasaXDia.TabIndex = 16;
             this.gbCasaXDia.TabStop = false;
             // 
             // numDiasPermitidos
             // 
-            this.numDiasPermitidos.Location = new System.Drawing.Point(154, 38);
-            this.numDiasPermitidos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numDiasPermitidos.Location = new System.Drawing.Point(103, 25);
             this.numDiasPermitidos.Name = "numDiasPermitidos";
-            this.numDiasPermitidos.Size = new System.Drawing.Size(150, 26);
+            this.numDiasPermitidos.Size = new System.Drawing.Size(100, 20);
             this.numDiasPermitidos.TabIndex = 13;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(24, 152);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(16, 99);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(25, 20);
+            this.label7.Size = new System.Drawing.Size(19, 13);
             this.label7.TabIndex = 17;
             this.label7.Text = "N°";
             // 
             // tBlocalidad
             // 
-            this.tBlocalidad.Location = new System.Drawing.Point(230, 52);
-            this.tBlocalidad.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tBlocalidad.Location = new System.Drawing.Point(153, 34);
             this.tBlocalidad.Name = "tBlocalidad";
-            this.tBlocalidad.Size = new System.Drawing.Size(148, 26);
+            this.tBlocalidad.Size = new System.Drawing.Size(100, 20);
             this.tBlocalidad.TabIndex = 10;
             // 
             // gBHoteles
@@ -477,11 +454,9 @@ namespace TP2_Lab
             this.gBHoteles.Controls.Add(this.label9);
             this.gBHoteles.Controls.Add(this.numEstrellas);
             this.gBHoteles.Controls.Add(this.label8);
-            this.gBHoteles.Location = new System.Drawing.Point(446, 29);
-            this.gBHoteles.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gBHoteles.Location = new System.Drawing.Point(297, 19);
             this.gBHoteles.Name = "gBHoteles";
-            this.gBHoteles.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gBHoteles.Size = new System.Drawing.Size(423, 174);
+            this.gBHoteles.Size = new System.Drawing.Size(282, 113);
             this.gBHoteles.TabIndex = 20;
             this.gBHoteles.TabStop = false;
             this.gBHoteles.Visible = false;
@@ -493,25 +468,24 @@ namespace TP2_Lab
             "Simple",
             "Doble",
             "Triple"});
-            this.cBTipoHabitacion.Location = new System.Drawing.Point(218, 125);
+            this.cBTipoHabitacion.Location = new System.Drawing.Point(145, 81);
+            this.cBTipoHabitacion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cBTipoHabitacion.Name = "cBTipoHabitacion";
-            this.cBTipoHabitacion.Size = new System.Drawing.Size(150, 28);
+            this.cBTipoHabitacion.Size = new System.Drawing.Size(101, 21);
             this.cBTipoHabitacion.TabIndex = 15;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 125);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Location = new System.Drawing.Point(8, 81);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(138, 20);
+            this.label9.Size = new System.Drawing.Size(95, 13);
             this.label9.TabIndex = 19;
             this.label9.Text = "Tipo de habitacion";
             // 
             // numEstrellas
             // 
-            this.numEstrellas.Location = new System.Drawing.Point(218, 75);
-            this.numEstrellas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numEstrellas.Location = new System.Drawing.Point(145, 49);
             this.numEstrellas.Maximum = new decimal(new int[] {
             3,
             0,
@@ -523,7 +497,7 @@ namespace TP2_Lab
             0,
             0});
             this.numEstrellas.Name = "numEstrellas";
-            this.numEstrellas.Size = new System.Drawing.Size(150, 26);
+            this.numEstrellas.Size = new System.Drawing.Size(100, 20);
             this.numEstrellas.TabIndex = 14;
             this.numEstrellas.Value = new decimal(new int[] {
             2,
@@ -534,59 +508,45 @@ namespace TP2_Lab
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 75);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(8, 49);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(70, 20);
+            this.label8.Size = new System.Drawing.Size(46, 13);
             this.label8.TabIndex = 18;
             this.label8.Text = "Estrellas";
             // 
             // numCamas
             // 
-            this.numCamas.Location = new System.Drawing.Point(230, 192);
-            this.numCamas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numCamas.Location = new System.Drawing.Point(153, 125);
             this.numCamas.Name = "numCamas";
-            this.numCamas.Size = new System.Drawing.Size(150, 26);
+            this.numCamas.Size = new System.Drawing.Size(100, 20);
             this.numCamas.TabIndex = 12;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(22, 388);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Location = new System.Drawing.Point(15, 252);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(53, 20);
+            this.label11.Size = new System.Drawing.Size(37, 13);
             this.label11.TabIndex = 13;
             this.label11.Text = "Precio";
             // 
             // numPrecio
             // 
-            this.numPrecio.Location = new System.Drawing.Point(92, 383);
-            this.numPrecio.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numPrecio.Location = new System.Drawing.Point(61, 249);
             this.numPrecio.Name = "numPrecio";
-            this.numPrecio.Size = new System.Drawing.Size(164, 26);
+            this.numPrecio.Size = new System.Drawing.Size(109, 20);
             this.numPrecio.TabIndex = 9;
             // 
             // FileImagen
             // 
             this.FileImagen.FileName = "openFileDialog1";
             // 
-            // btnImagen
-            // 
-            this.btnImagen.Location = new System.Drawing.Point(363, 272);
-            this.btnImagen.Name = "btnImagen";
-            this.btnImagen.Size = new System.Drawing.Size(134, 41);
-            this.btnImagen.TabIndex = 21;
-            this.btnImagen.Text = "Cargar Imagen";
-            this.btnImagen.UseVisualStyleBackColor = true;
-            this.btnImagen.Click += new System.EventHandler(this.btnImagen_Click);
-            // 
             // FPropiedad
             // 
             this.AcceptButton = this.btnAceptar;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1354, 591);
+            this.ClientSize = new System.Drawing.Size(903, 384);
             this.Controls.Add(this.numPrecio);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.groupBox5);
@@ -594,7 +554,6 @@ namespace TP2_Lab
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.groupBox2);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FPropiedad";
             this.Text = "FPropiedad";
             this.groupBox2.ResumeLayout(false);

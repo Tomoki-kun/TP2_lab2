@@ -17,15 +17,16 @@ namespace TP2_Lab
 {
     public partial class Form1 : Form
     {
-        string miArchivo = "Datos.dat";
-        Propietario propietario;
-        Propiedad prop;
-        Sistema nuevoS = new Sistema();
-        int cantPropiedades = 0,
+        private string miArchivo = "Datos.dat";
+        private Propietario propietario;
+        private Propiedad prop;
+        private Sistema nuevoS = new Sistema();
+        private int cantPropiedades = 0,
             cantReservas = 0,
             reservasCasaDia = 0,
             reservasCasaFinde = 0,
             reservasHabitaciones = 0;
+        private List<IExportable> listaDatos = new List<IExportable>();
 
         public Form1()
         {
@@ -244,20 +245,24 @@ namespace TP2_Lab
                                 if (prop is Habitaciones)
                                 {
                                     costoFinal = (prop.CalcularPrecio() * numeroDias) + ((prop.CalcularPrecio() * numeroDias * 0.03));
+                                    reservasHabitaciones++;
                                 }
                                 if (prop is Casa)
                                 {
                                     costoFinal = ((Casa)prop).DiasAReservar(numeroDias);
-
+                                    reservasCasaDia++;
                                 }
                                 if (prop is CasaFindeSemana)
                                 {
                                     costoFinal = prop.CalcularPrecio();
+                                    reservasCasaFinde++;
                                 }
                                 miReserva.PrecioFinal = costoFinal;
                                 miReserva.Realizado = DateTime.Now;
                                 miReserva.Comprobante(prop);
                                 prop.AgregarReserva(miReserva);
+                                listaDatos.Add(miReserva);
+                                listaDatos.Add(miCliente);
                             }
                             else
                             {
@@ -313,6 +318,9 @@ namespace TP2_Lab
                                 prop.ListaReservas.Remove(resv);
                                 MessageBox.Show("Reserva Cancelada", "Cancelación exitosa");
                                 encontrada = true;
+                                if (prop is Habitaciones) reservasHabitaciones--;
+                                if (prop is Casa) reservasCasaDia--;
+                                if (prop is CasaFindeSemana) reservasCasaFinde--;
                             }
                         }
                     }
@@ -410,6 +418,43 @@ namespace TP2_Lab
             return ret;
         }
 
+        private void exportarDatosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportarDatos(listaDatos,miArchivo);
+            MessageBox.Show("Datos exportados correctamente", "Operacion exitosa");
+        }
+        static void ExportarDatos(List<IExportable> datos, string nombreArchivo)
+        {
+            FileStream archivoExportar = new FileStream(nombreArchivo, FileMode.OpenOrCreate, FileAccess.Write);
+            StreamWriter sW = new StreamWriter(archivoExportar);
+
+            foreach (IExportable dato in datos)
+            {
+                sW.WriteLine(dato.Exportar());
+            }
+            sW.Dispose();
+            archivoExportar.Close();
+        }
+
+        private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("***************************************************\n" +
+                            "           Empresa de alquileres temporarios       \n" +
+                            "***************************************************\n" +
+                            "Versión: 1.0\n" +
+                            "Autores: \n" +
+                            "Acosta,Nicolas \n" +
+                            "Belini, Augusto \n" +
+                            "Ferrari, Nahuel \n" +
+                            "Millen, Julian \n" +
+                            "Descripción: Proyecto de alquileres temporarios que facilita la gestion de reservas para habitaciones de hotel, casas por dias y casas de fin de semana. Ofreciendo caracteristicas de filtrado como importacion/exportacion de datos en formato CSV, graficos estadisticos y una interfaz de usuario intuitiva y facil de usar para quien lo desee. \n" +
+                            "Fecha de creación: Noviembre 2023\n" +
+                            "*******************************",
+                            "Acerca de",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+
         private string CapitalizarPalabras(string texto)
         {
             string[] palabras = texto.Split(' ');
@@ -471,6 +516,7 @@ namespace TP2_Lab
         }
         #endregion
 
+        #region Ventana de Graficos
         private void barraToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FGraficos stats2 = new FGraficos();
@@ -568,5 +614,6 @@ namespace TP2_Lab
 
             stats.ShowDialog();
         }
+        #endregion
     }
 }

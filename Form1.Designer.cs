@@ -77,6 +77,9 @@
             this.graficosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sectoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.calendarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCantHuespedes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGPropiedades)).BeginInit();
@@ -436,6 +439,7 @@
             // archivoToolStripMenuItem
             // 
             this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.calendarioToolStripMenuItem,
             this.imprimirToolStripMenuItem,
             this.exportarDatosToolStripMenuItem,
             this.salirToolStripMenuItem});
@@ -480,6 +484,7 @@
             this.exportarDatosToolStripMenuItem.Name = "exportarDatosToolStripMenuItem";
             this.exportarDatosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.exportarDatosToolStripMenuItem.Text = "Exportar datos";
+            this.exportarDatosToolStripMenuItem.Click += new System.EventHandler(this.exportarDatosToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
@@ -498,6 +503,7 @@
             this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
             this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.acercaDeToolStripMenuItem.Text = "Acerca de";
+            this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
             // crearUsuarioToolStripMenuItem
             // 
@@ -533,6 +539,27 @@
             this.barraToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.barraToolStripMenuItem.Text = "Barra";
             this.barraToolStripMenuItem.Click += new System.EventHandler(this.barraToolStripMenuItem_Click);
+            // 
+            // calendarioToolStripMenuItem
+            // 
+            this.calendarioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importarToolStripMenuItem,
+            this.exportarToolStripMenuItem});
+            this.calendarioToolStripMenuItem.Name = "calendarioToolStripMenuItem";
+            this.calendarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.calendarioToolStripMenuItem.Text = "Calendario";
+            // 
+            // importarToolStripMenuItem
+            // 
+            this.importarToolStripMenuItem.Name = "importarToolStripMenuItem";
+            this.importarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.importarToolStripMenuItem.Text = "Importar";
+            // 
+            // exportarToolStripMenuItem
+            // 
+            this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
+            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.exportarToolStripMenuItem.Text = "Exportar";
             // 
             // Form1
             // 
@@ -614,6 +641,9 @@
         private System.Windows.Forms.ToolStripMenuItem graficosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sectoresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem barraToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem calendarioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportarToolStripMenuItem;
     }
 }
 

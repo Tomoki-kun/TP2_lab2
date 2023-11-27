@@ -14,7 +14,6 @@ namespace TP2_Lab
         public CasaFindeSemana(int nro, int diasPermitidos, Propietario miPropietario,double precio, string direccion,string localidad,int cantCamas, bool[]servicios, Image pic)
             :base(nro,diasPermitidos,miPropietario,precio,direccion, localidad, cantCamas,servicios, pic)
         {
-
         }
         public override double CalcularPrecio()
         {

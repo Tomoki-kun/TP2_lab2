@@ -13,21 +13,27 @@ namespace TP2_Lab
         private string nombre;
         private long dni;
 
+       
+        //Propiedades
+        public long DNI
+        {
+            get { return dni; }
+        } 
+
+        //Constructor
         public Cliente(string nombre, long dni)
         {
             this.nombre = nombre;
             this.dni = dni;
         }
 
-        public long DNI
-        {
-            get { return dni; }
-        }
+        //Metodos
         public override string ToString()
         {
             return nombre;
         }
 
+        //Metodo de IExportable
         public string Exportar()
         {
             return $"{nombre},{dni}";

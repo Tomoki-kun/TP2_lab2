@@ -14,6 +14,8 @@ namespace TP2_Lab
     public class Sistema
     {
         private ArrayList listaPropiedad;
+
+        #region Propiedades
         public ArrayList ListaPropiedad
         {
             get { return listaPropiedad; }
@@ -23,11 +25,13 @@ namespace TP2_Lab
         {
             get { return listaPropiedad.Count; }
         }
+        #endregion
         public Sistema()
         {
             listaPropiedad = new ArrayList();
         }
 
+        #region Metodos
         public void AgregarPropiedad(Propiedad miPropiedad)
         {
             listaPropiedad.Add(miPropiedad);
@@ -83,5 +87,6 @@ namespace TP2_Lab
             }
             return ret;
         }
+        #endregion
     }
 }

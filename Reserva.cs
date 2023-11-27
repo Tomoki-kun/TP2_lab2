@@ -20,19 +20,8 @@ namespace TP2_Lab
         private DateTime realizado;
         private double precioFinal;
         private int cantPersonas;
-        public Reserva(Cliente cliente, int numReserva, int cantidad, DateTime fechaEntrada, DateTime fechaSalida)
-        {
-            Cliente = cliente;
-            this.numReserva = numReserva;
-            this.fechaEntrada = fechaEntrada;
-            this.fechaSalida = fechaSalida;
-            cantPersonas = cantidad;
-        }
-        public DateTime Realizado
-        {
-            get { return realizado; }
-            set { realizado = value; }
-        }
+
+        #region Propiedades
         public Cliente Cliente
         {
             get { return cliente; }
@@ -48,11 +37,33 @@ namespace TP2_Lab
             get { return fechaSalida; }
             set { fechaSalida = value; }
         }
+        public DateTime Realizado
+        {
+            get { return realizado; }
+            set { realizado = value; }
+        }
         public double PrecioFinal
         {
             get { return precioFinal; }
             set { precioFinal = value; }
         }
+        public int CantPersonas
+        {
+            get { return cantPersonas; }
+        }
+        #endregion
+
+        //Constructor
+        public Reserva(Cliente cliente, int numReserva, int cantidad, DateTime fechaEntrada, DateTime fechaSalida)
+        {
+            Cliente = cliente;
+            this.numReserva = numReserva;
+            this.fechaEntrada = fechaEntrada;
+            this.fechaSalida = fechaSalida;
+            cantPersonas = cantidad;
+        }
+
+        #region Metodos
         public int CompareTo(object obj)
         {
             return numReserva.CompareTo(((Reserva)obj).numReserva);
@@ -63,10 +74,6 @@ namespace TP2_Lab
                 FechaSalida.ToString() + ";" + realizado.ToString() + ";" + cantPersonas.ToString();
         }
 
-        public int CantPersonas
-        {
-            get { return cantPersonas; }
-        }
         public void Comprobante(Propiedad prop)
         {
             string ss;
@@ -89,5 +96,6 @@ namespace TP2_Lab
         {
             return $"{numReserva},{cliente.DNI},{fechaEntrada},{fechaSalida}";
         }
+        #endregion
     }
 }

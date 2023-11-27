@@ -14,17 +14,26 @@ namespace TP2_Lab
         private int diasPermitidos; //dias minimo
         //private int diasTotales;     //dias totales
         Propietario miPropietario;
+        #region Propiedades
+        public string Propietario
+        {
+            get{ return miPropietario.ToString(); }
+        }
+        public int DiasPermitidos
+        {
+            get { return diasPermitidos; }
+        }
+        #endregion
 
+        //Constructor
         public Casa(int nro,int diasPermitidos, Propietario miPropietario, double precio, string direccion, string localidad, int cantCamas, bool[] servicios, Image pic)
             : base(nro,precio, direccion, localidad, cantCamas, servicios, pic)
         {
             this.diasPermitidos = diasPermitidos;
             this.miPropietario = miPropietario;
         }
-        public string Propietario
-        {
-            get{ return miPropietario.ToString(); }
-        }
+
+        #region Metodos
         public override double CalcularPrecio()
         {
             double precioServicios = 0;
@@ -44,11 +53,6 @@ namespace TP2_Lab
             return precio;
         }
 
-        public int DiasPermitidos
-        {
-            get { return diasPermitidos; }
-        }
-
         public double DiasAReservar(int dias)
         {
             double ret = diasPermitidos * precioBasico;
@@ -57,5 +61,6 @@ namespace TP2_Lab
 
             return ret;
         }
+        #endregion
     }
 }

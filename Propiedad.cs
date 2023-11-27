@@ -20,14 +20,46 @@ namespace TP2_Lab
         protected int nro;
         private List<Reserva> listaReservas=new List<Reserva>();
         Image imagen;
+        protected bool[] servicios = new bool[6];
+        private string direccion;
+        private string localidad;
+
+        #region Propiedades
+        public double PrecioBasico
+        {
+            get { return precioBasico; }
+            private set { precioBasico = value; }
+        }
+        public int CantCamas
+        {
+            get { return cantCamas; }
+            private set { cantCamas = value; }
+        }
+        public int Nro
+        {
+            get { return nro; }
+            private set { nro = value; }
+        }
         public List<Reserva> ListaReservas
         {
             get { return listaReservas; }
         }
-        protected bool[] servicios = new bool[6];
-        private string direccion;
-        private string localidad;
-        
+        public Image Imagen
+        {
+            get { return imagen; }
+            private set { imagen = value; }
+        }
+        public string Direccion
+        {
+            get { return direccion; }
+            private set { direccion = value; }
+        }
+        public string Localidad
+        {
+            get { return localidad; }
+            private set { localidad = value; }
+        }
+        #endregion
         public Propiedad(int nro,double precio,string direccion,string localidad, int cantCamas,bool[]servicios, Image pic)
         {
             Nro = nro;
@@ -42,46 +74,19 @@ namespace TP2_Lab
             Imagen = pic;
             
         }
+
+        #region Metodos
         public abstract double CalcularPrecio();
 
-        public Image Imagen
-        {
-            get { return imagen; }
-            private set { imagen = value; }
-        }
         public void AgregarReserva(Reserva miReserva)
         {
             listaReservas.Add(miReserva);
-        }
-        public int CantCamas
-        {
-            get { return cantCamas; }
-            private set { cantCamas = value;}
-        }
-        public double PrecioBasico
-        {
-            get { return precioBasico; }
-            private set { precioBasico = value;}
-        }
-        public string Localidad
-        {
-            get { return localidad; }
-            private set { localidad = value; }
-        }
-        public int Nro
-        {
-            get { return nro; }
-            private set { nro = value;}
-        }
-        public string Direccion
-        {
-            get { return direccion; }
-            private set { direccion = value;}
         }
 
         public int CompareTo(object obj)
         {
             return this.direccion.CompareTo(((Propiedad)obj).direccion);
         }
+        #endregion
     }
 }

@@ -14,13 +14,7 @@ namespace TP2_Lab
         private int estrellas;
         private string tipoHabitacion;
 
-        public Habitaciones(int nro,int estrellas,double precio,string direccion,string localidad, bool[] servicios, int cantCamas,
-            string tipoHabitacion, Image pic) : base(nro,precio,direccion, localidad, cantCamas,servicios, pic)
-        {
-            this.estrellas = estrellas;
-            this.tipoHabitacion = tipoHabitacion;
-        }
-
+        #region Propiedades
         public int Estrellas
         {
             get { return estrellas; }
@@ -30,6 +24,14 @@ namespace TP2_Lab
         {
             get { return tipoHabitacion; }
         }
+        #endregion
+        public Habitaciones(int nro,int estrellas,double precio,string direccion,string localidad, bool[] servicios, int cantCamas,
+            string tipoHabitacion, Image pic) : base(nro,precio,direccion, localidad, cantCamas,servicios, pic)
+        {
+            this.estrellas = estrellas;
+            this.tipoHabitacion = tipoHabitacion;
+        }
+
         public override double CalcularPrecio()
         {
             double precioServicios = 0;

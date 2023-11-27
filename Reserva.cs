@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.Windows.Forms;
+using System.Runtime.Remoting.Messaging;
 
 namespace TP2_Lab
 {
@@ -60,6 +61,11 @@ namespace TP2_Lab
         {
             return Cliente + ";" + numReserva.ToString() + ";" + FechaEntrada.ToString() + ";" + 
                 FechaSalida.ToString() + ";" + realizado.ToString() + ";" + cantPersonas.ToString();
+        }
+
+        public int CantPersonas
+        {
+            get { return cantPersonas; }
         }
         public void Comprobante(Propiedad prop)
         {

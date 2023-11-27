@@ -525,12 +525,14 @@
             this.sectoresToolStripMenuItem.Name = "sectoresToolStripMenuItem";
             this.sectoresToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.sectoresToolStripMenuItem.Text = "Sectores";
+            this.sectoresToolStripMenuItem.Click += new System.EventHandler(this.sectoresToolStripMenuItem_Click);
             // 
             // barraToolStripMenuItem
             // 
             this.barraToolStripMenuItem.Name = "barraToolStripMenuItem";
             this.barraToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.barraToolStripMenuItem.Text = "Barra";
+            this.barraToolStripMenuItem.Click += new System.EventHandler(this.barraToolStripMenuItem_Click);
             // 
             // Form1
             // 

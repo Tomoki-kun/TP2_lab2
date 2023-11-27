@@ -10,6 +10,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using TP2_Lab.Properties;
 
 namespace TP2_Lab
@@ -20,8 +21,11 @@ namespace TP2_Lab
         Propietario propietario;
         Propiedad prop;
         Sistema nuevoS = new Sistema();
-        int cantPropiedades = 0;
-        int cantReservas = 0;
+        int cantPropiedades = 0,
+            cantReservas = 0,
+            reservasCasaDia = 0,
+            reservasCasaFinde = 0,
+            reservasHabitaciones = 0;
 
         public Form1()
         {
@@ -467,5 +471,102 @@ namespace TP2_Lab
         }
         #endregion
 
+        private void barraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FGraficos stats2 = new FGraficos();
+
+            // Crea el área del gráfico
+            ChartArea areaReservas = new ChartArea();
+            stats2.cGrafico.ChartAreas.Add(areaReservas);
+
+            // Crear una serie para el gráfico de barras
+            Series series = new Series("Huéspedes");
+            series.ChartType = SeriesChartType.Bar;
+
+            // Contador para la cantidad de huéspedes
+            int[] contadorHuespedes = new int[5];
+
+            // Inicializar todos los elementos en cero
+            for (int i = 0; i < contadorHuespedes.Length; i++)
+            {
+                contadorHuespedes[i] = 0;
+            }
+
+            // Iterar a través de las reservas y contar la cantidad de huéspedes
+            foreach (Reserva reserva in prop.ListaReservas)
+            {
+                int huesp = reserva.CantPersonas;
+                // Implementar contadores específicos para cada cantidad de huéspedes
+                if (huesp == 2)
+                {
+                    contadorHuespedes[0]++;
+                }
+                else if (huesp == 3)
+                {
+                    contadorHuespedes[1]++;
+                }
+                else if (huesp == 4)
+                {
+                    contadorHuespedes[2]++;
+                }
+                else if (huesp == 5)
+                {
+                    contadorHuespedes[3]++;
+                }
+                else
+                {
+                    contadorHuespedes[4]++;
+                }
+            }
+
+            // Agrega los puntos de datos a la serie
+            series.Points.AddXY("Huespedes 2", contadorHuespedes[0]);
+            series.Points.AddXY("Huespedes 3", contadorHuespedes[1]);
+            series.Points.AddXY("Huespedes 4", contadorHuespedes[2]);
+            series.Points.AddXY("Huespedes 5", contadorHuespedes[3]);
+            series.Points.AddXY("Huespedes 6 o mas", contadorHuespedes[4]);
+
+            // Agregar la serie al gráfico
+            stats2.cGrafico.Series.Add(series);
+
+            stats2.cGrafico.Palette = ChartColorPalette.Excel; //colores de las barras
+
+            // Mostrar el formulario con el gráfico
+            stats2.ShowDialog();
+        }
+
+        private void sectoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FGraficos stats = new FGraficos();
+
+            // Crea el área del gráfico
+            ChartArea areaReservas = new ChartArea();
+            stats.cGrafico.ChartAreas.Add(areaReservas);
+
+            // Limpia cualquier serie existente
+            stats.cGrafico.Series.Clear();
+
+            stats.cGrafico.Width = 800;
+            stats.cGrafico.Height = 600;
+
+            // Crea una serie para el gráfico de sectores
+            Series serieReservas = new Series();
+            serieReservas.ChartType = SeriesChartType.Pie;
+
+            // Agrega los puntos de datos a la serie
+            serieReservas.Points.AddXY("CasaPorDia", reservasCasaDia);
+            serieReservas.Points.AddXY("CasaFindeSemana", reservasCasaFinde);
+            serieReservas.Points.AddXY("Habitaciones", reservasHabitaciones);
+
+            // Cambia los colores específicos si es necesario
+            serieReservas.Points[0].Color = Color.Red;
+            serieReservas.Points[1].Color = Color.Green;
+            serieReservas.Points[2].Color = Color.Blue;
+
+            // Agrega la serie al gráfico
+            stats.cGrafico.Series.Add(serieReservas);
+
+            stats.ShowDialog();
+        }
     }
 }

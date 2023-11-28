@@ -474,7 +474,7 @@ namespace TP2_Lab
             string rutaPaginaHTML = "Ayuda.html";
 
             // Combina la ruta de la página HTML con la ruta del directorio de ejecución del programa
-            string rutaCompleta = Path.Combine(Application.StartupPath, "Resources", rutaPaginaHTML);
+            string rutaCompleta = Path.Combine(Application.StartupPath,"Resource", rutaPaginaHTML);
 
             // Verifica si el archivo existe antes de intentar abrirlo
             if (File.Exists(rutaCompleta))

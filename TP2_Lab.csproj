@@ -157,7 +157,9 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resource\Ayuda.html" />
+    <Content Include="Resource\Ayuda.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

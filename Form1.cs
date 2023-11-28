@@ -27,10 +27,35 @@ namespace TP2_Lab
             reservasCasaFinde = 0,
             reservasHabitaciones = 0;
         private List<IExportable> listaDatos = new List<IExportable>();
+        private List<Usuario> listaUsuarios = new List<Usuario>();
+        Usuario admin = new Administrador("Admin", "Admin");
+
 
         public Form1()
         {
             InitializeComponent();
+            listaUsuarios.Add(admin);
+            FLogin vLogin = new FLogin();
+            Usuario usuario;
+            vLogin.ShowDialog();
+            
+            if (vLogin.rbAdmin.Checked)
+                usuario = new Administrador(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
+            else
+                usuario = new Empleado(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
+            listaDatos.Sort();
+            int pos = listaUsuarios.BinarySearch(usuario);
+            while ( pos != 0 || (pos==0 && usuario is Administrador  && listaUsuarios[pos] is Usuario))
+            {
+                vLogin.ShowDialog();
+                if (vLogin.rbAdmin.Checked)
+                    usuario = new Administrador(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
+                else
+                    usuario = new Empleado(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
+                listaDatos.Sort();
+            }
+
+            vLogin.Dispose();
         }
 
         #region Serializacion de datos
@@ -420,20 +445,8 @@ namespace TP2_Lab
 
         private void exportarDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ExportarDatos(listaDatos,miArchivo);
+            ExportarDatos(listaDatos, miArchivo);
             MessageBox.Show("Datos exportados correctamente", "Operacion exitosa");
-        }
-        static void ExportarDatos(List<IExportable> datos, string nombreArchivo)
-        {
-            FileStream archivoExportar = new FileStream(nombreArchivo, FileMode.OpenOrCreate, FileAccess.Write);
-            StreamWriter sW = new StreamWriter(archivoExportar);
-
-            foreach (IExportable dato in datos)
-            {
-                sW.WriteLine(dato.Exportar());
-            }
-            sW.Dispose();
-            archivoExportar.Close();
         }
 
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -453,6 +466,42 @@ namespace TP2_Lab
                             "Acerca de",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
+        }
+
+        private void verAyudaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string rutaPaginaHTML = "Ayuda.html";
+
+            // Combina la ruta de la página HTML con la ruta del directorio de ejecución del programa
+            string rutaCompleta = Path.Combine(Application.StartupPath, "Resources", rutaPaginaHTML);
+
+            // Verifica si el archivo existe antes de intentar abrirlo
+            if (File.Exists(rutaCompleta))
+            {
+                FWeb web = new FWeb();
+                web.wBrowser.Navigate(rutaCompleta);
+
+                // Establece el tamaño de la ventana y muestra la forma
+                web.Size = new Size(800, 600);
+                web.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("La página HTML no se encuentra en la ruta especificada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        static void ExportarDatos(List<IExportable> datos, string nombreArchivo)
+        {
+            FileStream archivoExportar = new FileStream(nombreArchivo, FileMode.OpenOrCreate, FileAccess.Write);
+            StreamWriter sW = new StreamWriter(archivoExportar);
+
+            foreach (IExportable dato in datos)
+            {
+                sW.WriteLine(dato.Exportar());
+            }
+            sW.Dispose();
+            archivoExportar.Close();
         }
 
         private string CapitalizarPalabras(string texto)

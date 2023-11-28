@@ -497,6 +497,7 @@
             this.verAyudaToolStripMenuItem.Name = "verAyudaToolStripMenuItem";
             this.verAyudaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.verAyudaToolStripMenuItem.Text = "Ver ayuda";
+            this.verAyudaToolStripMenuItem.Click += new System.EventHandler(this.verAyudaToolStripMenuItem_Click);
             // 
             // acercaDeToolStripMenuItem
             // 

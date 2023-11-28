@@ -8,5 +8,12 @@ namespace TP2_Lab
 {
     internal class Administrador: Usuario
     {
+        public Administrador(string user, string password) : base(user, password)
+        {
+        }
+
+        public void CrearUsuario(string nom, string cont, bool tipo)
+        {
+        }
     }
 }

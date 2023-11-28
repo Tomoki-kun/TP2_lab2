@@ -8,5 +8,13 @@ namespace TP2_Lab
 {
     internal class Empleado: Usuario
     {
+        public Empleado(string user, string pas) : base(user, pas)
+        {
+        }
+
+
+        public void CambiarPassword(string nuevaP)
+        {
+        }
     }
 }

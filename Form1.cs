@@ -43,7 +43,6 @@ namespace TP2_Lab
                 usuario = new Administrador(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
             else
                 usuario = new Empleado(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
-            listaDatos.Sort();
             listaUsuarios.Sort();
             int pos = listaUsuarios.BinarySearch(usuario);
             while ( pos != 0 || (pos==0 && usuario is Administrador  && listaUsuarios[pos] is Usuario))

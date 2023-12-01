@@ -45,7 +45,7 @@ namespace TP2_Lab
                 usuario = new Empleado(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
             listaUsuarios.Sort();
             int pos = listaUsuarios.BinarySearch(usuario);
-            while ( pos != 0 || (pos==0 && usuario is Administrador  && listaUsuarios[pos] is Usuario))
+            while ( pos < 0 || (pos>=0 && ((usuario is Administrador  && listaUsuarios[pos] is Empleado) || (usuario is Empleado && listaUsuarios[pos] is Administrador))))
             {
                 vLogin.ShowDialog();
                 if (vLogin.rbAdmin.Checked)

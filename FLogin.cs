@@ -16,7 +16,7 @@ namespace TP2_Lab
         {
             InitializeComponent();
         }
-        Usuario nuevoU = new Usuario();
+        Usuario nuevoU = new Usuario("","");
         private void FLogin_Load(object sender, EventArgs e)
         {
 

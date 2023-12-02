@@ -82,7 +82,7 @@ namespace TP2_Lab
                         {
                             string nombre = CapitalizarPalabras(nuevaP.tBnombre.Text);
                             string apellido = CapitalizarPalabras(nuevaP.tBApellido.Text);
-                            long dni = Convert.ToInt64(nuevaP.numDNI.Value);
+                            long dni = Convert.ToInt64(nuevaP.tBdniPropietario.Text);
                             propietario = new Propietario(nombre, apellido, dni);
                             int cantDiasPermitidos = Convert.ToInt32(nuevaP.numDiasPermitidos.Value);
                             if (nuevaP.rBcasaDia.Checked)
@@ -176,7 +176,7 @@ namespace TP2_Lab
                     try
                     {
                         nombre = nuevoC.tBnombreC.Text;
-                        dni = (long)nuevoC.numDNI.Value;
+                        dni = Convert.ToInt64(nuevoC.tBdniCliente.Text);
                         Cliente miCliente = new Cliente(nombre, dni);
                         int huespedes = Convert.ToInt32(numCantHuespedes.Text);
                         DateTime inicio = Calendar.SelectionRange.Start;
@@ -184,7 +184,7 @@ namespace TP2_Lab
                         TimeSpan duracionReserva = fin - inicio;
                         int numeroDias = duracionReserva.Days;
                         prop = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
-                        
+
                         if (!nuevoS.Reservado(inicio, fin, prop) && prop != null)
                         {
                             if (prop is CasaFindeSemana && inicio.DayOfWeek == DayOfWeek.Friday && fin.DayOfWeek == DayOfWeek.Sunday
@@ -192,19 +192,19 @@ namespace TP2_Lab
                             {
                                 miReserva = new Reserva(miCliente, cantReservas, huespedes, inicio, fin);
                                 cantReservas++;
-                                double costoFinal=0;
-                                if(prop is Habitaciones)
+                                double costoFinal = 0;
+                                if (prop is Habitaciones)
                                 {
-                                     costoFinal = (prop.CalcularPrecio()*numeroDias)+((prop.CalcularPrecio()*numeroDias*0.03));
+                                    costoFinal = (prop.CalcularPrecio() * numeroDias) + ((prop.CalcularPrecio() * numeroDias * 0.03));
                                     reservasHabitaciones++;
                                 }
-                                if(prop is Casa)
+                                if (prop is Casa)
                                 {
-                                     costoFinal = ((Casa)prop).DiasAReservar(numeroDias);
+                                    costoFinal = ((Casa)prop).DiasAReservar(numeroDias);
                                     reservasCasaDia++;
 
                                 }
-                                if(prop is CasaFindeSemana)
+                                if (prop is CasaFindeSemana)
                                 {
                                     costoFinal = prop.CalcularPrecio();
                                     reservasCasaFinde++;
@@ -220,9 +220,9 @@ namespace TP2_Lab
                             }
                             else
                             {
-                                MessageBox.Show("No se pudo realizar la reserva","ERROR");
+                                MessageBox.Show("No se pudo realizar la reserva", "ERROR");
                             }
-                            
+
                         }
                         else if (prop == null)
                         {
@@ -232,7 +232,6 @@ namespace TP2_Lab
                         {
                             MessageBox.Show("Fechas ya reservadas");
                         }
-
                     }
                     catch (FormatException)
                     {
@@ -386,7 +385,7 @@ namespace TP2_Lab
                         {
                             nombre = resv.Cliente.ToString();
                             dni = resv.Cliente.DNI;
-                            if (nombre == vCliente.tBnombreC.Text && dni == (long)vCliente.numDNI.Value)
+                            if (nombre == vCliente.tBnombreC.Text && dni == Convert.ToInt64(vCliente.tBdniCliente.Text))
                             {
                                 prop.ListaReservas.Remove(resv);
                                 //lstReservas.Remove(resv);

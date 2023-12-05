@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
 
 namespace TP2_Lab
 {
@@ -22,15 +23,20 @@ namespace TP2_Lab
                 dni = value;
                 if (dni < 10000000 || dni > 99999999)
                 {
-                    throw new NumeroDniException("El numero de dni no es valido");
+                  throw new NumeroDniException("El numero de dni no es valido");
                 }
+                //string dniStr = dni.ToString(); // Convertir a cadena para verificar longitud
+                //if (!Regex.IsMatch(dniStr, @"^\d{8}$") || dni < 10000000 || dni > 99999999)
+                //{
+                //    throw new NumeroDniException("El numero de dni no es valido");
+                //}
             }
         }
         public Propietario(string nombre, string apellido, long dni)
         {
             this.nombre = nombre;
             this.apellido = apellido;
-            this.dni = dni;
+            this.DNI = dni;
         }
 
         public override string ToString()

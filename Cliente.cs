@@ -18,13 +18,21 @@ namespace TP2_Lab
         public long DNI
         {
             get { return dni; }
+            set
+            {
+                dni = value;
+                if(dni<10000000 || dni > 99999999)
+                {
+                    throw new NumeroDniException("DNI invalido");
+                }
+            }
         } 
 
         //Constructor
         public Cliente(string nombre, long dni)
         {
             this.nombre = nombre;
-            this.dni = dni;
+            this.DNI = dni;
         }
 
         //Metodos

@@ -14,11 +14,24 @@ namespace TP2_Lab
         private string apellido;
         private long dni;
 
+        public long DNI
+        {
+            get { return dni; }
+            set
+            {
+                dni = value;
+                if(dni<10000000 || dni > 99999999)
+                {
+                    throw new NumeroDniException("DNI no valido");
+                }
+            }
+        }
+
         public Propietario(string nombre, string apellido, long dni)
         {
             this.nombre = nombre;
             this.apellido = apellido;
-            this.dni = dni;
+            this.DNI = dni;
         }
 
         public override string ToString()

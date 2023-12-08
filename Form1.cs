@@ -17,26 +17,61 @@ namespace TP2_Lab
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-           
-            InitializeComponent();
-            log.ShowDialog();
-        }
         FileStream miArchivo;
         Propietario propietario;
         Propiedad prop;
         Reserva miReserva;
         Sistema nuevoS = new Sistema();
-        FLogin log = new FLogin();
         int cantPropiedades = 0;
         int cantReservas = 0;
         int reservasCasaFinde = 0, reservasCasaDia = 0, reservasHabitaciones = 0;
-        //private List<IExportable> lstReservas = new List<IExportable>();
-        //private List<IExportable> lstClientes = new List<IExportable>();
         private List<IExportable> lstDatosE = new List<IExportable>();
+        private List<Usuario> listaUsuarios = new List<Usuario>();
+        Usuario admin = new Administrador("admin", "admin");
+        Usuario empleado = new Empleado("empleado", "empleado");
+        Usuario usuario=null;
+        
 
-        private void Form1_Load(object sender, EventArgs e)
+        public Form1()
+        {
+
+            InitializeComponent();
+            listaUsuarios.Add(admin);
+            listaUsuarios.Add(empleado);
+            
+            FLogin vLogin = new FLogin();
+            vLogin.ShowDialog();
+
+            if (vLogin.rBadministrador.Checked)
+            {
+                usuario = new Administrador(vLogin.tBusuario.Text, vLogin.tBpasword.Text);
+            }
+            else
+            {
+                if (vLogin.rBempleado.Checked)
+                {
+                    usuario = new Empleado(vLogin.tBusuario.Text, vLogin.tBpasword.Text);
+                    btnAgregarPropiedad.Visible = false;
+                    btnEliminarPropiedad.Visible= false;
+                    crearUsuarioToolStripMenuItem.Visible = false;
+                }
+            }
+            listaUsuarios.Sort();
+            int pos = listaUsuarios.BinarySearch(usuario);
+            while (pos < 0 || (pos >= 0 && ((usuario is Administrador && listaUsuarios[pos] is Empleado) || (usuario is Empleado && listaUsuarios[pos] is Administrador))))
+            {
+                vLogin.ShowDialog();
+                if (vLogin.rBadministrador.Checked)
+                    usuario = new Administrador(vLogin.tBusuario.Text, vLogin.tBpasword.Text);
+                else
+                    usuario = new Empleado(vLogin.tBusuario.Text, vLogin.tBpasword.Text);
+                lstDatosE.Sort();
+            }
+
+            vLogin.Dispose();
+        }
+
+    private void Form1_Load(object sender, EventArgs e)
         {
             DGPropiedades.ColumnCount = 11;
             DGPropiedades.Columns[0].HeaderCell.Value = "Objeto";
@@ -604,13 +639,32 @@ namespace TP2_Lab
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Close();
+            this.Hide();
+            FLogin nuevoL = new FLogin();
+            nuevoL.ShowDialog();
+            this.Show();
         }
 
         private void exportarDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ExportarDatos(lstDatosE, "exportables.txt");
             MessageBox.Show("Datos exportados correctamente");
+        }
+
+        private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FActualizarContra nuevaC = new FActualizarContra();
+            if(nuevaC.ShowDialog()== DialogResult.OK)
+            {
+                string contraN = nuevaC.tBnuevaC.Text;
+                string contraN2 = nuevaC.tBnuevaC2.Text;
+
+                if(contraN == contraN2)
+                {
+                    ((Empleado)usuario).CambiarPassword(contraN);
+                    MessageBox.Show("Contraseña cambiada correctamente", "Informacion",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                }
+            }
         }
 
         private void acercaDeToolStripMenuItem1_Click(object sender, EventArgs e)

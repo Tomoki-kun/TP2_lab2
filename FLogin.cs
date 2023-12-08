@@ -16,7 +16,6 @@ namespace TP2_Lab
         {
             InitializeComponent();
         }
-        Usuario nuevoU = new Usuario("","");
         private void FLogin_Load(object sender, EventArgs e)
         {
 
@@ -24,20 +23,15 @@ namespace TP2_Lab
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string user = tBusuario.Text;
-            string password = tBpasword.Text;
+           
+        }
 
-            if (user == nuevoU.usuario[0, 0] && password == nuevoU.usuario[1, 0])
+        private void FLogin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (tBpasword.Text == "" && tBusuario.Text == "")
             {
-                MessageBox.Show("Bienvenido al sistema de reservas");
-                button1.DialogResult = DialogResult.OK;
-                this.Hide();
-            }
-            else
-            {
-                MessageBox.Show("Usuario o Contraseña incorrecto");
-                tBusuario.Text = "";
-                tBpasword.Text = "";
+                MessageBox.Show("Por favor, complete todos los datos antes de cerrar la ventana.", "Datos Incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                e.Cancel = true;
             }
         }
     }

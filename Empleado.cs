@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TP2_Lab
 {
@@ -16,6 +17,14 @@ namespace TP2_Lab
 
         public void CambiarPassword(string nuevaP) 
         {
+            if(nuevaP != Contra)
+            {
+                Contra = nuevaP;
+            }
+            else
+            {
+                MessageBox.Show("no puede poner la misma contraseña");
+            }
         }
 
 

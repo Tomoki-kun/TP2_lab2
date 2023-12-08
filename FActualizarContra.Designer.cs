@@ -78,7 +78,6 @@ namespace TP2_Lab
             this.tBnuevaC2.PasswordChar = '*';
             this.tBnuevaC2.Size = new System.Drawing.Size(586, 22);
             this.tBnuevaC2.TabIndex = 4;
-            this.tBnuevaC2.Visible = false;
             // 
             // FActualizarContra
             // 

@@ -35,8 +35,8 @@ namespace TP2_Lab
             this.tBpasword = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rBadministrador = new System.Windows.Forms.RadioButton();
             this.rBempleado = new System.Windows.Forms.RadioButton();
+            this.rBadministrador = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,7 +63,7 @@ namespace TP2_Lab
             // tBusuario
             // 
             this.tBusuario.Location = new System.Drawing.Point(99, 70);
-            this.tBusuario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBusuario.Margin = new System.Windows.Forms.Padding(4);
             this.tBusuario.Name = "tBusuario";
             this.tBusuario.Size = new System.Drawing.Size(487, 22);
             this.tBusuario.TabIndex = 2;
@@ -71,7 +71,7 @@ namespace TP2_Lab
             // tBpasword
             // 
             this.tBpasword.Location = new System.Drawing.Point(99, 170);
-            this.tBpasword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBpasword.Margin = new System.Windows.Forms.Padding(4);
             this.tBpasword.Name = "tBpasword";
             this.tBpasword.PasswordChar = '*';
             this.tBpasword.Size = new System.Drawing.Size(487, 22);
@@ -79,8 +79,9 @@ namespace TP2_Lab
             // 
             // button1
             // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.button1.Location = new System.Drawing.Point(487, 225);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 4;
@@ -99,6 +100,16 @@ namespace TP2_Lab
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rango:";
             // 
+            // rBempleado
+            // 
+            this.rBempleado.AutoSize = true;
+            this.rBempleado.Location = new System.Drawing.Point(125, 21);
+            this.rBempleado.Name = "rBempleado";
+            this.rBempleado.Size = new System.Drawing.Size(92, 21);
+            this.rBempleado.TabIndex = 1;
+            this.rBempleado.Text = "Empleado";
+            this.rBempleado.UseVisualStyleBackColor = true;
+            // 
             // rBadministrador
             // 
             this.rBadministrador.AutoSize = true;
@@ -111,16 +122,6 @@ namespace TP2_Lab
             this.rBadministrador.Text = "Administrador";
             this.rBadministrador.UseVisualStyleBackColor = true;
             // 
-            // rBempleado
-            // 
-            this.rBempleado.AutoSize = true;
-            this.rBempleado.Location = new System.Drawing.Point(125, 21);
-            this.rBempleado.Name = "rBempleado";
-            this.rBempleado.Size = new System.Drawing.Size(92, 21);
-            this.rBempleado.TabIndex = 1;
-            this.rBempleado.Text = "Empleado";
-            this.rBempleado.UseVisualStyleBackColor = true;
-            // 
             // FLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -132,9 +133,10 @@ namespace TP2_Lab
             this.Controls.Add(this.tBusuario);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FLogin";
             this.Text = "FLogin";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FLogin_FormClosing);
             this.Load += new System.EventHandler(this.FLogin_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

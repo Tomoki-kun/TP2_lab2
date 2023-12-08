@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace TP2_Lab
 {
-    class Usuario
+    class Usuario: IComparable
     {
-        public string[,] usuario = { { "ricardo", "raka" }, { "12345", "877563" } };
-
         protected string Nombre { get; set; }
         protected string Contra { get; set; }
 
@@ -18,6 +16,19 @@ namespace TP2_Lab
         {
             Nombre = n;
             Contra = c;
+        }
+
+        public int CompareTo(object obj)
+        {
+            int nombreComparison = Nombre.CompareTo(((Usuario)obj).Nombre);
+
+            if (nombreComparison == 0)
+            {
+                // Si los nombres son iguales, compara por contraseña
+                return Contra.CompareTo(((Usuario)obj).Contra);
+            }
+
+            return nombreComparison;
         }
 
     }

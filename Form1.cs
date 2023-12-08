@@ -659,11 +659,39 @@ namespace TP2_Lab
                 string contraN = nuevaC.tBnuevaC.Text;
                 string contraN2 = nuevaC.tBnuevaC2.Text;
 
-                if(contraN == contraN2)
+                if(contraN == contraN2 && contraN != usuario.Contra)
                 {
                     ((Empleado)usuario).CambiarPassword(contraN);
                     MessageBox.Show("Contraseña cambiada correctamente", "Informacion",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 }
+                else
+                {
+                    MessageBox.Show("Ha puesto la misma contraseña que antes!");
+                }
+            }
+        }
+
+        private void crearUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FLogin nuevoUser = new FLogin();
+            if(nuevoUser.ShowDialog()== DialogResult.OK)
+            {
+                string nombre = nuevoUser.tBusuario.Text;
+                string contra = nuevoUser.tBpasword.Text;
+                if (nuevoUser.rBadministrador.Checked)
+                {
+                    usuario = new Administrador(nombre, contra);
+                }
+                else
+                {
+                    if (nuevoUser.rBempleado.Checked)
+                    {
+                        usuario = new Empleado(nombre, contra);
+                        
+                    }
+                }
+                MessageBox.Show("Usuario creado correctamente");
+                listaUsuarios.Add(usuario);
             }
         }
 

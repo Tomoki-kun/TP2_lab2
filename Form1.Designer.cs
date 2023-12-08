@@ -361,6 +361,7 @@
             this.crearUsuarioToolStripMenuItem.Name = "crearUsuarioToolStripMenuItem";
             this.crearUsuarioToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
             this.crearUsuarioToolStripMenuItem.Text = "Crear Usuario";
+            this.crearUsuarioToolStripMenuItem.Click += new System.EventHandler(this.crearUsuarioToolStripMenuItem_Click);
             // 
             // cambiarContraseñaToolStripMenuItem
             // 

@@ -8,10 +8,20 @@ namespace TP2_Lab
 {
     class Usuario: IComparable
     {
-        protected string Nombre { get; set; }
-        protected string Contra { get; set; }
+        protected string nombre;
+        protected string contra;
 
+        public string Nombre
+        {
+            get { return nombre; }
+            set { nombre = value; }
+        }
 
+        public string Contra
+        {
+            get { return contra; }
+            set { contra = value; }
+        }
         public Usuario(string n, string c)
         {
             Nombre = n;

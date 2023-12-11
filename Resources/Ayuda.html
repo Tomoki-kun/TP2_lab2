@@ -1,13 +1,62 @@
 <!DOCTYPE html>
 <html>
+<img src="C:\Users\julim\Downloads\imagen-logo" alt="Logo" style="max-width: 100px; margin-bottom: 10px;">
 <head>
     <title>Casos de usos</title>
     <link rel="stylesheet" href="styles.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: cornflowerblue;
+            margin: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            border: 10px solid black; /* Añade grosor a las líneas de borde de la tabla */
+            color: white;
+        }
+
+        th, td {
+            border: 4px solid #ddd;
+            padding: 15px;
+            text-align: left;
+            border-color: black;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        caption {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        td {
+            vertical-align: top;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-    <table style="width:100%" border="1">
+    <table style="width:100%" border="1" id="caso1">
         <caption>
             Casos de uso
+            <!-- Botones para navegar a cada caso de uso -->
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="#caso1"><button>Caso de Uso 1</button></a>
+                <a href="#caso2"><button>Caso de Uso 2</button></a>
+                <a href="#caso3"><button>Caso de Uso 3</button></a>
+            </div>
         </caption>
         <tr>
             <td align="center">
@@ -67,7 +116,7 @@
     <br />
 
 
-    <table style="width:100%" border="1">
+    <table style="width:100%" border="1" id="caso2">
         <tr>
             <td align="center">
                 Caso de uso: Cancelar una Reserva
@@ -112,7 +161,7 @@
 
     <br />
 
-    <table style="width:100%" border="1">
+    <table style="width:100%" border="1" id="caso3">
         <tr>
             <td align="center">
                 Caso de uso: Registrar una propiedad
@@ -156,4 +205,8 @@
         </tr>
     </table>
 </body>
+<div style="background-color: #333; color: white; padding: 20px; text-align: center;">
+    <h2>UTN Facultad Regional Paraná</h2>
+    <p>Laboratorio 2</p>
+</div>
 </html>

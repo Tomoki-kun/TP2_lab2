@@ -118,7 +118,6 @@ namespace TP2_Lab
                             string nombre = CapitalizarPalabras(nuevaP.tBnombre.Text);
                             string apellido = CapitalizarPalabras(nuevaP.tBApellido.Text);
                             long dni = Convert.ToInt64(nuevaP.tBdniPropietario.Text);
-                            Propietario propExistente = BuscarPropietario(dni);
                                 propietario = new Propietario(nombre, apellido, dni);
                                 int cantDiasPermitidos = Convert.ToInt32(nuevaP.numDiasPermitidos.Value);
                                 if (nuevaP.rBcasaDia.Checked)
@@ -139,7 +138,6 @@ namespace TP2_Lab
                         nuevoS.AgregarPropiedad(prop);
                         DGAgregarPropiedad(prop);
                         lstPropietarios.Add(propietario);
-                        propietario.CantPropiedadesP++;
                         string auxLocalidad = nuevaP.tBlocalidad.Text;
                         if (cBLocalidad.Items.Count == 0)
                         {

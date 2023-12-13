@@ -27,10 +27,11 @@ namespace TP2_Lab
         int reservasCasaFinde = 0, reservasCasaDia = 0, reservasHabitaciones = 0;
         private List<IExportable> lstDatosE = new List<IExportable>();
         private List<Usuario> listaUsuarios = new List<Usuario>();
+        private List<Propietario> lstPropietarios = new List<Propietario>();
         Usuario admin = new Administrador("admin", "admin");
         Usuario empleado = new Empleado("empleado", "empleado");
-        Usuario usuario=null;
-        
+        Usuario usuario = null;
+
 
         public Form1()
         {
@@ -38,7 +39,7 @@ namespace TP2_Lab
             InitializeComponent();
             listaUsuarios.Add(admin);
             listaUsuarios.Add(empleado);
-            
+
             FLogin vLogin = new FLogin();
             vLogin.ShowDialog();
 
@@ -52,7 +53,7 @@ namespace TP2_Lab
                 {
                     usuario = new Empleado(vLogin.tBusuario.Text, vLogin.tBpasword.Text);
                     btnAgregarPropiedad.Visible = false;
-                    btnEliminarPropiedad.Visible= false;
+                    btnEliminarPropiedad.Visible = false;
                     crearUsuarioToolStripMenuItem.Visible = false;
                 }
             }
@@ -71,7 +72,7 @@ namespace TP2_Lab
             vLogin.Dispose();
         }
 
-    private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
             DGPropiedades.ColumnCount = 11;
             DGPropiedades.Columns[0].HeaderCell.Value = "Objeto";
@@ -112,31 +113,33 @@ namespace TP2_Lab
                         int cantCamas = Convert.ToInt32(nuevaP.numCamas.Text);
                         double precio = Convert.ToDouble(nuevaP.numPrecio.Value);
                         int nro = Convert.ToInt32(nuevaP.numNro.Value);
-
                         if (nuevaP.rBCasas.Checked)
                         {
                             string nombre = CapitalizarPalabras(nuevaP.tBnombre.Text);
                             string apellido = CapitalizarPalabras(nuevaP.tBApellido.Text);
                             long dni = Convert.ToInt64(nuevaP.tBdniPropietario.Text);
-                            propietario = new Propietario(nombre, apellido, dni);
-                            int cantDiasPermitidos = Convert.ToInt32(nuevaP.numDiasPermitidos.Value);
-                            if (nuevaP.rBcasaDia.Checked)
-                            {
-                                prop = new Casa(nro, cantDiasPermitidos, propietario, precio, direccion, localidad, cantCamas, servicios);
-                            }
-                            else if (nuevaP.rBcasaFinde.Checked)
-                            {
-                                prop = new CasaFindeSemana(nro, 0, propietario, precio, direccion, localidad, cantCamas, servicios);
-                            }
+                            Propietario propExistente = BuscarPropietario(dni);
+                                propietario = new Propietario(nombre, apellido, dni);
+                                int cantDiasPermitidos = Convert.ToInt32(nuevaP.numDiasPermitidos.Value);
+                                if (nuevaP.rBcasaDia.Checked)
+                                {
+                                    prop = new Casa(nro, cantDiasPermitidos, propietario, precio, direccion, localidad, cantCamas, servicios);
+                                }
+                                else if (nuevaP.rBcasaFinde.Checked)
+                                {
+                                    prop = new CasaFindeSemana(nro, 0, propietario, precio, direccion, localidad, cantCamas, servicios);
+                                }
                         }
                         if (nuevaP.rBHoteles.Checked)
                         {
                             int estrellas = Convert.ToInt32(nuevaP.numEstrellas.Text);
                             string tipoHabitacion = nuevaP.cBTipoHabitacion.ValueMember;
-                            prop = new Habitaciones(nro,estrellas, precio, direccion, localidad, servicios, cantCamas, tipoHabitacion);
+                            prop = new Habitaciones(nro, estrellas, precio, direccion, localidad, servicios, cantCamas, tipoHabitacion);
                         }
                         nuevoS.AgregarPropiedad(prop);
                         DGAgregarPropiedad(prop);
+                        lstPropietarios.Add(propietario);
+                        propietario.CantPropiedadesP++;
                         string auxLocalidad = nuevaP.tBlocalidad.Text;
                         if (cBLocalidad.Items.Count == 0)
                         {
@@ -295,7 +298,7 @@ namespace TP2_Lab
             if (!string.IsNullOrWhiteSpace(cBLocalidad.Text))
             {
                 int cant = DGPropiedades.RowCount;
-                for (int i = 0; i < cant-1; i++)
+                for (int i = 0; i < cant - 1; i++)
                 {
                     DataGridViewCell celda = DGPropiedades.Rows[i].Cells[0];
                     if (celda.Value != null && celda.Value is Propiedad)
@@ -407,7 +410,7 @@ namespace TP2_Lab
         private void btnEliminarReserva_Click(object sender, EventArgs e)
         {
             FCliente vCliente = new FCliente();
-            if(vCliente.ShowDialog() == DialogResult.OK)
+            if (vCliente.ShowDialog() == DialogResult.OK)
             {
                 if (vCliente.tBnombreC.Text != "")
                 {
@@ -440,7 +443,7 @@ namespace TP2_Lab
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if(miArchivo != null)
+            if (miArchivo != null)
             {
                 if (File.Exists(miArchivo.Name)) File.Delete(miArchivo.Name);
                 FileStream archivo = new FileStream(miArchivo.Name, FileMode.CreateNew, FileAccess.Write);
@@ -461,9 +464,9 @@ namespace TP2_Lab
                 miArchivo = new FileStream(archivo, FileMode.CreateNew, FileAccess.Write);
                 StreamWriter sw = new StreamWriter(miArchivo);
                 string linea;
-                foreach(Propiedad prop in nuevoS.ListaPropiedad)
+                foreach (Propiedad prop in nuevoS.ListaPropiedad)
                 {
-                    foreach(Reserva resv in prop.ListaReservas)
+                    foreach (Reserva resv in prop.ListaReservas)
                     {
                         linea = resv.ToString();
                         sw.WriteLine(linea);
@@ -484,15 +487,15 @@ namespace TP2_Lab
                 string archivo = openFileDialog1.FileName;
                 miArchivo = new FileStream(archivo, FileMode.Open, FileAccess.Read);
                 StreamReader sr = new StreamReader(miArchivo);
-                
+
                 string renglon;
                 while (!sr.EndOfStream)
                 {
                     renglon = sr.ReadLine();
                     int filaIndex = vReservaImportada.dGReservaImportada.Rows.Add();
                     DataGridViewRow fila = DGPropiedades.Rows[filaIndex];
-                    string[] datos = renglon.Split(';'); 
-                    for(int i=0;i<datos.Length;i++)
+                    string[] datos = renglon.Split(';');
+                    for (int i = 0; i < datos.Length; i++)
                     {
                         fila.Cells[i].Value = datos[i];
                     }
@@ -505,7 +508,7 @@ namespace TP2_Lab
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            foreach(Propiedad propiedad in nuevoS.ListaPropiedad)
+            foreach (Propiedad propiedad in nuevoS.ListaPropiedad)
                 DGAgregarPropiedad(propiedad);
 
             cBLocalidad.ValueMember = "";
@@ -520,12 +523,12 @@ namespace TP2_Lab
             string rutaPaginaHTML = "Ayuda.html";
 
             // Combina la ruta de la página HTML con la ruta del directorio de ejecución del programa
-            string rutaCompleta = Path.Combine(Application.StartupPath,"Resources", rutaPaginaHTML);
+            string rutaCompleta = Path.Combine(Application.StartupPath, "Resources", rutaPaginaHTML);
 
             // Verifica si el archivo existe antes de intentar abrirlo
             if (File.Exists(rutaCompleta))
             {
-                FWeb web = new FWeb(); 
+                FWeb web = new FWeb();
                 web.wBrowser.Navigate(rutaCompleta);
 
                 // Establece el tamaño de la ventana y muestra la forma
@@ -552,7 +555,7 @@ namespace TP2_Lab
             series.ChartType = SeriesChartType.Bar;
 
             // Contador para la cantidad de huéspedes
-            int[] contadorHuespedes = new int[5]; 
+            int[] contadorHuespedes = new int[5];
 
             // Inicializar todos los elementos en cero
             for (int i = 0; i < contadorHuespedes.Length; i++)
@@ -600,7 +603,7 @@ namespace TP2_Lab
             stats2.cBarras.Palette = ChartColorPalette.Excel; //colores de las barras
 
             // Mostrar el formulario con el gráfico
-            stats2.ShowDialog();                
+            stats2.ShowDialog();
         }
 
         private void graficoDeSectoresToolStripMenuItem_Click(object sender, EventArgs e)
@@ -627,9 +630,9 @@ namespace TP2_Lab
             serieReservas.Points.AddXY("Habitaciones", reservasHabitaciones);
 
             // Cambia los colores específicos si es necesario
-            serieReservas.Points[0].Color = Color.Red; 
-            serieReservas.Points[1].Color = Color.Green; 
-            serieReservas.Points[2].Color = Color.Blue; 
+            serieReservas.Points[0].Color = Color.Red;
+            serieReservas.Points[1].Color = Color.Green;
+            serieReservas.Points[2].Color = Color.Blue;
 
             // Agrega la serie al gráfico
             stats.cTorta.Series.Add(serieReservas);
@@ -654,15 +657,15 @@ namespace TP2_Lab
         private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FActualizarContra nuevaC = new FActualizarContra();
-            if(nuevaC.ShowDialog()== DialogResult.OK)
+            if (nuevaC.ShowDialog() == DialogResult.OK)
             {
                 string contraN = nuevaC.tBnuevaC.Text;
                 string contraN2 = nuevaC.tBnuevaC2.Text;
 
-                if(contraN == contraN2 && contraN != usuario.Contra)
+                if (contraN == contraN2 && contraN != usuario.Contra)
                 {
                     ((Empleado)usuario).CambiarPassword(contraN);
-                    MessageBox.Show("Contraseña cambiada correctamente", "Informacion",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    MessageBox.Show("Contraseña cambiada correctamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -674,7 +677,7 @@ namespace TP2_Lab
         private void crearUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FLogin nuevoUser = new FLogin();
-            if(nuevoUser.ShowDialog()== DialogResult.OK)
+            if (nuevoUser.ShowDialog() == DialogResult.OK)
             {
                 string nombre = nuevoUser.tBusuario.Text;
                 string contra = nuevoUser.tBpasword.Text;
@@ -687,12 +690,42 @@ namespace TP2_Lab
                     if (nuevoUser.rBempleado.Checked)
                     {
                         usuario = new Empleado(nombre, contra);
-                        
+
                     }
                 }
                 MessageBox.Show("Usuario creado correctamente");
                 listaUsuarios.Add(usuario);
             }
+        }
+
+        private void btnBuscarProp_Click(object sender, EventArgs e)
+        {
+            FBuscarProp buscarProp = new FBuscarProp();
+
+            if (buscarProp.ShowDialog() == DialogResult.OK)
+            {
+                long dni = Convert.ToInt64(buscarProp.tBdniProp.Text);
+                Propietario buscado = BuscarPropietario(dni);
+
+                MessageBox.Show("Propietario: " + buscado.ToString() + " Cantidad de propiedades: " + buscado.CantPropiedadesP);
+            }
+            buscarProp.Dispose();
+        }
+
+        public Propietario BuscarPropietario(long dni)
+        {
+            Propietario aBuscar = new Propietario("", "", dni);
+            lstPropietarios.Sort();
+            int orden = lstPropietarios.BinarySearch(aBuscar);
+            if (orden >= 0)
+            {
+                aBuscar = lstPropietarios[orden];
+            }
+            else
+            {
+                throw new Exception("Propietario no encontrado");
+            }
+            return aBuscar;
         }
 
         private void acercaDeToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -704,10 +737,10 @@ namespace TP2_Lab
                 "Autores: \n" +
                 "Acosta,Nicolas \n" +
                 "Bellini, Augusto \n" +
-                "Ferrari, Nahuel \n"+ 
-                "Millen, Julian \n"+
+                "Ferrari, Nahuel \n" +
+                "Millen, Julian \n" +
                 "Descripción: Proyecto de alquileres temporarios que facilita la gestion de reservas para habitaciones de hotel, casas por dias y casas de fin de semana. Ofreciendo caracteristicas de filtrado como importacion/exportacion de datos en formato CSV, graficos estadisticos y una interfaz de usuario intuitiva y facil de usar para quien lo desee. \n" +
-                "Fecha de creación: Noviembre 2023\n" + 
+                "Fecha de creación: Noviembre 2023\n" +
                 "*******************************",
                 "Acerca de",
                 MessageBoxButtons.OK,
@@ -719,14 +752,15 @@ namespace TP2_Lab
         {
             FileStream archivoExportar = new FileStream(nombreArchivo, FileMode.OpenOrCreate, FileAccess.Write);
             StreamWriter sW = new StreamWriter(archivoExportar);
-            
-                foreach (IExportable dato in datos)
-                {
-                    sW.WriteLine(dato.Exportar());
-                }
+
+            foreach (IExportable dato in datos)
+            {
+                sW.WriteLine(dato.Exportar());
+            }
             sW.Dispose();
             archivoExportar.Close();
 
         }
     }
+ 
 }

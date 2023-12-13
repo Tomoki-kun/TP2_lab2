@@ -9,12 +9,30 @@ using System.Text.RegularExpressions;
 namespace TP2_Lab
 {
     [Serializable]
-    public class Propietario
+    public class Propietario:IComparable
     {
         private string nombre;
         private string apellido;
         private long dni;
+        private int cantPropiedadesP;
 
+        public int CantPropiedadesP
+        {
+            get { return cantPropiedadesP; }
+            set { cantPropiedadesP = value; }
+        }
+
+        public string Nombre
+        {
+            get { return nombre; }
+            set { nombre = value; }
+        }
+
+        public string Apellido
+        {
+            get { return apellido; }
+            set { apellido = value; }
+        }
         public long DNI
         {
             get { return dni; }
@@ -37,6 +55,12 @@ namespace TP2_Lab
             this.nombre = nombre;
             this.apellido = apellido;
             this.DNI = dni;
+            cantPropiedadesP = 0;
+        }
+
+        public int CompareTo(Object obj)
+        {
+            return this.DNI.CompareTo(((Propietario)obj).DNI);
         }
 
         public override string ToString()

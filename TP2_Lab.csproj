@@ -58,6 +58,12 @@
     <Compile Include="FActualizarContra.Designer.cs">
       <DependentUpon>FActualizarContra.cs</DependentUpon>
     </Compile>
+    <Compile Include="FBuscarProp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FBuscarProp.Designer.cs">
+      <DependentUpon>FBuscarProp.cs</DependentUpon>
+    </Compile>
     <Compile Include="FCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +124,9 @@
     <Compile Include="Usuario.cs" />
     <EmbeddedResource Include="FActualizarContra.resx">
       <DependentUpon>FActualizarContra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FBuscarProp.resx">
+      <DependentUpon>FBuscarProp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FCliente.resx">
       <DependentUpon>FCliente.cs</DependentUpon>

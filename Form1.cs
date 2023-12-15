@@ -726,7 +726,7 @@ namespace TP2_Lab
             return aBuscar;
         }
 
-        private void acercaDeToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void acercaDeToolStripMenuItem1_Click_1(object sender, EventArgs e)
         {
             MessageBox.Show(" **************************************************\n" +
                 "           Empresa de alquileres temporarios         \n" +
@@ -744,7 +744,6 @@ namespace TP2_Lab
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
-
 
         static void ExportarDatos(List<IExportable> datos, string nombreArchivo)
         {

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.IO.Pipes;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
@@ -29,7 +30,8 @@ namespace TP2_Lab
         private List<IExportable> listaDatos = new List<IExportable>();
         private List<Usuario> listaUsuarios = new List<Usuario>();
         Usuario admin = new Administrador("Admin", "Admin");
-
+        FileStream archivo;
+        BinaryFormatter serUnser;
 
         public Form1()
         {
@@ -43,6 +45,7 @@ namespace TP2_Lab
                 usuario = new Administrador(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
             else
                 usuario = new Empleado(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
+            listaUsuarios.Add(usuario);
             listaUsuarios.Sort();
             int pos = listaUsuarios.BinarySearch(usuario);
             while ( pos < 0 || (pos>=0 && ((usuario is Administrador  && listaUsuarios[pos] is Empleado) || (usuario is Empleado && listaUsuarios[pos] is Administrador))))
@@ -56,28 +59,66 @@ namespace TP2_Lab
             }
 
             vLogin.Dispose();
+            Deserealizar();
+            Refresh();
         }
 
         #region Serializacion de datos
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (File.Exists(miArchivo))
+            
+        }
+        private void Deserealizar()
+        {
+            try
             {
-                FileStream archivo = new FileStream(miArchivo, FileMode.Open, FileAccess.Read);
-                BinaryFormatter serUnser = new BinaryFormatter();
-                nuevoS = (Sistema)serUnser.Deserialize(archivo);
-                archivo.Close();
+                if (File.Exists(miArchivo))
+                {
+                    archivo = new FileStream(miArchivo, FileMode.Open, FileAccess.Read);
+                    serUnser = new BinaryFormatter();
+                    nuevoS = (Sistema)serUnser.Deserialize(archivo);
+                }
+                else
+                {
+                    nuevoS = new Sistema();
+                    MessageBox.Show("No se pudo encontrar el archivo, se generó una nueva empresa", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error De Deserializacion: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (archivo != null)
+                {
+                    archivo.Close();
+                    archivo.Dispose();
+                }
             }
         }
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            try
+            {
+                if (File.Exists(miArchivo)) File.Delete(miArchivo);
 
-            if (File.Exists(miArchivo)) File.Delete(miArchivo);
-
-            FileStream archivo = new FileStream(miArchivo, FileMode.CreateNew, FileAccess.Write);
-            BinaryFormatter serUnser = new BinaryFormatter();
-            serUnser.Serialize(archivo, nuevoS);
-            archivo.Close();
+                archivo = new FileStream(miArchivo, FileMode.CreateNew, FileAccess.Write);
+                serUnser = new BinaryFormatter();
+                serUnser.Serialize(archivo, nuevoS);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al serializar el archivo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (archivo != null)
+                {
+                    archivo.Close();
+                    archivo.Dispose();
+                }
+            }
         }
         #endregion
 
@@ -502,6 +543,11 @@ namespace TP2_Lab
             }
             sW.Dispose();
             archivoExportar.Close();
+        }
+
+        private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         private string CapitalizarPalabras(string texto)

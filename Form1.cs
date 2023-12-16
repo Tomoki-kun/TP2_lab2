@@ -60,7 +60,7 @@ namespace TP2_Lab
 
             vLogin.Dispose();
             Deserealizar();
-            Refresh();
+            RefreshDataGridView();
         }
 
         #region Serializacion de datos
@@ -607,6 +607,15 @@ namespace TP2_Lab
                 fila.Cells[8].Value = "---";
                 fila.Cells[9].Value = "---";
                 fila.Cells[10].Value = ((Casa)propiedad).Propietario;
+            }
+        }
+
+        private void RefreshDataGridView()
+        {
+            DGPropiedades.Rows.Clear();
+            foreach(Propiedad propi in nuevoS.ListaPropiedad)
+            {
+                DGAgregarPropiedad(propi);
             }
         }
         #endregion

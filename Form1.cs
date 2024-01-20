@@ -596,7 +596,6 @@ namespace TP2_Lab
                 fila.Cells[10].Value = ((Casa)propiedad).Propietario;
             }
 
-            DGPropiedades.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
         }
 
         private void RefreshDataGridView()

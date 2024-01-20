@@ -218,10 +218,10 @@ namespace TP2_Lab
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            bool loc = true,
-                 fechas = true,
-                 huespedes = true,
-                 tipoHabitacion = true;
+            //bool loc = true,
+                 //fechas = true,
+                 //huespedes = true,
+                 //tipoHabitacion = true;
             ArrayList disponibles = new ArrayList();
             if (!string.IsNullOrWhiteSpace(cBLocalidad.Text))
             {
@@ -231,6 +231,8 @@ namespace TP2_Lab
                     DataGridViewCell celda = DGPropiedades.Rows[i].Cells[0];
                     if (celda.Value != null && celda.Value is Propiedad)
                     {
+                        // Reiniciar las variables en cada iteración
+                        bool loc = true, fechas = true, huespedes = true, tipoHabitacion = true;
                         Propiedad propiedad = (Propiedad)celda.Value;
 
                         if (!(propiedad.Localidad == cBLocalidad.SelectedItem.ToString()))
@@ -249,17 +251,21 @@ namespace TP2_Lab
                         if (cBTipoHabitaciones.ValueMember != "" && cBTipoHabitaciones.ValueMember != ((Habitaciones)propiedad).TipoHabitacion)
                             tipoHabitacion = false;
                         if (loc && fechas && huespedes && tipoHabitacion)
+                        {
                             disponibles.Add(propiedad);
+                        }
                     }
+
                 }
                 if (disponibles.Count != nuevoS.CantPropiedades)
                 {
-                    DGPropiedades.Rows.Clear();
+                    //limpiamos el datagrid
+                   DGPropiedades.Rows.Clear();
 
-                    foreach (Propiedad propiedad in disponibles)
-                    {
+                foreach (Propiedad propiedad in disponibles)
+                   {
                         DGAgregarPropiedad(propiedad);
-                    }
+                  }
                 }
             }
         }

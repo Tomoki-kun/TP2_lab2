@@ -567,7 +567,7 @@ namespace TP2_Lab
             fila.Cells[4].Value = propiedad.Nro;
             fila.Cells[6].Value = propiedad.PrecioBasico;
             fila.Cells[7].Value = propiedad.CantCamas;
-            bitmap = new Bitmap(propiedad.Imagen, 50, 25);
+            bitmap = new Bitmap(propiedad.Imagen, new Size(125,125));
             fila.Cells[11].Value = bitmap;
 
 
@@ -578,7 +578,6 @@ namespace TP2_Lab
                 fila.Cells[5].Value = "---";
                 fila.Cells[8].Value = ((Habitaciones)propiedad).Estrellas;
                 fila.Cells[9].Value = ((Habitaciones)propiedad).TipoHabitacion;
-                fila.Cells[11].Value = propiedad.Imagen;
             }
             else if (propiedad is Casa)
             {
@@ -596,6 +595,8 @@ namespace TP2_Lab
                 fila.Cells[9].Value = "---";
                 fila.Cells[10].Value = ((Casa)propiedad).Propietario;
             }
+
+            DGPropiedades.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
         }
 
         private void RefreshDataGridView()

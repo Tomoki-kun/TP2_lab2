@@ -89,6 +89,7 @@
       <DependentUpon>FWeb.cs</DependentUpon>
     </Compile>
     <Compile Include="Habitaciones.cs" />
+    <Compile Include="Huesped.cs" />
     <Compile Include="IExportable.cs" />
     <Compile Include="NumeroDniException.cs" />
     <Compile Include="Program.cs" />

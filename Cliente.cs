@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
+using System.Collections;
 
 namespace TP2_Lab
 {
@@ -12,7 +13,7 @@ namespace TP2_Lab
     {
         private string nombre;
         private long dni;
-
+        private ArrayList lstHuespedes = new ArrayList();
        
         //Propiedades
         public long DNI

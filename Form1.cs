@@ -40,7 +40,7 @@ namespace TP2_Lab
             FLogin vLogin = new FLogin();
             Usuario usuario;
             vLogin.ShowDialog();
-            
+
             if (vLogin.rbAdmin.Checked)
                 usuario = new Administrador(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
             else
@@ -48,7 +48,7 @@ namespace TP2_Lab
             listaUsuarios.Add(usuario);
             listaUsuarios.Sort();
             int pos = listaUsuarios.BinarySearch(usuario);
-            while ( pos < 0 || (pos>=0 && ((usuario is Administrador  && listaUsuarios[pos] is Empleado) || (usuario is Empleado && listaUsuarios[pos] is Administrador))))
+            while (pos < 0 || (pos >= 0 && ((usuario is Administrador && listaUsuarios[pos] is Empleado) || (usuario is Empleado && listaUsuarios[pos] is Administrador))))
             {
                 vLogin.ShowDialog();
                 if (vLogin.rbAdmin.Checked)
@@ -66,7 +66,7 @@ namespace TP2_Lab
         #region Serializacion de datos
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
         private void Deserealizar()
         {
@@ -171,19 +171,7 @@ namespace TP2_Lab
                         nuevoS.AgregarPropiedad(prop);
                         DGAgregarPropiedad(prop);
                         string auxLocalidad = nuevaP.tBlocalidad.Text;
-                        if (cBLocalidad.Items.Count == 0)
-                        {
-                            cBLocalidad.Items.Add(auxLocalidad);
-                        }
-                        else
-                        {
-                            bool existe = false;
-                            foreach (var item in cBLocalidad.Items)
-                                if ((string)item.ToString() == auxLocalidad)
-                                    existe = true;
-                            if (existe)
-                                cBLocalidad.Items.Add(auxLocalidad);
-                        }
+                        ActualizarLocalidades(nuevoS.ListaPropiedad);
                         cantPropiedades++;
                         if (cantPropiedades > 0)
                         {
@@ -204,7 +192,7 @@ namespace TP2_Lab
 
         private void btnEliminarPropiedad_Click(object sender, EventArgs e)
         {
-            if (DGPropiedades.Rows.Count > 1)
+            if (DGPropiedades.Rows.Count > 0)
             {
                 prop = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
                 Propiedad aEliminar = nuevoS.BuscarPropiedad(prop);
@@ -514,7 +502,7 @@ namespace TP2_Lab
             string rutaPaginaHTML = "Ayuda.html";
 
             // Combina la ruta de la página HTML con la ruta del directorio de ejecución del programa
-            string rutaCompleta = Path.Combine(Application.StartupPath,"Resource", rutaPaginaHTML);
+            string rutaCompleta = Path.Combine(Application.StartupPath, "Resource", rutaPaginaHTML);
 
             // Verifica si el archivo existe antes de intentar abrirlo
             if (File.Exists(rutaCompleta))
@@ -613,9 +601,35 @@ namespace TP2_Lab
         private void RefreshDataGridView()
         {
             DGPropiedades.Rows.Clear();
-            foreach(Propiedad propi in nuevoS.ListaPropiedad)
+            foreach (Propiedad propi in nuevoS.ListaPropiedad)
             {
                 DGAgregarPropiedad(propi);
+            }
+            cantPropiedades = nuevoS.ListaPropiedad.Count;
+            if (cantPropiedades > 0)
+            {
+                groupBox1.Enabled = true;
+            }
+            ActualizarLocalidades(nuevoS.ListaPropiedad);
+        }
+        private void ActualizarLocalidades(ArrayList propiedades)
+        {
+            foreach (Propiedad p in propiedades)
+            {
+                if (cBLocalidad.Items.Count == 0)
+                {
+                    cBLocalidad.Items.Add(p.Localidad);
+                }
+                else
+                {
+                    bool existe = false;
+                    foreach (var item in cBLocalidad.Items)
+                        if ((string)item.ToString() == p.Localidad)
+                            existe = true;
+                    if (!existe)
+                        cBLocalidad.Items.Add(p.Localidad);
+                }
+
             }
         }
         #endregion

@@ -64,6 +64,12 @@
     <Compile Include="FGraficos.Designer.cs">
       <DependentUpon>FGraficos.cs</DependentUpon>
     </Compile>
+    <Compile Include="FHuesped.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FHuesped.Designer.cs">
+      <DependentUpon>FHuesped.cs</DependentUpon>
+    </Compile>
     <Compile Include="FLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FGraficos.resx">
       <DependentUpon>FGraficos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FHuesped.resx">
+      <DependentUpon>FHuesped.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FLogin.resx">
       <DependentUpon>FLogin.cs</DependentUpon>

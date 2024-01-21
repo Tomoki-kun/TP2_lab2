@@ -36,6 +36,7 @@ namespace TP2_Lab
         public Form1()
         {
             InitializeComponent();
+            InicializarUI();
             listaUsuarios.Add(admin);
             FLogin vLogin = new FLogin();
             Usuario usuario;
@@ -61,6 +62,16 @@ namespace TP2_Lab
             vLogin.Dispose();
             Deserealizar();
             RefreshDataGridView();
+        }
+        private void InicializarUI()
+        {
+            // Configurar el botón para abrir la ventana de huéspedes
+            btnHuespedes = new Button();
+            btnHuespedes.Text = "Huespedes";
+            btnHuespedes.Click += btnHuespedes_Click_1;
+
+            // Agregar el botón al formulario
+            Controls.Add(btnHuespedes);
         }
 
         #region Serializacion de datos
@@ -596,6 +607,16 @@ namespace TP2_Lab
                 fila.Cells[10].Value = ((Casa)propiedad).Propietario;
             }
 
+        }
+
+
+        private void btnHuespedes_Click_1(object sender, EventArgs e)
+        {
+            // Abrir la ventana modal de huéspedes
+            using (FHuesped formHuespedes = new FHuesped())
+            {
+                formHuespedes.ShowDialog();
+            }
         }
 
         private void RefreshDataGridView()

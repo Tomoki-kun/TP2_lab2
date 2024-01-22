@@ -219,9 +219,11 @@ namespace TP2_Lab
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             //bool loc = true,
-                 //fechas = true,
-                 //huespedes = true,
-                 //tipoHabitacion = true;
+            //fechas = true,
+            //huespedes = true,
+            //tipoHabitacion = true;
+            groupBox2.Enabled = true;
+            cBTipoHabitaciones.Enabled = true;
             ArrayList disponibles = new ArrayList();
             if (!string.IsNullOrWhiteSpace(cBLocalidad.Text))
             {
@@ -232,7 +234,7 @@ namespace TP2_Lab
                     if (celda.Value != null && celda.Value is Propiedad)
                     {
                         // Reiniciar las variables en cada iteración
-                        bool loc = true, fechas = true, huespedes = true, tipoHabitacion = true;
+                        bool loc = true, fechas = true, huespedes = true, tipoHabitacion = true, tipoCasa=true;
                         Propiedad propiedad = (Propiedad)celda.Value;
 
                         if (!(propiedad.Localidad == cBLocalidad.SelectedItem.ToString()))
@@ -250,7 +252,14 @@ namespace TP2_Lab
 
                         if (cBTipoHabitaciones.ValueMember != "" && cBTipoHabitaciones.ValueMember != ((Habitaciones)propiedad).TipoHabitacion)
                             tipoHabitacion = false;
+                        if (rBcasaFSemana.Checked || rBcasaXdia.Checked)
+                         tipoCasa = false;
+                        
                         if (loc && fechas && huespedes && tipoHabitacion)
+                        {
+                            disponibles.Add(propiedad);
+                        }
+                        else if(loc && fechas && huespedes && tipoCasa)
                         {
                             disponibles.Add(propiedad);
                         }
@@ -602,6 +611,27 @@ namespace TP2_Lab
                 fila.Cells[9].Value = "---";
                 fila.Cells[10].Value = ((Casa)propiedad).Propietario;
             }
+        }
+
+        private void rBcasaFSemana_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rBcasaFSemana.Checked)
+            {
+                cBTipoHabitaciones.Enabled = false;
+            }
+        }
+
+        private void rBcasaXdia_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rBcasaXdia.Checked)
+            {
+                cBTipoHabitaciones.Enabled = false;
+            }
+        }
+
+        private void cBTipoHabitaciones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            groupBox2.Enabled = false;
         }
 
         private void RefreshDataGridView()

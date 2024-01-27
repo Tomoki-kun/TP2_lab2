@@ -39,9 +39,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.rBcasaFSemana = new System.Windows.Forms.RadioButton();
-            this.rBcasaXdia = new System.Windows.Forms.RadioButton();
+            this.label5 = new System.Windows.Forms.Label();
+            this.rBcasa = new System.Windows.Forms.RadioButton();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.numCantHuespedes = new System.Windows.Forms.NumericUpDown();
             this.cBTipoHabitaciones = new System.Windows.Forms.ComboBox();
@@ -50,18 +49,6 @@
             this.btnReservar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.DGPropiedades = new System.Windows.Forms.DataGridView();
-            this.Objeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiasPermitidos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrecioBasico = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CantCamas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estrellas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoHabitacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dueño = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Imagen = new System.Windows.Forms.DataGridViewImageColumn();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -83,8 +70,20 @@
             this.sectoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.Objeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiasPermitidos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrecioBasico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CantCamas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estrellas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoHabitacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dueño = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Imagen = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Imagen2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCantHuespedes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGPropiedades)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -187,7 +186,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.rBcasa);
             this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.numCantHuespedes);
             this.groupBox1.Controls.Add(this.cBTipoHabitaciones);
@@ -210,40 +210,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar:";
             // 
-            // groupBox2
+            // label5
             // 
-            this.groupBox2.Controls.Add(this.rBcasaFSemana);
-            this.groupBox2.Controls.Add(this.rBcasaXdia);
-            this.groupBox2.Location = new System.Drawing.Point(12, 521);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(388, 79);
-            this.groupBox2.TabIndex = 23;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Tipo de Casa";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(87, 556);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(76, 17);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Tipo Casa:";
             // 
-            // rBcasaFSemana
+            // rBcasa
             // 
-            this.rBcasaFSemana.AutoSize = true;
-            this.rBcasaFSemana.Location = new System.Drawing.Point(175, 38);
-            this.rBcasaFSemana.Name = "rBcasaFSemana";
-            this.rBcasaFSemana.Size = new System.Drawing.Size(158, 21);
-            this.rBcasaFSemana.TabIndex = 22;
-            this.rBcasaFSemana.TabStop = true;
-            this.rBcasaFSemana.Text = "Casa Fin de semana";
-            this.rBcasaFSemana.UseVisualStyleBackColor = true;
-            this.rBcasaFSemana.CheckedChanged += new System.EventHandler(this.rBcasaFSemana_CheckedChanged);
-            // 
-            // rBcasaXdia
-            // 
-            this.rBcasaXdia.AutoSize = true;
-            this.rBcasaXdia.Location = new System.Drawing.Point(33, 38);
-            this.rBcasaXdia.Name = "rBcasaXdia";
-            this.rBcasaXdia.Size = new System.Drawing.Size(109, 21);
-            this.rBcasaXdia.TabIndex = 21;
-            this.rBcasaXdia.TabStop = true;
-            this.rBcasaXdia.Text = "Casa por dia";
-            this.rBcasaXdia.UseVisualStyleBackColor = true;
-            this.rBcasaXdia.CheckedChanged += new System.EventHandler(this.rBcasaXdia_CheckedChanged);
+            this.rBcasa.AutoSize = true;
+            this.rBcasa.Location = new System.Drawing.Point(189, 556);
+            this.rBcasa.Name = "rBcasa";
+            this.rBcasa.Size = new System.Drawing.Size(61, 21);
+            this.rBcasa.TabIndex = 21;
+            this.rBcasa.TabStop = true;
+            this.rBcasa.Text = "Casa";
+            this.rBcasa.UseVisualStyleBackColor = true;
+            this.rBcasa.CheckedChanged += new System.EventHandler(this.rBcasa_CheckedChanged);
             // 
             // btnLimpiar
             // 
@@ -341,7 +327,8 @@
             this.Estrellas,
             this.TipoHabitacion,
             this.Dueño,
-            this.Imagen});
+            this.Imagen,
+            this.Imagen2});
             this.DGPropiedades.Location = new System.Drawing.Point(444, 28);
             this.DGPropiedades.Margin = new System.Windows.Forms.Padding(4);
             this.DGPropiedades.MaximumSize = new System.Drawing.Size(1231, 554);
@@ -352,123 +339,6 @@
             this.DGPropiedades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGPropiedades.Size = new System.Drawing.Size(1231, 554);
             this.DGPropiedades.TabIndex = 15;
-            // 
-            // Objeto
-            // 
-            this.Objeto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Objeto.FillWeight = 2F;
-            this.Objeto.HeaderText = "Objeto";
-            this.Objeto.MinimumWidth = 8;
-            this.Objeto.Name = "Objeto";
-            this.Objeto.ReadOnly = true;
-            this.Objeto.Visible = false;
-            // 
-            // Tipo
-            // 
-            this.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Tipo.FillWeight = 48F;
-            this.Tipo.HeaderText = "Tipo";
-            this.Tipo.MinimumWidth = 8;
-            this.Tipo.Name = "Tipo";
-            this.Tipo.ReadOnly = true;
-            this.Tipo.Width = 78;
-            // 
-            // Localidad
-            // 
-            this.Localidad.FillWeight = 47.9798F;
-            this.Localidad.HeaderText = "Localidad";
-            this.Localidad.MinimumWidth = 8;
-            this.Localidad.Name = "Localidad";
-            this.Localidad.ReadOnly = true;
-            this.Localidad.Width = 98;
-            // 
-            // Direccion
-            // 
-            this.Direccion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Direccion.FillWeight = 47.9798F;
-            this.Direccion.HeaderText = "Dirección";
-            this.Direccion.MinimumWidth = 8;
-            this.Direccion.Name = "Direccion";
-            this.Direccion.ReadOnly = true;
-            this.Direccion.Width = 77;
-            // 
-            // Nro
-            // 
-            this.Nro.FillWeight = 47.9798F;
-            this.Nro.HeaderText = "N°";
-            this.Nro.MinimumWidth = 8;
-            this.Nro.Name = "Nro";
-            this.Nro.ReadOnly = true;
-            this.Nro.Width = 53;
-            // 
-            // DiasPermitidos
-            // 
-            this.DiasPermitidos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.DiasPermitidos.FillWeight = 47.9798F;
-            this.DiasPermitidos.HeaderText = "Días Permitidos";
-            this.DiasPermitidos.MinimumWidth = 8;
-            this.DiasPermitidos.Name = "DiasPermitidos";
-            this.DiasPermitidos.ReadOnly = true;
-            this.DiasPermitidos.Width = 44;
-            // 
-            // PrecioBasico
-            // 
-            this.PrecioBasico.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.PrecioBasico.FillWeight = 47.9798F;
-            this.PrecioBasico.HeaderText = "Precio Básico";
-            this.PrecioBasico.MinimumWidth = 8;
-            this.PrecioBasico.Name = "PrecioBasico";
-            this.PrecioBasico.ReadOnly = true;
-            this.PrecioBasico.Width = 50;
-            // 
-            // CantCamas
-            // 
-            this.CantCamas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CantCamas.FillWeight = 47.9798F;
-            this.CantCamas.HeaderText = "Cantidad de Camas";
-            this.CantCamas.MinimumWidth = 8;
-            this.CantCamas.Name = "CantCamas";
-            this.CantCamas.ReadOnly = true;
-            this.CantCamas.Width = 40;
-            // 
-            // Estrellas
-            // 
-            this.Estrellas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Estrellas.FillWeight = 47.9798F;
-            this.Estrellas.HeaderText = "Estrellas";
-            this.Estrellas.MinimumWidth = 8;
-            this.Estrellas.Name = "Estrellas";
-            this.Estrellas.ReadOnly = true;
-            this.Estrellas.Width = 35;
-            // 
-            // TipoHabitacion
-            // 
-            this.TipoHabitacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.TipoHabitacion.FillWeight = 47.9798F;
-            this.TipoHabitacion.HeaderText = "Tipo de Habitación";
-            this.TipoHabitacion.MinimumWidth = 8;
-            this.TipoHabitacion.Name = "TipoHabitacion";
-            this.TipoHabitacion.ReadOnly = true;
-            this.TipoHabitacion.Width = 60;
-            // 
-            // Dueño
-            // 
-            this.Dueño.HeaderText = "Propietario";
-            this.Dueño.MinimumWidth = 8;
-            this.Dueño.Name = "Dueño";
-            this.Dueño.ReadOnly = true;
-            this.Dueño.Width = 106;
-            // 
-            // Imagen
-            // 
-            this.Imagen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Imagen.FillWeight = 568.2F;
-            this.Imagen.HeaderText = "Imagen";
-            this.Imagen.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.Imagen.MinimumWidth = 2;
-            this.Imagen.Name = "Imagen";
-            this.Imagen.ReadOnly = true;
-            this.Imagen.Width = 332;
             // 
             // openFileDialog1
             // 
@@ -621,6 +491,134 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // Objeto
+            // 
+            this.Objeto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Objeto.FillWeight = 2F;
+            this.Objeto.HeaderText = "Objeto";
+            this.Objeto.MinimumWidth = 8;
+            this.Objeto.Name = "Objeto";
+            this.Objeto.ReadOnly = true;
+            this.Objeto.Visible = false;
+            // 
+            // Tipo
+            // 
+            this.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Tipo.FillWeight = 48F;
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.MinimumWidth = 8;
+            this.Tipo.Name = "Tipo";
+            this.Tipo.ReadOnly = true;
+            this.Tipo.Width = 78;
+            // 
+            // Localidad
+            // 
+            this.Localidad.FillWeight = 47.9798F;
+            this.Localidad.HeaderText = "Localidad";
+            this.Localidad.MinimumWidth = 8;
+            this.Localidad.Name = "Localidad";
+            this.Localidad.ReadOnly = true;
+            this.Localidad.Width = 98;
+            // 
+            // Direccion
+            // 
+            this.Direccion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Direccion.FillWeight = 47.9798F;
+            this.Direccion.HeaderText = "Dirección";
+            this.Direccion.MinimumWidth = 8;
+            this.Direccion.Name = "Direccion";
+            this.Direccion.ReadOnly = true;
+            this.Direccion.Width = 77;
+            // 
+            // Nro
+            // 
+            this.Nro.FillWeight = 47.9798F;
+            this.Nro.HeaderText = "N°";
+            this.Nro.MinimumWidth = 8;
+            this.Nro.Name = "Nro";
+            this.Nro.ReadOnly = true;
+            this.Nro.Width = 53;
+            // 
+            // DiasPermitidos
+            // 
+            this.DiasPermitidos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.DiasPermitidos.FillWeight = 47.9798F;
+            this.DiasPermitidos.HeaderText = "Días Permitidos";
+            this.DiasPermitidos.MinimumWidth = 8;
+            this.DiasPermitidos.Name = "DiasPermitidos";
+            this.DiasPermitidos.ReadOnly = true;
+            this.DiasPermitidos.Width = 44;
+            // 
+            // PrecioBasico
+            // 
+            this.PrecioBasico.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.PrecioBasico.FillWeight = 47.9798F;
+            this.PrecioBasico.HeaderText = "Precio Básico";
+            this.PrecioBasico.MinimumWidth = 8;
+            this.PrecioBasico.Name = "PrecioBasico";
+            this.PrecioBasico.ReadOnly = true;
+            this.PrecioBasico.Width = 50;
+            // 
+            // CantCamas
+            // 
+            this.CantCamas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CantCamas.FillWeight = 47.9798F;
+            this.CantCamas.HeaderText = "Cantidad de Camas";
+            this.CantCamas.MinimumWidth = 8;
+            this.CantCamas.Name = "CantCamas";
+            this.CantCamas.ReadOnly = true;
+            this.CantCamas.Width = 40;
+            // 
+            // Estrellas
+            // 
+            this.Estrellas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Estrellas.FillWeight = 47.9798F;
+            this.Estrellas.HeaderText = "Estrellas";
+            this.Estrellas.MinimumWidth = 8;
+            this.Estrellas.Name = "Estrellas";
+            this.Estrellas.ReadOnly = true;
+            this.Estrellas.Width = 35;
+            // 
+            // TipoHabitacion
+            // 
+            this.TipoHabitacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.TipoHabitacion.FillWeight = 47.9798F;
+            this.TipoHabitacion.HeaderText = "Tipo de Habitación";
+            this.TipoHabitacion.MinimumWidth = 8;
+            this.TipoHabitacion.Name = "TipoHabitacion";
+            this.TipoHabitacion.ReadOnly = true;
+            this.TipoHabitacion.Width = 60;
+            // 
+            // Dueño
+            // 
+            this.Dueño.HeaderText = "Propietario";
+            this.Dueño.MinimumWidth = 8;
+            this.Dueño.Name = "Dueño";
+            this.Dueño.ReadOnly = true;
+            this.Dueño.Width = 106;
+            // 
+            // Imagen
+            // 
+            this.Imagen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Imagen.FillWeight = 568.2F;
+            this.Imagen.HeaderText = "Imagen";
+            this.Imagen.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Imagen.MinimumWidth = 2;
+            this.Imagen.Name = "Imagen";
+            this.Imagen.ReadOnly = true;
+            this.Imagen.Width = 332;
+            // 
+            // Imagen2
+            // 
+            this.Imagen2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Imagen2.FillWeight = 568.2F;
+            this.Imagen2.HeaderText = "Imagen2";
+            this.Imagen2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Imagen2.MinimumWidth = 2;
+            this.Imagen2.Name = "Imagen2";
+            this.Imagen2.ReadOnly = true;
+            this.Imagen2.Width = 332;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -643,8 +641,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCantHuespedes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGPropiedades)).EndInit();
             this.menuStrip1.ResumeLayout(false);
@@ -676,18 +672,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Objeto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Localidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nro;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DiasPermitidos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrecioBasico;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CantCamas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Estrellas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TipoHabitacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Dueño;
-        private System.Windows.Forms.DataGridViewImageColumn Imagen;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem imprimirToolStripMenuItem;
@@ -707,9 +691,21 @@
         private System.Windows.Forms.ToolStripMenuItem calendarioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportarToolStripMenuItem;
-        private System.Windows.Forms.GroupBox groupBox2;
-        public System.Windows.Forms.RadioButton rBcasaFSemana;
-        public System.Windows.Forms.RadioButton rBcasaXdia;
+        public System.Windows.Forms.RadioButton rBcasa;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Objeto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Localidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nro;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DiasPermitidos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrecioBasico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CantCamas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estrellas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TipoHabitacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Dueño;
+        private System.Windows.Forms.DataGridViewImageColumn Imagen;
+        private System.Windows.Forms.DataGridViewImageColumn Imagen2;
     }
 }
 

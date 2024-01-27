@@ -146,6 +146,7 @@ namespace TP2_Lab
                         double precio = Convert.ToDouble(nuevaP.numPrecio.Value);
                         int nro = Convert.ToInt32(nuevaP.numNro.Value);
                         Image imagen = Image.FromFile(nuevaP.RutaImagen);
+                        Image imagen2 = Image.FromFile(nuevaP.RutaImagen2);
                         if (nuevaP.rBCasas.Checked)
                         {
                             string nombre = CapitalizarPalabras(nuevaP.tBnombre.Text);
@@ -155,18 +156,18 @@ namespace TP2_Lab
                             int cantDiasPermitidos = Convert.ToInt32(nuevaP.numDiasPermitidos.Value);
                             if (nuevaP.rBcasaDia.Checked)
                             {
-                                prop = new Casa(nro, cantDiasPermitidos, propietario, precio, direccion, localidad, cantCamas, servicios, imagen);
+                                prop = new Casa(nro, cantDiasPermitidos, propietario, precio, direccion, localidad, cantCamas, servicios, imagen,imagen2);
                             }
                             else if (nuevaP.rBcasaFinde.Checked)
                             {
-                                prop = new CasaFindeSemana(nro, 0, propietario, precio, direccion, localidad, cantCamas, servicios, imagen);
+                                prop = new CasaFindeSemana(nro, 0, propietario, precio, direccion, localidad, cantCamas, servicios, imagen,imagen2);
                             }
                         }
                         if (nuevaP.rBHoteles.Checked)
                         {
                             int estrellas = Convert.ToInt32(nuevaP.numEstrellas.Text);
                             string tipoHabitacion = nuevaP.cBTipoHabitacion.ValueMember;
-                            prop = new Habitaciones(nro, estrellas, precio, direccion, localidad, servicios, cantCamas, tipoHabitacion, imagen);
+                            prop = new Habitaciones(nro, estrellas, precio, direccion, localidad, servicios, cantCamas, tipoHabitacion, imagen,imagen2);
                         }
                         nuevoS.AgregarPropiedad(prop);
                         DGAgregarPropiedad(prop);
@@ -222,8 +223,8 @@ namespace TP2_Lab
             //fechas = true,
             //huespedes = true,
             //tipoHabitacion = true;
-            groupBox2.Enabled = true;
             cBTipoHabitaciones.Enabled = true;
+            rBcasa.Checked = false;
             ArrayList disponibles = new ArrayList();
             if (!string.IsNullOrWhiteSpace(cBLocalidad.Text))
             {
@@ -252,16 +253,20 @@ namespace TP2_Lab
 
                         if (cBTipoHabitaciones.ValueMember != "" && cBTipoHabitaciones.ValueMember != ((Habitaciones)propiedad).TipoHabitacion)
                             tipoHabitacion = false;
-                        if (rBcasaFSemana.Checked || rBcasaXdia.Checked)
+                        if (rBcasa.Checked)
                          tipoCasa = false;
-                        
+
                         if (loc && fechas && huespedes && tipoHabitacion)
                         {
                             disponibles.Add(propiedad);
                         }
-                        else if(loc && fechas && huespedes && tipoCasa)
+                        else if (loc && fechas && huespedes && tipoCasa)
                         {
-                            disponibles.Add(propiedad);
+                            disponibles.Add((Casa)propiedad);
+                            if(dias.Days== 1 || dias.Days==2 || dias.Days==3)
+                            {
+                                disponibles.Add((CasaFindeSemana)propiedad);
+                            }
                         }
                     }
 
@@ -574,7 +579,7 @@ namespace TP2_Lab
         {
             int filaIndex = DGPropiedades.Rows.Add();
             DataGridViewRow fila = DGPropiedades.Rows[filaIndex];
-            Bitmap bitmap;
+            Bitmap bitmap, bitmap2;
 
             fila.Cells[0].Value = propiedad;
             fila.Cells[2].Value = propiedad.Localidad;
@@ -584,6 +589,8 @@ namespace TP2_Lab
             fila.Cells[7].Value = propiedad.CantCamas;
             bitmap = new Bitmap(propiedad.Imagen, 50, 25);
             fila.Cells[11].Value = bitmap;
+            //bitmap2 = new Bitmap(propiedad.Imagen2, 50, 25);
+            //fila.Cells[12].Value = bitmap2;
 
 
             // Verificar el tipo de instancia y llenar las celdas correspondientes
@@ -594,6 +601,7 @@ namespace TP2_Lab
                 fila.Cells[8].Value = ((Habitaciones)propiedad).Estrellas;
                 fila.Cells[9].Value = ((Habitaciones)propiedad).TipoHabitacion;
                 fila.Cells[11].Value = propiedad.Imagen;
+                //fila.Cells[12].Value = propiedad.Imagen2;
             }
             else if (propiedad is Casa)
             {
@@ -613,25 +621,17 @@ namespace TP2_Lab
             }
         }
 
-        private void rBcasaFSemana_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rBcasaFSemana.Checked)
-            {
-                cBTipoHabitaciones.Enabled = false;
-            }
-        }
-
-        private void rBcasaXdia_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rBcasaXdia.Checked)
-            {
-                cBTipoHabitaciones.Enabled = false;
-            }
-        }
-
         private void cBTipoHabitaciones_SelectedIndexChanged(object sender, EventArgs e)
         {
-            groupBox2.Enabled = false;
+            rBcasa.Enabled = false;
+        }
+
+        private void rBcasa_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rBcasa.Checked)
+            {
+                cBTipoHabitaciones.Enabled = false;
+            }
         }
 
         private void RefreshDataGridView()

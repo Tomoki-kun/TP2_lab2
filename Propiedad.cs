@@ -20,6 +20,7 @@ namespace TP2_Lab
         protected int nro;
         private List<Reserva> listaReservas=new List<Reserva>();
         Image imagen;
+        Image imagen2;
         protected bool[] servicios = new bool[6];
         private string direccion;
         private string localidad;
@@ -49,6 +50,12 @@ namespace TP2_Lab
             get { return imagen; }
             private set { imagen = value; }
         }
+
+        public Image Imagen2
+        {
+            get { return imagen2; }
+            private set { imagen2 = value; }
+        }
         public string Direccion
         {
             get { return direccion; }
@@ -60,7 +67,7 @@ namespace TP2_Lab
             private set { localidad = value; }
         }
         #endregion
-        public Propiedad(int nro,double precio,string direccion,string localidad, int cantCamas,bool[]servicios, Image pic)
+        public Propiedad(int nro,double precio,string direccion,string localidad, int cantCamas,bool[]servicios, Image pic, Image pic2)
         {
             Nro = nro;
             PrecioBasico = precio;
@@ -72,7 +79,7 @@ namespace TP2_Lab
                 this.servicios[i] = servicios[i];
             }
             Imagen = pic;
-            
+            imagen2 = pic2;
         }
 
         #region Metodos

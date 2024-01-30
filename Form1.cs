@@ -555,7 +555,16 @@ namespace TP2_Lab
 
         private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FRegistro fCambiarC = new FRegistro();
+            fCambiarC.Text = "Cambiar Contraseña";
+            fCambiarC.groupBox1.Visible = false;
+            if(fCambiarC.ShowDialog()== DialogResult.OK)
+            {
+                string nombre = fCambiarC.tBuserN.Text;
+                string nuevaContra = fCambiarC.tBcontraN.Text;
+                CambiarContra(nombre, nuevaContra);
+                MessageBox.Show("Contraseña cambiada correctamente");
+            }
         }
 
         private string CapitalizarPalabras(string texto)
@@ -634,6 +643,51 @@ namespace TP2_Lab
             }
         }
 
+        private void crearUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FRegistro crearU = new FRegistro();
+            if(admin is Administrador)
+            {
+                if(crearU.ShowDialog()== DialogResult.OK)
+                {
+                    string nombre = crearU.tBuserN.Text;
+                    string contra = crearU.tBcontraN.Text;
+                    bool tipoA = crearU.rBadminN.Checked;
+                    bool tipoC = crearU.rBempleadoN.Checked;
+                    if (tipoA)
+                    {
+                        CrearUsuarioAdmin(nombre, contra, tipoA);
+                    }
+                    else if (tipoC)
+                    {
+                        CrearUsuarioEmpleado(nombre, contra, tipoC);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo crear el usuario");
+                    }
+                    MessageBox.Show("Usuario creado correctamente");
+                }
+            }
+        }
+
+        private void eliminarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FRegistro fEliminar = new FRegistro();
+            if (admin is Administrador)
+            {
+                fEliminar.tBcontraN.Enabled = false;
+                fEliminar.groupBox1.Enabled = false;
+                if (fEliminar.ShowDialog() == DialogResult.OK)
+                {
+                    fEliminar.tBcontraN.Enabled = false;
+                    fEliminar.groupBox1.Enabled = false;
+                    string nombre = fEliminar.tBuserN.Text;
+                    EliminarUsuario(nombre);
+                }
+            }
+        }
+
         private void RefreshDataGridView()
         {
             DGPropiedades.Rows.Clear();
@@ -667,6 +721,84 @@ namespace TP2_Lab
                 }
 
             }
+        }
+
+        public Usuario CrearUsuarioAdmin(string nom, string contra, bool tipo)
+        {
+            Usuario nuevoUsuario;
+            if (tipo)
+            {
+                nuevoUsuario = new Administrador(nom, contra);
+                listaUsuarios.Add(nuevoUsuario);
+            }
+            else
+            {
+                throw new Exception("no se pudo crear el usuario");
+            }
+            return nuevoUsuario;
+        }
+
+        public Usuario CrearUsuarioEmpleado(string nom, string contra, bool tipo)
+        {
+            Usuario nuevoUsu;
+            if (tipo)
+            {
+                nuevoUsu = new Empleado(nom, contra);
+                listaUsuarios.Add(nuevoUsu);
+            }
+            else
+            {
+                throw new Exception("no se pudo crear el usuario");
+            }
+            return nuevoUsu;
+        }
+
+
+        public Usuario EliminarUsuario(string nombre)
+        {
+            Usuario aEliminar = BuscarUsuario(nombre);
+
+            if (aEliminar != null)
+            {
+                listaUsuarios.Remove(aEliminar);
+                MessageBox.Show("El usuario ha sido eliminado");
+            }
+            else
+            {
+                throw new Exception("Usuario no encontrado");
+            }
+            return aEliminar;
+        }
+
+        public Usuario CambiarContra(string nombre, string nuevaC)
+        {
+            Usuario miUsu = BuscarUsuario(nombre);
+            if (miUsu != null)
+            {
+                miUsu.Contra = nuevaC;
+                MessageBox.Show("Contraseña cambiada correctamente");
+            }
+            else
+            {
+                throw new Exception("Usuario no encontrado");
+            }
+            return miUsu;
+        }
+
+        public Usuario BuscarUsuario(string nombre)
+        {
+            Usuario buscado = new Usuario(nombre, "");
+            listaUsuarios.Sort();
+            int orden = listaUsuarios.BinarySearch(buscado);
+            if (orden >= 0)
+            {
+                buscado = listaUsuarios[orden];
+            }
+            else
+            {
+                throw new Exception("Usuario no encontrado");
+            }
+            return buscado;
         }
         #endregion
 

@@ -82,6 +82,12 @@
     <Compile Include="FPropiedad.Designer.cs">
       <DependentUpon>FPropiedad.cs</DependentUpon>
     </Compile>
+    <Compile Include="FRegistro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FRegistro.Designer.cs">
+      <DependentUpon>FRegistro.cs</DependentUpon>
+    </Compile>
     <Compile Include="FWeb.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FPropiedad.resx">
       <DependentUpon>FPropiedad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRegistro.resx">
+      <DependentUpon>FRegistro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FWeb.resx">
       <DependentUpon>FWeb.cs</DependentUpon>

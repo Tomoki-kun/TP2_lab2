@@ -45,6 +45,14 @@ namespace TP2_Lab
                 usuario = new Administrador(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
             else
                 usuario = new Empleado(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
+
+            if(usuario is Empleado)
+            {
+                btnAgregarPropiedad.Enabled = false;
+                btnEliminarPropiedad.Enabled = false;
+                crearUsuarioToolStripMenuItem.Enabled = false;
+                eliminarUsuarioToolStripMenuItem.Enabled = false;
+            }
             listaUsuarios.Add(usuario);
             listaUsuarios.Sort();
             int pos = listaUsuarios.BinarySearch(usuario);
@@ -53,8 +61,9 @@ namespace TP2_Lab
                 vLogin.ShowDialog();
                 if (vLogin.rbAdmin.Checked)
                     usuario = new Administrador(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
+                
                 else
-                    usuario = new Empleado(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
+                    usuario = new Empleado(vLogin.tbUsuario.Text, vLogin.tbContra.Text);      
                 listaDatos.Sort();
             }
 
@@ -66,7 +75,7 @@ namespace TP2_Lab
         #region Serializacion de datos
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            CargarUsuarios();
         }
         private void Deserealizar()
         {
@@ -106,6 +115,7 @@ namespace TP2_Lab
                 archivo = new FileStream(miArchivo, FileMode.CreateNew, FileAccess.Write);
                 serUnser = new BinaryFormatter();
                 serUnser.Serialize(archivo, nuevoS);
+                GuardarUsuarios(listaUsuarios);
             }
             catch (Exception ex)
             {
@@ -118,6 +128,28 @@ namespace TP2_Lab
                     archivo.Close();
                     archivo.Dispose();
                 }
+            }
+        }
+
+        private void GuardarUsuarios(List<Usuario> lstUsuarios)
+        {
+            string path = "usuarios.dat";
+            using (FileStream fS = new FileStream(path, FileMode.Create, FileAccess.Write))
+            {
+                serUnser = new BinaryFormatter();
+                serUnser.Serialize(fS, lstUsuarios);
+            }
+        }
+
+        private void CargarUsuarios()
+        {
+            string path = "usuarios.dat";
+            if (File.Exists(path))
+            {
+                FileStream fS = new FileStream(path, FileMode.Open, FileAccess.Read);
+                BinaryFormatter bF = new BinaryFormatter();
+                listaUsuarios = (List<Usuario>)bF.Deserialize(fS);
+                fS.Close();
             }
         }
         #endregion

@@ -504,7 +504,7 @@
             this.importarToolStripMenuItem,
             this.exportarToolStripMenuItem});
             this.calendarioToolStripMenuItem.Name = "calendarioToolStripMenuItem";
-            this.calendarioToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
+            this.calendarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.calendarioToolStripMenuItem.Text = "Calendario";
             // 
             // importarToolStripMenuItem
@@ -522,20 +522,21 @@
             // imprimirToolStripMenuItem
             // 
             this.imprimirToolStripMenuItem.Name = "imprimirToolStripMenuItem";
-            this.imprimirToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
+            this.imprimirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.imprimirToolStripMenuItem.Text = "Imprimir";
+            this.imprimirToolStripMenuItem.Click += new System.EventHandler(this.imprimirToolStripMenuItem_Click);
             // 
             // exportarDatosToolStripMenuItem
             // 
             this.exportarDatosToolStripMenuItem.Name = "exportarDatosToolStripMenuItem";
-            this.exportarDatosToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
+            this.exportarDatosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.exportarDatosToolStripMenuItem.Text = "Exportar datos";
             this.exportarDatosToolStripMenuItem.Click += new System.EventHandler(this.exportarDatosToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.salirToolStripMenuItem.Text = "Salir";
             // 
             // ayudaToolStripMenuItem

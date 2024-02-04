@@ -22,6 +22,7 @@ namespace TP2_Lab
         private Propietario propietario;
         private Propiedad prop;
         private Sistema nuevoS = new Sistema();
+        private Reserva miReserva;
         private int cantPropiedades = 0,
             cantReservas = 0,
             reservasCasaDia = 0,
@@ -323,6 +324,7 @@ namespace TP2_Lab
             {
                 string nombre;
                 long dni;
+                DateTime fechaNac = new DateTime();
                 if (nuevoC.tBnombreC.Text == "" || numCantHuespedes.Text == "")
                 {
                     MessageBox.Show("Faltan datos por rellenar");
@@ -333,7 +335,8 @@ namespace TP2_Lab
                     {
                         nombre = nuevoC.tBnombreC.Text;
                         dni = (long)nuevoC.numDNI.Value;
-                        Cliente miCliente = new Cliente(nombre, dni);
+                        fechaNac = nuevoC.dTfechaNac.Value;
+                        Cliente miCliente = new Cliente(nombre, dni,fechaNac);
                         int huespedes = Convert.ToInt32(numCantHuespedes.Text);
                         DateTime inicio = Calendar.SelectionRange.Start;
                         DateTime fin = Calendar.SelectionRange.End;
@@ -345,7 +348,7 @@ namespace TP2_Lab
                             if (prop is CasaFindeSemana && inicio.DayOfWeek == DayOfWeek.Friday && fin.DayOfWeek == DayOfWeek.Sunday
                                  || prop is Casa && !(prop is CasaFindeSemana) && numeroDias >= ((Casa)prop).DiasPermitidos || prop is Habitaciones)
                             {
-                                Reserva miReserva = new Reserva(miCliente, cantReservas, huespedes, inicio, fin);
+                                miReserva = new Reserva(miCliente, cantReservas, huespedes, inicio, fin);
                                 cantReservas++;
                                 double costoFinal = 0;
                                 if (prop is Habitaciones)
@@ -800,6 +803,31 @@ namespace TP2_Lab
                 throw new Exception("Usuario no encontrado");
             }
             return aEliminar;
+        }
+
+        private void imprimirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FTicket nuevoTicket = new FTicket();
+           if(miReserva != null && prop != null){
+                nuevoTicket.lBTicket.Items.Add(miReserva.ToString());
+                if (prop is Habitaciones)
+                    nuevoTicket.lBTicket.Items.Add( "\n\tNro de habitacion: " + prop.Nro.ToString() + "\n\tTipo de Habitacion" + ((Habitaciones)prop).TipoHabitacion);
+                else
+                    nuevoTicket.lBTicket.Items.Add( "\n\tNro: " + prop.Nro);
+                nuevoTicket.lBTicket.Items.Add("Datos de alojamiento: \n\tDireccion:" + prop.Direccion);
+                nuevoTicket.lBTicket.Items.Add("\nCantidad personas admitidos: " + miReserva.CantPersonas);
+                nuevoTicket.lBTicket.Items.Add("\nDatos Cliente: \n\tNombre: " + miReserva.Cliente + "\n\tDNI: " + miReserva.Cliente.DNI.ToString() + "\n\tFecha de Nacimiento: "+miReserva.Cliente.FechaNacimiento);
+                nuevoTicket.lBTicket.Items.Add("\nFecha y Hora reserva: " + miReserva.Realizado.ToString("U"));
+                nuevoTicket.lBTicket.Items.Add("\nFecha CheckIn: " + miReserva.FechaEntrada + "\nFecha CheckOut: " + miReserva.FechaSalida);
+                nuevoTicket.lBTicket.Items.Add("\nCosto por día: $" + prop.PrecioBasico.ToString());
+                nuevoTicket.lBTicket.Items.Add("\nCosto total: $" + miReserva.PrecioFinal.ToString("00.0"));
+                nuevoTicket.pBfotoProp.Image = prop.Imagen;
+                nuevoTicket.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Error, no hay ninguna reserva");
+            }
         }
 
         public Usuario CambiarContra(string nombre, string nuevaC)

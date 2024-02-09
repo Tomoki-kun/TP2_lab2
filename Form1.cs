@@ -33,7 +33,6 @@ namespace TP2_Lab
         Usuario admin = new Administrador("Admin", "Admin");
         FileStream archivo;
         BinaryFormatter serUnser;
-
         public Form1()
         {
             InitializeComponent();
@@ -46,7 +45,11 @@ namespace TP2_Lab
                 usuario = new Administrador(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
             else
                 usuario = new Empleado(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
-
+            if(usuario is Administrador && !EsAdministrador(vLogin.tbUsuario.Text))
+            {
+                MessageBox.Show("No puede ingresar como usuario administrador");
+                vLogin.Dispose();
+            }
             if(usuario is Empleado)
             {
                 btnAgregarPropiedad.Enabled = false;
@@ -513,19 +516,7 @@ namespace TP2_Lab
         }
         #endregion
 
-        #region Metodos del Form
-        private bool VerificarCamposCompletos(FPropiedad form)
-        {
-            bool ret = true;
-            if (string.IsNullOrWhiteSpace(form.tBdireccion.Text) && string.IsNullOrWhiteSpace(form.tBlocalidad.Text))
-                ret = false;
-            if ((string.IsNullOrWhiteSpace(form.tBApellido.Text) && string.IsNullOrWhiteSpace(form.tBnombre.Text) &&
-                form.tBApellido.IsAccessible && form.tBnombre.IsAccessible) ||
-                (string.IsNullOrEmpty(form.cBTipoHabitacion.ValueMember) && form.cBTipoHabitacion.IsAccessible))
-                ret = false;
-
-            return ret;
-        }
+        #region MenuStrip
 
         private void exportarDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -575,6 +566,128 @@ namespace TP2_Lab
             }
         }
 
+
+        private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FRegistro fCambiarC = new FRegistro();
+            fCambiarC.Text = "Cambiar Contraseña";
+            fCambiarC.groupBox1.Visible = false;
+            if (fCambiarC.ShowDialog() == DialogResult.OK)
+            {
+                string nombre = fCambiarC.tBuserN.Text;
+                string nuevaContra = fCambiarC.tBcontraN.Text;
+                CambiarContra(nombre, nuevaContra);
+                MessageBox.Show("Contraseña cambiada correctamente");
+            }
+        }
+
+        private void crearUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FRegistro crearU = new FRegistro();
+            if (admin is Administrador)
+            {
+                if (crearU.ShowDialog() == DialogResult.OK)
+                {
+                    string nombre = crearU.tBuserN.Text;
+                    string contra = crearU.tBcontraN.Text;
+                    bool tipoA = crearU.rBadminN.Checked;
+                    bool tipoC = crearU.rBempleadoN.Checked;
+                    if (tipoA)
+                    {
+                        CrearUsuarioAdmin(nombre, contra, tipoA);
+                    }
+                    else if (tipoC)
+                    {
+                        CrearUsuarioEmpleado(nombre, contra, tipoC);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo crear el usuario");
+                    }
+                    MessageBox.Show("Usuario creado correctamente");
+                }
+            }
+        }
+        private void eliminarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FRegistro fEliminar = new FRegistro();
+            if (admin is Administrador)
+            {
+                fEliminar.tBcontraN.Enabled = false;
+                fEliminar.groupBox1.Enabled = false;
+                if (fEliminar.ShowDialog() == DialogResult.OK)
+                {
+                    fEliminar.tBcontraN.Enabled = false;
+                    fEliminar.groupBox1.Enabled = false;
+                    string nombre = fEliminar.tBuserN.Text;
+                    EliminarUsuario(nombre);
+                }
+            }
+        }
+
+        private void imprimirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FTicket nuevoTicket = new FTicket();
+            if (miReserva != null && prop != null)
+            {
+                if (prop is Habitaciones)
+                    nuevoTicket.lBticket.Items.Add("\n\tNro de habitacion: " + prop.Nro.ToString() + "\n\tTipo de Habitacion" + ((Habitaciones)prop).TipoHabitacion);
+                else
+
+                    nuevoTicket.lBticket.Items.Add("\n\tNro: " + prop.Nro);
+                nuevoTicket.lBticket.Items.Add("Datos de alojamiento: \n\tDireccion:" + prop.Direccion);
+                nuevoTicket.lBticket.Items.Add("\nPersonas admitidas: " + miReserva.CantPersonas);
+                nuevoTicket.lBticket.Items.Add("--------------------------------------------------------------------------------------");
+                nuevoTicket.lBticket.Items.Add("\nCliente: \n\tNombre: " + miReserva.Cliente + "\n\tDNI: " + miReserva.Cliente.DNI.ToString());
+                nuevoTicket.lBticket.Items.Add("Fecha de Nacimiento: " + miReserva.Cliente.FechaNacimiento.ToString("dd/MM/yyyy"));
+                nuevoTicket.lBticket.Items.Add("--------------------------------------------------------------------------------------");
+                nuevoTicket.lBticket.Items.Add("\nFecha y Hora reserva: " + miReserva.Realizado.ToString("U"));
+                nuevoTicket.lBticket.Items.Add("\nFecha CheckIn: " + miReserva.FechaEntrada.ToString("dd/MM/yyyy") + "\nFecha CheckOut: " + miReserva.FechaSalida.ToString("dd/MM/yyyy"));
+                nuevoTicket.lBticket.Items.Add("--------------------------------------------------------------------------------------");
+                nuevoTicket.lBticket.Items.Add("\nCosto por día: $" + prop.PrecioBasico.ToString());
+                nuevoTicket.lBticket.Items.Add("\nCosto total: $" + miReserva.PrecioFinal.ToString("00.0"));
+                nuevoTicket.pBfotoProp.Image = prop.Imagen;
+                nuevoTicket.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Error, no hay ninguna reserva");
+            }
+        }
+
+
+        private void barraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GraficoDeBarras();
+        }
+
+        private void sectoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GraficosSectores();
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+         {
+            Close();
+         }
+
+
+        #endregion
+
+        #region Metodos del Form
+        private bool VerificarCamposCompletos(FPropiedad form)
+        {
+            bool ret = true;
+            if (string.IsNullOrWhiteSpace(form.tBdireccion.Text) && string.IsNullOrWhiteSpace(form.tBlocalidad.Text))
+                ret = false;
+            if ((string.IsNullOrWhiteSpace(form.tBApellido.Text) && string.IsNullOrWhiteSpace(form.tBnombre.Text) &&
+                form.tBApellido.IsAccessible && form.tBnombre.IsAccessible) ||
+                (string.IsNullOrEmpty(form.cBTipoHabitacion.ValueMember) && form.cBTipoHabitacion.IsAccessible))
+                ret = false;
+
+            return ret;
+        }
+
         static void ExportarDatos(List<IExportable> datos, string nombreArchivo)
         {
             FileStream archivoExportar = new FileStream(nombreArchivo, FileMode.OpenOrCreate, FileAccess.Write);
@@ -588,19 +701,6 @@ namespace TP2_Lab
             archivoExportar.Close();
         }
 
-        private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FRegistro fCambiarC = new FRegistro();
-            fCambiarC.Text = "Cambiar Contraseña";
-            fCambiarC.groupBox1.Visible = false;
-            if(fCambiarC.ShowDialog()== DialogResult.OK)
-            {
-                string nombre = fCambiarC.tBuserN.Text;
-                string nuevaContra = fCambiarC.tBcontraN.Text;
-                CambiarContra(nombre, nuevaContra);
-                MessageBox.Show("Contraseña cambiada correctamente");
-            }
-        }
 
         private string CapitalizarPalabras(string texto)
         {
@@ -675,51 +775,6 @@ namespace TP2_Lab
             if (rBcasa.Checked)
             {
                 cBTipoHabitaciones.Enabled = false;
-            }
-        }
-
-        private void crearUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FRegistro crearU = new FRegistro();
-            if(admin is Administrador)
-            {
-                if(crearU.ShowDialog()== DialogResult.OK)
-                {
-                    string nombre = crearU.tBuserN.Text;
-                    string contra = crearU.tBcontraN.Text;
-                    bool tipoA = crearU.rBadminN.Checked;
-                    bool tipoC = crearU.rBempleadoN.Checked;
-                    if (tipoA)
-                    {
-                        CrearUsuarioAdmin(nombre, contra, tipoA);
-                    }
-                    else if (tipoC)
-                    {
-                        CrearUsuarioEmpleado(nombre, contra, tipoC);
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se pudo crear el usuario");
-                    }
-                    MessageBox.Show("Usuario creado correctamente");
-                }
-            }
-        }
-
-        private void eliminarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FRegistro fEliminar = new FRegistro();
-            if (admin is Administrador)
-            {
-                fEliminar.tBcontraN.Enabled = false;
-                fEliminar.groupBox1.Enabled = false;
-                if (fEliminar.ShowDialog() == DialogResult.OK)
-                {
-                    fEliminar.tBcontraN.Enabled = false;
-                    fEliminar.groupBox1.Enabled = false;
-                    string nombre = fEliminar.tBuserN.Text;
-                    EliminarUsuario(nombre);
-                }
             }
         }
 
@@ -805,31 +860,6 @@ namespace TP2_Lab
             return aEliminar;
         }
 
-        private void imprimirToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FTicket nuevoTicket = new FTicket();
-           if(miReserva != null && prop != null){
-                nuevoTicket.lBTicket.Items.Add(miReserva.ToString());
-                if (prop is Habitaciones)
-                    nuevoTicket.lBTicket.Items.Add( "\n\tNro de habitacion: " + prop.Nro.ToString() + "\n\tTipo de Habitacion" + ((Habitaciones)prop).TipoHabitacion);
-                else
-                    nuevoTicket.lBTicket.Items.Add( "\n\tNro: " + prop.Nro);
-                nuevoTicket.lBTicket.Items.Add("Datos de alojamiento: \n\tDireccion:" + prop.Direccion);
-                nuevoTicket.lBTicket.Items.Add("\nCantidad personas admitidos: " + miReserva.CantPersonas);
-                nuevoTicket.lBTicket.Items.Add("\nDatos Cliente: \n\tNombre: " + miReserva.Cliente + "\n\tDNI: " + miReserva.Cliente.DNI.ToString() + "\n\tFecha de Nacimiento: "+miReserva.Cliente.FechaNacimiento);
-                nuevoTicket.lBTicket.Items.Add("\nFecha y Hora reserva: " + miReserva.Realizado.ToString("U"));
-                nuevoTicket.lBTicket.Items.Add("\nFecha CheckIn: " + miReserva.FechaEntrada + "\nFecha CheckOut: " + miReserva.FechaSalida);
-                nuevoTicket.lBTicket.Items.Add("\nCosto por día: $" + prop.PrecioBasico.ToString());
-                nuevoTicket.lBTicket.Items.Add("\nCosto total: $" + miReserva.PrecioFinal.ToString("00.0"));
-                nuevoTicket.pBfotoProp.Image = prop.Imagen;
-                nuevoTicket.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Error, no hay ninguna reserva");
-            }
-        }
-
         public Usuario CambiarContra(string nombre, string nuevaC)
         {
             Usuario miUsu = BuscarUsuario(nombre);
@@ -860,13 +890,30 @@ namespace TP2_Lab
             }
             return buscado;
         }
+
+        public bool EsAdministrador(string nombre)
+        {
+            bool esAdmin = false;
+            Usuario admin = BuscarUsuario(nombre);
+            if(admin is Administrador) 
+            {
+               esAdmin= true;
+            }
+            else
+            {
+                throw new Exception("No es un administrador");
+            }
+            return esAdmin;
+        }
+
+
         #endregion
 
         #region Ventana de Graficos
-        private void barraToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void GraficoDeBarras()
         {
             FGraficos stats2 = new FGraficos();
-
             // Crea el área del gráfico
             ChartArea areaReservas = new ChartArea();
             stats2.cGrafico.ChartAreas.Add(areaReservas);
@@ -923,14 +970,12 @@ namespace TP2_Lab
 
             stats2.cGrafico.Palette = ChartColorPalette.Excel; //colores de las barras
 
-            // Mostrar el formulario con el gráfico
             stats2.ShowDialog();
         }
 
-        private void sectoresToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GraficosSectores()
         {
             FGraficos stats = new FGraficos();
-
             // Crea el área del gráfico
             ChartArea areaReservas = new ChartArea();
             stats.cGrafico.ChartAreas.Add(areaReservas);

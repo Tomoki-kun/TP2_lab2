@@ -55,8 +55,14 @@ namespace TP2_Lab
             {
                 if (FileImagen.ShowDialog() == DialogResult.OK)
                 {
-                    RutaImagen = FileImagen.FileName;
-                    RutaImagen2 = FileImagen.FileName;
+                    if (i == 0)
+                    {
+                        RutaImagen = FileImagen.FileName;
+                    }
+                    else if (i == 1)
+                    {
+                        RutaImagen2 = FileImagen.FileName;
+                    }
                 }
             }
         }

@@ -51,6 +51,11 @@ namespace TP2_Lab
         {
             get { return cantPersonas; }
         }
+
+        public int NumeroReserva
+        {
+            get { return numReserva; }
+        }
         #endregion
 
         //Constructor

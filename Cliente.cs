@@ -9,7 +9,7 @@ using System.Collections;
 namespace TP2_Lab
 {
     [Serializable]
-    public class Cliente: IExportable
+    public class Cliente: IExportable,IComparable
     {
         private string nombre;
         private long dni;
@@ -48,6 +48,11 @@ namespace TP2_Lab
         public override string ToString()
         {
             return nombre;
+        }
+
+        public int CompareTo(Object obj)
+        {
+            return this.DNI.CompareTo(((Cliente)obj).DNI);
         }
 
         //Metodo de IExportable

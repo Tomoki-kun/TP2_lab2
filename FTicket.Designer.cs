@@ -30,61 +30,71 @@ namespace TP2_Lab
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FTicket));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pBfotoProp = new System.Windows.Forms.PictureBox();
             this.lBticket = new System.Windows.Forms.ListBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBfotoProp)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(59, 19);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(258, 148);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pBfotoProp
-            // 
-            this.pBfotoProp.Location = new System.Drawing.Point(481, 173);
-            this.pBfotoProp.Name = "pBfotoProp";
-            this.pBfotoProp.Size = new System.Drawing.Size(190, 272);
-            this.pBfotoProp.TabIndex = 2;
-            this.pBfotoProp.TabStop = false;
             // 
             // lBticket
             // 
             this.lBticket.FormattingEnabled = true;
             this.lBticket.ItemHeight = 16;
-            this.lBticket.Location = new System.Drawing.Point(12, 173);
+            this.lBticket.Location = new System.Drawing.Point(3, 3);
             this.lBticket.Name = "lBticket";
-            this.lBticket.Size = new System.Drawing.Size(463, 404);
+            this.lBticket.Size = new System.Drawing.Size(505, 324);
             this.lBticket.TabIndex = 3;
+            // 
+            // button1
+            // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button1.Location = new System.Drawing.Point(39, 534);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(395, 34);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Aceptar";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 333);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(169, 17);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Propiedad que se alquila:";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(84, 369);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(314, 144);
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
             // 
             // FTicket
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(689, 580);
-            this.Controls.Add(this.lBticket);
-            this.Controls.Add(this.pBfotoProp);
+            this.ClientSize = new System.Drawing.Size(515, 580);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.lBticket);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FTicket";
             this.Text = "FTicket";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBfotoProp)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBox1;
-        public System.Windows.Forms.PictureBox pBfotoProp;
         public System.Windows.Forms.ListBox lBticket;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.PictureBox pictureBox1;
     }
 }

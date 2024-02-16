@@ -30,6 +30,7 @@ namespace TP2_Lab
             reservasHabitaciones = 0;
         private List<IExportable> listaDatos = new List<IExportable>();
         private List<Usuario> listaUsuarios = new List<Usuario>();
+        private List<Cliente> listaClientes = new List<Cliente>();
         Usuario admin = new Administrador("Admin", "Admin");
         FileStream archivo;
         BinaryFormatter serUnser;
@@ -375,6 +376,7 @@ namespace TP2_Lab
                                 prop.AgregarReserva(miReserva);
                                 listaDatos.Add(miReserva);
                                 listaDatos.Add(miCliente);
+                                listaClientes.Add(miCliente);
                             }
                             else
                             {
@@ -446,6 +448,7 @@ namespace TP2_Lab
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
+            rBcasa.Enabled = true;
             DGPropiedades.Rows.Clear();
             int cant = nuevoS.ListaPropiedad.Count;
             for (int i = 0; i < cant; i++)
@@ -522,6 +525,110 @@ namespace TP2_Lab
         {
             ExportarDatos(listaDatos, miArchivo);
             MessageBox.Show("Datos exportados correctamente", "Operacion exitosa");
+        }
+
+        private void importarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "Archivos CSV (.csv)|*.csv";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                ImportarCalendarioDeReservas(openFileDialog1.FileName);
+            }
+        }
+
+        private void ImportarCalendarioDeReservas(string path)
+        {
+            List<Reserva> reservas = new List<Reserva>();
+            try
+            {
+                FileStream archivo = new FileStream(path, FileMode.Open, FileAccess.Read);
+                StreamReader sR = new StreamReader(archivo);
+                string linea;
+                string[] datos;
+
+                while (!sR.EndOfStream)
+                {
+                    linea = sR.ReadLine();
+                    datos = linea.Split(';');
+                    int numReserva = Convert.ToInt32(datos[0]);
+                    int cantidad = Convert.ToInt32(datos[1]);
+                    long dni = Convert.ToInt64(datos[2]);
+                    DateTime fechaI = Convert.ToDateTime(datos[3]);
+                    DateTime fechaF = Convert.ToDateTime(datos[4]);
+
+                    Cliente nuevoCliente = BuscarCliente(dni);
+                    if(nuevoCliente != null)
+                    {
+                        reservas.Add(new Reserva(nuevoCliente, numReserva,cantidad, fechaI, fechaF));
+                        MessageBox.Show("Se ha importado correctamente su calendario");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se ha encontrado una reserva");
+                    }
+                }
+                sR.Close();
+                archivo.Dispose();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Error en el formato del archivo");
+            }
+            catch(IOException excep)
+            {
+                MessageBox.Show("Error en el archivo" + excep);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error desconocido" + ex.Message);
+            }
+        }
+
+        private Cliente BuscarCliente(long dni)
+        {
+            Cliente aBuscar = new Cliente("", dni, DateTime.Now);
+            listaClientes.Sort();
+            int orden = listaClientes.BinarySearch(aBuscar);
+
+            if (orden >= 0)
+            {
+                aBuscar = listaClientes[orden];
+            }
+            else
+            {
+                MessageBox.Show("Cliente no encontrado");
+            }
+            return aBuscar;
+        }
+
+        private void exportarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Filter = "Archivos CSV (.csv)|*.csv";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                ExportarCalendarioDeReservas(prop.ListaReservas, saveFileDialog1.FileName);
+            }
+        }
+
+        private void ExportarCalendarioDeReservas(List<Reserva> listaReserva,string path)
+        {
+            try
+            {
+                FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+                StreamWriter sW = new StreamWriter(fs);
+
+                foreach(Reserva r in listaReserva)
+                {
+                    sW.WriteLine(r.Exportar());
+                }
+                sW.Close();
+                fs.Dispose();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error desconocido" + ex.Message);
+            }
+            MessageBox.Show("Se ha exportado su calendario de reservas correctamente");
         }
 
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -646,7 +753,7 @@ namespace TP2_Lab
                 nuevoTicket.lBticket.Items.Add("--------------------------------------------------------------------------------------");
                 nuevoTicket.lBticket.Items.Add("\nCosto por día: $" + prop.PrecioBasico.ToString());
                 nuevoTicket.lBticket.Items.Add("\nCosto total: $" + miReserva.PrecioFinal.ToString("00.0"));
-                nuevoTicket.pBfotoProp.Image = prop.Imagen;
+                nuevoTicket.pictureBox1.Image = prop.Imagen;
                 nuevoTicket.ShowDialog();
             }
             else
@@ -733,10 +840,11 @@ namespace TP2_Lab
             fila.Cells[7].Value = propiedad.CantCamas;
             bitmap = new Bitmap(propiedad.Imagen, 50, 25);
             fila.Cells[11].Value = bitmap;
-            //bitmap2 = new Bitmap(propiedad.Imagen2, 50, 25);
-            //fila.Cells[12].Value = bitmap2;
-
-
+            if (propiedad.Imagen2 != null)
+            {
+                bitmap2 = new Bitmap(propiedad.Imagen2, 50, 25);
+                fila.Cells[12].Value = bitmap2;
+            }
             // Verificar el tipo de instancia y llenar las celdas correspondientes
             if (propiedad is Habitaciones)
             {
@@ -745,7 +853,7 @@ namespace TP2_Lab
                 fila.Cells[8].Value = ((Habitaciones)propiedad).Estrellas;
                 fila.Cells[9].Value = ((Habitaciones)propiedad).TipoHabitacion;
                 fila.Cells[11].Value = propiedad.Imagen;
-                //fila.Cells[12].Value = propiedad.Imagen2;
+                fila.Cells[12].Value = propiedad.Imagen2;
             }
             else if (propiedad is Casa)
             {
@@ -897,7 +1005,7 @@ namespace TP2_Lab
             Usuario admin = BuscarUsuario(nombre);
             if(admin is Administrador) 
             {
-               esAdmin= true;
+                esAdmin = true;
             }
             else
             {

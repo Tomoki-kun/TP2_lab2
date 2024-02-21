@@ -19,11 +19,16 @@ namespace TP2_Lab
 
         private void FLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (tbContra.Text == "" && tbUsuario.Text == "")
+            if (this.DialogResult == DialogResult.OK && (tbContra.Text == "" || tbUsuario.Text == ""))
             {
                 MessageBox.Show("Por favor, complete todos los datos antes de cerrar la ventana.", "Datos Incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 e.Cancel = true;
             }
+        }
+
+        private void btnLogin_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TP2_Lab
 {
+    [Serializable]
     internal class Empleado: Usuario
     {
         public Empleado(string user, string pas) : base(user, pas)

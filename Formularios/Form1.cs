@@ -18,6 +18,8 @@ namespace TP2_Lab
 {
     public partial class Form1 : Form
     {
+        Usuario usuario;
+        private bool LoginSuccessful = true;
         private string miArchivo = "Datos.dat";
         private Propietario propietario;
         private Propiedad prop;
@@ -28,46 +30,79 @@ namespace TP2_Lab
             reservasCasaFinde = 0,
             reservasHabitaciones = 0;
         private List<IExportable> listaDatos = new List<IExportable>();
-        private List<Usuario> listaUsuarios = new List<Usuario>();
-        Usuario admin = new Administrador("Admin", "Admin");
-        FileStream archivo;
-        BinaryFormatter serUnser;
+        //private List<Usuario> listaUsuarios = new List<Usuario>();
+        //private Usuario admin = new Administrador("Admin", "Admin");
+        private FileStream archivo;
+        private BinaryFormatter serDeser;
 
         public Form1()
         {
             InitializeComponent();
-            listaUsuarios.Add(admin);
-            FLogin vLogin = new FLogin();
-            Usuario usuario;
-            vLogin.ShowDialog();
-
-            if (vLogin.rbAdmin.Checked)
-                usuario = new Administrador(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
-            else
-                usuario = new Empleado(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
-            listaUsuarios.Add(usuario);
-            listaUsuarios.Sort();
-            int pos = listaUsuarios.BinarySearch(usuario);
-            while (pos < 0 || (pos >= 0 && ((usuario is Administrador && listaUsuarios[pos] is Empleado) || (usuario is Empleado && listaUsuarios[pos] is Administrador))))
+            Deserealizar();
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            if (nuevoS.ListaUsuarios.Count == 0)
             {
-                vLogin.ShowDialog();
-                if (vLogin.rbAdmin.Checked)
-                    usuario = new Administrador(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
+                usuario = new Administrador("Admin", "Admin");
+                nuevoS.ListaUsuarios.Add(usuario);
+                usuario= new Empleado("pancho", "fili");
+                nuevoS.ListaUsuarios.Add(usuario);
+            }
+            FLogin vLogin = new FLogin();
+            DialogResult presiono = vLogin.ShowDialog();
+            if (presiono == DialogResult.OK)
+            {
+                usuario = new Usuario(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
+                nuevoS.ListaUsuarios.Sort();
+                int pos = nuevoS.ListaUsuarios.BinarySearch(usuario);
+                while (pos < 0)
+                {
+                    MessageBox.Show("Usuario no econtrado", "Error", MessageBoxButtons.OK);
+                    presiono = vLogin.ShowDialog();
+                    if (presiono == DialogResult.Cancel)
+                    {
+                        LoginSuccessful = false;
+                        this.Close();
+                    }
+                    usuario = new Usuario(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
+                    pos = nuevoS.ListaUsuarios.BinarySearch(usuario);
+                }
+
+                if (nuevoS.ListaUsuarios[pos] is Administrador)
+                    usuario = (Administrador)nuevoS.ListaUsuarios[pos];
                 else
-                    usuario = new Empleado(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
-                listaDatos.Sort();
+                    usuario = (Empleado)nuevoS.ListaUsuarios[pos];
+                //while (pos < 0 || (pos >= 0 && ((usuario is Administrador && nuevoS.ListaUsuarios[pos] is Empleado) || 
+                //                  (usuario is Empleado && nuevoS.ListaUsuarios[pos] is Administrador))))
+                //{
+                //    MessageBox.Show("Usuario no econtrado", "Error", MessageBoxButtons.OK);
+                //    presiono = vLogin.ShowDialog();
+                //    if (presiono == DialogResult.Cancel)
+                //    {
+                //        LoginSuccessful = false;
+                //        this.Close();
+                //    }
+                //    if (vLogin.rbAdmin.Checked)
+                //        usuario = new Administrador(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
+                //    else
+                //        usuario = new Empleado(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
+                //    listaDatos.Sort();
+                //}
+            }
+            else if (presiono == DialogResult.Cancel)
+            {
+                LoginSuccessful = false;
+                this.Close();
             }
 
+
             vLogin.Dispose();
-            Deserealizar();
             RefreshDataGridView();
         }
 
         #region Serializacion de datos
-        private void Form1_Load(object sender, EventArgs e)
-        {
 
-        }
         private void Deserealizar()
         {
             try
@@ -75,8 +110,8 @@ namespace TP2_Lab
                 if (File.Exists(miArchivo))
                 {
                     archivo = new FileStream(miArchivo, FileMode.Open, FileAccess.Read);
-                    serUnser = new BinaryFormatter();
-                    nuevoS = (Sistema)serUnser.Deserialize(archivo);
+                    serDeser = new BinaryFormatter();
+                    nuevoS = (Sistema)serDeser.Deserialize(archivo);
                 }
                 else
                 {
@@ -99,24 +134,27 @@ namespace TP2_Lab
         }
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            try
+            if (LoginSuccessful)
             {
-                if (File.Exists(miArchivo)) File.Delete(miArchivo);
-
-                archivo = new FileStream(miArchivo, FileMode.CreateNew, FileAccess.Write);
-                serUnser = new BinaryFormatter();
-                serUnser.Serialize(archivo, nuevoS);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocurrió un error al serializar el archivo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                if (archivo != null)
+                try
                 {
-                    archivo.Close();
-                    archivo.Dispose();
+                    if (File.Exists(miArchivo)) File.Delete(miArchivo);
+
+                    archivo = new FileStream(miArchivo, FileMode.CreateNew, FileAccess.Write);
+                    serDeser = new BinaryFormatter();
+                    serDeser.Serialize(archivo, nuevoS);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocurrió un error al serializar el archivo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    if (archivo != null)
+                    {
+                        archivo.Close();
+                        archivo.Dispose();
+                    }
                 }
             }
         }
@@ -459,6 +497,7 @@ namespace TP2_Lab
         #endregion
 
         #region Metodos del Form
+
         private bool VerificarCamposCompletos(FPropiedad form)
         {
             bool ret = true;

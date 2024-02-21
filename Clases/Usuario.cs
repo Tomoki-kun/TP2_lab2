@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TP2_Lab
 {
+    [Serializable]
     internal class Usuario: IComparable
     {
         protected string Nombre { get; set; }

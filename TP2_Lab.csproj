@@ -47,80 +47,80 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administrador.cs" />
-    <Compile Include="Casa.cs" />
-    <Compile Include="CasaFindeSemana.cs" />
-    <Compile Include="Cliente.cs" />
-    <Compile Include="Empleado.cs" />
-    <Compile Include="FCliente.cs">
+    <Compile Include="Clases\Administrador.cs" />
+    <Compile Include="Clases\Casa.cs" />
+    <Compile Include="Clases\CasaFindeSemana.cs" />
+    <Compile Include="Clases\Cliente.cs" />
+    <Compile Include="Clases\Empleado.cs" />
+    <Compile Include="Formularios\FCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FCliente.Designer.cs">
+    <Compile Include="Formularios\FCliente.Designer.cs">
       <DependentUpon>FCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="FGraficos.cs">
+    <Compile Include="Formularios\FGraficos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FGraficos.Designer.cs">
+    <Compile Include="Formularios\FGraficos.Designer.cs">
       <DependentUpon>FGraficos.cs</DependentUpon>
     </Compile>
-    <Compile Include="FLogin.cs">
+    <Compile Include="Formularios\FLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FLogin.Designer.cs">
+    <Compile Include="Formularios\FLogin.Designer.cs">
       <DependentUpon>FLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Formularios\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Formularios\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="FPropiedad.cs">
+    <Compile Include="Formularios\FPropiedad.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FPropiedad.Designer.cs">
+    <Compile Include="Formularios\FPropiedad.Designer.cs">
       <DependentUpon>FPropiedad.cs</DependentUpon>
     </Compile>
-    <Compile Include="FWeb.cs">
+    <Compile Include="Formularios\FWeb.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FWeb.Designer.cs">
+    <Compile Include="Formularios\FWeb.Designer.cs">
       <DependentUpon>FWeb.cs</DependentUpon>
     </Compile>
-    <Compile Include="Habitaciones.cs" />
-    <Compile Include="Huesped.cs" />
-    <Compile Include="IExportable.cs" />
-    <Compile Include="NumeroDniException.cs" />
+    <Compile Include="Clases\Habitaciones.cs" />
+    <Compile Include="Clases\Huesped.cs" />
+    <Compile Include="Otros\IExportable.cs" />
+    <Compile Include="Otros\NumeroDniException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Propiedad.cs" />
-    <Compile Include="Propietario.cs" />
-    <Compile Include="Reserva.cs" />
-    <Compile Include="FReservaImportada.cs">
+    <Compile Include="Clases\Propiedad.cs" />
+    <Compile Include="Clases\Propietario.cs" />
+    <Compile Include="Clases\Reserva.cs" />
+    <Compile Include="Formularios\FReservaImportada.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FReservaImportada.Designer.cs">
+    <Compile Include="Formularios\FReservaImportada.Designer.cs">
       <DependentUpon>FReservaImportada.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sistema.cs" />
-    <Compile Include="Usuario.cs" />
-    <EmbeddedResource Include="FCliente.resx">
+    <Compile Include="Clases\Sistema.cs" />
+    <Compile Include="Clases\Usuario.cs" />
+    <EmbeddedResource Include="Formularios\FCliente.resx">
       <DependentUpon>FCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FGraficos.resx">
+    <EmbeddedResource Include="Formularios\FGraficos.resx">
       <DependentUpon>FGraficos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FLogin.resx">
+    <EmbeddedResource Include="Formularios\FLogin.resx">
       <DependentUpon>FLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Formularios\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FPropiedad.resx">
+    <EmbeddedResource Include="Formularios\FPropiedad.resx">
       <DependentUpon>FPropiedad.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FWeb.resx">
+    <EmbeddedResource Include="Formularios\FWeb.resx">
       <DependentUpon>FWeb.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -132,7 +132,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="FReservaImportada.resx">
+    <EmbeddedResource Include="Formularios\FReservaImportada.resx">
       <DependentUpon>FReservaImportada.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">

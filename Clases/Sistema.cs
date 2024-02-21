@@ -13,7 +13,8 @@ namespace TP2_Lab
     [Serializable]
     public class Sistema
     {
-        private ArrayList listaPropiedad;
+        private ArrayList listaPropiedad = new ArrayList();
+        private ArrayList listaUsuarios = new ArrayList();
 
         #region Propiedades
         public ArrayList ListaPropiedad
@@ -25,11 +26,13 @@ namespace TP2_Lab
         {
             get { return listaPropiedad.Count; }
         }
-        #endregion
-        public Sistema()
+
+        public ArrayList ListaUsuarios
         {
-            listaPropiedad = new ArrayList();
+            get { return listaUsuarios; }
         }
+
+        #endregion
 
         #region Metodos
         public void AgregarPropiedad(Propiedad miPropiedad)

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TP2_Lab
 {
+    [Serializable]
     internal class Administrador: Usuario
     {
         public Administrador(string user, string password) : base(user, password)

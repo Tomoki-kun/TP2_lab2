@@ -41,6 +41,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnModificarReserva = new System.Windows.Forms.Button();
             this.rBcasa = new System.Windows.Forms.RadioButton();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.numCantHuespedes = new System.Windows.Forms.NumericUpDown();
@@ -85,6 +86,7 @@
             this.sectoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnModificarPropiedad = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCantHuespedes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGPropiedades)).BeginInit();
@@ -115,10 +117,10 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(134, 607);
+            this.btnBuscar.Location = new System.Drawing.Point(63, 609);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(80, 49);
+            this.btnBuscar.Size = new System.Drawing.Size(100, 49);
             this.btnBuscar.TabIndex = 2;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -189,6 +191,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.btnModificarReserva);
             this.groupBox1.Controls.Add(this.rBcasa);
             this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.numCantHuespedes);
@@ -220,6 +223,16 @@
             this.label5.Size = new System.Drawing.Size(76, 17);
             this.label5.TabIndex = 22;
             this.label5.Text = "Tipo Casa:";
+            // 
+            // btnModificarReserva
+            // 
+            this.btnModificarReserva.Location = new System.Drawing.Point(194, 611);
+            this.btnModificarReserva.Name = "btnModificarReserva";
+            this.btnModificarReserva.Size = new System.Drawing.Size(94, 47);
+            this.btnModificarReserva.TabIndex = 17;
+            this.btnModificarReserva.Text = "Modificar Reserva";
+            this.btnModificarReserva.UseVisualStyleBackColor = true;
+            this.btnModificarReserva.Click += new System.EventHandler(this.btnModificarReserva_Click);
             // 
             // rBcasa
             // 
@@ -634,6 +647,16 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // btnModificarPropiedad
+            // 
+            this.btnModificarPropiedad.Location = new System.Drawing.Point(738, 641);
+            this.btnModificarPropiedad.Name = "btnModificarPropiedad";
+            this.btnModificarPropiedad.Size = new System.Drawing.Size(98, 60);
+            this.btnModificarPropiedad.TabIndex = 18;
+            this.btnModificarPropiedad.Text = "Modificar Propiedad";
+            this.btnModificarPropiedad.UseVisualStyleBackColor = true;
+            this.btnModificarPropiedad.Click += new System.EventHandler(this.btnModificarPropiedad_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -641,6 +664,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1704, 772);
+            this.Controls.Add(this.btnModificarPropiedad);
             this.Controls.Add(this.DGPropiedades);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnExportar);
@@ -723,6 +747,8 @@
         private System.Windows.Forms.DataGridViewImageColumn Imagen;
         private System.Windows.Forms.DataGridViewImageColumn Imagen2;
         private System.Windows.Forms.ToolStripMenuItem eliminarUsuarioToolStripMenuItem;
+        private System.Windows.Forms.Button btnModificarReserva;
+        private System.Windows.Forms.Button btnModificarPropiedad;
     }
 }
 

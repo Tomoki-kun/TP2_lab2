@@ -228,6 +228,43 @@ namespace TP2_Lab
             }
         }
 
+        private void btnModificarPropiedad_Click(object sender, EventArgs e)
+        {
+            FPropiedad nuevoFprop = new FPropiedad();
+            if (DGPropiedades.SelectedRows.Count > 0)
+            {
+                Propiedad seleccionada = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value; //obtiene la propiedad seleccionada
+                Propiedad buscada = nuevoS.BuscarPropiedad(seleccionada); 
+
+                if(buscada == null)
+                {
+                    MessageBox.Show("No se ha encontrado la propiedad");
+                }
+                if(nuevoFprop.ShowDialog() == DialogResult.OK)
+                {
+                    if (buscada != null)
+                    {
+                        string direccion = nuevoFprop.tBdireccion.Text;
+                        string localidad = nuevoFprop.tBlocalidad.Text;
+                        int nro = Convert.ToInt32(nuevoFprop.numNro.Value);
+                        int cantCamas = Convert.ToInt32(nuevoFprop.numCamas.Value);
+
+                        buscada.Nro = nro;
+                        buscada.Localidad = localidad;
+                        buscada.CantCamas = cantCamas;
+                        buscada.Direccion = direccion;
+
+                        DGPropiedades.Refresh();
+                    }
+                }
+                MessageBox.Show("Propiedad modificada correctamente");
+                
+            }
+            else
+            {
+                MessageBox.Show("No se ha podido modificar la propiedad");
+            }
+        }
         private void btnEliminarPropiedad_Click(object sender, EventArgs e)
         {
             if (DGPropiedades.Rows.Count > 0)
@@ -411,6 +448,48 @@ namespace TP2_Lab
             nuevoC.Dispose();
         }
 
+        private void btnModificarReserva_Click(object sender, EventArgs e)
+        {
+            FCliente mCliente = new FCliente();
+            fModificarReserva modificar = new fModificarReserva();
+            mCliente.dTfechaNac.Visible = false;
+            mCliente.numDNI.Visible = false;
+            if (mCliente.ShowDialog() == DialogResult.OK)
+            {
+                if(mCliente.tBnombreC.Text != "")
+                {
+                    string nombre;
+                    bool encontrada = false;
+                    foreach(Propiedad prop in nuevoS.ListaPropiedad)
+                    {
+                        foreach(Reserva resv in prop.ListaReservas)
+                        {
+                            nombre = resv.Cliente.ToString();
+                            if(nombre== mCliente.tBnombreC.Text)
+                            {
+                                encontrada = true;
+                                if (modificar.ShowDialog() == DialogResult.OK)
+                                {
+                                    DateTime fechaIn = modificar.dtFechaIn.Value;
+                                    DateTime fechaFin = modificar.dtFechaFin.Value;
+                                    int cantPersonas = Convert.ToInt32(modificar.tBcantidad.Text);
+                                    resv.CantPersonas = cantPersonas;
+                                    resv.FechaEntrada = fechaIn;
+                                    resv.FechaSalida = fechaFin;
+                                }
+                                MessageBox.Show("Reserva actualizada con exito");
+                            }
+                        }
+                    }
+                    if (!encontrada)
+                    {
+                        MessageBox.Show("Reserva no encontrada");
+                    }
+                }
+            }
+
+        }
+
         private void btnEliminarReserva_Click(object sender, EventArgs e)
         {
             FCliente vCliente = new FCliente();
@@ -505,7 +584,7 @@ namespace TP2_Lab
                 {
                     renglon = sr.ReadLine();
                     int filaIndex = vReservaImportada.dGReservaImportada.Rows.Add();
-                    DataGridViewRow fila = DGPropiedades.Rows[filaIndex];
+                    DataGridViewRow fila = vReservaImportada.dGReservaImportada.Rows[filaIndex];
                     string[] datos = renglon.Split(';');
                     for (int i = 0; i < datos.Length; i++)
                     {

@@ -34,12 +34,12 @@ namespace TP2_Lab
         public int CantCamas
         {
             get { return cantCamas; }
-            private set { cantCamas = value; }
+           set { cantCamas = value; }
         }
         public int Nro
         {
             get { return nro; }
-            private set { nro = value; }
+            set { nro = value; }
         }
         public List<Reserva> ListaReservas
         {
@@ -59,12 +59,12 @@ namespace TP2_Lab
         public string Direccion
         {
             get { return direccion; }
-            private set { direccion = value; }
+            set { direccion = value; }
         }
         public string Localidad
         {
             get { return localidad; }
-            private set { localidad = value; }
+            set { localidad = value; }
         }
         #endregion
         public Propiedad(int nro,double precio,string direccion,string localidad, int cantCamas,bool[]servicios, Image pic, Image pic2)

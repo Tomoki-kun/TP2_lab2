@@ -50,6 +50,7 @@ namespace TP2_Lab
         public int CantPersonas
         {
             get { return cantPersonas; }
+            set { cantPersonas = value; }
         }
 
         public int NumeroReserva

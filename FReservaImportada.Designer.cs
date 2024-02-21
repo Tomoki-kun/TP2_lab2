@@ -1,4 +1,5 @@
-﻿namespace TP2_Lab
+﻿
+namespace TP2_Lab
 {
     partial class FReservaImportada
     {
@@ -29,89 +30,82 @@
         private void InitializeComponent()
         {
             this.dGReservaImportada = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumeroDeReserva = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CheckIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CheckOUT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CantPersonas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NroReserva = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaReservacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dGReservaImportada)).BeginInit();
             this.SuspendLayout();
             // 
             // dGReservaImportada
             // 
-            this.dGReservaImportada.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dGReservaImportada.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dGReservaImportada.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGReservaImportada.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Cliente,
-            this.NumeroDeReserva,
-            this.CheckIN,
-            this.CheckOUT,
-            this.Fecha,
-            this.CantPersonas});
-            this.dGReservaImportada.Location = new System.Drawing.Point(12, 12);
+            this.NroReserva,
+            this.FechaReservacion,
+            this.FechaIn,
+            this.FechaFin,
+            this.Cantidad});
+            this.dGReservaImportada.Location = new System.Drawing.Point(0, 0);
             this.dGReservaImportada.Name = "dGReservaImportada";
-            this.dGReservaImportada.ReadOnly = true;
-            this.dGReservaImportada.Size = new System.Drawing.Size(776, 397);
+            this.dGReservaImportada.RowHeadersWidth = 51;
+            this.dGReservaImportada.RowTemplate.Height = 24;
+            this.dGReservaImportada.Size = new System.Drawing.Size(927, 438);
             this.dGReservaImportada.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(12, 415);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(776, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Aceptar";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // Cliente
             // 
             this.Cliente.HeaderText = "Cliente";
+            this.Cliente.MinimumWidth = 6;
             this.Cliente.Name = "Cliente";
-            this.Cliente.ReadOnly = true;
+            this.Cliente.Width = 125;
             // 
-            // NumeroDeReserva
+            // NroReserva
             // 
-            this.NumeroDeReserva.HeaderText = "Numero de Reserva";
-            this.NumeroDeReserva.Name = "NumeroDeReserva";
-            this.NumeroDeReserva.ReadOnly = true;
+            this.NroReserva.HeaderText = "Numero Reserva";
+            this.NroReserva.MinimumWidth = 6;
+            this.NroReserva.Name = "NroReserva";
+            this.NroReserva.Width = 125;
             // 
-            // CheckIN
+            // FechaReservacion
             // 
-            this.CheckIN.HeaderText = "Check In";
-            this.CheckIN.Name = "CheckIN";
-            this.CheckIN.ReadOnly = true;
+            this.FechaReservacion.HeaderText = "Fecha de reservacion";
+            this.FechaReservacion.MinimumWidth = 6;
+            this.FechaReservacion.Name = "FechaReservacion";
+            this.FechaReservacion.Width = 125;
             // 
-            // CheckOUT
+            // FechaIn
             // 
-            this.CheckOUT.HeaderText = "Check Out";
-            this.CheckOUT.Name = "CheckOUT";
-            this.CheckOUT.ReadOnly = true;
+            this.FechaIn.HeaderText = "Fecha Inicio";
+            this.FechaIn.MinimumWidth = 6;
+            this.FechaIn.Name = "FechaIn";
+            this.FechaIn.Width = 125;
             // 
-            // Fecha
+            // FechaFin
             // 
-            this.Fecha.HeaderText = "Realizado";
-            this.Fecha.Name = "Fecha";
-            this.Fecha.ReadOnly = true;
+            this.FechaFin.HeaderText = "Fecha Fin";
+            this.FechaFin.MinimumWidth = 6;
+            this.FechaFin.Name = "FechaFin";
+            this.FechaFin.Width = 125;
             // 
-            // CantPersonas
+            // Cantidad
             // 
-            this.CantPersonas.HeaderText = "Cantidad de Personas";
-            this.CantPersonas.Name = "CantPersonas";
-            this.CantPersonas.ReadOnly = true;
+            this.Cantidad.HeaderText = "Cantidad de Huespedes";
+            this.Cantidad.MinimumWidth = 6;
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.Width = 125;
             // 
             // FReservaImportada
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(922, 450);
             this.Controls.Add(this.dGReservaImportada);
             this.Name = "FReservaImportada";
-            this.Text = "ReservaImportada";
+            this.Text = "FReservaImportada";
             ((System.ComponentModel.ISupportInitialize)(this.dGReservaImportada)).EndInit();
             this.ResumeLayout(false);
 
@@ -120,12 +114,11 @@
         #endregion
 
         public System.Windows.Forms.DataGridView dGReservaImportada;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NumeroDeReserva;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CheckIN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CheckOUT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CantPersonas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NroReserva;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaReservacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaIn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaFin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
     }
 }

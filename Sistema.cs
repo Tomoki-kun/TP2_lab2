@@ -53,7 +53,7 @@ namespace TP2_Lab
                 aux = (Propiedad)listaPropiedad[pos];
             return aux;
         }
-        private Reserva BuscarReserva(Propiedad miPropiedad,Reserva miReserva)
+        public Reserva BuscarReserva(Propiedad miPropiedad,Reserva miReserva)
         {
             int pos = miPropiedad.ListaReservas.BinarySearch(miReserva);
             Reserva aux = null;

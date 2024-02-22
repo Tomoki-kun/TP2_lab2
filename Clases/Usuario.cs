@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace TP2_Lab
 {
     [Serializable]
-    internal class Usuario: IComparable
+    public class Usuario: IComparable
     {
-        protected string Nombre { get; set; }
-        protected string Contra { get; set; }
+        public string Nombre { get; set; }
+        public string Contra { get; set; }
 
 
         public Usuario(string n, string c)
@@ -19,7 +19,7 @@ namespace TP2_Lab
             Contra = c;
         }
         
-        public int CompareTo(object obj)
+        /*public int CompareTo(object obj)
         {
             int nombreComparison = Nombre.CompareTo(((Usuario)obj).Nombre);
 
@@ -30,6 +30,11 @@ namespace TP2_Lab
             }
 
             return nombreComparison;
+        }*/
+
+        public int CompareTo(object obj)
+        {
+            return this.Nombre.CompareTo(((Usuario)obj).Nombre);
         }
     }
 }

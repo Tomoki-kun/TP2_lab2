@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnAgregarPropiedad = new System.Windows.Forms.Button();
             this.btnEliminarPropiedad = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -39,6 +40,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnModificarReserva = new System.Windows.Forms.Button();
+            this.rBcasa = new System.Windows.Forms.RadioButton();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.numCantHuespedes = new System.Windows.Forms.NumericUpDown();
             this.cBTipoHabitaciones = new System.Windows.Forms.ComboBox();
@@ -63,6 +67,7 @@
             this.usuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.crearUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eliminarUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.graficosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sectoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -183,6 +188,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.btnModificarReserva);
+            this.groupBox1.Controls.Add(this.rBcasa);
             this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.numCantHuespedes);
             this.groupBox1.Controls.Add(this.cBTipoHabitaciones);
@@ -204,6 +212,37 @@
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(87, 556);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(76, 17);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Tipo Casa:";
+            // 
+            // btnModificarReserva
+            // 
+            this.btnModificarReserva.Location = new System.Drawing.Point(194, 611);
+            this.btnModificarReserva.Name = "btnModificarReserva";
+            this.btnModificarReserva.Size = new System.Drawing.Size(94, 47);
+            this.btnModificarReserva.TabIndex = 17;
+            this.btnModificarReserva.Text = "Modificar Reserva";
+            this.btnModificarReserva.UseVisualStyleBackColor = true;
+            this.btnModificarReserva.Click += new System.EventHandler(this.btnModificarReserva_Click);
+            // 
+            // rBcasa
+            // 
+            this.rBcasa.AutoSize = true;
+            this.rBcasa.Location = new System.Drawing.Point(189, 556);
+            this.rBcasa.Name = "rBcasa";
+            this.rBcasa.Size = new System.Drawing.Size(61, 21);
+            this.rBcasa.TabIndex = 21;
+            this.rBcasa.TabStop = true;
+            this.rBcasa.Text = "Casa";
+            this.rBcasa.UseVisualStyleBackColor = true;
+            this.rBcasa.CheckedChanged += new System.EventHandler(this.rBcasa_CheckedChanged);
             // 
             // btnLimpiar
             // 
@@ -238,6 +277,7 @@
             this.cBTipoHabitaciones.Name = "cBTipoHabitaciones";
             this.cBTipoHabitaciones.Size = new System.Drawing.Size(107, 24);
             this.cBTipoHabitaciones.TabIndex = 16;
+            this.cBTipoHabitaciones.SelectedIndexChanged += new System.EventHandler(this.cBTipoHabitaciones_SelectedIndexChanged);
             // 
             // cBLocalidad
             // 
@@ -354,18 +394,21 @@
             this.importarToolStripMenuItem.Name = "importarToolStripMenuItem";
             this.importarToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.importarToolStripMenuItem.Text = "Importar";
+            this.importarToolStripMenuItem.Click += new System.EventHandler(this.importarToolStripMenuItem_Click);
             // 
             // exportarToolStripMenuItem
             // 
             this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
             this.exportarToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.exportarToolStripMenuItem.Text = "Exportar";
+            this.exportarToolStripMenuItem.Click += new System.EventHandler(this.exportarToolStripMenuItem_Click);
             // 
             // imprimirToolStripMenuItem
             // 
             this.imprimirToolStripMenuItem.Name = "imprimirToolStripMenuItem";
             this.imprimirToolStripMenuItem.Size = new System.Drawing.Size(177, 26);
             this.imprimirToolStripMenuItem.Text = "Imprimir";
+            this.imprimirToolStripMenuItem.Click += new System.EventHandler(this.imprimirToolStripMenuItem_Click);
             // 
             // exportarDatosToolStripMenuItem
             // 
@@ -379,6 +422,7 @@
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
             this.salirToolStripMenuItem.Size = new System.Drawing.Size(177, 26);
             this.salirToolStripMenuItem.Text = "Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
             // 
@@ -407,7 +451,8 @@
             // 
             this.usuarioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.crearUsuarioToolStripMenuItem,
-            this.cambiarContraseñaToolStripMenuItem});
+            this.cambiarContraseñaToolStripMenuItem,
+            this.eliminarUsuarioToolStripMenuItem});
             this.usuarioToolStripMenuItem.Name = "usuarioToolStripMenuItem";
             this.usuarioToolStripMenuItem.Size = new System.Drawing.Size(67, 21);
             this.usuarioToolStripMenuItem.Text = "Usuario";
@@ -417,6 +462,7 @@
             this.crearUsuarioToolStripMenuItem.Name = "crearUsuarioToolStripMenuItem";
             this.crearUsuarioToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
             this.crearUsuarioToolStripMenuItem.Text = "Crear Usuario";
+            this.crearUsuarioToolStripMenuItem.Click += new System.EventHandler(this.crearUsuarioToolStripMenuItem_Click);
             // 
             // cambiarContraseñaToolStripMenuItem
             // 
@@ -424,6 +470,13 @@
             this.cambiarContraseñaToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
             this.cambiarContraseñaToolStripMenuItem.Text = "Cambiar contraseña";
             this.cambiarContraseñaToolStripMenuItem.Click += new System.EventHandler(this.cambiarContraseñaToolStripMenuItem_Click);
+            // 
+            // eliminarUsuarioToolStripMenuItem
+            // 
+            this.eliminarUsuarioToolStripMenuItem.Name = "eliminarUsuarioToolStripMenuItem";
+            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.eliminarUsuarioToolStripMenuItem.Text = "Eliminar Usuario";
+            this.eliminarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.eliminarUsuarioToolStripMenuItem_Click);
             // 
             // verToolStripMenuItem
             // 
@@ -597,10 +650,11 @@
             this.Controls.Add(this.btnEliminarPropiedad);
             this.Controls.Add(this.btnAgregarPropiedad);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "ReservasTech";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);

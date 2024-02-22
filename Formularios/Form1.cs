@@ -24,6 +24,7 @@ namespace TP2_Lab
         private Propietario propietario;
         private Propiedad prop;
         private Sistema nuevoS = new Sistema();
+        private Reserva miReserva;
         private int cantPropiedades = 0,
             cantReservas = 0,
             reservasCasaDia = 0,
@@ -73,36 +74,33 @@ namespace TP2_Lab
                     usuario = (Administrador)nuevoS.ListaUsuarios[pos];
                 else
                     usuario = (Empleado)nuevoS.ListaUsuarios[pos];
-                //while (pos < 0 || (pos >= 0 && ((usuario is Administrador && nuevoS.ListaUsuarios[pos] is Empleado) || 
-                //                  (usuario is Empleado && nuevoS.ListaUsuarios[pos] is Administrador))))
-                //{
-                //    MessageBox.Show("Usuario no econtrado", "Error", MessageBoxButtons.OK);
-                //    presiono = vLogin.ShowDialog();
-                //    if (presiono == DialogResult.Cancel)
-                //    {
-                //        LoginSuccessful = false;
-                //        this.Close();
-                //    }
-                //    if (vLogin.rbAdmin.Checked)
-                //        usuario = new Administrador(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
-                //    else
-                //        usuario = new Empleado(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
-                //    listaDatos.Sort();
-                //}
+            if(usuario is Administrador && !EsAdministrador(vLogin.tbUsuario.Text))
+            {
+                MessageBox.Show("No puede ingresar como usuario administrador");
+                vLogin.Dispose();
+            }
+            if(usuario is Empleado)
+            {
+                btnAgregarPropiedad.Enabled = false;
+                btnEliminarPropiedad.Enabled = false;
+                crearUsuarioToolStripMenuItem.Enabled = false;
+                eliminarUsuarioToolStripMenuItem.Enabled = false;
+            }
+            listaUsuarios.Add(usuario);
+            listaUsuarios.Sort();
+            int pos = listaUsuarios.BinarySearch(usuario);
             }
             else if (presiono == DialogResult.Cancel)
             {
                 LoginSuccessful = false;
                 this.Close();
             }
-
-
             vLogin.Dispose();
             RefreshDataGridView();
+            CargarUsuarios();
         }
 
         #region Serializacion de datos
-
         private void Deserealizar()
         {
             try
@@ -143,6 +141,7 @@ namespace TP2_Lab
                     archivo = new FileStream(miArchivo, FileMode.CreateNew, FileAccess.Write);
                     serDeser = new BinaryFormatter();
                     serDeser.Serialize(archivo, nuevoS);
+                    GuardarUsuarios(listaUsuarios);
                 }
                 catch (Exception ex)
                 {
@@ -156,6 +155,28 @@ namespace TP2_Lab
                         archivo.Dispose();
                     }
                 }
+            }
+        }
+
+        private void GuardarUsuarios(List<Usuario> lstUsuarios)
+        {
+            string path = "usuarios.dat";
+            using (FileStream fS = new FileStream(path, FileMode.Create, FileAccess.Write))
+            {
+                serUnser = new BinaryFormatter();
+                serUnser.Serialize(fS, lstUsuarios);
+            }
+        }
+
+        private void CargarUsuarios()
+        {
+            string path = "usuarios.dat";
+            if (File.Exists(path))
+            {
+                FileStream fS = new FileStream(path, FileMode.Open, FileAccess.Read);
+                BinaryFormatter bF = new BinaryFormatter();
+                listaUsuarios = (List<Usuario>)bF.Deserialize(fS);
+                fS.Close();
             }
         }
         #endregion
@@ -184,6 +205,7 @@ namespace TP2_Lab
                         double precio = Convert.ToDouble(nuevaP.numPrecio.Value);
                         int nro = Convert.ToInt32(nuevaP.numNro.Value);
                         Image imagen = Image.FromFile(nuevaP.RutaImagen);
+                        Image imagen2 = Image.FromFile(nuevaP.RutaImagen2);
                         if (nuevaP.rBCasas.Checked)
                         {
                             string nombre = CapitalizarPalabras(nuevaP.tBnombre.Text);
@@ -193,18 +215,18 @@ namespace TP2_Lab
                             int cantDiasPermitidos = Convert.ToInt32(nuevaP.numDiasPermitidos.Value);
                             if (nuevaP.rBcasaDia.Checked)
                             {
-                                prop = new Casa(nro, cantDiasPermitidos, propietario, precio, direccion, localidad, cantCamas, servicios, imagen);
+                                prop = new Casa(nro, cantDiasPermitidos, propietario, precio, direccion, localidad, cantCamas, servicios, imagen,imagen2);
                             }
                             else if (nuevaP.rBcasaFinde.Checked)
                             {
-                                prop = new CasaFindeSemana(nro, 0, propietario, precio, direccion, localidad, cantCamas, servicios, imagen);
+                                prop = new CasaFindeSemana(nro, 0, propietario, precio, direccion, localidad, cantCamas, servicios, imagen,imagen2);
                             }
                         }
                         if (nuevaP.rBHoteles.Checked)
                         {
                             int estrellas = Convert.ToInt32(nuevaP.numEstrellas.Text);
                             string tipoHabitacion = nuevaP.cBTipoHabitacion.ValueMember;
-                            prop = new Habitaciones(nro, estrellas, precio, direccion, localidad, servicios, cantCamas, tipoHabitacion, imagen);
+                            prop = new Habitaciones(nro, estrellas, precio, direccion, localidad, servicios, cantCamas, tipoHabitacion, imagen,imagen2);
                         }
                         nuevoS.AgregarPropiedad(prop);
                         DGAgregarPropiedad(prop);
@@ -228,6 +250,43 @@ namespace TP2_Lab
             }
         }
 
+        private void btnModificarPropiedad_Click(object sender, EventArgs e)
+        {
+            FPropiedad nuevoFprop = new FPropiedad();
+            if (DGPropiedades.SelectedRows.Count > 0)
+            {
+                Propiedad seleccionada = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value; //obtiene la propiedad seleccionada
+                Propiedad buscada = nuevoS.BuscarPropiedad(seleccionada); 
+
+                if(buscada == null)
+                {
+                    MessageBox.Show("No se ha encontrado la propiedad");
+                }
+                if(nuevoFprop.ShowDialog() == DialogResult.OK)
+                {
+                    if (buscada != null)
+                    {
+                        string direccion = nuevoFprop.tBdireccion.Text;
+                        string localidad = nuevoFprop.tBlocalidad.Text;
+                        int nro = Convert.ToInt32(nuevoFprop.numNro.Value);
+                        int cantCamas = Convert.ToInt32(nuevoFprop.numCamas.Value);
+
+                        buscada.Nro = nro;
+                        buscada.Localidad = localidad;
+                        buscada.CantCamas = cantCamas;
+                        buscada.Direccion = direccion;
+
+                        DGPropiedades.Refresh();
+                    }
+                }
+                MessageBox.Show("Propiedad modificada correctamente");
+                
+            }
+            else
+            {
+                MessageBox.Show("No se ha podido modificar la propiedad");
+            }
+        }
         private void btnEliminarPropiedad_Click(object sender, EventArgs e)
         {
             if (DGPropiedades.Rows.Count > 0)
@@ -256,10 +315,12 @@ namespace TP2_Lab
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            bool loc = true,
-                 fechas = true,
-                 huespedes = true,
-                 tipoHabitacion = true;
+            //bool loc = true,
+            //fechas = true,
+            //huespedes = true,
+            //tipoHabitacion = true;
+            cBTipoHabitaciones.Enabled = true;
+            rBcasa.Checked = false;
             ArrayList disponibles = new ArrayList();
             if (!string.IsNullOrWhiteSpace(cBLocalidad.Text))
             {
@@ -269,6 +330,8 @@ namespace TP2_Lab
                     DataGridViewCell celda = DGPropiedades.Rows[i].Cells[0];
                     if (celda.Value != null && celda.Value is Propiedad)
                     {
+                        // Reiniciar las variables en cada iteración
+                        bool loc = true, fechas = true, huespedes = true, tipoHabitacion = true, tipoCasa=true;
                         Propiedad propiedad = (Propiedad)celda.Value;
 
                         if (!(propiedad.Localidad == cBLocalidad.SelectedItem.ToString()))
@@ -286,18 +349,33 @@ namespace TP2_Lab
 
                         if (cBTipoHabitaciones.ValueMember != "" && cBTipoHabitaciones.ValueMember != ((Habitaciones)propiedad).TipoHabitacion)
                             tipoHabitacion = false;
+                        if (rBcasa.Checked)
+                         tipoCasa = false;
+
                         if (loc && fechas && huespedes && tipoHabitacion)
+                        {
                             disponibles.Add(propiedad);
+                        }
+                        else if (loc && fechas && huespedes && tipoCasa)
+                        {
+                            disponibles.Add((Casa)propiedad);
+                            if(dias.Days== 1 || dias.Days==2 || dias.Days==3)
+                            {
+                                disponibles.Add((CasaFindeSemana)propiedad);
+                            }
+                        }
                     }
+
                 }
                 if (disponibles.Count != nuevoS.CantPropiedades)
                 {
-                    DGPropiedades.Rows.Clear();
+                    //limpiamos el datagrid
+                   DGPropiedades.Rows.Clear();
 
-                    foreach (Propiedad propiedad in disponibles)
-                    {
+                foreach (Propiedad propiedad in disponibles)
+                   {
                         DGAgregarPropiedad(propiedad);
-                    }
+                  }
                 }
             }
         }
@@ -309,6 +387,7 @@ namespace TP2_Lab
             {
                 string nombre;
                 long dni;
+                DateTime fechaNac = new DateTime();
                 if (nuevoC.tBnombreC.Text == "" || numCantHuespedes.Text == "")
                 {
                     MessageBox.Show("Faltan datos por rellenar");
@@ -319,7 +398,8 @@ namespace TP2_Lab
                     {
                         nombre = nuevoC.tBnombreC.Text;
                         dni = (long)nuevoC.numDNI.Value;
-                        Cliente miCliente = new Cliente(nombre, dni);
+                        fechaNac = nuevoC.dTfechaNac.Value;
+                        Cliente miCliente = new Cliente(nombre, dni,fechaNac);
                         int huespedes = Convert.ToInt32(numCantHuespedes.Text);
                         DateTime inicio = Calendar.SelectionRange.Start;
                         DateTime fin = Calendar.SelectionRange.End;
@@ -331,7 +411,7 @@ namespace TP2_Lab
                             if (prop is CasaFindeSemana && inicio.DayOfWeek == DayOfWeek.Friday && fin.DayOfWeek == DayOfWeek.Sunday
                                  || prop is Casa && !(prop is CasaFindeSemana) && numeroDias >= ((Casa)prop).DiasPermitidos || prop is Habitaciones)
                             {
-                                Reserva miReserva = new Reserva(miCliente, cantReservas, huespedes, inicio, fin);
+                                miReserva = new Reserva(miCliente, cantReservas, huespedes, inicio, fin);
                                 cantReservas++;
                                 double costoFinal = 0;
                                 if (prop is Habitaciones)
@@ -355,6 +435,7 @@ namespace TP2_Lab
                                 prop.AgregarReserva(miReserva);
                                 listaDatos.Add(miReserva);
                                 listaDatos.Add(miCliente);
+                                listaClientes.Add(miCliente);
                             }
                             else
                             {
@@ -387,6 +468,48 @@ namespace TP2_Lab
                 }
             }
             nuevoC.Dispose();
+        }
+
+        private void btnModificarReserva_Click(object sender, EventArgs e)
+        {
+            FCliente mCliente = new FCliente();
+            fModificarReserva modificar = new fModificarReserva();
+            mCliente.dTfechaNac.Visible = false;
+            mCliente.numDNI.Visible = false;
+            if (mCliente.ShowDialog() == DialogResult.OK)
+            {
+                if(mCliente.tBnombreC.Text != "")
+                {
+                    string nombre;
+                    bool encontrada = false;
+                    foreach(Propiedad prop in nuevoS.ListaPropiedad)
+                    {
+                        foreach(Reserva resv in prop.ListaReservas)
+                        {
+                            nombre = resv.Cliente.ToString();
+                            if(nombre== mCliente.tBnombreC.Text)
+                            {
+                                encontrada = true;
+                                if (modificar.ShowDialog() == DialogResult.OK)
+                                {
+                                    DateTime fechaIn = modificar.dtFechaIn.Value;
+                                    DateTime fechaFin = modificar.dtFechaFin.Value;
+                                    int cantPersonas = Convert.ToInt32(modificar.tBcantidad.Text);
+                                    resv.CantPersonas = cantPersonas;
+                                    resv.FechaEntrada = fechaIn;
+                                    resv.FechaSalida = fechaFin;
+                                }
+                                MessageBox.Show("Reserva actualizada con exito");
+                            }
+                        }
+                    }
+                    if (!encontrada)
+                    {
+                        MessageBox.Show("Reserva no encontrada");
+                    }
+                }
+            }
+
         }
 
         private void btnEliminarReserva_Click(object sender, EventArgs e)
@@ -426,6 +549,7 @@ namespace TP2_Lab
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
+            rBcasa.Enabled = true;
             DGPropiedades.Rows.Clear();
             int cant = nuevoS.ListaPropiedad.Count;
             for (int i = 0; i < cant; i++)
@@ -482,7 +606,7 @@ namespace TP2_Lab
                 {
                     renglon = sr.ReadLine();
                     int filaIndex = vReservaImportada.dGReservaImportada.Rows.Add();
-                    DataGridViewRow fila = DGPropiedades.Rows[filaIndex];
+                    DataGridViewRow fila = vReservaImportada.dGReservaImportada.Rows[filaIndex];
                     string[] datos = renglon.Split(';');
                     for (int i = 0; i < datos.Length; i++)
                     {
@@ -496,7 +620,7 @@ namespace TP2_Lab
         }
         #endregion
 
-        #region Metodos del Form
+        #region MenuStrip
 
         private bool VerificarCamposCompletos(FPropiedad form)
         {
@@ -515,6 +639,110 @@ namespace TP2_Lab
         {
             ExportarDatos(listaDatos, miArchivo);
             MessageBox.Show("Datos exportados correctamente", "Operacion exitosa");
+        }
+
+        private void importarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "Archivos CSV (.csv)|*.csv";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                ImportarCalendarioDeReservas(openFileDialog1.FileName);
+            }
+        }
+
+        private void ImportarCalendarioDeReservas(string path)
+        {
+            List<Reserva> reservas = new List<Reserva>();
+            try
+            {
+                FileStream archivo = new FileStream(path, FileMode.Open, FileAccess.Read);
+                StreamReader sR = new StreamReader(archivo);
+                string linea;
+                string[] datos;
+
+                while (!sR.EndOfStream)
+                {
+                    linea = sR.ReadLine();
+                    datos = linea.Split(';');
+                    int numReserva = Convert.ToInt32(datos[0]);
+                    int cantidad = Convert.ToInt32(datos[1]);
+                    long dni = Convert.ToInt64(datos[2]);
+                    DateTime fechaI = Convert.ToDateTime(datos[3]);
+                    DateTime fechaF = Convert.ToDateTime(datos[4]);
+
+                    Cliente nuevoCliente = BuscarCliente(dni);
+                    if(nuevoCliente != null)
+                    {
+                        reservas.Add(new Reserva(nuevoCliente, numReserva,cantidad, fechaI, fechaF));
+                        MessageBox.Show("Se ha importado correctamente su calendario");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se ha encontrado una reserva");
+                    }
+                }
+                sR.Close();
+                archivo.Dispose();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Error en el formato del archivo");
+            }
+            catch(IOException excep)
+            {
+                MessageBox.Show("Error en el archivo" + excep);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error desconocido" + ex.Message);
+            }
+        }
+
+        private Cliente BuscarCliente(long dni)
+        {
+            Cliente aBuscar = new Cliente("", dni, DateTime.Now);
+            listaClientes.Sort();
+            int orden = listaClientes.BinarySearch(aBuscar);
+
+            if (orden >= 0)
+            {
+                aBuscar = listaClientes[orden];
+            }
+            else
+            {
+                MessageBox.Show("Cliente no encontrado");
+            }
+            return aBuscar;
+        }
+
+        private void exportarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Filter = "Archivos CSV (.csv)|*.csv";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                ExportarCalendarioDeReservas(prop.ListaReservas, saveFileDialog1.FileName);
+            }
+        }
+
+        private void ExportarCalendarioDeReservas(List<Reserva> listaReserva,string path)
+        {
+            try
+            {
+                FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+                StreamWriter sW = new StreamWriter(fs);
+
+                foreach(Reserva r in listaReserva)
+                {
+                    sW.WriteLine(r.Exportar());
+                }
+                sW.Close();
+                fs.Dispose();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error desconocido" + ex.Message);
+            }
+            MessageBox.Show("Se ha exportado su calendario de reservas correctamente");
         }
 
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -559,6 +787,128 @@ namespace TP2_Lab
             }
         }
 
+
+        private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FRegistro fCambiarC = new FRegistro();
+            fCambiarC.Text = "Cambiar Contraseña";
+            fCambiarC.groupBox1.Visible = false;
+            if (fCambiarC.ShowDialog() == DialogResult.OK)
+            {
+                string nombre = fCambiarC.tBuserN.Text;
+                string nuevaContra = fCambiarC.tBcontraN.Text;
+                CambiarContra(nombre, nuevaContra);
+                MessageBox.Show("Contraseña cambiada correctamente");
+            }
+        }
+
+        private void crearUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FRegistro crearU = new FRegistro();
+            if (admin is Administrador)
+            {
+                if (crearU.ShowDialog() == DialogResult.OK)
+                {
+                    string nombre = crearU.tBuserN.Text;
+                    string contra = crearU.tBcontraN.Text;
+                    bool tipoA = crearU.rBadminN.Checked;
+                    bool tipoC = crearU.rBempleadoN.Checked;
+                    if (tipoA)
+                    {
+                        CrearUsuarioAdmin(nombre, contra, tipoA);
+                    }
+                    else if (tipoC)
+                    {
+                        CrearUsuarioEmpleado(nombre, contra, tipoC);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo crear el usuario");
+                    }
+                    MessageBox.Show("Usuario creado correctamente");
+                }
+            }
+        }
+        private void eliminarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FRegistro fEliminar = new FRegistro();
+            if (admin is Administrador)
+            {
+                fEliminar.tBcontraN.Enabled = false;
+                fEliminar.groupBox1.Enabled = false;
+                if (fEliminar.ShowDialog() == DialogResult.OK)
+                {
+                    fEliminar.tBcontraN.Enabled = false;
+                    fEliminar.groupBox1.Enabled = false;
+                    string nombre = fEliminar.tBuserN.Text;
+                    EliminarUsuario(nombre);
+                }
+            }
+        }
+
+        private void imprimirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FTicket nuevoTicket = new FTicket();
+            if (miReserva != null && prop != null)
+            {
+                if (prop is Habitaciones)
+                    nuevoTicket.lBticket.Items.Add("\n\tNro de habitacion: " + prop.Nro.ToString() + "\n\tTipo de Habitacion" + ((Habitaciones)prop).TipoHabitacion);
+                else
+
+                    nuevoTicket.lBticket.Items.Add("\n\tNro: " + prop.Nro);
+                nuevoTicket.lBticket.Items.Add("Datos de alojamiento: \n\tDireccion:" + prop.Direccion);
+                nuevoTicket.lBticket.Items.Add("\nPersonas admitidas: " + miReserva.CantPersonas);
+                nuevoTicket.lBticket.Items.Add("--------------------------------------------------------------------------------------");
+                nuevoTicket.lBticket.Items.Add("\nCliente: \n\tNombre: " + miReserva.Cliente + "\n\tDNI: " + miReserva.Cliente.DNI.ToString());
+                nuevoTicket.lBticket.Items.Add("Fecha de Nacimiento: " + miReserva.Cliente.FechaNacimiento.ToString("dd/MM/yyyy"));
+                nuevoTicket.lBticket.Items.Add("--------------------------------------------------------------------------------------");
+                nuevoTicket.lBticket.Items.Add("\nFecha y Hora reserva: " + miReserva.Realizado.ToString("U"));
+                nuevoTicket.lBticket.Items.Add("\nFecha CheckIn: " + miReserva.FechaEntrada.ToString("dd/MM/yyyy") + "\nFecha CheckOut: " + miReserva.FechaSalida.ToString("dd/MM/yyyy"));
+                nuevoTicket.lBticket.Items.Add("--------------------------------------------------------------------------------------");
+                nuevoTicket.lBticket.Items.Add("\nCosto por día: $" + prop.PrecioBasico.ToString());
+                nuevoTicket.lBticket.Items.Add("\nCosto total: $" + miReserva.PrecioFinal.ToString("00.0"));
+                nuevoTicket.pictureBox1.Image = prop.Imagen;
+                nuevoTicket.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Error, no hay ninguna reserva");
+            }
+        }
+
+
+        private void barraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GraficoDeBarras();
+        }
+
+        private void sectoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GraficosSectores();
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+         {
+            Close();
+         }
+
+
+        #endregion
+
+        #region Metodos del Form
+        private bool VerificarCamposCompletos(FPropiedad form)
+        {
+            bool ret = true;
+            if (string.IsNullOrWhiteSpace(form.tBdireccion.Text) && string.IsNullOrWhiteSpace(form.tBlocalidad.Text))
+                ret = false;
+            if ((string.IsNullOrWhiteSpace(form.tBApellido.Text) && string.IsNullOrWhiteSpace(form.tBnombre.Text) &&
+                form.tBApellido.IsAccessible && form.tBnombre.IsAccessible) ||
+                (string.IsNullOrEmpty(form.cBTipoHabitacion.ValueMember) && form.cBTipoHabitacion.IsAccessible))
+                ret = false;
+
+            return ret;
+        }
+
         static void ExportarDatos(List<IExportable> datos, string nombreArchivo)
         {
             FileStream archivoExportar = new FileStream(nombreArchivo, FileMode.OpenOrCreate, FileAccess.Write);
@@ -572,10 +922,6 @@ namespace TP2_Lab
             archivoExportar.Close();
         }
 
-        private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private string CapitalizarPalabras(string texto)
         {
@@ -598,7 +944,7 @@ namespace TP2_Lab
         {
             int filaIndex = DGPropiedades.Rows.Add();
             DataGridViewRow fila = DGPropiedades.Rows[filaIndex];
-            Bitmap bitmap;
+            Bitmap bitmap, bitmap2;
 
             fila.Cells[0].Value = propiedad;
             fila.Cells[2].Value = propiedad.Localidad;
@@ -608,8 +954,11 @@ namespace TP2_Lab
             fila.Cells[7].Value = propiedad.CantCamas;
             bitmap = new Bitmap(propiedad.Imagen, new Size(125,125));
             fila.Cells[11].Value = bitmap;
-
-
+            if (propiedad.Imagen2 != null)
+            {
+                bitmap2 = new Bitmap(propiedad.Imagen2, 50, 25);
+                fila.Cells[12].Value = bitmap2;
+            }
             // Verificar el tipo de instancia y llenar las celdas correspondientes
             if (propiedad is Habitaciones)
             {
@@ -635,6 +984,19 @@ namespace TP2_Lab
                 fila.Cells[10].Value = ((Casa)propiedad).Propietario;
             }
 
+        }
+
+        private void cBTipoHabitaciones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            rBcasa.Enabled = false;
+        }
+
+        private void rBcasa_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rBcasa.Checked)
+            {
+                cBTipoHabitaciones.Enabled = false;
+            }
         }
 
         private void RefreshDataGridView()
@@ -671,13 +1033,108 @@ namespace TP2_Lab
 
             }
         }
+
+        public Usuario CrearUsuarioAdmin(string nom, string contra, bool tipo)
+        {
+            Usuario nuevoUsuario;
+            if (tipo)
+            {
+                nuevoUsuario = new Administrador(nom, contra);
+                listaUsuarios.Add(nuevoUsuario);
+            }
+            else
+            {
+                throw new Exception("no se pudo crear el usuario");
+            }
+            return nuevoUsuario;
+        }
+
+        public Usuario CrearUsuarioEmpleado(string nom, string contra, bool tipo)
+        {
+            Usuario nuevoUsu;
+            if (tipo)
+            {
+                nuevoUsu = new Empleado(nom, contra);
+                listaUsuarios.Add(nuevoUsu);
+            }
+            else
+            {
+                throw new Exception("no se pudo crear el usuario");
+            }
+            return nuevoUsu;
+        }
+
+
+        public Usuario EliminarUsuario(string nombre)
+        {
+            Usuario aEliminar = BuscarUsuario(nombre);
+
+            if (aEliminar != null)
+            {
+                listaUsuarios.Remove(aEliminar);
+                MessageBox.Show("El usuario ha sido eliminado");
+            }
+            else
+            {
+                throw new Exception("Usuario no encontrado");
+            }
+            return aEliminar;
+        }
+
+        public Usuario CambiarContra(string nombre, string nuevaC)
+        {
+            Usuario miUsu = BuscarUsuario(nombre);
+            if (miUsu != null)
+            {
+                miUsu.Contra = nuevaC;
+                MessageBox.Show("Contraseña cambiada correctamente");
+            }
+            else
+            {
+                throw new Exception("Usuario no encontrado");
+            }
+            return miUsu;
+        }
+
+        public Usuario BuscarUsuario(string nombre)
+        {
+            Usuario buscado = new Usuario(nombre, "");
+            listaUsuarios.Sort();
+            int orden = listaUsuarios.BinarySearch(buscado);
+            if (orden >= 0)
+            {
+                buscado = listaUsuarios[orden];
+            }
+            else
+            {
+                throw new Exception("Usuario no encontrado");
+            }
+            return buscado;
+        }
+
+        public bool EsAdministrador(string nombre)
+        {
+            bool esAdmin = false;
+            Usuario admin = BuscarUsuario(nombre);
+            if(admin is Administrador) 
+            {
+                esAdmin = true;
+            }
+            else
+            {
+                throw new Exception("No es un administrador");
+            }
+            return esAdmin;
+        }
+
+
         #endregion
 
         #region Ventana de Graficos
-        private void barraToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void GraficoDeBarras()
         {
             FGraficos stats2 = new FGraficos();
-
             // Crea el área del gráfico
             ChartArea areaReservas = new ChartArea();
             stats2.cGrafico.ChartAreas.Add(areaReservas);
@@ -734,14 +1191,12 @@ namespace TP2_Lab
 
             stats2.cGrafico.Palette = ChartColorPalette.Excel; //colores de las barras
 
-            // Mostrar el formulario con el gráfico
             stats2.ShowDialog();
         }
 
-        private void sectoresToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GraficosSectores()
         {
             FGraficos stats = new FGraficos();
-
             // Crea el área del gráfico
             ChartArea areaReservas = new ChartArea();
             stats.cGrafico.ChartAreas.Add(areaReservas);

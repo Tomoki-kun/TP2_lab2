@@ -9,10 +9,11 @@ using System.Collections;
 namespace TP2_Lab
 {
     [Serializable]
-    public class Cliente: IExportable
+    public class Cliente: IExportable,IComparable
     {
         private string nombre;
         private long dni;
+        private DateTime fechaNac = new DateTime();
         private ArrayList lstHuespedes = new ArrayList();
        
         //Propiedades
@@ -29,17 +30,29 @@ namespace TP2_Lab
             }
         } 
 
+        public DateTime FechaNacimiento
+        {
+            get { return fechaNac; }
+            set { fechaNac = value; }
+        }
+
         //Constructor
-        public Cliente(string nombre, long dni)
+        public Cliente(string nombre, long dni, DateTime fechaNac)
         {
             this.nombre = nombre;
             this.DNI = dni;
+            this.fechaNac = fechaNac;
         }
 
         //Metodos
         public override string ToString()
         {
             return nombre;
+        }
+
+        public int CompareTo(Object obj)
+        {
+            return this.DNI.CompareTo(((Cliente)obj).DNI);
         }
 
         //Metodo de IExportable

@@ -50,6 +50,12 @@ namespace TP2_Lab
         public int CantPersonas
         {
             get { return cantPersonas; }
+            set { cantPersonas = value; }
+        }
+
+        public int NumeroReserva
+        {
+            get { return numReserva; }
         }
         #endregion
 
@@ -74,7 +80,7 @@ namespace TP2_Lab
                 FechaSalida.ToString() + ";" + realizado.ToString() + ";" + cantPersonas.ToString();
         }
 
-        public void Comprobante(Propiedad prop)
+        public string Comprobante(Propiedad prop)
         {
             string ss;
             if (prop is Habitaciones)
@@ -91,6 +97,7 @@ namespace TP2_Lab
                 "\nCosto total: " + precioFinal;
 
             MessageBox.Show(ret);
+            return ret;
         }
         public string Exportar()
         {

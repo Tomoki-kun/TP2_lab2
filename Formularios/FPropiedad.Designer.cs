@@ -91,7 +91,7 @@ namespace TP2_Lab
             // 
             this.rBcasaFinde.AutoSize = true;
             this.rBcasaFinde.Location = new System.Drawing.Point(163, 27);
-            this.rBcasaFinde.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rBcasaFinde.Margin = new System.Windows.Forms.Padding(4);
             this.rBcasaFinde.Name = "rBcasaFinde";
             this.rBcasaFinde.Size = new System.Drawing.Size(178, 21);
             this.rBcasaFinde.TabIndex = 15;
@@ -103,7 +103,7 @@ namespace TP2_Lab
             this.rBcasaDia.AutoSize = true;
             this.rBcasaDia.Checked = true;
             this.rBcasaDia.Location = new System.Drawing.Point(15, 28);
-            this.rBcasaDia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rBcasaDia.Margin = new System.Windows.Forms.Padding(4);
             this.rBcasaDia.Name = "rBcasaDia";
             this.rBcasaDia.Size = new System.Drawing.Size(111, 21);
             this.rBcasaDia.TabIndex = 14;
@@ -121,9 +121,9 @@ namespace TP2_Lab
             this.groupBox2.Controls.Add(this.cbxPileta);
             this.groupBox2.Controls.Add(this.cbxCochera);
             this.groupBox2.Location = new System.Drawing.Point(16, 81);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(368, 204);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
@@ -133,7 +133,7 @@ namespace TP2_Lab
             // 
             this.cbxMascotas.AutoSize = true;
             this.cbxMascotas.Location = new System.Drawing.Point(57, 169);
-            this.cbxMascotas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxMascotas.Margin = new System.Windows.Forms.Padding(4);
             this.cbxMascotas.Name = "cbxMascotas";
             this.cbxMascotas.Size = new System.Drawing.Size(182, 21);
             this.cbxMascotas.TabIndex = 8;
@@ -144,7 +144,7 @@ namespace TP2_Lab
             // 
             this.cbxDesayuno.AutoSize = true;
             this.cbxDesayuno.Location = new System.Drawing.Point(57, 140);
-            this.cbxDesayuno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxDesayuno.Margin = new System.Windows.Forms.Padding(4);
             this.cbxDesayuno.Name = "cbxDesayuno";
             this.cbxDesayuno.Size = new System.Drawing.Size(94, 21);
             this.cbxDesayuno.TabIndex = 7;
@@ -155,7 +155,7 @@ namespace TP2_Lab
             // 
             this.cbxLimpieza.AutoSize = true;
             this.cbxLimpieza.Location = new System.Drawing.Point(57, 112);
-            this.cbxLimpieza.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxLimpieza.Margin = new System.Windows.Forms.Padding(4);
             this.cbxLimpieza.Name = "cbxLimpieza";
             this.cbxLimpieza.Size = new System.Drawing.Size(140, 21);
             this.cbxLimpieza.TabIndex = 6;
@@ -166,7 +166,7 @@ namespace TP2_Lab
             // 
             this.cbxWifi.AutoSize = true;
             this.cbxWifi.Location = new System.Drawing.Point(57, 84);
-            this.cbxWifi.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxWifi.Margin = new System.Windows.Forms.Padding(4);
             this.cbxWifi.Name = "cbxWifi";
             this.cbxWifi.Size = new System.Drawing.Size(53, 21);
             this.cbxWifi.TabIndex = 5;
@@ -177,7 +177,7 @@ namespace TP2_Lab
             // 
             this.cbxPileta.AutoSize = true;
             this.cbxPileta.Location = new System.Drawing.Point(57, 55);
-            this.cbxPileta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxPileta.Margin = new System.Windows.Forms.Padding(4);
             this.cbxPileta.Name = "cbxPileta";
             this.cbxPileta.Size = new System.Drawing.Size(65, 21);
             this.cbxPileta.TabIndex = 4;
@@ -188,7 +188,7 @@ namespace TP2_Lab
             // 
             this.cbxCochera.AutoSize = true;
             this.cbxCochera.Location = new System.Drawing.Point(57, 23);
-            this.cbxCochera.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxCochera.Margin = new System.Windows.Forms.Padding(4);
             this.cbxCochera.Name = "cbxCochera";
             this.cbxCochera.Size = new System.Drawing.Size(83, 21);
             this.cbxCochera.TabIndex = 3;
@@ -204,9 +204,9 @@ namespace TP2_Lab
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Location = new System.Drawing.Point(385, 23);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox3.Size = new System.Drawing.Size(368, 160);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
@@ -215,7 +215,7 @@ namespace TP2_Lab
             // numDNI
             // 
             this.numDNI.Location = new System.Drawing.Point(141, 97);
-            this.numDNI.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numDNI.Margin = new System.Windows.Forms.Padding(4);
             this.numDNI.Maximum = new decimal(new int[] {
             99999999,
             0,
@@ -238,7 +238,7 @@ namespace TP2_Lab
             // tBApellido
             // 
             this.tBApellido.Location = new System.Drawing.Point(141, 68);
-            this.tBApellido.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBApellido.Margin = new System.Windows.Forms.Padding(4);
             this.tBApellido.Name = "tBApellido";
             this.tBApellido.Size = new System.Drawing.Size(132, 22);
             this.tBApellido.TabIndex = 17;
@@ -246,7 +246,7 @@ namespace TP2_Lab
             // tBnombre
             // 
             this.tBnombre.Location = new System.Drawing.Point(141, 39);
-            this.tBnombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBnombre.Margin = new System.Windows.Forms.Padding(4);
             this.tBnombre.Name = "tBnombre";
             this.tBnombre.Size = new System.Drawing.Size(132, 22);
             this.tBnombre.TabIndex = 16;
@@ -285,7 +285,7 @@ namespace TP2_Lab
             // 
             this.btnAceptar.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnAceptar.Location = new System.Drawing.Point(16, 400);
-            this.btnAceptar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAceptar.Margin = new System.Windows.Forms.Padding(4);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(100, 28);
             this.btnAceptar.TabIndex = 19;
@@ -297,7 +297,7 @@ namespace TP2_Lab
             // 
             this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button2.Location = new System.Drawing.Point(284, 400);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 28);
             this.button2.TabIndex = 20;
@@ -327,7 +327,7 @@ namespace TP2_Lab
             // tBdireccion
             // 
             this.tBdireccion.Location = new System.Drawing.Point(205, 78);
-            this.tBdireccion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBdireccion.Margin = new System.Windows.Forms.Padding(4);
             this.tBdireccion.Name = "tBdireccion";
             this.tBdireccion.Size = new System.Drawing.Size(132, 22);
             this.tBdireccion.TabIndex = 11;
@@ -347,9 +347,9 @@ namespace TP2_Lab
             this.groupBox4.Controls.Add(this.rBCasas);
             this.groupBox4.Controls.Add(this.rBHoteles);
             this.groupBox4.Location = new System.Drawing.Point(16, 4);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox4.Size = new System.Drawing.Size(225, 52);
             this.groupBox4.TabIndex = 11;
             this.groupBox4.TabStop = false;
@@ -360,7 +360,7 @@ namespace TP2_Lab
             this.rBCasas.AutoSize = true;
             this.rBCasas.Checked = true;
             this.rBCasas.Location = new System.Drawing.Point(8, 23);
-            this.rBCasas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rBCasas.Margin = new System.Windows.Forms.Padding(4);
             this.rBCasas.Name = "rBCasas";
             this.rBCasas.Size = new System.Drawing.Size(68, 21);
             this.rBCasas.TabIndex = 1;
@@ -373,7 +373,7 @@ namespace TP2_Lab
             // 
             this.rBHoteles.AutoSize = true;
             this.rBHoteles.Location = new System.Drawing.Point(129, 23);
-            this.rBHoteles.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rBHoteles.Margin = new System.Windows.Forms.Padding(4);
             this.rBHoteles.Name = "rBHoteles";
             this.rBHoteles.Size = new System.Drawing.Size(77, 21);
             this.rBHoteles.TabIndex = 2;
@@ -396,9 +396,9 @@ namespace TP2_Lab
             this.groupBox5.Controls.Add(this.label5);
             this.groupBox5.Controls.Add(this.tBdireccion);
             this.groupBox5.Location = new System.Drawing.Point(400, 4);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox5.Size = new System.Drawing.Size(788, 487);
             this.groupBox5.TabIndex = 12;
             this.groupBox5.TabStop = false;
@@ -428,7 +428,7 @@ namespace TP2_Lab
             // numNro
             // 
             this.numNro.Location = new System.Drawing.Point(204, 121);
-            this.numNro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numNro.Margin = new System.Windows.Forms.Padding(4);
             this.numNro.Name = "numNro";
             this.numNro.Size = new System.Drawing.Size(133, 22);
             this.numNro.TabIndex = 13;
@@ -440,9 +440,9 @@ namespace TP2_Lab
             this.gBCasas.Controls.Add(this.rBcasaDia);
             this.gBCasas.Controls.Add(this.groupBox3);
             this.gBCasas.Location = new System.Drawing.Point(7, 273);
-            this.gBCasas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBCasas.Margin = new System.Windows.Forms.Padding(4);
             this.gBCasas.Name = "gBCasas";
-            this.gBCasas.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBCasas.Padding = new System.Windows.Forms.Padding(4);
             this.gBCasas.Size = new System.Drawing.Size(761, 191);
             this.gBCasas.TabIndex = 0;
             this.gBCasas.TabStop = false;
@@ -462,7 +462,7 @@ namespace TP2_Lab
             // numDiasPermitidos
             // 
             this.numDiasPermitidos.Location = new System.Drawing.Point(137, 31);
-            this.numDiasPermitidos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numDiasPermitidos.Margin = new System.Windows.Forms.Padding(4);
             this.numDiasPermitidos.Name = "numDiasPermitidos";
             this.numDiasPermitidos.Size = new System.Drawing.Size(133, 22);
             this.numDiasPermitidos.TabIndex = 13;
@@ -480,7 +480,7 @@ namespace TP2_Lab
             // tBlocalidad
             // 
             this.tBlocalidad.Location = new System.Drawing.Point(204, 42);
-            this.tBlocalidad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBlocalidad.Margin = new System.Windows.Forms.Padding(4);
             this.tBlocalidad.Name = "tBlocalidad";
             this.tBlocalidad.Size = new System.Drawing.Size(132, 22);
             this.tBlocalidad.TabIndex = 10;
@@ -492,9 +492,9 @@ namespace TP2_Lab
             this.gBHoteles.Controls.Add(this.numEstrellas);
             this.gBHoteles.Controls.Add(this.label8);
             this.gBHoteles.Location = new System.Drawing.Point(396, 23);
-            this.gBHoteles.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBHoteles.Margin = new System.Windows.Forms.Padding(4);
             this.gBHoteles.Name = "gBHoteles";
-            this.gBHoteles.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBHoteles.Padding = new System.Windows.Forms.Padding(4);
             this.gBHoteles.Size = new System.Drawing.Size(376, 139);
             this.gBHoteles.TabIndex = 20;
             this.gBHoteles.TabStop = false;
@@ -526,7 +526,7 @@ namespace TP2_Lab
             // numEstrellas
             // 
             this.numEstrellas.Location = new System.Drawing.Point(193, 60);
-            this.numEstrellas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numEstrellas.Margin = new System.Windows.Forms.Padding(4);
             this.numEstrellas.Maximum = new decimal(new int[] {
             3,
             0,
@@ -559,7 +559,7 @@ namespace TP2_Lab
             // numCamas
             // 
             this.numCamas.Location = new System.Drawing.Point(204, 154);
-            this.numCamas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numCamas.Margin = new System.Windows.Forms.Padding(4);
             this.numCamas.Name = "numCamas";
             this.numCamas.Size = new System.Drawing.Size(133, 22);
             this.numCamas.TabIndex = 12;
@@ -577,7 +577,7 @@ namespace TP2_Lab
             // numPrecio
             // 
             this.numPrecio.Location = new System.Drawing.Point(81, 306);
-            this.numPrecio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numPrecio.Margin = new System.Windows.Forms.Padding(4);
             this.numPrecio.Name = "numPrecio";
             this.numPrecio.Size = new System.Drawing.Size(145, 22);
             this.numPrecio.TabIndex = 9;
@@ -599,7 +599,7 @@ namespace TP2_Lab
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.groupBox2);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FPropiedad";
             this.Text = "FPropiedad";
             this.groupBox2.ResumeLayout(false);

@@ -23,13 +23,13 @@ namespace TP2_Lab
         private string miArchivo = "Datos.dat";
         private Propietario propietario;
         private Propiedad prop;
-        private Sistema nuevoS = new Sistema();
+        private Sistema nuevoS;
         private Reserva miReserva;
         private int cantPropiedades = 0,
-            cantReservas = 0,
-            reservasCasaDia = 0,
-            reservasCasaFinde = 0,
-            reservasHabitaciones = 0;
+                    cantReservas = 0,
+                    reservasCasaDia = 0,
+                    reservasCasaFinde = 0,
+                    reservasHabitaciones = 0;
         private List<IExportable> listaDatos = new List<IExportable>();
         //private List<Usuario> listaUsuarios = new List<Usuario>();
         //private Usuario admin = new Administrador("Admin", "Admin");
@@ -43,7 +43,7 @@ namespace TP2_Lab
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (nuevoS.ListaUsuarios.Count == 0)
+            if (nuevoS.CantUsuarios == 0)
             {
                 usuario = new Administrador("Admin", "Admin");
                 nuevoS.ListaUsuarios.Add(usuario);
@@ -74,18 +74,6 @@ namespace TP2_Lab
                     usuario = (Administrador)nuevoS.ListaUsuarios[pos];
                 else 
                     usuario = (Empleado)nuevoS.ListaUsuarios[pos];
-            if(usuario is Administrador && !EsAdministrador(vLogin.tbUsuario.Text))
-            {
-                MessageBox.Show("No puede ingresar como usuario administrador");
-                vLogin.Dispose();
-            }
-            if(usuario is Empleado)
-            {
-                btnAgregarPropiedad.Enabled = false;
-                btnEliminarPropiedad.Enabled = false;
-                crearUsuarioToolStripMenuItem.Enabled = false;
-                eliminarUsuarioToolStripMenuItem.Enabled = false;
-            }
             }
             else if (presiono == DialogResult.Cancel)
             {
@@ -364,7 +352,7 @@ namespace TP2_Lab
                     }
 
                 }
-                if (disponibles.Count != nuevoS.CantPropiedades)
+                if (disponibles.Count != nuevoS.ListaUsuarios.Count)
                 {
                     //limpiamos el datagrid
                    DGPropiedades.Rows.Clear();
@@ -548,7 +536,7 @@ namespace TP2_Lab
         {
             rBcasa.Enabled = true;
             DGPropiedades.Rows.Clear();
-            int cant = nuevoS.ListaPropiedad.Count;
+            int cant = nuevoS.CantUsuarios;
             for (int i = 0; i < cant; i++)
             {
                 Propiedad propiedad = (Propiedad)nuevoS.ListaPropiedad[i];

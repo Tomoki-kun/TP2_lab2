@@ -13,8 +13,14 @@ namespace TP2_Lab
     [Serializable]
     public class Sistema
     {
-        private ArrayList listaPropiedad = new ArrayList();
-        private ArrayList listaUsuarios = new ArrayList();
+        private ArrayList listaPropiedad;
+        private ArrayList listaUsuarios;
+
+        public Sistema()
+        {
+            listaPropiedad = new ArrayList();
+            listaUsuarios = new ArrayList();
+        }
 
         #region Propiedades
         public ArrayList ListaPropiedad
@@ -30,6 +36,10 @@ namespace TP2_Lab
         public ArrayList ListaUsuarios
         {
             get { return listaUsuarios; }
+        }
+        public int CantUsuarios
+        {
+            get { return listaUsuarios.Count; }
         }
 
         #endregion
@@ -52,15 +62,15 @@ namespace TP2_Lab
             Propiedad aux = null;
             listaPropiedad.Sort();
             int pos = listaPropiedad.BinarySearch(miPropiedad);
-            if(pos >= 0)
+            if (pos >= 0)
                 aux = (Propiedad)listaPropiedad[pos];
             return aux;
         }
-        private Reserva BuscarReserva(Propiedad miPropiedad,Reserva miReserva)
+        private Reserva BuscarReserva(Propiedad miPropiedad, Reserva miReserva)
         {
             int pos = miPropiedad.ListaReservas.BinarySearch(miReserva);
             Reserva aux = null;
-            if(pos >= 0)
+            if (pos >= 0)
                 aux = (Reserva)listaPropiedad[pos];
             return aux;
         }

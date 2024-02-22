@@ -72,7 +72,7 @@ namespace TP2_Lab
 
                 if (nuevoS.ListaUsuarios[pos] is Administrador)
                     usuario = (Administrador)nuevoS.ListaUsuarios[pos];
-                else
+                else 
                     usuario = (Empleado)nuevoS.ListaUsuarios[pos];
             if(usuario is Administrador && !EsAdministrador(vLogin.tbUsuario.Text))
             {
@@ -86,9 +86,6 @@ namespace TP2_Lab
                 crearUsuarioToolStripMenuItem.Enabled = false;
                 eliminarUsuarioToolStripMenuItem.Enabled = false;
             }
-            listaUsuarios.Add(usuario);
-            listaUsuarios.Sort();
-            int pos = listaUsuarios.BinarySearch(usuario);
             }
             else if (presiono == DialogResult.Cancel)
             {
@@ -163,8 +160,8 @@ namespace TP2_Lab
             string path = "usuarios.dat";
             using (FileStream fS = new FileStream(path, FileMode.Create, FileAccess.Write))
             {
-                serUnser = new BinaryFormatter();
-                serUnser.Serialize(fS, lstUsuarios);
+                serDeser = new BinaryFormatter();
+                serDeser.Serialize(fS, lstUsuarios);
             }
         }
 

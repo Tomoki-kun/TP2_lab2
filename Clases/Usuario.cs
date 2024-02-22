@@ -18,23 +18,23 @@ namespace TP2_Lab
             Nombre = n;
             Contra = c;
         }
-        
-        /*public int CompareTo(object obj)
+
+        public int CompareTo(object obj)
         {
-            int nombreComparison = Nombre.CompareTo(((Usuario)obj).Nombre);
+            int nombreComparison = this.Nombre.CompareTo(((Usuario)obj).Nombre);
 
             if (nombreComparison == 0)
             {
                 // Si los nombres son iguales, compara por contraseña
-                return Contra.CompareTo(((Usuario)obj).Contra);
+                return this.Contra.CompareTo(((Usuario)obj).Contra);
             }
 
             return nombreComparison;
-        }*/
-
-        public int CompareTo(object obj)
-        {
-            return this.Nombre.CompareTo(((Usuario)obj).Nombre);
         }
+
+        //public int CompareTo(object obj)
+        //{
+        //    return this.Nombre.CompareTo(((Usuario)obj).Nombre);
+        //}
     }
 }

@@ -31,8 +31,6 @@ namespace TP2_Lab
                     reservasCasaFinde = 0,
                     reservasHabitaciones = 0;
         private List<IExportable> listaDatos = new List<IExportable>();
-        //private List<Usuario> listaUsuarios = new List<Usuario>();
-        //private Usuario admin = new Administrador("Admin", "Admin");
         private FileStream archivo;
         private BinaryFormatter serDeser;
 
@@ -82,7 +80,6 @@ namespace TP2_Lab
             }
             vLogin.Dispose();
             RefreshDataGridView();
-            CargarUsuarios();
         }
 
         #region Serializacion de datos
@@ -126,7 +123,7 @@ namespace TP2_Lab
                     archivo = new FileStream(miArchivo, FileMode.CreateNew, FileAccess.Write);
                     serDeser = new BinaryFormatter();
                     serDeser.Serialize(archivo, nuevoS);
-                    GuardarUsuarios(listaUsuarios);
+                    GuardarUsuarios(nuevoS.ListaUsuarios);
                 }
                 catch (Exception ex)
                 {
@@ -143,7 +140,7 @@ namespace TP2_Lab
             }
         }
 
-        private void GuardarUsuarios(List<Usuario> lstUsuarios)
+        private void GuardarUsuarios(ArrayList lstUsuarios)
         {
             string path = "usuarios.dat";
             using (FileStream fS = new FileStream(path, FileMode.Create, FileAccess.Write))
@@ -153,17 +150,6 @@ namespace TP2_Lab
             }
         }
 
-        private void CargarUsuarios()
-        {
-            string path = "usuarios.dat";
-            if (File.Exists(path))
-            {
-                FileStream fS = new FileStream(path, FileMode.Open, FileAccess.Read);
-                BinaryFormatter bF = new BinaryFormatter();
-                listaUsuarios = (List<Usuario>)bF.Deserialize(fS);
-                fS.Close();
-            }
-        }
         #endregion
 
         #region Botones
@@ -607,18 +593,7 @@ namespace TP2_Lab
 
         #region MenuStrip
 
-        private bool VerificarCamposCompletos(FPropiedad form)
-        {
-            bool ret = true;
-            if (string.IsNullOrWhiteSpace(form.tBdireccion.Text) && string.IsNullOrWhiteSpace(form.tBlocalidad.Text))
-                ret = false;
-            if ((string.IsNullOrWhiteSpace(form.tBApellido.Text) && string.IsNullOrWhiteSpace(form.tBnombre.Text) &&
-                form.tBApellido.IsAccessible && form.tBnombre.IsAccessible) ||
-                (string.IsNullOrEmpty(form.cBTipoHabitacion.ValueMember) && form.cBTipoHabitacion.IsAccessible))
-                ret = false;
-
-            return ret;
-        }
+        
 
         private void exportarDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {

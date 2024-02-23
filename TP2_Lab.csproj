@@ -73,10 +73,10 @@
     <Compile Include="Formularios\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="fModificarReserva.cs">
+    <Compile Include="Formularios\fModificarReserva.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="fModificarReserva.Designer.cs">
+    <Compile Include="Formularios\fModificarReserva.Designer.cs">
       <DependentUpon>fModificarReserva.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\Form1.Designer.cs">
@@ -88,22 +88,16 @@
     <Compile Include="Formularios\FPropiedad.Designer.cs">
       <DependentUpon>FPropiedad.cs</DependentUpon>
     </Compile>
-    <Compile Include="FRegistro.cs">
+    <Compile Include="Formularios\FRegistro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FRegistro.Designer.cs">
+    <Compile Include="Formularios\FRegistro.Designer.cs">
       <DependentUpon>FRegistro.cs</DependentUpon>
     </Compile>
-    <Compile Include="FReservaImportada.cs">
+    <Compile Include="Formularios\FTicket.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FReservaImportada.Designer.cs">
-      <DependentUpon>FReservaImportada.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FTicket.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FTicket.Designer.cs">
+    <Compile Include="Formularios\FTicket.Designer.cs">
       <DependentUpon>FTicket.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\FWeb.cs">
@@ -138,7 +132,7 @@
     <EmbeddedResource Include="Formularios\FLogin.resx">
       <DependentUpon>FLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="fModificarReserva.resx">
+    <EmbeddedResource Include="Formularios\fModificarReserva.resx">
       <DependentUpon>fModificarReserva.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Form1.resx">
@@ -147,13 +141,10 @@
     <EmbeddedResource Include="Formularios\FPropiedad.resx">
       <DependentUpon>FPropiedad.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FRegistro.resx">
+    <EmbeddedResource Include="Formularios\FRegistro.resx">
       <DependentUpon>FRegistro.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FReservaImportada.resx">
-      <DependentUpon>FReservaImportada.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FTicket.resx">
+    <EmbeddedResource Include="Formularios\FTicket.resx">
       <DependentUpon>FTicket.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FWeb.resx">

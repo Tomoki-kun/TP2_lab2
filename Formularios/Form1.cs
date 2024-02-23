@@ -140,7 +140,7 @@ namespace TP2_Lab
             }
         }
 
-        private void GuardarUsuarios(ArrayList lstUsuarios)
+        private void GuardarUsuarios(List<Usuario> lstUsuarios)
         {
             string path = "usuarios.dat";
             using (FileStream fS = new FileStream(path, FileMode.Create, FileAccess.Write))
@@ -406,7 +406,7 @@ namespace TP2_Lab
                                 prop.AgregarReserva(miReserva);
                                 listaDatos.Add(miReserva);
                                 listaDatos.Add(miCliente);
-                                listaClientes.Add(miCliente);
+                                nuevoS.ListaClientes.Add(miCliente);
                             }
                             else
                             {
@@ -661,12 +661,12 @@ namespace TP2_Lab
         private Cliente BuscarCliente(long dni)
         {
             Cliente aBuscar = new Cliente("", dni, DateTime.Now);
-            listaClientes.Sort();
-            int orden = listaClientes.BinarySearch(aBuscar);
+            nuevoS.ListaClientes.Sort();
+            int orden = nuevoS.ListaClientes.BinarySearch(aBuscar);
 
             if (orden >= 0)
             {
-                aBuscar = listaClientes[orden];
+                aBuscar = nuevoS.ListaClientes[orden];
             }
             else
             {
@@ -765,7 +765,7 @@ namespace TP2_Lab
         private void crearUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FRegistro crearU = new FRegistro();
-            if (admin is Administrador)
+            if (usuario is Administrador)
             {
                 if (crearU.ShowDialog() == DialogResult.OK)
                 {
@@ -792,7 +792,7 @@ namespace TP2_Lab
         private void eliminarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FRegistro fEliminar = new FRegistro();
-            if (admin is Administrador)
+            if (usuario is Administrador)
             {
                 fEliminar.tBcontraN.Enabled = false;
                 fEliminar.groupBox1.Enabled = false;
@@ -1000,7 +1000,7 @@ namespace TP2_Lab
             if (tipo)
             {
                 nuevoUsuario = new Administrador(nom, contra);
-                listaUsuarios.Add(nuevoUsuario);
+                nuevoS.ListaUsuarios.Add(nuevoUsuario);
             }
             else
             {
@@ -1015,7 +1015,7 @@ namespace TP2_Lab
             if (tipo)
             {
                 nuevoUsu = new Empleado(nom, contra);
-                listaUsuarios.Add(nuevoUsu);
+                nuevoS.ListaUsuarios.Add(nuevoUsu);
             }
             else
             {
@@ -1031,7 +1031,7 @@ namespace TP2_Lab
 
             if (aEliminar != null)
             {
-                listaUsuarios.Remove(aEliminar);
+                nuevoS.ListaUsuarios.Remove(aEliminar);
                 MessageBox.Show("El usuario ha sido eliminado");
             }
             else
@@ -1059,11 +1059,11 @@ namespace TP2_Lab
         public Usuario BuscarUsuario(string nombre)
         {
             Usuario buscado = new Usuario(nombre, "");
-            listaUsuarios.Sort();
-            int orden = listaUsuarios.BinarySearch(buscado);
+            nuevoS.ListaUsuarios.Sort();
+            int orden = nuevoS.ListaUsuarios.BinarySearch(buscado);
             if (orden >= 0)
             {
-                buscado = listaUsuarios[orden];
+                buscado = nuevoS.ListaUsuarios[orden];
             }
             else
             {

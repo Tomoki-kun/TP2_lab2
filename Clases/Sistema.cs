@@ -14,12 +14,14 @@ namespace TP2_Lab
     public class Sistema
     {
         private ArrayList listaPropiedad;
-        private ArrayList listaUsuarios;
+        private List<Usuario> listaUsuarios;
+        private List<Cliente> listaClientes;
 
         public Sistema()
         {
             listaPropiedad = new ArrayList();
-            listaUsuarios = new ArrayList();
+            listaUsuarios = new List<Usuario>();
+            listaClientes = new List<Cliente>();
         }
 
         #region Propiedades
@@ -33,13 +35,18 @@ namespace TP2_Lab
             get { return listaPropiedad.Count; }
         }
 
-        public ArrayList ListaUsuarios
+        public List<Usuario> ListaUsuarios
         {
             get { return listaUsuarios; }
         }
         public int CantUsuarios
         {
             get { return listaUsuarios.Count; }
+        }
+
+        public List<Cliente> ListaClientes
+        {
+            get { return listaClientes; }
         }
 
         #endregion

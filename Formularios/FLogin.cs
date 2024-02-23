@@ -30,5 +30,10 @@ namespace TP2_Lab
         {
 
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

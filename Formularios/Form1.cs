@@ -45,7 +45,7 @@ namespace TP2_Lab
             {
                 usuario = new Administrador("Admin", "Admin");
                 nuevoS.ListaUsuarios.Add(usuario);
-                usuario= new Empleado("pancho", "fili");
+                usuario = new Empleado("pancho", "fili");
                 nuevoS.ListaUsuarios.Add(usuario);
             }
             FLogin vLogin = new FLogin();
@@ -69,9 +69,19 @@ namespace TP2_Lab
                 }
 
                 if (nuevoS.ListaUsuarios[pos] is Administrador)
+                {
                     usuario = (Administrador)nuevoS.ListaUsuarios[pos];
-                else 
+                    MessageBox.Show("Uds es: Administrador");
+                }
+                else
+                {
                     usuario = (Empleado)nuevoS.ListaUsuarios[pos];
+                    MessageBox.Show("Uds es: Administrador");
+                    btnAgregarPropiedad.Enabled = false;
+                    btnEliminarPropiedad.Enabled = false;
+                    crearUsuarioToolStripMenuItem.Enabled = false;
+                    eliminarUsuarioToolStripMenuItem.Enabled = false;
+                }
             }
             else if (presiono == DialogResult.Cancel)
             {
@@ -80,6 +90,11 @@ namespace TP2_Lab
             }
             vLogin.Dispose();
             RefreshDataGridView();
+        }
+
+        private object GetType(Usuario usuario)
+        {
+            throw new NotImplementedException();
         }
 
         #region Serializacion de datos
@@ -186,18 +201,18 @@ namespace TP2_Lab
                             int cantDiasPermitidos = Convert.ToInt32(nuevaP.numDiasPermitidos.Value);
                             if (nuevaP.rBcasaDia.Checked)
                             {
-                                prop = new Casa(nro, cantDiasPermitidos, propietario, precio, direccion, localidad, cantCamas, servicios, imagen,imagen2);
+                                prop = new Casa(nro, cantDiasPermitidos, propietario, precio, direccion, localidad, cantCamas, servicios, imagen, imagen2);
                             }
                             else if (nuevaP.rBcasaFinde.Checked)
                             {
-                                prop = new CasaFindeSemana(nro, 0, propietario, precio, direccion, localidad, cantCamas, servicios, imagen,imagen2);
+                                prop = new CasaFindeSemana(nro, 0, propietario, precio, direccion, localidad, cantCamas, servicios, imagen, imagen2);
                             }
                         }
                         if (nuevaP.rBHoteles.Checked)
                         {
                             int estrellas = Convert.ToInt32(nuevaP.numEstrellas.Text);
                             string tipoHabitacion = nuevaP.cBTipoHabitacion.ValueMember;
-                            prop = new Habitaciones(nro, estrellas, precio, direccion, localidad, servicios, cantCamas, tipoHabitacion, imagen,imagen2);
+                            prop = new Habitaciones(nro, estrellas, precio, direccion, localidad, servicios, cantCamas, tipoHabitacion, imagen, imagen2);
                         }
                         nuevoS.AgregarPropiedad(prop);
                         DGAgregarPropiedad(prop);
@@ -227,13 +242,13 @@ namespace TP2_Lab
             if (DGPropiedades.SelectedRows.Count > 0)
             {
                 Propiedad seleccionada = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value; //obtiene la propiedad seleccionada
-                Propiedad buscada = nuevoS.BuscarPropiedad(seleccionada); 
+                Propiedad buscada = nuevoS.BuscarPropiedad(seleccionada);
 
-                if(buscada == null)
+                if (buscada == null)
                 {
                     MessageBox.Show("No se ha encontrado la propiedad");
                 }
-                if(nuevoFprop.ShowDialog() == DialogResult.OK)
+                if (nuevoFprop.ShowDialog() == DialogResult.OK)
                 {
                     if (buscada != null)
                     {
@@ -251,7 +266,7 @@ namespace TP2_Lab
                     }
                 }
                 MessageBox.Show("Propiedad modificada correctamente");
-                
+
             }
             else
             {
@@ -302,7 +317,7 @@ namespace TP2_Lab
                     if (celda.Value != null && celda.Value is Propiedad)
                     {
                         // Reiniciar las variables en cada iteración
-                        bool loc = true, fechas = true, huespedes = true, tipoHabitacion = true, tipoCasa=true;
+                        bool loc = true, fechas = true, huespedes = true, tipoHabitacion = true, tipoCasa = true;
                         Propiedad propiedad = (Propiedad)celda.Value;
 
                         if (!(propiedad.Localidad == cBLocalidad.SelectedItem.ToString()))
@@ -321,7 +336,7 @@ namespace TP2_Lab
                         if (cBTipoHabitaciones.ValueMember != "" && cBTipoHabitaciones.ValueMember != ((Habitaciones)propiedad).TipoHabitacion)
                             tipoHabitacion = false;
                         if (rBcasa.Checked)
-                         tipoCasa = false;
+                            tipoCasa = false;
 
                         if (loc && fechas && huespedes && tipoHabitacion)
                         {
@@ -330,7 +345,7 @@ namespace TP2_Lab
                         else if (loc && fechas && huespedes && tipoCasa)
                         {
                             disponibles.Add((Casa)propiedad);
-                            if(dias.Days== 1 || dias.Days==2 || dias.Days==3)
+                            if (dias.Days == 1 || dias.Days == 2 || dias.Days == 3)
                             {
                                 disponibles.Add((CasaFindeSemana)propiedad);
                             }
@@ -341,12 +356,12 @@ namespace TP2_Lab
                 if (disponibles.Count != nuevoS.ListaUsuarios.Count)
                 {
                     //limpiamos el datagrid
-                   DGPropiedades.Rows.Clear();
+                    DGPropiedades.Rows.Clear();
 
-                foreach (Propiedad propiedad in disponibles)
-                   {
+                    foreach (Propiedad propiedad in disponibles)
+                    {
                         DGAgregarPropiedad(propiedad);
-                  }
+                    }
                 }
             }
         }
@@ -370,7 +385,7 @@ namespace TP2_Lab
                         nombre = nuevoC.tBnombreC.Text;
                         dni = (long)nuevoC.numDNI.Value;
                         fechaNac = nuevoC.dTfechaNac.Value;
-                        Cliente miCliente = new Cliente(nombre, dni,fechaNac);
+                        Cliente miCliente = new Cliente(nombre, dni, fechaNac);
                         int huespedes = Convert.ToInt32(numCantHuespedes.Text);
                         DateTime inicio = Calendar.SelectionRange.Start;
                         DateTime fin = Calendar.SelectionRange.End;
@@ -449,16 +464,16 @@ namespace TP2_Lab
             mCliente.numDNI.Visible = false;
             if (mCliente.ShowDialog() == DialogResult.OK)
             {
-                if(mCliente.tBnombreC.Text != "")
+                if (mCliente.tBnombreC.Text != "")
                 {
                     string nombre;
                     bool encontrada = false;
-                    foreach(Propiedad prop in nuevoS.ListaPropiedad)
+                    foreach (Propiedad prop in nuevoS.ListaPropiedad)
                     {
-                        foreach(Reserva resv in prop.ListaReservas)
+                        foreach (Reserva resv in prop.ListaReservas)
                         {
                             nombre = resv.Cliente.ToString();
-                            if(nombre== mCliente.tBnombreC.Text)
+                            if (nombre == mCliente.tBnombreC.Text)
                             {
                                 encontrada = true;
                                 if (modificar.ShowDialog() == DialogResult.OK)
@@ -593,7 +608,7 @@ namespace TP2_Lab
 
         #region MenuStrip
 
-        
+
 
         private void exportarDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -631,9 +646,9 @@ namespace TP2_Lab
                     DateTime fechaF = Convert.ToDateTime(datos[4]);
 
                     Cliente nuevoCliente = BuscarCliente(dni);
-                    if(nuevoCliente != null)
+                    if (nuevoCliente != null)
                     {
-                        reservas.Add(new Reserva(nuevoCliente, numReserva,cantidad, fechaI, fechaF));
+                        reservas.Add(new Reserva(nuevoCliente, numReserva, cantidad, fechaI, fechaF));
                         MessageBox.Show("Se ha importado correctamente su calendario");
                     }
                     else
@@ -648,11 +663,11 @@ namespace TP2_Lab
             {
                 MessageBox.Show("Error en el formato del archivo");
             }
-            catch(IOException excep)
+            catch (IOException excep)
             {
                 MessageBox.Show("Error en el archivo" + excep);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error desconocido" + ex.Message);
             }
@@ -684,21 +699,21 @@ namespace TP2_Lab
             }
         }
 
-        private void ExportarCalendarioDeReservas(List<Reserva> listaReserva,string path)
+        private void ExportarCalendarioDeReservas(List<Reserva> listaReserva, string path)
         {
             try
             {
                 FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
                 StreamWriter sW = new StreamWriter(fs);
 
-                foreach(Reserva r in listaReserva)
+                foreach (Reserva r in listaReserva)
                 {
                     sW.WriteLine(r.Exportar());
                 }
                 sW.Close();
                 fs.Dispose();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error desconocido" + ex.Message);
             }
@@ -848,9 +863,9 @@ namespace TP2_Lab
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
-         {
+        {
             Close();
-         }
+        }
 
 
         #endregion
@@ -912,7 +927,7 @@ namespace TP2_Lab
             fila.Cells[4].Value = propiedad.Nro;
             fila.Cells[6].Value = propiedad.PrecioBasico;
             fila.Cells[7].Value = propiedad.CantCamas;
-            bitmap = new Bitmap(propiedad.Imagen, new Size(125,125));
+            bitmap = new Bitmap(propiedad.Imagen, new Size(125, 125));
             fila.Cells[11].Value = bitmap;
             if (propiedad.Imagen2 != null)
             {
@@ -1076,7 +1091,7 @@ namespace TP2_Lab
         {
             bool esAdmin = false;
             Usuario admin = BuscarUsuario(nombre);
-            if(admin is Administrador) 
+            if (admin is Administrador)
             {
                 esAdmin = true;
             }

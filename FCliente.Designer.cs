@@ -29,26 +29,26 @@ namespace TP2_Lab
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.lBnombre = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.tBnombreC = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lBDni = new System.Windows.Forms.Label();
             this.numDNI = new System.Windows.Forms.NumericUpDown();
             this.dTfechaNac = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lBfechaNac = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numDNI)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // lBnombre
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 62);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Nombre:";
+            this.lBnombre.AutoSize = true;
+            this.lBnombre.Location = new System.Drawing.Point(41, 62);
+            this.lBnombre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lBnombre.Name = "lBnombre";
+            this.lBnombre.Size = new System.Drawing.Size(62, 17);
+            this.lBnombre.TabIndex = 0;
+            this.lBnombre.Text = "Nombre:";
             // 
             // button1
             // 
@@ -80,15 +80,15 @@ namespace TP2_Lab
             this.tBnombreC.Size = new System.Drawing.Size(195, 22);
             this.tBnombreC.TabIndex = 4;
             // 
-            // label3
+            // lBDni
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(68, 96);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 17);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "DNI:";
+            this.lBDni.AutoSize = true;
+            this.lBDni.Location = new System.Drawing.Point(68, 96);
+            this.lBDni.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lBDni.Name = "lBDni";
+            this.lBDni.Size = new System.Drawing.Size(35, 17);
+            this.lBDni.TabIndex = 7;
+            this.lBDni.Text = "DNI:";
             // 
             // numDNI
             // 
@@ -123,28 +123,28 @@ namespace TP2_Lab
             this.dTfechaNac.TabIndex = 10;
             this.dTfechaNac.Value = new System.DateTime(2018, 12, 31, 0, 0, 0, 0);
             // 
-            // label4
+            // lBfechaNac
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 137);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(143, 17);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Fecha de nacimiento:";
+            this.lBfechaNac.AutoSize = true;
+            this.lBfechaNac.Location = new System.Drawing.Point(12, 137);
+            this.lBfechaNac.Name = "lBfechaNac";
+            this.lBfechaNac.Size = new System.Drawing.Size(143, 17);
+            this.lBfechaNac.TabIndex = 11;
+            this.lBfechaNac.Text = "Fecha de nacimiento:";
             // 
             // FCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(397, 240);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lBfechaNac);
             this.Controls.Add(this.dTfechaNac);
             this.Controls.Add(this.numDNI);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lBDni);
             this.Controls.Add(this.tBnombreC);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lBnombre);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FCliente";
             this.Text = "FCliente";
@@ -156,13 +156,13 @@ namespace TP2_Lab
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lBnombre;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         public System.Windows.Forms.TextBox tBnombreC;
-        private System.Windows.Forms.Label label3;
         public System.Windows.Forms.NumericUpDown numDNI;
         public System.Windows.Forms.DateTimePicker dTfechaNac;
-        private System.Windows.Forms.Label label4;
+        public System.Windows.Forms.Label lBDni;
+        public System.Windows.Forms.Label lBfechaNac;
     }
 }

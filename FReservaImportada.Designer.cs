@@ -32,9 +32,9 @@ namespace TP2_Lab
             this.dGReservaImportada = new System.Windows.Forms.DataGridView();
             this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NroReserva = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaReservacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaReservacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dGReservaImportada)).BeginInit();
             this.SuspendLayout();
@@ -45,9 +45,9 @@ namespace TP2_Lab
             this.dGReservaImportada.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Cliente,
             this.NroReserva,
-            this.FechaReservacion,
-            this.FechaIn,
+            this.FechaInicio,
             this.FechaFin,
+            this.FechaReservacion,
             this.Cantidad});
             this.dGReservaImportada.Location = new System.Drawing.Point(0, 0);
             this.dGReservaImportada.Name = "dGReservaImportada";
@@ -70,19 +70,12 @@ namespace TP2_Lab
             this.NroReserva.Name = "NroReserva";
             this.NroReserva.Width = 125;
             // 
-            // FechaReservacion
+            // FechaInicio
             // 
-            this.FechaReservacion.HeaderText = "Fecha de reservacion";
-            this.FechaReservacion.MinimumWidth = 6;
-            this.FechaReservacion.Name = "FechaReservacion";
-            this.FechaReservacion.Width = 125;
-            // 
-            // FechaIn
-            // 
-            this.FechaIn.HeaderText = "Fecha Inicio";
-            this.FechaIn.MinimumWidth = 6;
-            this.FechaIn.Name = "FechaIn";
-            this.FechaIn.Width = 125;
+            this.FechaInicio.HeaderText = "Fecha Inicio";
+            this.FechaInicio.MinimumWidth = 6;
+            this.FechaInicio.Name = "FechaInicio";
+            this.FechaInicio.Width = 125;
             // 
             // FechaFin
             // 
@@ -90,6 +83,13 @@ namespace TP2_Lab
             this.FechaFin.MinimumWidth = 6;
             this.FechaFin.Name = "FechaFin";
             this.FechaFin.Width = 125;
+            // 
+            // FechaReservacion
+            // 
+            this.FechaReservacion.HeaderText = "Fecha de Reservacion";
+            this.FechaReservacion.MinimumWidth = 6;
+            this.FechaReservacion.Name = "FechaReservacion";
+            this.FechaReservacion.Width = 125;
             // 
             // Cantidad
             // 
@@ -116,9 +116,9 @@ namespace TP2_Lab
         public System.Windows.Forms.DataGridView dGReservaImportada;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn NroReserva;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaReservacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaIn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaInicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaFin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaReservacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
     }
 }

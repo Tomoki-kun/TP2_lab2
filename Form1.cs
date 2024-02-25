@@ -453,7 +453,9 @@ namespace TP2_Lab
             FCliente mCliente = new FCliente();
             fModificarReserva modificar = new fModificarReserva();
             mCliente.dTfechaNac.Visible = false;
+            mCliente.lBfechaNac.Visible = false;
             mCliente.numDNI.Visible = false;
+            mCliente.lBDni.Visible = false;
             if (mCliente.ShowDialog() == DialogResult.OK)
             {
                 if(mCliente.tBnombreC.Text != "")
@@ -462,10 +464,11 @@ namespace TP2_Lab
                     bool encontrada = false;
                     foreach(Propiedad prop in nuevoS.ListaPropiedad)
                     {
-                        foreach(Reserva resv in prop.ListaReservas)
+                        for(int i=0; i<prop.ListaReservas.Count;i++)
                         {
+                            Reserva resv = prop.ListaReservas[i];
                             nombre = resv.Cliente.ToString();
-                            if(nombre== mCliente.tBnombreC.Text)
+                            if(nombre == mCliente.tBnombreC.Text)
                             {
                                 encontrada = true;
                                 if (modificar.ShowDialog() == DialogResult.OK)
@@ -473,19 +476,32 @@ namespace TP2_Lab
                                     DateTime fechaIn = modificar.dtFechaIn.Value;
                                     DateTime fechaFin = modificar.dtFechaFin.Value;
                                     int cantPersonas = Convert.ToInt32(modificar.tBcantidad.Text);
+                                    if((fechaIn >= resv.FechaEntrada && fechaFin<resv.FechaSalida) || (fechaFin > resv.FechaEntrada && fechaFin <= resv.FechaSalida) ||(fechaIn <= resv.FechaEntrada && fechaFin >= resv.FechaSalida))
+                                    {
+                                        MessageBox.Show("Fechas ya reservadas");
+                                    }
+                                    else if (cantPersonas > prop.CantCamas)
+                                    {
+                                        MessageBox.Show("La cantidad de personas excede lo permitido");
+                                    }
+                                    else { 
                                     resv.CantPersonas = cantPersonas;
                                     resv.FechaEntrada = fechaIn;
                                     resv.FechaSalida = fechaFin;
+
+                                    //ahora actualizamos la reserva en la lista
+                                    prop.ListaReservas[i] = resv;
+                                    MessageBox.Show("Reserva actualizada con exito");
+                                    }
                                 }
-                                MessageBox.Show("Reserva actualizada con exito");
                             }
                         }
                     }
-                    if (!encontrada)
-                    {
-                        MessageBox.Show("Reserva no encontrada");
-                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show("No se pudo actualizar la reserva");
             }
 
         }

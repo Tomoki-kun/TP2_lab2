@@ -108,6 +108,12 @@
     </Compile>
     <Compile Include="Clases\Habitaciones.cs" />
     <Compile Include="Clases\Huesped.cs" />
+    <Compile Include="Formularios\ImageViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\ImageViewForm.Designer.cs">
+      <DependentUpon>ImageViewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Otros\IExportable.cs" />
     <Compile Include="Otros\NumeroDniException.cs" />
     <Compile Include="Program.cs" />
@@ -149,6 +155,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FWeb.resx">
       <DependentUpon>FWeb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\ImageViewForm.resx">
+      <DependentUpon>ImageViewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

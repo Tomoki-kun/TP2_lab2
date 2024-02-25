@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,11 +13,12 @@ namespace TP2_Lab
 {
     public partial class FPropiedad : Form
     {
+        private List<Image> images = new List<Image>(); // Lista para almacenar las imágenes
         public FPropiedad()
         {
             InitializeComponent();
         }
-        
+
         private void rBCasas_CheckedChanged(object sender, EventArgs e)
         {
             gBCasas.Visible = true;
@@ -46,40 +48,39 @@ namespace TP2_Lab
             }
         }
 
-        public string RutaImagen { get; private set; }
-        public string RutaImagen2 { get; private set; }
+        public List<Image> ListaImagenes 
+        {
+            get { return images; }
+        }
         private void btnImagen_Click(object sender, EventArgs e)
         {
             FileImagen.Filter = "Imagenes | *.jpg;*.jpeg;*.png";
-            for (int i = 0; i < 2; i++)
+            FileImagen.FileName = "";
+            FileImagen.Multiselect = true;
+            FileImagen.InitialDirectory = Path.Combine(Application.StartupPath, "Resource");
+            if (FileImagen.ShowDialog() == DialogResult.OK)
             {
-                if (FileImagen.ShowDialog() == DialogResult.OK)
+                foreach (string fileName in FileImagen.FileNames)
                 {
-                    if (i == 0)
-                    {
-                        RutaImagen = FileImagen.FileName;
-                    }
-                    else if (i == 1)
-                    {
-                        RutaImagen2 = FileImagen.FileName;
-                    }
+                    Image image = Image.FromFile(fileName);
+                    images.Add(image); // Agregar la imagen a la lista
                 }
             }
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (RutaImagen == null && RutaImagen2 == null)
+            if (images.Count == 0)
             {
                 if (rBCasas.Checked)
                 {
-                    RutaImagen = Application.StartupPath + "\\Resource\\CasaDefault.jpg";
-                    RutaImagen2 = Application.StartupPath + "\\Resource\\CasaDefault.jpg";
+                    Image image = Image.FromFile(Application.StartupPath + "\\Resource\\CasaDefault.jpg");
+                    images.Add(image);
                 }
                 if (rBHoteles.Checked)
                 {
-                    RutaImagen = Application.StartupPath + "\\Resource\\HotelDefault.jpg";
-                    RutaImagen2 = Application.StartupPath + "\\Resource\\HotelDefault.jpg";
+                    Image image = Image.FromFile( Application.StartupPath + "\\Resource\\HotelDefault.jpg");
+                    images.Add(image);
                 }
             }
         }

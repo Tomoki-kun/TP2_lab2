@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using TP2_Lab.Formularios;
 using TP2_Lab.Properties;
 
 namespace TP2_Lab
@@ -26,13 +27,13 @@ namespace TP2_Lab
         private Sistema nuevoS;
         private Reserva miReserva;
         private int cantPropiedades = 0,
-                    cantReservas = 0,
                     reservasCasaDia = 0,
                     reservasCasaFinde = 0,
                     reservasHabitaciones = 0;
         private List<IExportable> listaDatos = new List<IExportable>();
         private FileStream archivo;
         private BinaryFormatter serDeser;
+        private List<Image> images = new List<Image>();
 
         public Form1()
         {
@@ -189,8 +190,7 @@ namespace TP2_Lab
                         int cantCamas = Convert.ToInt32(nuevaP.numCamas.Text);
                         double precio = Convert.ToDouble(nuevaP.numPrecio.Value);
                         int nro = Convert.ToInt32(nuevaP.numNro.Value);
-                        Image imagen = Image.FromFile(nuevaP.RutaImagen);
-                        Image imagen2 = Image.FromFile(nuevaP.RutaImagen2);
+                        List<Image> imagenCargadas = nuevaP.ListaImagenes;
                         if (nuevaP.rBCasas.Checked)
                         {
                             string nombre = CapitalizarPalabras(nuevaP.tBnombre.Text);
@@ -200,18 +200,18 @@ namespace TP2_Lab
                             int cantDiasPermitidos = Convert.ToInt32(nuevaP.numDiasPermitidos.Value);
                             if (nuevaP.rBcasaDia.Checked)
                             {
-                                prop = new Casa(nro, cantDiasPermitidos, propietario, precio, direccion, localidad, cantCamas, servicios, imagen, imagen2);
+                                prop = new Casa(nro, cantDiasPermitidos, propietario, precio, direccion, localidad, cantCamas, servicios, imagenCargadas);
                             }
                             else if (nuevaP.rBcasaFinde.Checked)
                             {
-                                prop = new CasaFindeSemana(nro, 0, propietario, precio, direccion, localidad, cantCamas, servicios, imagen, imagen2);
+                                prop = new CasaFindeSemana(nro, 0, propietario, precio, direccion, localidad, cantCamas, servicios, imagenCargadas);
                             }
                         }
                         if (nuevaP.rBHoteles.Checked)
                         {
                             int estrellas = Convert.ToInt32(nuevaP.numEstrellas.Text);
                             string tipoHabitacion = nuevaP.cBTipoHabitacion.ValueMember;
-                            prop = new Habitaciones(nro, estrellas, precio, direccion, localidad, servicios, cantCamas, tipoHabitacion, imagen, imagen2);
+                            prop = new Habitaciones(nro, estrellas, precio, direccion, localidad, servicios, cantCamas, tipoHabitacion, imagenCargadas);
                         }
                         nuevoS.AgregarPropiedad(prop);
                         DGAgregarPropiedad(prop);
@@ -463,8 +463,7 @@ namespace TP2_Lab
                             if (prop is CasaFindeSemana && inicio.DayOfWeek == DayOfWeek.Friday && fin.DayOfWeek == DayOfWeek.Sunday
                                  || prop is Casa && !(prop is CasaFindeSemana) && numeroDias >= ((Casa)prop).DiasPermitidos || prop is Habitaciones)
                             {
-                                miReserva = new Reserva(miCliente, cantReservas, huespedes, inicio, fin);
-                                cantReservas++;
+                                miReserva = new Reserva(miCliente, huespedes, inicio, fin);
                                 double costoFinal = 0;
                                 if (prop is Habitaciones)
                                 {
@@ -611,58 +610,8 @@ namespace TP2_Lab
             cBTipoHabitaciones.ValueMember = "";
         }
 
-        private void btnExportar_Click(object sender, EventArgs e)
-        {
-            string archivo = "misDatos.txt";
-            saveFileDialog1.FileName = archivo;
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                archivo = saveFileDialog1.FileName;
-                if (File.Exists(archivo)) File.Delete(archivo);
-                FileStream miArchivo = new FileStream(archivo, FileMode.CreateNew, FileAccess.Write);
-                StreamWriter sw = new StreamWriter(miArchivo);
-                string linea;
-                foreach (Propiedad prop in nuevoS.ListaPropiedad)
-                {
-                    foreach (Reserva resv in prop.ListaReservas)
-                    {
-                        linea = resv.ToString();
-                        sw.WriteLine(linea);
-                    }
-                }
-                sw.Close();
-                miArchivo.Close();
-            }
-        }
 
-        private void btnImportar_Click(object sender, EventArgs e)
-        {
-            FReservaImportada vReservaImportada = new FReservaImportada();
-            vReservaImportada.dGReservaImportada.RowHeadersVisible = false;
-            openFileDialog1.Filter = "archivo de valores separados por coma (*.csv) | *.csv";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                string archivo = openFileDialog1.FileName;
-                FileStream miArchivo = new FileStream(archivo, FileMode.Open, FileAccess.Read);
-                StreamReader sr = new StreamReader(miArchivo);
 
-                string renglon;
-                while (!sr.EndOfStream)
-                {
-                    renglon = sr.ReadLine();
-                    int filaIndex = vReservaImportada.dGReservaImportada.Rows.Add();
-                    DataGridViewRow fila = vReservaImportada.dGReservaImportada.Rows[filaIndex];
-                    string[] datos = renglon.Split(';');
-                    for (int i = 0; i < datos.Length; i++)
-                    {
-                        fila.Cells[i].Value = datos[i];
-                    }
-                }
-                vReservaImportada.ShowDialog();
-                sr.Close();
-                miArchivo.Close();
-            }
-        }
         #endregion
 
         #region MenuStrip
@@ -687,27 +636,33 @@ namespace TP2_Lab
         private void ImportarCalendarioDeReservas(string path)
         {
             List<Reserva> reservas = new List<Reserva>();
+            FileStream archivo = null;
+            StreamReader sR = null;
             try
             {
-                FileStream archivo = new FileStream(path, FileMode.Open, FileAccess.Read);
-                StreamReader sR = new StreamReader(archivo);
+                archivo = new FileStream(path, FileMode.Open, FileAccess.Read);
+                sR = new StreamReader(archivo);
                 string linea;
                 string[] datos;
 
+                linea = sR.ReadLine();
                 while (!sR.EndOfStream)
                 {
                     linea = sR.ReadLine();
                     datos = linea.Split(';');
                     int numReserva = Convert.ToInt32(datos[0]);
-                    int cantidad = Convert.ToInt32(datos[1]);
-                    long dni = Convert.ToInt64(datos[2]);
-                    DateTime fechaI = Convert.ToDateTime(datos[3]);
-                    DateTime fechaF = Convert.ToDateTime(datos[4]);
+                    DateTime fechaI = Convert.ToDateTime(datos[1]);
+                    DateTime fechaF = Convert.ToDateTime(datos[2]);
+                    DateTime realizado = Convert.ToDateTime(datos[3]);
+                    int cantidad = Convert.ToInt32(datos[4]);
+                    long dni = Convert.ToInt64(datos[5]);
 
                     Cliente nuevoCliente = BuscarCliente(dni);
                     if (nuevoCliente != null)
                     {
-                        reservas.Add(new Reserva(nuevoCliente, numReserva, cantidad, fechaI, fechaF));
+                        Reserva nuevaRes = new Reserva(nuevoCliente, cantidad, fechaI, fechaF);
+                        nuevaRes.NumeroReserva = numReserva;
+                        reservas.Add(nuevaRes);
                         MessageBox.Show("Se ha importado correctamente su calendario");
                     }
                     else
@@ -715,8 +670,6 @@ namespace TP2_Lab
                         MessageBox.Show("No se ha encontrado una reserva");
                     }
                 }
-                sR.Close();
-                archivo.Dispose();
             }
             catch (FormatException)
             {
@@ -730,6 +683,42 @@ namespace TP2_Lab
             {
                 MessageBox.Show("Error desconocido" + ex.Message);
             }
+            finally
+            {
+                sR.Close();
+                archivo.Dispose();
+            }
+        }
+
+        private void exportarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            prop = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value; ;
+            saveFileDialog1.Filter = "Archivos CSV (.csv)|*.csv";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                ExportarCalendarioDeReservas(prop.ListaReservas, saveFileDialog1.FileName);
+            }
+        }
+
+        private void ExportarCalendarioDeReservas(List<Reserva> listaReserva, string path)
+        {
+            try
+            {
+                FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+                StreamWriter sW = new StreamWriter(fs);
+                sW.WriteLine("nro Reserva;Fecha entrada;Fecha salida;Realizada;Cantidad de Huespedes;DNI cliente");
+                foreach (Reserva r in listaReserva)
+                {
+                    sW.WriteLine(r.Exportar());
+                }
+                sW.Close();
+                fs.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error desconocido" + ex.Message);
+            }
+            MessageBox.Show("Se ha exportado su calendario de reservas correctamente");
         }
 
         private Cliente BuscarCliente(long dni)
@@ -749,35 +738,6 @@ namespace TP2_Lab
             return aBuscar;
         }
 
-        private void exportarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            saveFileDialog1.Filter = "Archivos CSV (.csv)|*.csv";
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                ExportarCalendarioDeReservas(prop.ListaReservas, saveFileDialog1.FileName);
-            }
-        }
-
-        private void ExportarCalendarioDeReservas(List<Reserva> listaReserva, string path)
-        {
-            try
-            {
-                FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
-                StreamWriter sW = new StreamWriter(fs);
-
-                foreach (Reserva r in listaReserva)
-                {
-                    sW.WriteLine(r.Exportar());
-                }
-                sW.Close();
-                fs.Dispose();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error desconocido" + ex.Message);
-            }
-            MessageBox.Show("Se ha exportado su calendario de reservas correctamente");
-        }
 
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -897,7 +857,9 @@ namespace TP2_Lab
                 nuevoTicket.lBticket.Items.Add("--------------------------------------------------------------------------------------");
                 nuevoTicket.lBticket.Items.Add("\nCosto por día: $" + prop.PrecioBasico.ToString());
                 nuevoTicket.lBticket.Items.Add("\nCosto total: $" + miReserva.PrecioFinal.ToString("00.0"));
-                nuevoTicket.pictureBox1.Image = prop.Imagen;
+
+                Bitmap bitmap = new Bitmap(prop.Imagenes[0], new Size(125, 125));
+                nuevoTicket.pictureBox1.Image = bitmap;
                 nuevoTicket.ShowDialog();
             }
             else
@@ -974,7 +936,6 @@ namespace TP2_Lab
         {
             int filaIndex = DGPropiedades.Rows.Add();
             DataGridViewRow fila = DGPropiedades.Rows[filaIndex];
-            Bitmap bitmap;
 
             fila.Cells[0].Value = propiedad;
             fila.Cells[2].Value = propiedad.Localidad;
@@ -982,10 +943,6 @@ namespace TP2_Lab
             fila.Cells[4].Value = propiedad.Nro;
             fila.Cells[6].Value = propiedad.PrecioBasico;
             fila.Cells[7].Value = propiedad.CantCamas;
-            bitmap = new Bitmap(propiedad.Imagen, new Size(125, 125));
-            fila.Cells[11].Value = bitmap;
-            bitmap = new Bitmap(propiedad.Imagen2, new Size(125, 125));
-            fila.Cells[12].Value = bitmap;
 
             // Verificar el tipo de instancia y llenar las celdas correspondientes
             if (propiedad is Habitaciones)
@@ -1097,14 +1054,61 @@ namespace TP2_Lab
             return aEliminar;
         }
 
-        private void graficosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void DGPropiedades_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex >= 0 && e.ColumnIndex == DGPropiedades.Columns["VerImagen"].Index)
+            {
+                Propiedad propiedad = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
 
+                if (propiedad != null)
+                {
+                    // Obtener la lista de imágenes del objeto asociado
+                    List<Image> images = propiedad.Imagenes;
+
+                    // Haz algo con la lista de imágenes, como mostrarlas en una ventana
+                    if (images != null && images.Count > 0)
+                    {
+                        ImageViewForm imageViewForm = new ImageViewForm(images); // Reemplaza ImageViewForm con el nombre de tu ventana de visualización de imágenes
+                        imageViewForm.ShowDialog();
+                    }
+                }
+
+                //// Mostrar la ventana de visualización de imágenes
+                //ImageViewForm imageViewForm = new ImageViewForm(image);
+                //imageViewForm.ShowDialog();
+            }
+        }
+
+        private void DGPropiedades_SelectionChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void DGPropiedades_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            DGReservas.Rows.Clear();
+
+            Propiedad propiedad = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
+            foreach (Reserva reserva in propiedad.ListaReservas)
+            {
+                string cliente = reserva.Cliente.ToString();
+                string nroReserva = reserva.NumeroReserva.ToString();
+                string ingreso = reserva.FechaEntrada.ToString("U");
+                string egreso = reserva.FechaSalida.ToString("U");
+                string reservacion = reserva.Realizado.ToString("U");
+                string cantHuesped = reserva.CantPersonas.ToString();
+
+                int filaIndex = DGReservas.Rows.Add();
+                DataGridViewRow fila = DGReservas.Rows[filaIndex];
+
+                fila.Cells[0].Value = cliente;
+                fila.Cells[1].Value = nroReserva;
+                fila.Cells[2].Value = ingreso;
+                fila.Cells[3].Value = egreso;
+                fila.Cells[4].Value = reservacion;
+                fila.Cells[5].Value = cantHuesped;
+            }
         }
 
         public void CambiarContra(string actualC, string nuevaC)

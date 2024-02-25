@@ -28,7 +28,7 @@ namespace TP2_Lab
         }
         #endregion
         public Habitaciones(int nro,int estrellas,double precio,string direccion,string localidad, bool[] servicios, int cantCamas,
-            string tipoHabitacion, Image pic,Image pic2) : base(nro,precio,direccion, localidad, cantCamas,servicios, pic,pic2)
+            string tipoHabitacion, List<Image> pics) : base(nro,precio,direccion, localidad, cantCamas,servicios, pics)
         {
             this.estrellas = estrellas;
             this.tipoHabitacion = tipoHabitacion;

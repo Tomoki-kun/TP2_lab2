@@ -19,8 +19,7 @@ namespace TP2_Lab
         protected bool estado;
         protected int nro;
         private List<Reserva> listaReservas=new List<Reserva>();
-        Image imagen;
-        Image imagen2;
+        List<Image> imagenes = new List<Image>();
         protected bool[] servicios = new bool[6];
         private string direccion;
         private string localidad;
@@ -45,17 +44,12 @@ namespace TP2_Lab
         {
             get { return listaReservas; }
         }
-        public Image Imagen
+        public List<Image> Imagenes
         {
-            get { return imagen; }
-            private set { imagen = value; }
+            get { return imagenes; }
+            set { imagenes = value; }
         }
 
-        public Image Imagen2
-        {
-            get { return imagen2; }
-            private set { imagen2 = value; }
-        }
         public string Direccion
         {
             get { return direccion; }
@@ -67,7 +61,7 @@ namespace TP2_Lab
             set { localidad = value; }
         }
         #endregion
-        public Propiedad(int nro,double precio,string direccion,string localidad, int cantCamas,bool[]servicios, Image pic, Image pic2)
+        public Propiedad(int nro,double precio,string direccion,string localidad, int cantCamas,bool[]servicios, List<Image> imagenes)
         {
             Nro = nro;
             PrecioBasico = precio;
@@ -78,8 +72,7 @@ namespace TP2_Lab
             {
                 this.servicios[i] = servicios[i];
             }
-            Imagen = pic;
-            imagen2 = pic2;
+            Imagenes = imagenes;
         }
 
         public bool[] Servicios

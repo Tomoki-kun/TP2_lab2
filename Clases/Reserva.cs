@@ -14,6 +14,7 @@ namespace TP2_Lab
     public class Reserva : IComparable, IExportable
     {
         private Cliente cliente;
+        private static int numStatic = 0;
         private int numReserva;
         private DateTime fechaEntrada;
         private DateTime fechaSalida;
@@ -56,14 +57,15 @@ namespace TP2_Lab
         public int NumeroReserva
         {
             get { return numReserva; }
+            set {  numReserva = value; }
         }
         #endregion
 
         //Constructor
-        public Reserva(Cliente cliente, int numReserva, int cantidad, DateTime fechaEntrada, DateTime fechaSalida)
+        public Reserva(Cliente cliente,  int cantidad, DateTime fechaEntrada, DateTime fechaSalida)
         {
             Cliente = cliente;
-            this.numReserva = numReserva;
+            this.numReserva = numStatic;
             this.fechaEntrada = fechaEntrada;
             this.fechaSalida = fechaSalida;
             cantPersonas = cantidad;
@@ -76,8 +78,8 @@ namespace TP2_Lab
         }
         public override string ToString()
         {
-            return Cliente + ";" + numReserva.ToString() + ";" + FechaEntrada.ToString() + ";" + 
-                FechaSalida.ToString() + ";" + realizado.ToString() + ";" + cantPersonas.ToString();
+            return numReserva.ToString() + ";" + FechaEntrada.ToString() + ";" + 
+                FechaSalida.ToString() + ";" + realizado.ToString() + ";" + cantPersonas.ToString() + ";" + cliente.DNI.ToString();
         }
 
         public string Comprobante(Propiedad prop)
@@ -101,7 +103,7 @@ namespace TP2_Lab
         }
         public string Exportar()
         {
-            return $"{numReserva},{cliente.DNI},{fechaEntrada},{fechaSalida}";
+            return ToString();
         }
         #endregion
     }

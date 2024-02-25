@@ -11,8 +11,8 @@ namespace TP2_Lab
     [Serializable]
     internal class CasaFindeSemana:Casa
     {
-        public CasaFindeSemana(int nro, int diasPermitidos, Propietario miPropietario,double precio, string direccion,string localidad,int cantCamas, bool[]servicios, Image pic,Image pic2)
-            :base(nro,diasPermitidos,miPropietario,precio,direccion, localidad, cantCamas,servicios, pic,pic2)
+        public CasaFindeSemana(int nro, int diasPermitidos, Propietario miPropietario,double precio, string direccion,string localidad,int cantCamas, bool[]servicios, List<Image> pics)
+            :base(nro,diasPermitidos,miPropietario,precio,direccion, localidad, cantCamas,servicios, pics)
         {
         }
         public override double CalcularPrecio()

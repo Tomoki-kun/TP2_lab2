@@ -33,8 +33,6 @@
             this.btnAgregarPropiedad = new System.Windows.Forms.Button();
             this.btnEliminarPropiedad = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.btnImportar = new System.Windows.Forms.Button();
-            this.btnExportar = new System.Windows.Forms.Button();
             this.Calendar = new System.Windows.Forms.MonthCalendar();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,6 +49,18 @@
             this.btnReservar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.DGPropiedades = new System.Windows.Forms.DataGridView();
+            this.Objeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiasPermitidos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrecioBasico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CantCamas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estrellas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoHabitacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dueño = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VerImagen = new System.Windows.Forms.DataGridViewButtonColumn();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -74,23 +84,18 @@
             this.barraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnModificarPropiedad = new System.Windows.Forms.Button();
-            this.Objeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiasPermitidos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrecioBasico = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CantCamas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estrellas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoHabitacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dueño = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Imagen = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Imagen2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.DGReservas = new System.Windows.Forms.DataGridView();
+            this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumReserva = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ingreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Egreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaReservacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CantHuespedes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCantHuespedes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGPropiedades)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGReservas)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAgregarPropiedad
@@ -125,28 +130,6 @@
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // btnImportar
-            // 
-            this.btnImportar.Location = new System.Drawing.Point(1325, 650);
-            this.btnImportar.Margin = new System.Windows.Forms.Padding(4);
-            this.btnImportar.Name = "btnImportar";
-            this.btnImportar.Size = new System.Drawing.Size(100, 42);
-            this.btnImportar.TabIndex = 3;
-            this.btnImportar.Text = "Importar";
-            this.btnImportar.UseVisualStyleBackColor = true;
-            this.btnImportar.Click += new System.EventHandler(this.btnImportar_Click);
-            // 
-            // btnExportar
-            // 
-            this.btnExportar.Location = new System.Drawing.Point(1461, 652);
-            this.btnExportar.Margin = new System.Windows.Forms.Padding(4);
-            this.btnExportar.Name = "btnExportar";
-            this.btnExportar.Size = new System.Drawing.Size(100, 39);
-            this.btnExportar.TabIndex = 4;
-            this.btnExportar.Text = "Exportar";
-            this.btnExportar.UseVisualStyleBackColor = true;
-            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // Calendar
             // 
@@ -342,8 +325,7 @@
             this.Estrellas,
             this.TipoHabitacion,
             this.Dueño,
-            this.Imagen,
-            this.Imagen2});
+            this.VerImagen});
             this.DGPropiedades.Location = new System.Drawing.Point(444, 28);
             this.DGPropiedades.Margin = new System.Windows.Forms.Padding(4);
             this.DGPropiedades.MaximumSize = new System.Drawing.Size(1500, 554);
@@ -352,9 +334,123 @@
             this.DGPropiedades.RowHeadersVisible = false;
             this.DGPropiedades.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.DGPropiedades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGPropiedades.Size = new System.Drawing.Size(1500, 554);
+            this.DGPropiedades.Size = new System.Drawing.Size(1500, 312);
             this.DGPropiedades.TabIndex = 15;
+            this.DGPropiedades.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGPropiedades_CellClick);
             this.DGPropiedades.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGPropiedades_CellContentClick);
+            this.DGPropiedades.SelectionChanged += new System.EventHandler(this.DGPropiedades_SelectionChanged);
+            // 
+            // Objeto
+            // 
+            this.Objeto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Objeto.FillWeight = 2F;
+            this.Objeto.HeaderText = "Objeto";
+            this.Objeto.MinimumWidth = 8;
+            this.Objeto.Name = "Objeto";
+            this.Objeto.ReadOnly = true;
+            this.Objeto.Visible = false;
+            // 
+            // Tipo
+            // 
+            this.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Tipo.FillWeight = 48F;
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.MinimumWidth = 8;
+            this.Tipo.Name = "Tipo";
+            this.Tipo.ReadOnly = true;
+            this.Tipo.Width = 78;
+            // 
+            // Localidad
+            // 
+            this.Localidad.FillWeight = 25F;
+            this.Localidad.HeaderText = "Localidad";
+            this.Localidad.MinimumWidth = 8;
+            this.Localidad.Name = "Localidad";
+            this.Localidad.ReadOnly = true;
+            // 
+            // Direccion
+            // 
+            this.Direccion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Direccion.FillWeight = 35F;
+            this.Direccion.HeaderText = "Dirección";
+            this.Direccion.MinimumWidth = 8;
+            this.Direccion.Name = "Direccion";
+            this.Direccion.ReadOnly = true;
+            this.Direccion.Width = 77;
+            // 
+            // Nro
+            // 
+            this.Nro.FillWeight = 15F;
+            this.Nro.HeaderText = "N°";
+            this.Nro.MinimumWidth = 8;
+            this.Nro.Name = "Nro";
+            this.Nro.ReadOnly = true;
+            // 
+            // DiasPermitidos
+            // 
+            this.DiasPermitidos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.DiasPermitidos.FillWeight = 47.9798F;
+            this.DiasPermitidos.HeaderText = "Días Permitidos";
+            this.DiasPermitidos.MinimumWidth = 8;
+            this.DiasPermitidos.Name = "DiasPermitidos";
+            this.DiasPermitidos.ReadOnly = true;
+            this.DiasPermitidos.Width = 60;
+            // 
+            // PrecioBasico
+            // 
+            this.PrecioBasico.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.PrecioBasico.FillWeight = 25F;
+            this.PrecioBasico.HeaderText = "Precio Básico";
+            this.PrecioBasico.MinimumWidth = 8;
+            this.PrecioBasico.Name = "PrecioBasico";
+            this.PrecioBasico.ReadOnly = true;
+            this.PrecioBasico.Width = 110;
+            // 
+            // CantCamas
+            // 
+            this.CantCamas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.CantCamas.FillWeight = 25F;
+            this.CantCamas.HeaderText = "Cantidad de Camas";
+            this.CantCamas.MinimumWidth = 8;
+            this.CantCamas.Name = "CantCamas";
+            this.CantCamas.ReadOnly = true;
+            this.CantCamas.Width = 103;
+            // 
+            // Estrellas
+            // 
+            this.Estrellas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Estrellas.FillWeight = 25F;
+            this.Estrellas.HeaderText = "Estrellas";
+            this.Estrellas.MinimumWidth = 8;
+            this.Estrellas.Name = "Estrellas";
+            this.Estrellas.ReadOnly = true;
+            this.Estrellas.Width = 88;
+            // 
+            // TipoHabitacion
+            // 
+            this.TipoHabitacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.TipoHabitacion.FillWeight = 25F;
+            this.TipoHabitacion.HeaderText = "Tipo de Habitación";
+            this.TipoHabitacion.MinimumWidth = 8;
+            this.TipoHabitacion.Name = "TipoHabitacion";
+            this.TipoHabitacion.ReadOnly = true;
+            this.TipoHabitacion.Width = 138;
+            // 
+            // Dueño
+            // 
+            this.Dueño.FillWeight = 35F;
+            this.Dueño.HeaderText = "Propietario";
+            this.Dueño.MinimumWidth = 8;
+            this.Dueño.Name = "Dueño";
+            this.Dueño.ReadOnly = true;
+            // 
+            // VerImagen
+            // 
+            this.VerImagen.HeaderText = "Ver Imagen";
+            this.VerImagen.MinimumWidth = 6;
+            this.VerImagen.Name = "VerImagen";
+            this.VerImagen.ReadOnly = true;
+            this.VerImagen.UseColumnTextForButtonValue = true;
             // 
             // openFileDialog1
             // 
@@ -465,21 +561,21 @@
             // crearUsuarioToolStripMenuItem
             // 
             this.crearUsuarioToolStripMenuItem.Name = "crearUsuarioToolStripMenuItem";
-            this.crearUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.crearUsuarioToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
             this.crearUsuarioToolStripMenuItem.Text = "Crear Usuario";
             this.crearUsuarioToolStripMenuItem.Click += new System.EventHandler(this.crearUsuarioToolStripMenuItem_Click);
             // 
             // cambiarContraseñaToolStripMenuItem
             // 
             this.cambiarContraseñaToolStripMenuItem.Name = "cambiarContraseñaToolStripMenuItem";
-            this.cambiarContraseñaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.cambiarContraseñaToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
             this.cambiarContraseñaToolStripMenuItem.Text = "Cambiar contraseña";
             this.cambiarContraseñaToolStripMenuItem.Click += new System.EventHandler(this.cambiarContraseñaToolStripMenuItem_Click);
             // 
             // eliminarUsuarioToolStripMenuItem
             // 
             this.eliminarUsuarioToolStripMenuItem.Name = "eliminarUsuarioToolStripMenuItem";
-            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
             this.eliminarUsuarioToolStripMenuItem.Text = "Eliminar Usuario";
             this.eliminarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.eliminarUsuarioToolStripMenuItem_Click);
             // 
@@ -497,21 +593,20 @@
             this.sectoresToolStripMenuItem,
             this.barraToolStripMenuItem});
             this.graficosToolStripMenuItem.Name = "graficosToolStripMenuItem";
-            this.graficosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.graficosToolStripMenuItem.Size = new System.Drawing.Size(138, 26);
             this.graficosToolStripMenuItem.Text = "Graficos";
-            this.graficosToolStripMenuItem.Click += new System.EventHandler(this.graficosToolStripMenuItem_Click);
             // 
             // sectoresToolStripMenuItem
             // 
             this.sectoresToolStripMenuItem.Name = "sectoresToolStripMenuItem";
-            this.sectoresToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.sectoresToolStripMenuItem.Size = new System.Drawing.Size(140, 26);
             this.sectoresToolStripMenuItem.Text = "Sectores";
             this.sectoresToolStripMenuItem.Click += new System.EventHandler(this.sectoresToolStripMenuItem_Click);
             // 
             // barraToolStripMenuItem
             // 
             this.barraToolStripMenuItem.Name = "barraToolStripMenuItem";
-            this.barraToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.barraToolStripMenuItem.Size = new System.Drawing.Size(140, 26);
             this.barraToolStripMenuItem.Text = "Barra";
             this.barraToolStripMenuItem.Click += new System.EventHandler(this.barraToolStripMenuItem_Click);
             // 
@@ -531,131 +626,60 @@
             this.btnModificarPropiedad.UseVisualStyleBackColor = true;
             this.btnModificarPropiedad.Click += new System.EventHandler(this.btnModificarPropiedad_Click);
             // 
-            // Objeto
+            // DGReservas
             // 
-            this.Objeto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Objeto.FillWeight = 2F;
-            this.Objeto.HeaderText = "Objeto";
-            this.Objeto.MinimumWidth = 8;
-            this.Objeto.Name = "Objeto";
-            this.Objeto.ReadOnly = true;
-            this.Objeto.Visible = false;
+            this.DGReservas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DGReservas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGReservas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Cliente,
+            this.NumReserva,
+            this.Ingreso,
+            this.Egreso,
+            this.FechaReservacion,
+            this.CantHuespedes});
+            this.DGReservas.Location = new System.Drawing.Point(444, 361);
+            this.DGReservas.Name = "DGReservas";
+            this.DGReservas.RowHeadersVisible = false;
+            this.DGReservas.RowHeadersWidth = 51;
+            this.DGReservas.RowTemplate.Height = 24;
+            this.DGReservas.Size = new System.Drawing.Size(1500, 273);
+            this.DGReservas.TabIndex = 19;
             // 
-            // Tipo
+            // Cliente
             // 
-            this.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Tipo.FillWeight = 48F;
-            this.Tipo.HeaderText = "Tipo";
-            this.Tipo.MinimumWidth = 8;
-            this.Tipo.Name = "Tipo";
-            this.Tipo.ReadOnly = true;
-            this.Tipo.Width = 78;
+            this.Cliente.HeaderText = "Cliente";
+            this.Cliente.MinimumWidth = 6;
+            this.Cliente.Name = "Cliente";
             // 
-            // Localidad
+            // NumReserva
             // 
-            this.Localidad.FillWeight = 25F;
-            this.Localidad.HeaderText = "Localidad";
-            this.Localidad.MinimumWidth = 8;
-            this.Localidad.Name = "Localidad";
-            this.Localidad.ReadOnly = true;
+            this.NumReserva.HeaderText = "Nro Reserva";
+            this.NumReserva.MinimumWidth = 6;
+            this.NumReserva.Name = "NumReserva";
             // 
-            // Direccion
+            // Ingreso
             // 
-            this.Direccion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Direccion.FillWeight = 35F;
-            this.Direccion.HeaderText = "Dirección";
-            this.Direccion.MinimumWidth = 8;
-            this.Direccion.Name = "Direccion";
-            this.Direccion.ReadOnly = true;
-            this.Direccion.Width = 77;
+            this.Ingreso.HeaderText = "Ingreso";
+            this.Ingreso.MinimumWidth = 6;
+            this.Ingreso.Name = "Ingreso";
             // 
-            // Nro
+            // Egreso
             // 
-            this.Nro.FillWeight = 15F;
-            this.Nro.HeaderText = "N°";
-            this.Nro.MinimumWidth = 8;
-            this.Nro.Name = "Nro";
-            this.Nro.ReadOnly = true;
+            this.Egreso.HeaderText = "Egreso";
+            this.Egreso.MinimumWidth = 6;
+            this.Egreso.Name = "Egreso";
             // 
-            // DiasPermitidos
+            // FechaReservacion
             // 
-            this.DiasPermitidos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.DiasPermitidos.FillWeight = 47.9798F;
-            this.DiasPermitidos.HeaderText = "Días Permitidos";
-            this.DiasPermitidos.MinimumWidth = 8;
-            this.DiasPermitidos.Name = "DiasPermitidos";
-            this.DiasPermitidos.ReadOnly = true;
-            this.DiasPermitidos.Width = 60;
+            this.FechaReservacion.HeaderText = "Fecha Reservacion";
+            this.FechaReservacion.MinimumWidth = 6;
+            this.FechaReservacion.Name = "FechaReservacion";
             // 
-            // PrecioBasico
+            // CantHuespedes
             // 
-            this.PrecioBasico.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.PrecioBasico.FillWeight = 25F;
-            this.PrecioBasico.HeaderText = "Precio Básico";
-            this.PrecioBasico.MinimumWidth = 8;
-            this.PrecioBasico.Name = "PrecioBasico";
-            this.PrecioBasico.ReadOnly = true;
-            this.PrecioBasico.Width = 110;
-            // 
-            // CantCamas
-            // 
-            this.CantCamas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.CantCamas.FillWeight = 25F;
-            this.CantCamas.HeaderText = "Cantidad de Camas";
-            this.CantCamas.MinimumWidth = 8;
-            this.CantCamas.Name = "CantCamas";
-            this.CantCamas.ReadOnly = true;
-            this.CantCamas.Width = 103;
-            // 
-            // Estrellas
-            // 
-            this.Estrellas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Estrellas.FillWeight = 25F;
-            this.Estrellas.HeaderText = "Estrellas";
-            this.Estrellas.MinimumWidth = 8;
-            this.Estrellas.Name = "Estrellas";
-            this.Estrellas.ReadOnly = true;
-            this.Estrellas.Width = 88;
-            // 
-            // TipoHabitacion
-            // 
-            this.TipoHabitacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.TipoHabitacion.FillWeight = 25F;
-            this.TipoHabitacion.HeaderText = "Tipo de Habitación";
-            this.TipoHabitacion.MinimumWidth = 8;
-            this.TipoHabitacion.Name = "TipoHabitacion";
-            this.TipoHabitacion.ReadOnly = true;
-            this.TipoHabitacion.Width = 138;
-            // 
-            // Dueño
-            // 
-            this.Dueño.FillWeight = 35F;
-            this.Dueño.HeaderText = "Propietario";
-            this.Dueño.MinimumWidth = 8;
-            this.Dueño.Name = "Dueño";
-            this.Dueño.ReadOnly = true;
-            // 
-            // Imagen
-            // 
-            this.Imagen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Imagen.FillWeight = 568.2F;
-            this.Imagen.HeaderText = "Imagen";
-            this.Imagen.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.Imagen.MinimumWidth = 2;
-            this.Imagen.Name = "Imagen";
-            this.Imagen.ReadOnly = true;
-            this.Imagen.Width = 130;
-            // 
-            // Imagen2
-            // 
-            this.Imagen2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Imagen2.FillWeight = 568.2F;
-            this.Imagen2.HeaderText = "Imagen2";
-            this.Imagen2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.Imagen2.MinimumWidth = 2;
-            this.Imagen2.Name = "Imagen2";
-            this.Imagen2.ReadOnly = true;
-            this.Imagen2.Width = 130;
+            this.CantHuespedes.HeaderText = "Cant. Huespedes";
+            this.CantHuespedes.MinimumWidth = 6;
+            this.CantHuespedes.Name = "CantHuespedes";
             // 
             // Form1
             // 
@@ -664,11 +688,10 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1980, 770);
+            this.Controls.Add(this.DGReservas);
             this.Controls.Add(this.btnModificarPropiedad);
             this.Controls.Add(this.DGPropiedades);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnExportar);
-            this.Controls.Add(this.btnImportar);
             this.Controls.Add(this.btnEliminarPropiedad);
             this.Controls.Add(this.btnAgregarPropiedad);
             this.Controls.Add(this.menuStrip1);
@@ -685,6 +708,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGPropiedades)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGReservas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -695,8 +719,6 @@
         private System.Windows.Forms.Button btnAgregarPropiedad;
         private System.Windows.Forms.Button btnEliminarPropiedad;
         private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.Button btnImportar;
-        private System.Windows.Forms.Button btnExportar;
         private System.Windows.Forms.MonthCalendar Calendar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -747,7 +769,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Estrellas;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoHabitacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Dueño;
-        private System.Windows.Forms.DataGridViewImageColumn Imagen;
-        private System.Windows.Forms.DataGridViewImageColumn Imagen2;
+        private System.Windows.Forms.DataGridViewButtonColumn VerImagen;
+        private System.Windows.Forms.DataGridView DGReservas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumReserva;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ingreso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Egreso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaReservacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CantHuespedes;
     }
 }

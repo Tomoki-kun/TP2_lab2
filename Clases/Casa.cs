@@ -32,8 +32,8 @@ namespace TP2_Lab
         #endregion
 
         //Constructor
-        public Casa(int nro,int diasPermitidos, Propietario miPropietario, double precio, string direccion, string localidad, int cantCamas, bool[] servicios, Image pic,Image pic2)
-            : base(nro,precio, direccion, localidad, cantCamas, servicios, pic,pic2)
+        public Casa(int nro,int diasPermitidos, Propietario miPropietario, double precio, string direccion, string localidad, int cantCamas, bool[] servicios, List<Image> pics)
+            : base(nro,precio, direccion, localidad, cantCamas, servicios, pics)
         {
             this.diasPermitidos = diasPermitidos;
             this.miPropietario = miPropietario;

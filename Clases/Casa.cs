@@ -13,15 +13,21 @@ namespace TP2_Lab
     {
         private int diasPermitidos; //dias minimo
         //private int diasTotales;     //dias totales
-        Propietario miPropietario;
+        private Propietario miPropietario;
         #region Propiedades
         public string Propietario
         {
             get{ return miPropietario.ToString(); }
         }
+
+        public long DNIpropietario
+        {
+            get { return miPropietario.DNI; }
+        }
         public int DiasPermitidos
         {
             get { return diasPermitidos; }
+            set { diasPermitidos = value;}
         }
         #endregion
 

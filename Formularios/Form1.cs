@@ -55,6 +55,8 @@ namespace TP2_Lab
                 usuario = new Usuario(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
                 nuevoS.ListaUsuarios.Sort();
                 int pos = nuevoS.ListaUsuarios.BinarySearch(usuario);
+                if (pos == 0 && usuario.Contra != nuevoS.ListaUsuarios[pos].Contra)
+                    pos = -1;
                 while (pos < 0)
                 {
                     MessageBox.Show("Usuario no econtrado", "Error", MessageBoxButtons.OK);
@@ -66,6 +68,8 @@ namespace TP2_Lab
                     }
                     usuario = new Usuario(vLogin.tbUsuario.Text, vLogin.tbContra.Text);
                     pos = nuevoS.ListaUsuarios.BinarySearch(usuario);
+                    if (pos == 0 && usuario.Contra != nuevoS.ListaUsuarios[pos].Contra)
+                        pos = -1;
                 }
 
                 if (nuevoS.ListaUsuarios[pos] is Administrador)
@@ -76,12 +80,13 @@ namespace TP2_Lab
                 else
                 {
                     usuario = (Empleado)nuevoS.ListaUsuarios[pos];
-                    MessageBox.Show("Uds es: Administrador");
+                    MessageBox.Show("Uds es: Empleado");
                     btnAgregarPropiedad.Enabled = false;
                     btnEliminarPropiedad.Enabled = false;
                     crearUsuarioToolStripMenuItem.Enabled = false;
                     eliminarUsuarioToolStripMenuItem.Enabled = false;
                 }
+                RefreshDataGridView();
             }
             else if (presiono == DialogResult.Cancel)
             {
@@ -89,12 +94,6 @@ namespace TP2_Lab
                 this.Close();
             }
             vLogin.Dispose();
-            RefreshDataGridView();
-        }
-
-        private object GetType(Usuario usuario)
-        {
-            throw new NotImplementedException();
         }
 
         #region Serializacion de datos
@@ -248,30 +247,97 @@ namespace TP2_Lab
                 {
                     MessageBox.Show("No se ha encontrado la propiedad");
                 }
-                if (nuevoFprop.ShowDialog() == DialogResult.OK)
+                else
                 {
-                    if (buscada != null)
+                    nuevoFprop.gbPropiedad.Enabled = false;
+                    if (buscada is Habitaciones)
                     {
-                        string direccion = nuevoFprop.tBdireccion.Text;
+                        nuevoFprop.rBHoteles.Checked = true;
+                        nuevoFprop.numEstrellas.Value = ((Habitaciones)buscada).Estrellas;
+                        nuevoFprop.cBTipoHabitacion.ValueMember = ((Habitaciones)buscada).TipoHabitacion;
+                    }
+                    if (buscada is Casa)
+                    {
+                        nuevoFprop.rBcasaFinde.Enabled = false;
+                        nuevoFprop.rBcasaDia.Enabled = false;
+                        if (buscada is CasaFindeSemana)
+                        {
+                            nuevoFprop.rBcasaFinde.Checked = true;
+                            nuevoFprop.gbCasaXDia.Enabled = false;
+                        }
+                        else
+                            nuevoFprop.numDiasPermitidos.Value = ((Casa)buscada).DiasPermitidos;
+
+                        string nomCompleto = ((Casa)buscada).Propietario;
+                        string[] nomSeparado = nomCompleto.Split(',');
+                        nuevoFprop.tBApellido.Text = nomSeparado[0];
+                        nuevoFprop.tBnombre.Text = nomSeparado[1];
+                        nuevoFprop.numDNI.Value = ((Casa)buscada).DNIpropietario;
+                        nuevoFprop.gbPropietario.Enabled = false;
+                    }
+
+                    if (buscada.Servicios[0] == true) nuevoFprop.cbxCochera.Checked = true;
+                    if (buscada.Servicios[1] == true) nuevoFprop.cbxPileta.Checked = true;
+                    if (buscada.Servicios[2] == true) nuevoFprop.cbxWifi.Checked = true;
+                    if (buscada.Servicios[3] == true) nuevoFprop.cbxLimpieza.Checked = true;
+                    if (buscada.Servicios[4] == true) nuevoFprop.cbxDesayuno.Checked = true;
+                    if (buscada.Servicios[5] == true) nuevoFprop.cbxMascotas.Checked = true;
+
+                    nuevoFprop.numPrecio.Value = (decimal)buscada.PrecioBasico;
+
+                    nuevoFprop.tBlocalidad.Text = buscada.Localidad;
+                    nuevoFprop.tBdireccion.Text = buscada.Direccion;
+                    nuevoFprop.numNro.Value = buscada.Nro;
+                    nuevoFprop.numCamas.Value = buscada.CantCamas;
+
+
+
+                    if (nuevoFprop.ShowDialog() == DialogResult.OK)
+                    {
+                        double precio = Convert.ToDouble(nuevoFprop.numPrecio.Value);
+
                         string localidad = nuevoFprop.tBlocalidad.Text;
+                        string direccion = nuevoFprop.tBdireccion.Text;
                         int nro = Convert.ToInt32(nuevoFprop.numNro.Value);
                         int cantCamas = Convert.ToInt32(nuevoFprop.numCamas.Value);
 
-                        buscada.Nro = nro;
-                        buscada.Localidad = localidad;
-                        buscada.CantCamas = cantCamas;
-                        buscada.Direccion = direccion;
 
-                        DGPropiedades.Refresh();
+                        buscada.Servicios[0] = nuevoFprop.cbxCochera.Checked == true ? true : false;
+                        buscada.Servicios[1] = nuevoFprop.cbxPileta.Checked == true ? true : false;
+                        buscada.Servicios[2] = nuevoFprop.cbxWifi.Checked == true ? true : false;
+                        buscada.Servicios[3] = nuevoFprop.cbxLimpieza.Checked == true ? true : false;
+                        buscada.Servicios[4] = nuevoFprop.cbxDesayuno.Checked == true ? true : false;
+                        buscada.Servicios[5] = nuevoFprop.cbxMascotas.Checked == true ? true : false;
+
+                        buscada.PrecioBasico = precio;
+
+                        buscada.Localidad = localidad;
+                        buscada.Direccion = direccion;
+                        buscada.Nro = nro;
+                        buscada.CantCamas = cantCamas;
+
+                        if (buscada is Habitaciones)
+                        {
+                            ((Habitaciones)buscada).Estrellas = Convert.ToInt32(nuevoFprop.numEstrellas.Value);
+                            ((Habitaciones)buscada).TipoHabitacion = nuevoFprop.cBTipoHabitacion.ValueMember;
+                        }
+                        if (buscada is Casa)
+                        {
+                            if (!(buscada is CasaFindeSemana))
+                            {
+                                ((Casa)buscada).DiasPermitidos = Convert.ToInt32(nuevoFprop.numDiasPermitidos.Value);
+                            }
+                        }
+                        MessageBox.Show("Propiedad modificada correctamente");
+                        RefreshDataGridView();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se ha podido modificar la propiedad");
                     }
                 }
-                MessageBox.Show("Propiedad modificada correctamente");
-
             }
-            else
-            {
-                MessageBox.Show("No se ha podido modificar la propiedad");
-            }
+            nuevoFprop.Dispose();
         }
         private void btnEliminarPropiedad_Click(object sender, EventArgs e)
         {
@@ -536,14 +602,7 @@ namespace TP2_Lab
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             rBcasa.Enabled = true;
-            DGPropiedades.Rows.Clear();
-            int cant = nuevoS.CantUsuarios;
-            for (int i = 0; i < cant; i++)
-            {
-                Propiedad propiedad = (Propiedad)nuevoS.ListaPropiedad[i];
-                DGAgregarPropiedad(propiedad);
-
-            }
+            RefreshDataGridView();
 
             cBLocalidad.ValueMember = "";
             Calendar.SelectionRange.Start = DateTime.Now;
@@ -768,13 +827,15 @@ namespace TP2_Lab
             FRegistro fCambiarC = new FRegistro();
             fCambiarC.Text = "Cambiar Contraseña";
             fCambiarC.groupBox1.Visible = false;
+            fCambiarC.lbUser.Text = "Contraseña actual";
+            fCambiarC.lbContra.Text = "Contraseña nueva";
             if (fCambiarC.ShowDialog() == DialogResult.OK)
             {
-                string nombre = fCambiarC.tBuserN.Text;
+                string actualContra = fCambiarC.tBuserN.Text;
                 string nuevaContra = fCambiarC.tBcontraN.Text;
-                CambiarContra(nombre, nuevaContra);
-                MessageBox.Show("Contraseña cambiada correctamente");
+                CambiarContra(actualContra, nuevaContra);
             }
+            fCambiarC.Dispose();
         }
 
         private void crearUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -786,39 +847,33 @@ namespace TP2_Lab
                 {
                     string nombre = crearU.tBuserN.Text;
                     string contra = crearU.tBcontraN.Text;
-                    bool tipoA = crearU.rBadminN.Checked;
-                    bool tipoC = crearU.rBempleadoN.Checked;
-                    if (tipoA)
+                    bool admin = crearU.rBadminN.Checked;
+                    if (admin)
                     {
-                        CrearUsuarioAdmin(nombre, contra, tipoA);
-                    }
-                    else if (tipoC)
-                    {
-                        CrearUsuarioEmpleado(nombre, contra, tipoC);
+                        CrearUsuario(nombre, contra, admin);
                     }
                     else
                     {
-                        MessageBox.Show("No se pudo crear el usuario");
+                        CrearUsuario(nombre, contra, admin);
                     }
-                    MessageBox.Show("Usuario creado correctamente");
                 }
             }
+            crearU.Dispose();
         }
         private void eliminarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FRegistro fEliminar = new FRegistro();
             if (usuario is Administrador)
             {
-                fEliminar.tBcontraN.Enabled = false;
-                fEliminar.groupBox1.Enabled = false;
+                fEliminar.tBcontraN.Visible = false;
+                fEliminar.lbContra.Visible = false;
+                fEliminar.groupBox1.Visible = false;
                 if (fEliminar.ShowDialog() == DialogResult.OK)
                 {
-                    fEliminar.tBcontraN.Enabled = false;
-                    fEliminar.groupBox1.Enabled = false;
-                    string nombre = fEliminar.tBuserN.Text;
-                    EliminarUsuario(nombre);
+                    EliminarUsuario(fEliminar.tBuserN.Text);
                 }
             }
+            fEliminar.Dispose();
         }
 
         private void imprimirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -919,7 +974,7 @@ namespace TP2_Lab
         {
             int filaIndex = DGPropiedades.Rows.Add();
             DataGridViewRow fila = DGPropiedades.Rows[filaIndex];
-            Bitmap bitmap, bitmap2;
+            Bitmap bitmap;
 
             fila.Cells[0].Value = propiedad;
             fila.Cells[2].Value = propiedad.Localidad;
@@ -929,11 +984,9 @@ namespace TP2_Lab
             fila.Cells[7].Value = propiedad.CantCamas;
             bitmap = new Bitmap(propiedad.Imagen, new Size(125, 125));
             fila.Cells[11].Value = bitmap;
-            if (propiedad.Imagen2 != null)
-            {
-                bitmap2 = new Bitmap(propiedad.Imagen2, 50, 25);
-                fila.Cells[12].Value = bitmap2;
-            }
+            bitmap = new Bitmap(propiedad.Imagen2, new Size(125, 125));
+            fila.Cells[12].Value = bitmap;
+
             // Verificar el tipo de instancia y llenar las celdas correspondientes
             if (propiedad is Habitaciones)
             {
@@ -1009,34 +1062,22 @@ namespace TP2_Lab
             }
         }
 
-        public Usuario CrearUsuarioAdmin(string nom, string contra, bool tipo)
+        public void CrearUsuario(string nom, string contra, bool tipo)
         {
             Usuario nuevoUsuario;
             if (tipo)
-            {
                 nuevoUsuario = new Administrador(nom, contra);
+            else
+                nuevoUsuario = new Empleado(nom, contra);
+            nuevoS.ListaUsuarios.Sort();
+            int pos = nuevoS.ListaUsuarios.BinarySearch(nuevoUsuario);
+            if (pos < 0)
+            {
                 nuevoS.ListaUsuarios.Add(nuevoUsuario);
+                MessageBox.Show("Usuario creado correctamente");
             }
             else
-            {
-                throw new Exception("no se pudo crear el usuario");
-            }
-            return nuevoUsuario;
-        }
-
-        public Usuario CrearUsuarioEmpleado(string nom, string contra, bool tipo)
-        {
-            Usuario nuevoUsu;
-            if (tipo)
-            {
-                nuevoUsu = new Empleado(nom, contra);
-                nuevoS.ListaUsuarios.Add(nuevoUsu);
-            }
-            else
-            {
-                throw new Exception("no se pudo crear el usuario");
-            }
-            return nuevoUsu;
+                MessageBox.Show("Nombre de usuario ocupado\n Intente con otro");
         }
 
 
@@ -1051,24 +1092,34 @@ namespace TP2_Lab
             }
             else
             {
-                throw new Exception("Usuario no encontrado");
+                MessageBox.Show("Usuario no encontrado");
             }
             return aEliminar;
         }
 
-        public Usuario CambiarContra(string nombre, string nuevaC)
+        private void graficosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Usuario miUsu = BuscarUsuario(nombre);
-            if (miUsu != null)
+
+        }
+
+        private void DGPropiedades_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        public void CambiarContra(string actualC, string nuevaC)
+        {
+            nuevoS.ListaUsuarios.Sort();
+            int pos = nuevoS.ListaUsuarios.BinarySearch(usuario);
+            if (nuevoS.ListaUsuarios[pos].Contra == actualC)
             {
-                miUsu.Contra = nuevaC;
+                nuevoS.ListaUsuarios[pos].Contra = nuevaC;
                 MessageBox.Show("Contraseña cambiada correctamente");
             }
             else
             {
-                throw new Exception("Usuario no encontrado");
+                MessageBox.Show("Contraseña incorrecta");
             }
-            return miUsu;
         }
 
         public Usuario BuscarUsuario(string nombre)
@@ -1082,26 +1133,10 @@ namespace TP2_Lab
             }
             else
             {
-                throw new Exception("Usuario no encontrado");
+                MessageBox.Show("Usuario no encontrado");
             }
             return buscado;
         }
-
-        public bool EsAdministrador(string nombre)
-        {
-            bool esAdmin = false;
-            Usuario admin = BuscarUsuario(nombre);
-            if (admin is Administrador)
-            {
-                esAdmin = true;
-            }
-            else
-            {
-                throw new Exception("No es un administrador");
-            }
-            return esAdmin;
-        }
-
 
         #endregion
 
@@ -1128,31 +1163,32 @@ namespace TP2_Lab
             }
 
             // Iterar a través de las reservas y contar la cantidad de huéspedes
-            foreach (Reserva reserva in prop.ListaReservas)
-            {
-                int huesp = reserva.CantPersonas;
-                // Implementar contadores específicos para cada cantidad de huéspedes
-                if (huesp == 2)
+            foreach (Propiedad propReserva in nuevoS.ListaPropiedad)
+                foreach (Reserva reserva in propReserva.ListaReservas)
                 {
-                    contadorHuespedes[0]++;
+                    int huesp = reserva.CantPersonas;
+                    // Implementar contadores específicos para cada cantidad de huéspedes
+                    if (huesp == 2)
+                    {
+                        contadorHuespedes[0]++;
+                    }
+                    else if (huesp == 3)
+                    {
+                        contadorHuespedes[1]++;
+                    }
+                    else if (huesp == 4)
+                    {
+                        contadorHuespedes[2]++;
+                    }
+                    else if (huesp == 5)
+                    {
+                        contadorHuespedes[3]++;
+                    }
+                    else
+                    {
+                        contadorHuespedes[4]++;
+                    }
                 }
-                else if (huesp == 3)
-                {
-                    contadorHuespedes[1]++;
-                }
-                else if (huesp == 4)
-                {
-                    contadorHuespedes[2]++;
-                }
-                else if (huesp == 5)
-                {
-                    contadorHuespedes[3]++;
-                }
-                else
-                {
-                    contadorHuespedes[4]++;
-                }
-            }
 
             // Agrega los puntos de datos a la serie
             series.Points.AddXY("Huespedes 2", contadorHuespedes[0]);
@@ -1179,22 +1215,34 @@ namespace TP2_Lab
             // Limpia cualquier serie existente
             stats.cGrafico.Series.Clear();
 
-            stats.cGrafico.Width = 800;
-            stats.cGrafico.Height = 600;
+            //stats.cGrafico.Width = 600;
+            //stats.cGrafico.Height = 600;
 
             // Crea una serie para el gráfico de sectores
             Series serieReservas = new Series();
             serieReservas.ChartType = SeriesChartType.Pie;
+            int casaFinde = 0,
+                casaXDia = 0,
+                habitacionHotel = 0;
+            foreach (Propiedad lugar in nuevoS.ListaPropiedad)
+            {
+                if (lugar is CasaFindeSemana) { casaFinde++; }
+                if (lugar is Casa) { casaXDia++; }
+                if (lugar is Habitaciones) { habitacionHotel++; }
+            }
 
             // Agrega los puntos de datos a la serie
-            serieReservas.Points.AddXY("CasaPorDia", reservasCasaDia);
-            serieReservas.Points.AddXY("CasaFindeSemana", reservasCasaFinde);
-            serieReservas.Points.AddXY("Habitaciones", reservasHabitaciones);
+            serieReservas.Points.AddXY("CasaPorDia", casaXDia);
+            serieReservas.Points.AddXY("CasaFindeSemana", casaFinde);
+            serieReservas.Points.AddXY("Habitaciones", habitacionHotel);
+
 
             // Cambia los colores específicos si es necesario
             serieReservas.Points[0].Color = Color.Red;
             serieReservas.Points[1].Color = Color.Green;
             serieReservas.Points[2].Color = Color.Blue;
+
+            serieReservas.CustomProperties = "PieLabelStyle=Disabled";
 
             // Agrega la serie al gráfico
             stats.cGrafico.Series.Add(serieReservas);

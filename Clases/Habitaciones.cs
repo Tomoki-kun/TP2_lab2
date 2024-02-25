@@ -18,11 +18,13 @@ namespace TP2_Lab
         public int Estrellas
         {
             get { return estrellas; }
+            set { estrellas = value; }
         }
 
         public string TipoHabitacion
         {
             get { return tipoHabitacion; }
+            set {  tipoHabitacion = value; }
         }
         #endregion
         public Habitaciones(int nro,int estrellas,double precio,string direccion,string localidad, bool[] servicios, int cantCamas,

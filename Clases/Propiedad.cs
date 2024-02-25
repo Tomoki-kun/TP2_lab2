@@ -29,7 +29,7 @@ namespace TP2_Lab
         public double PrecioBasico
         {
             get { return precioBasico; }
-            private set { precioBasico = value; }
+            set { precioBasico = value; }
         }
         public int CantCamas
         {
@@ -80,6 +80,11 @@ namespace TP2_Lab
             }
             Imagen = pic;
             imagen2 = pic2;
+        }
+
+        public bool[] Servicios
+        {
+            get { return servicios; }
         }
 
         #region Metodos

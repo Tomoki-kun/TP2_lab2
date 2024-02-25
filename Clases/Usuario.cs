@@ -21,20 +21,7 @@ namespace TP2_Lab
 
         public int CompareTo(object obj)
         {
-            int nombreComparison = this.Nombre.CompareTo(((Usuario)obj).Nombre);
-
-            if (nombreComparison == 0)
-            {
-                // Si los nombres son iguales, compara por contraseña
-                return this.Contra.CompareTo(((Usuario)obj).Contra);
-            }
-
-            return nombreComparison;
+            return this.Nombre.CompareTo(((Usuario)obj).Nombre);
         }
-
-        //public int CompareTo(object obj)
-        //{
-        //    return this.Nombre.CompareTo(((Usuario)obj).Nombre);
-        //}
     }
 }

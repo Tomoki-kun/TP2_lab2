@@ -30,7 +30,6 @@
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.cGrafico = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.cGrafico)).BeginInit();
@@ -43,33 +42,32 @@
             legend1.Name = "Legend1";
             this.cGrafico.Legends.Add(legend1);
             this.cGrafico.Location = new System.Drawing.Point(0, 0);
+            this.cGrafico.Margin = new System.Windows.Forms.Padding(4);
             this.cGrafico.Name = "cGrafico";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.cGrafico.Series.Add(series1);
-            this.cGrafico.Size = new System.Drawing.Size(674, 375);
+            this.cGrafico.Size = new System.Drawing.Size(640, 458);
             this.cGrafico.TabIndex = 0;
             this.cGrafico.Text = "chart1";
             // 
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(286, 381);
+            this.button1.Location = new System.Drawing.Point(249, 398);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(102, 49);
+            this.button1.Size = new System.Drawing.Size(136, 60);
             this.button1.TabIndex = 1;
             this.button1.Text = "Salir";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // FGraficos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(677, 436);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(643, 459);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.cGrafico);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FGraficos";
             this.Text = "FGraficos";
             ((System.ComponentModel.ISupportInitialize)(this.cGrafico)).EndInit();

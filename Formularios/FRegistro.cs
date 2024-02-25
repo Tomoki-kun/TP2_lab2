@@ -16,5 +16,10 @@ namespace TP2_Lab
         {
             InitializeComponent();
         }
+
+        private void FRegistro_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

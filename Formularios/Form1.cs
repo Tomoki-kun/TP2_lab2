@@ -26,10 +26,7 @@ namespace TP2_Lab
         private Propiedad prop;
         private Sistema nuevoS;
         private Reserva miReserva;
-        private int cantPropiedades = 0,
-                    reservasCasaDia = 0,
-                    reservasCasaFinde = 0,
-                    reservasHabitaciones = 0;
+        private int cantPropiedades = 0;
         private List<IExportable> listaDatos = new List<IExportable>();
         private FileStream archivo;
         private BinaryFormatter serDeser;
@@ -468,17 +465,14 @@ namespace TP2_Lab
                                 if (prop is Habitaciones)
                                 {
                                     costoFinal = (prop.CalcularPrecio() * numeroDias) + ((prop.CalcularPrecio() * numeroDias * 0.03));
-                                    reservasHabitaciones++;
                                 }
                                 if (prop is Casa)
                                 {
                                     costoFinal = ((Casa)prop).DiasAReservar(numeroDias);
-                                    reservasCasaDia++;
                                 }
                                 if (prop is CasaFindeSemana)
                                 {
                                     costoFinal = prop.CalcularPrecio();
-                                    reservasCasaFinde++;
                                 }
                                 miReserva.PrecioFinal = costoFinal;
                                 miReserva.Realizado = DateTime.Now;
@@ -565,37 +559,31 @@ namespace TP2_Lab
 
         private void btnEliminarReserva_Click(object sender, EventArgs e)
         {
-            FCliente vCliente = new FCliente();
-            if (vCliente.ShowDialog() == DialogResult.OK)
+            if (DGReservas.Rows.Count > 0)
             {
-                if (vCliente.tBnombreC.Text != "")
+                string nombre = DGReservas.SelectedRows[0].Cells[0].ToString();
+                int nroReserv = Convert.ToInt32(DGReservas.SelectedRows[0].Cells[1].Value);
+                Propiedad prop = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
+                int i = 0;
+                bool eliminado = false;
+                while ( !eliminado && i< prop.ListaReservas.Count)
                 {
-                    string nombre;
-                    long dni;
-                    bool encontrada = false;
-                    foreach (Propiedad prop in nuevoS.ListaPropiedad)
+                    Reserva resv = prop.ListaReservas[i];
+                    string nombreCli = resv.Cliente.ToString();
+                    if (nombreCli == nombre && resv.NumeroReserva == nroReserv)
                     {
-                        foreach (Reserva resv in prop.ListaReservas)
-                        {
-                            nombre = resv.Cliente.ToString();
-                            dni = resv.Cliente.DNI;
-                            if (nombre == vCliente.tBnombreC.Text && dni == (long)vCliente.numDNI.Value)
-                            {
-                                prop.ListaReservas.Remove(resv);
-                                MessageBox.Show("Reserva Cancelada", "Cancelación exitosa");
-                                encontrada = true;
-                                if (prop is Habitaciones) reservasHabitaciones--;
-                                if (prop is Casa) reservasCasaDia--;
-                                if (prop is CasaFindeSemana) reservasCasaFinde--;
-                            }
-                        }
+                        prop.ListaReservas.Remove(resv);
+                        MessageBox.Show("Reserva Eliminada", "Cancelación exitosa");
+                        eliminado = true;
                     }
-                    if (!encontrada)
-                        MessageBox.Show("No se encontró ninguna reserva de este cliente");
+                    i++;
                 }
-                else
-                    MessageBox.Show("Complete los campos");
+
+                RefrescarDGReservas();
             }
+            else
+                MessageBox.Show("Seleccione la reserva a eliminar");
+
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -1086,7 +1074,12 @@ namespace TP2_Lab
 
         private void DGPropiedades_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            RefrescarDGReservas();
+            
+        }
 
+        private void RefrescarDGReservas()
+        {
             DGReservas.Rows.Clear();
 
             Propiedad propiedad = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;

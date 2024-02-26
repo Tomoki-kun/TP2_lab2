@@ -209,9 +209,9 @@
             // 
             // btnModificarReserva
             // 
-            this.btnModificarReserva.Location = new System.Drawing.Point(194, 611);
+            this.btnModificarReserva.Location = new System.Drawing.Point(188, 611);
             this.btnModificarReserva.Name = "btnModificarReserva";
-            this.btnModificarReserva.Size = new System.Drawing.Size(94, 47);
+            this.btnModificarReserva.Size = new System.Drawing.Size(100, 47);
             this.btnModificarReserva.TabIndex = 17;
             this.btnModificarReserva.Text = "Modificar Reserva";
             this.btnModificarReserva.UseVisualStyleBackColor = true;
@@ -642,6 +642,7 @@
             this.DGReservas.RowHeadersVisible = false;
             this.DGReservas.RowHeadersWidth = 51;
             this.DGReservas.RowTemplate.Height = 24;
+            this.DGReservas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGReservas.Size = new System.Drawing.Size(1500, 273);
             this.DGReservas.TabIndex = 19;
             // 

@@ -29,6 +29,7 @@ namespace TP2_Lab
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FRegistro));
             this.tBuserN = new System.Windows.Forms.TextBox();
             this.tBcontraN = new System.Windows.Forms.TextBox();
             this.lbUser = new System.Windows.Forms.Label();
@@ -154,6 +155,7 @@ namespace TP2_Lab
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(424, 316);
             this.Controls.Add(this.groupBox2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FRegistro";
             this.Text = "FRegistro";
             this.Load += new System.EventHandler(this.FRegistro_Load);

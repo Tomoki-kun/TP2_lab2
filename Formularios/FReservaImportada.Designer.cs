@@ -29,6 +29,7 @@ namespace TP2_Lab
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FReservaImportada));
             this.dGReservaImportada = new System.Windows.Forms.DataGridView();
             this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NroReserva = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -104,6 +105,7 @@ namespace TP2_Lab
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(922, 450);
             this.Controls.Add(this.dGReservaImportada);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FReservaImportada";
             this.Text = "FReservaImportada";
             ((System.ComponentModel.ISupportInitialize)(this.dGReservaImportada)).EndInit();

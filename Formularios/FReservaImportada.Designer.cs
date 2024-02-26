@@ -58,42 +58,42 @@ namespace TP2_Lab
             // 
             // Cliente
             // 
-            this.Cliente.HeaderText = "Cliente";
+            this.Cliente.HeaderText = "";
             this.Cliente.MinimumWidth = 6;
             this.Cliente.Name = "Cliente";
             this.Cliente.Width = 125;
             // 
             // NroReserva
             // 
-            this.NroReserva.HeaderText = "Numero Reserva";
+            this.NroReserva.HeaderText = "";
             this.NroReserva.MinimumWidth = 6;
             this.NroReserva.Name = "NroReserva";
             this.NroReserva.Width = 125;
             // 
             // FechaReservacion
             // 
-            this.FechaReservacion.HeaderText = "Fecha de reservacion";
+            this.FechaReservacion.HeaderText = "";
             this.FechaReservacion.MinimumWidth = 6;
             this.FechaReservacion.Name = "FechaReservacion";
             this.FechaReservacion.Width = 125;
             // 
             // FechaIn
             // 
-            this.FechaIn.HeaderText = "Fecha Inicio";
+            this.FechaIn.HeaderText = "";
             this.FechaIn.MinimumWidth = 6;
             this.FechaIn.Name = "FechaIn";
             this.FechaIn.Width = 125;
             // 
             // FechaFin
             // 
-            this.FechaFin.HeaderText = "Fecha Fin";
+            this.FechaFin.HeaderText = "";
             this.FechaFin.MinimumWidth = 6;
             this.FechaFin.Name = "FechaFin";
             this.FechaFin.Width = 125;
             // 
             // Cantidad
             // 
-            this.Cantidad.HeaderText = "Cantidad de Huespedes";
+            this.Cantidad.HeaderText = "";
             this.Cantidad.MinimumWidth = 6;
             this.Cantidad.Name = "Cantidad";
             this.Cantidad.Width = 125;

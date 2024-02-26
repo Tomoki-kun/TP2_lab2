@@ -63,16 +63,16 @@ namespace TP2_Lab
             this.lbUser.AutoSize = true;
             this.lbUser.Location = new System.Drawing.Point(47, 56);
             this.lbUser.Name = "lbUser";
-            this.lbUser.Size = new System.Drawing.Size(109, 16);
+            this.lbUser.Size = new System.Drawing.Size(115, 17);
             this.lbUser.TabIndex = 2;
             this.lbUser.Text = "Nombre Usuario:";
             // 
             // lbContra
             // 
             this.lbContra.AutoSize = true;
-            this.lbContra.Location = new System.Drawing.Point(84, 112);
+            this.lbContra.Location = new System.Drawing.Point(47, 112);
             this.lbContra.Name = "lbContra";
-            this.lbContra.Size = new System.Drawing.Size(79, 16);
+            this.lbContra.Size = new System.Drawing.Size(85, 17);
             this.lbContra.TabIndex = 3;
             this.lbContra.Text = "Contraseña:";
             // 
@@ -101,7 +101,7 @@ namespace TP2_Lab
             this.rBempleadoN.AutoSize = true;
             this.rBempleadoN.Location = new System.Drawing.Point(132, 32);
             this.rBempleadoN.Name = "rBempleadoN";
-            this.rBempleadoN.Size = new System.Drawing.Size(91, 20);
+            this.rBempleadoN.Size = new System.Drawing.Size(92, 21);
             this.rBempleadoN.TabIndex = 6;
             this.rBempleadoN.TabStop = true;
             this.rBempleadoN.Text = "Empleado";
@@ -113,7 +113,7 @@ namespace TP2_Lab
             this.rBadminN.Checked = true;
             this.rBadminN.Location = new System.Drawing.Point(6, 32);
             this.rBadminN.Name = "rBadminN";
-            this.rBadminN.Size = new System.Drawing.Size(111, 20);
+            this.rBadminN.Size = new System.Drawing.Size(116, 21);
             this.rBadminN.TabIndex = 7;
             this.rBadminN.TabStop = true;
             this.rBadminN.Text = "Administrador";

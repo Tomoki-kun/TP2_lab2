@@ -36,14 +36,13 @@
             this.Calendar = new System.Windows.Forms.MonthCalendar();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btnModificarReserva = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rbHotel = new System.Windows.Forms.RadioButton();
             this.rBcasa = new System.Windows.Forms.RadioButton();
+            this.btnModificarReserva = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.numCantHuespedes = new System.Windows.Forms.NumericUpDown();
-            this.cBTipoHabitaciones = new System.Windows.Forms.ComboBox();
             this.cBLocalidad = new System.Windows.Forms.ComboBox();
             this.btnEliminarReserva = new System.Windows.Forms.Button();
             this.btnReservar = new System.Windows.Forms.Button();
@@ -91,7 +90,9 @@
             this.Egreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaReservacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CantHuespedes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cbHabilitar = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCantHuespedes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGPropiedades)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -133,9 +134,11 @@
             // 
             // Calendar
             // 
+            this.Calendar.Enabled = false;
             this.Calendar.Location = new System.Drawing.Point(8, 170);
             this.Calendar.Margin = new System.Windows.Forms.Padding(12, 11, 12, 11);
-            this.Calendar.MaxDate = new System.DateTime(2024, 1, 31, 0, 0, 0, 0);
+            this.Calendar.MaxDate = new System.DateTime(2024, 3, 31, 0, 0, 0, 0);
+            this.Calendar.MaxSelectionCount = 10000;
             this.Calendar.MinDate = new System.DateTime(2023, 11, 1, 0, 0, 0, 0);
             this.Calendar.Name = "Calendar";
             this.Calendar.ShowTodayCircle = false;
@@ -161,31 +164,19 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "Cantidad de huespedes:";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 494);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(140, 16);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Tipo de Habitaciones:";
-            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.cbHabilitar);
+            this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.btnModificarReserva);
-            this.groupBox1.Controls.Add(this.rBcasa);
             this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.numCantHuespedes);
-            this.groupBox1.Controls.Add(this.cBTipoHabitaciones);
             this.groupBox1.Controls.Add(this.cBLocalidad);
             this.groupBox1.Controls.Add(this.btnEliminarReserva);
             this.groupBox1.Controls.Add(this.btnReservar);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnBuscar);
-            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.Calendar);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Enabled = false;
@@ -198,14 +189,38 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar:";
             // 
-            // label5
+            // groupBox2
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(87, 556);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 16);
-            this.label5.TabIndex = 22;
-            this.label5.Text = "Tipo Casa:";
+            this.groupBox2.Controls.Add(this.rbHotel);
+            this.groupBox2.Controls.Add(this.rBcasa);
+            this.groupBox2.Location = new System.Drawing.Point(8, 482);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(337, 78);
+            this.groupBox2.TabIndex = 23;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Tipo propiedad";
+            // 
+            // rbHotel
+            // 
+            this.rbHotel.AutoSize = true;
+            this.rbHotel.Location = new System.Drawing.Point(43, 21);
+            this.rbHotel.Name = "rbHotel";
+            this.rbHotel.Size = new System.Drawing.Size(60, 20);
+            this.rbHotel.TabIndex = 0;
+            this.rbHotel.TabStop = true;
+            this.rbHotel.Text = "Hotel";
+            this.rbHotel.UseVisualStyleBackColor = true;
+            // 
+            // rBcasa
+            // 
+            this.rBcasa.AutoSize = true;
+            this.rBcasa.Location = new System.Drawing.Point(43, 47);
+            this.rBcasa.Name = "rBcasa";
+            this.rBcasa.Size = new System.Drawing.Size(60, 20);
+            this.rBcasa.TabIndex = 21;
+            this.rBcasa.TabStop = true;
+            this.rBcasa.Text = "Casa";
+            this.rBcasa.UseVisualStyleBackColor = true;
             // 
             // btnModificarReserva
             // 
@@ -216,18 +231,6 @@
             this.btnModificarReserva.Text = "Modificar Reserva";
             this.btnModificarReserva.UseVisualStyleBackColor = true;
             this.btnModificarReserva.Click += new System.EventHandler(this.btnModificarReserva_Click);
-            // 
-            // rBcasa
-            // 
-            this.rBcasa.AutoSize = true;
-            this.rBcasa.Location = new System.Drawing.Point(189, 556);
-            this.rBcasa.Name = "rBcasa";
-            this.rBcasa.Size = new System.Drawing.Size(60, 20);
-            this.rBcasa.TabIndex = 21;
-            this.rBcasa.TabStop = true;
-            this.rBcasa.Text = "Casa";
-            this.rBcasa.UseVisualStyleBackColor = true;
-            this.rBcasa.CheckedChanged += new System.EventHandler(this.rBcasa_CheckedChanged);
             // 
             // btnLimpiar
             // 
@@ -249,20 +252,6 @@
             this.numCantHuespedes.Name = "numCantHuespedes";
             this.numCantHuespedes.Size = new System.Drawing.Size(107, 22);
             this.numCantHuespedes.TabIndex = 18;
-            // 
-            // cBTipoHabitaciones
-            // 
-            this.cBTipoHabitaciones.FormattingEnabled = true;
-            this.cBTipoHabitaciones.Items.AddRange(new object[] {
-            "Simple",
-            "Doble",
-            "Triple"});
-            this.cBTipoHabitaciones.Location = new System.Drawing.Point(188, 490);
-            this.cBTipoHabitaciones.Margin = new System.Windows.Forms.Padding(4);
-            this.cBTipoHabitaciones.Name = "cBTipoHabitaciones";
-            this.cBTipoHabitaciones.Size = new System.Drawing.Size(107, 24);
-            this.cBTipoHabitaciones.TabIndex = 16;
-            this.cBTipoHabitaciones.SelectedIndexChanged += new System.EventHandler(this.cBTipoHabitaciones_SelectedIndexChanged);
             // 
             // cBLocalidad
             // 
@@ -628,6 +617,7 @@
             // 
             // DGReservas
             // 
+            this.DGReservas.AllowUserToAddRows = false;
             this.DGReservas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGReservas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGReservas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -639,6 +629,7 @@
             this.CantHuespedes});
             this.DGReservas.Location = new System.Drawing.Point(444, 361);
             this.DGReservas.Name = "DGReservas";
+            this.DGReservas.ReadOnly = true;
             this.DGReservas.RowHeadersVisible = false;
             this.DGReservas.RowHeadersWidth = 51;
             this.DGReservas.RowTemplate.Height = 24;
@@ -651,36 +642,53 @@
             this.Cliente.HeaderText = "Cliente";
             this.Cliente.MinimumWidth = 6;
             this.Cliente.Name = "Cliente";
+            this.Cliente.ReadOnly = true;
             // 
             // NumReserva
             // 
             this.NumReserva.HeaderText = "Nro Reserva";
             this.NumReserva.MinimumWidth = 6;
             this.NumReserva.Name = "NumReserva";
+            this.NumReserva.ReadOnly = true;
             // 
             // Ingreso
             // 
             this.Ingreso.HeaderText = "Ingreso";
             this.Ingreso.MinimumWidth = 6;
             this.Ingreso.Name = "Ingreso";
+            this.Ingreso.ReadOnly = true;
             // 
             // Egreso
             // 
             this.Egreso.HeaderText = "Egreso";
             this.Egreso.MinimumWidth = 6;
             this.Egreso.Name = "Egreso";
+            this.Egreso.ReadOnly = true;
             // 
             // FechaReservacion
             // 
             this.FechaReservacion.HeaderText = "Fecha Reservacion";
             this.FechaReservacion.MinimumWidth = 6;
             this.FechaReservacion.Name = "FechaReservacion";
+            this.FechaReservacion.ReadOnly = true;
             // 
             // CantHuespedes
             // 
             this.CantHuespedes.HeaderText = "Cant. Huespedes";
             this.CantHuespedes.MinimumWidth = 6;
             this.CantHuespedes.Name = "CantHuespedes";
+            this.CantHuespedes.ReadOnly = true;
+            // 
+            // cbHabilitar
+            // 
+            this.cbHabilitar.AutoSize = true;
+            this.cbHabilitar.Location = new System.Drawing.Point(8, 147);
+            this.cbHabilitar.Name = "cbHabilitar";
+            this.cbHabilitar.Size = new System.Drawing.Size(148, 20);
+            this.cbHabilitar.TabIndex = 20;
+            this.cbHabilitar.Text = "Habilitar Calendario";
+            this.cbHabilitar.UseVisualStyleBackColor = true;
+            this.cbHabilitar.CheckedChanged += new System.EventHandler(this.cbHabilitar_CheckedChanged);
             // 
             // Form1
             // 
@@ -705,6 +713,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCantHuespedes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGPropiedades)).EndInit();
             this.menuStrip1.ResumeLayout(false);
@@ -723,14 +733,12 @@
         private System.Windows.Forms.MonthCalendar Calendar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView DGPropiedades;
         private System.Windows.Forms.Button btnEliminarReserva;
         private System.Windows.Forms.Button btnReservar;
         private System.Windows.Forms.ComboBox cBLocalidad;
-        private System.Windows.Forms.ComboBox cBTipoHabitaciones;
         private System.Windows.Forms.NumericUpDown numCantHuespedes;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
@@ -755,7 +763,6 @@
         private System.Windows.Forms.ToolStripMenuItem importarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportarToolStripMenuItem;
         public System.Windows.Forms.RadioButton rBcasa;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ToolStripMenuItem eliminarUsuarioToolStripMenuItem;
         private System.Windows.Forms.Button btnModificarReserva;
         private System.Windows.Forms.Button btnModificarPropiedad;
@@ -778,5 +785,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Egreso;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaReservacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn CantHuespedes;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton rbHotel;
+        private System.Windows.Forms.CheckBox cbHabilitar;
     }
 }

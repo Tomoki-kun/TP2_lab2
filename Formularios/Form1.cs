@@ -364,69 +364,76 @@ namespace TP2_Lab
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            //bool loc = true,
-            //fechas = true,
-            //huespedes = true,
-            //tipoHabitacion = true;
-            cBTipoHabitaciones.Enabled = true;
-            rBcasa.Checked = false;
+            RefreshDataGridView();
             ArrayList disponibles = new ArrayList();
-            if (!string.IsNullOrWhiteSpace(cBLocalidad.Text))
+            int cant = DGPropiedades.RowCount;
+            for (int i = 0; i < cant; i++)
             {
-                int cant = DGPropiedades.RowCount;
-                for (int i = 0; i < cant - 1; i++)
+                DataGridViewCell celda = DGPropiedades.Rows[i].Cells[0];
+                if (celda.Value != null && celda.Value is Propiedad)
                 {
-                    DataGridViewCell celda = DGPropiedades.Rows[i].Cells[0];
-                    if (celda.Value != null && celda.Value is Propiedad)
+                    // Reiniciar las variables en cada iteración
+                    bool loc = true, fechas = true, huespedes = true, tipoHabitacion = true, tipoCasa = true;
+                    Propiedad miProp = (Propiedad)celda.Value;
+
+                    if (!string.IsNullOrWhiteSpace(cBLocalidad.Text) && !(miProp.Localidad == cBLocalidad.SelectedItem.ToString()))
                     {
-                        // Reiniciar las variables en cada iteración
-                        bool loc = true, fechas = true, huespedes = true, tipoHabitacion = true, tipoCasa = true;
-                        Propiedad propiedad = (Propiedad)celda.Value;
+                        loc = false;
+                    }
 
-                        if (!(propiedad.Localidad == cBLocalidad.SelectedItem.ToString()))
+                    TimeSpan dias = Calendar.SelectionEnd - Calendar.SelectionStart;
+                    if (Calendar.Enabled)
+                        if (nuevoS.Reservado(Calendar.SelectionStart, Calendar.SelectionEnd, miProp))
+                            fechas = false;
+
+                    if (numCantHuespedes.Value > 0 && numCantHuespedes.Value > miProp.CantCamas)
+                        huespedes = false;
+
+                    if (rbHotel.Checked)
+                        tipoCasa = false;
+                    if (rBcasa.Checked)
+                        tipoHabitacion = false;
+
+                    if (loc && fechas && huespedes && tipoHabitacion && miProp is Habitaciones)
+                    {
+                        disponibles.Add((Habitaciones)miProp);
+                    }
+                    else if (loc && fechas && huespedes && tipoCasa && miProp is Casa)
+                    {
+                        if (dias.Days >= 1 && dias.Days <= 3 && miProp is CasaFindeSemana)
                         {
-                            loc = false;
-                        }
-
-                        TimeSpan dias = Calendar.SelectionEnd - Calendar.SelectionStart;
-                        if (dias.Days > 0)
-                            if (nuevoS.Reservado(Calendar.SelectionStart, Calendar.SelectionEnd, propiedad))
-                                fechas = false;
-
-                        if (numCantHuespedes.Value > 0 && numCantHuespedes.Value > propiedad.CantCamas)
-                            huespedes = false;
-
-                        if (cBTipoHabitaciones.ValueMember != "" && cBTipoHabitaciones.ValueMember != ((Habitaciones)propiedad).TipoHabitacion)
-                            tipoHabitacion = false;
-                        if (rBcasa.Checked)
-                            tipoCasa = false;
-
-                        if (loc && fechas && huespedes && tipoHabitacion)
-                        {
-                            disponibles.Add(propiedad);
-                        }
-                        else if (loc && fechas && huespedes && tipoCasa)
-                        {
-                            disponibles.Add((Casa)propiedad);
-                            if (dias.Days == 1 || dias.Days == 2 || dias.Days == 3)
+                            bool esFinde = true;
+                            int j = 0;
+                            while (j < dias.Days && esFinde)
                             {
-                                disponibles.Add((CasaFindeSemana)propiedad);
+                                if (!(Calendar.SelectionEnd.DayOfWeek == DayOfWeek.Friday ||
+                                    Calendar.SelectionEnd.DayOfWeek == DayOfWeek.Saturday ||
+                                    Calendar.SelectionEnd.DayOfWeek == DayOfWeek.Sunday))
+                                    esFinde = false;
+                                j++;
                             }
+                            if (esFinde)
+                                disponibles.Add(miProp);
                         }
+                        else if(!(miProp is CasaFindeSemana))
+                            disponibles.Add((Casa)miProp);
+
                     }
 
-                }
-                if (disponibles.Count != nuevoS.ListaUsuarios.Count)
-                {
-                    //limpiamos el datagrid
-                    DGPropiedades.Rows.Clear();
-
-                    foreach (Propiedad propiedad in disponibles)
-                    {
-                        DGAgregarPropiedad(propiedad);
-                    }
                 }
             }
+            if (disponibles.Count != nuevoS.ListaPropiedad.Count)
+            {
+                //limpiamos el datagrid
+                DGPropiedades.Rows.Clear();
+
+                foreach (Propiedad propiedad in disponibles)
+                {
+                    DGAgregarPropiedad(propiedad);
+                }
+            }
+            rbHotel.Checked = false;
+            rBcasa.Checked = false;
         }
 
         private void btnReservar_Click(object sender, EventArgs e)
@@ -517,43 +524,45 @@ namespace TP2_Lab
 
         private void btnModificarReserva_Click(object sender, EventArgs e)
         {
-            FCliente mCliente = new FCliente();
             fModificarReserva modificar = new fModificarReserva();
-            mCliente.dTfechaNac.Visible = false;
-            mCliente.numDNI.Visible = false;
-            if (mCliente.ShowDialog() == DialogResult.OK)
+            bool encontrada = false;
+            string miCliente = DGReservas.SelectedRows[0].Cells[0].Value.ToString();
+            Propiedad prop = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
+            int reservado = Convert.ToInt32(DGReservas.SelectedRows[0].Cells[1].Value);
+            int i = 0;
+            bool encontrado = false;
+            while (!encontrado && i < prop.ListaReservas.Count)
             {
-                if (mCliente.tBnombreC.Text != "")
+                Reserva resv = prop.ListaReservas[i];
+                if (resv.Cliente.ToString() == miCliente && reservado == resv.NumeroReserva)
                 {
-                    string nombre;
-                    bool encontrada = false;
-                    foreach (Propiedad prop in nuevoS.ListaPropiedad)
+                    encontrado = true;
+                    prop.ListaReservas.Remove(resv);
+                    if (modificar.ShowDialog() == DialogResult.OK)
                     {
-                        foreach (Reserva resv in prop.ListaReservas)
+                        DateTime fechaIn = modificar.dtFechaIn.Value;
+                        DateTime fechaFin = modificar.dtFechaFin.Value;
+                        int cantPersonas = Convert.ToInt32(modificar.tBcantidad.Text);
+                        bool ocupado = nuevoS.Reservado(fechaIn, fechaFin, prop);
+                        if (!ocupado)
                         {
-                            nombre = resv.Cliente.ToString();
-                            if (nombre == mCliente.tBnombreC.Text)
-                            {
-                                encontrada = true;
-                                if (modificar.ShowDialog() == DialogResult.OK)
-                                {
-                                    DateTime fechaIn = modificar.dtFechaIn.Value;
-                                    DateTime fechaFin = modificar.dtFechaFin.Value;
-                                    int cantPersonas = Convert.ToInt32(modificar.tBcantidad.Text);
-                                    resv.CantPersonas = cantPersonas;
-                                    resv.FechaEntrada = fechaIn;
-                                    resv.FechaSalida = fechaFin;
-                                }
-                                MessageBox.Show("Reserva actualizada con exito");
-                            }
+                            resv.FechaEntrada = fechaIn;
+                            resv.FechaSalida = fechaFin;
+                            resv.CantPersonas = cantPersonas;
                         }
+                        else
+                            prop.ListaReservas.Add(resv);
                     }
-                    if (!encontrada)
-                    {
-                        MessageBox.Show("Reserva no encontrada");
-                    }
+                    MessageBox.Show("Reserva actualizada con exito");
                 }
+                i++;
             }
+
+            if (!encontrada)
+            {
+                MessageBox.Show("Reserva no encontrada");
+            }
+
 
         }
 
@@ -561,12 +570,12 @@ namespace TP2_Lab
         {
             if (DGReservas.Rows.Count > 0)
             {
-                string nombre = DGReservas.SelectedRows[0].Cells[0].ToString();
+                string nombre = DGReservas.SelectedRows[0].Cells[0].Value.ToString();
                 int nroReserv = Convert.ToInt32(DGReservas.SelectedRows[0].Cells[1].Value);
                 Propiedad prop = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
                 int i = 0;
                 bool eliminado = false;
-                while ( !eliminado && i< prop.ListaReservas.Count)
+                while (!eliminado && i < prop.ListaReservas.Count)
                 {
                     Reserva resv = prop.ListaReservas[i];
                     string nombreCli = resv.Cliente.ToString();
@@ -591,11 +600,10 @@ namespace TP2_Lab
             rBcasa.Enabled = true;
             RefreshDataGridView();
 
-            cBLocalidad.ValueMember = "";
+            cBLocalidad.Text = "";
             Calendar.SelectionRange.Start = DateTime.Now;
             Calendar.SelectionRange.End = DateTime.Now;
             numCantHuespedes.Value = 0;
-            cBTipoHabitaciones.ValueMember = "";
         }
 
 
@@ -964,13 +972,6 @@ namespace TP2_Lab
             rBcasa.Enabled = false;
         }
 
-        private void rBcasa_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rBcasa.Checked)
-            {
-                cBTipoHabitaciones.Enabled = false;
-            }
-        }
 
         private void RefreshDataGridView()
         {
@@ -1075,7 +1076,7 @@ namespace TP2_Lab
         private void DGPropiedades_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             RefrescarDGReservas();
-            
+
         }
 
         private void RefrescarDGReservas()
@@ -1247,5 +1248,10 @@ namespace TP2_Lab
             stats.ShowDialog();
         }
         #endregion
+
+        private void cbHabilitar_CheckedChanged(object sender, EventArgs e)
+        {
+            Calendar.Enabled = !Calendar.Enabled;
+        }
     }
 }

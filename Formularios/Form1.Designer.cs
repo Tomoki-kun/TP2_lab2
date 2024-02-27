@@ -37,6 +37,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbHabilitar = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rbHotel = new System.Windows.Forms.RadioButton();
             this.rBcasa = new System.Windows.Forms.RadioButton();
@@ -90,7 +91,6 @@
             this.Egreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaReservacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CantHuespedes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cbHabilitar = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCantHuespedes)).BeginInit();
@@ -188,6 +188,17 @@
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar:";
+            // 
+            // cbHabilitar
+            // 
+            this.cbHabilitar.AutoSize = true;
+            this.cbHabilitar.Location = new System.Drawing.Point(8, 147);
+            this.cbHabilitar.Name = "cbHabilitar";
+            this.cbHabilitar.Size = new System.Drawing.Size(148, 20);
+            this.cbHabilitar.TabIndex = 20;
+            this.cbHabilitar.Text = "Habilitar Calendario";
+            this.cbHabilitar.UseVisualStyleBackColor = true;
+            this.cbHabilitar.CheckedChanged += new System.EventHandler(this.cbHabilitar_CheckedChanged);
             // 
             // groupBox2
             // 
@@ -679,17 +690,6 @@
             this.CantHuespedes.Name = "CantHuespedes";
             this.CantHuespedes.ReadOnly = true;
             // 
-            // cbHabilitar
-            // 
-            this.cbHabilitar.AutoSize = true;
-            this.cbHabilitar.Location = new System.Drawing.Point(8, 147);
-            this.cbHabilitar.Name = "cbHabilitar";
-            this.cbHabilitar.Size = new System.Drawing.Size(148, 20);
-            this.cbHabilitar.TabIndex = 20;
-            this.cbHabilitar.Text = "Habilitar Calendario";
-            this.cbHabilitar.UseVisualStyleBackColor = true;
-            this.cbHabilitar.CheckedChanged += new System.EventHandler(this.cbHabilitar_CheckedChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -708,7 +708,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
-            this.Text = "ReservasTech";
+            this.Text = "Tech Arrendamientos";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);

@@ -100,8 +100,8 @@ namespace TP2_Lab
             List<Reserva> lista = miPropiedad.ListaReservas;
             while (ret == false && i < cant)
             {
-                if (lista[i].FechaEntrada >= fechaIngreso && lista[i].FechaEntrada <= fechaEgreso ||
-                    lista[i].FechaSalida >= fechaIngreso && lista[i].FechaSalida <= fechaEgreso)
+                if (lista[i].FechaEntrada <= fechaEgreso && lista[i].FechaSalida >= fechaIngreso ||
+                    lista[i].FechaSalida >= fechaIngreso && lista[i].FechaEntrada <= fechaEgreso)
                     ret = true;
                 i++;
             }

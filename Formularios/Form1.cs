@@ -86,6 +86,7 @@ namespace TP2_Lab
                     eliminarUsuarioToolStripMenuItem.Enabled = false;
                 }
                 RefreshDataGridView();
+                RefrescarDGReservas();
             }
             else if (presiono == DialogResult.Cancel)
             {
@@ -416,7 +417,7 @@ namespace TP2_Lab
                             if (esFinde)
                                 disponibles.Add(miProp);
                         }
-                        else if(!(miProp is CasaFindeSemana))
+                        else if (!(miProp is CasaFindeSemana))
                             disponibles.Add((Casa)miProp);
 
                     }
@@ -465,7 +466,9 @@ namespace TP2_Lab
                         prop = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
                         if (!nuevoS.Reservado(inicio, fin, prop) && prop != null)
                         {
-                            if (prop is CasaFindeSemana && inicio.DayOfWeek == DayOfWeek.Friday && fin.DayOfWeek == DayOfWeek.Sunday
+                            if (prop is CasaFindeSemana && 
+                                ((inicio.DayOfWeek == DayOfWeek.Friday || inicio.DayOfWeek == DayOfWeek.Saturday|| inicio.DayOfWeek == DayOfWeek.Sunday) && 
+                                (fin.DayOfWeek == DayOfWeek.Friday || fin.DayOfWeek == DayOfWeek.Saturday || fin.DayOfWeek == DayOfWeek.Sunday ))
                                  || prop is Casa && !(prop is CasaFindeSemana) && numeroDias >= ((Casa)prop).DiasPermitidos || prop is Habitaciones)
                             {
                                 miReserva = new Reserva(miCliente, huespedes, inicio, fin);
@@ -489,6 +492,7 @@ namespace TP2_Lab
                                 listaDatos.Add(miReserva);
                                 listaDatos.Add(miCliente);
                                 nuevoS.ListaClientes.Add(miCliente);
+                                RefrescarDGReservas();
                             }
                             else
                             {
@@ -526,45 +530,56 @@ namespace TP2_Lab
         private void btnModificarReserva_Click(object sender, EventArgs e)
         {
             fModificarReserva modificar = new fModificarReserva();
-            bool encontrada = false;
-            string miCliente = DGReservas.SelectedRows[0].Cells[0].Value.ToString();
-            Propiedad prop = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
-            int reservado = Convert.ToInt32(DGReservas.SelectedRows[0].Cells[1].Value);
-            int i = 0;
-            bool encontrado = false;
-            while (!encontrado && i < prop.ListaReservas.Count)
+            try
             {
-                Reserva resv = prop.ListaReservas[i];
-                if (resv.Cliente.ToString() == miCliente && reservado == resv.NumeroReserva)
+                string miCliente = DGReservas.SelectedRows[0].Cells[0].Value.ToString();
+                Propiedad prop = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
+                int reservado = Convert.ToInt32(DGReservas.SelectedRows[0].Cells[1].Value);
+                int i = 0;
+                bool encontrado = false;
+                while (!encontrado && i < prop.ListaReservas.Count)
                 {
-                    encontrado = true;
-                    prop.ListaReservas.Remove(resv);
-                    if (modificar.ShowDialog() == DialogResult.OK)
+                    Reserva resv = prop.ListaReservas[i];
+                    if (resv.Cliente.ToString() == miCliente && reservado == resv.NumeroReserva)
                     {
-                        DateTime fechaIn = modificar.dtFechaIn.Value;
-                        DateTime fechaFin = modificar.dtFechaFin.Value;
-                        int cantPersonas = Convert.ToInt32(modificar.tBcantidad.Text);
-                        bool ocupado = nuevoS.Reservado(fechaIn, fechaFin, prop);
-                        if (!ocupado)
+                        encontrado = true;
+                        prop.ListaReservas.Remove(resv);
+                        DialogResult dR = modificar.ShowDialog();
+                        if (dR == DialogResult.OK)
                         {
-                            //resv.FechaEntrada = fechaIn;
-                            //resv.FechaSalida = fechaFin;
-                            //resv.CantPersonas = cantPersonas;
+                            DateTime fechaIn = modificar.dtFechaIn.Value;
+                            DateTime fechaFin = modificar.dtFechaFin.Value;
+                            int cantPersonas = Convert.ToInt32(modificar.numCant.Value);
+                            bool ocupado = nuevoS.Reservado(fechaIn, fechaFin, prop);
+                            if (!ocupado)
+                            {
+                                Reserva reservaActualizada = new Reserva(resv.Cliente, cantPersonas, fechaIn, fechaFin);
+                                prop.ListaReservas.Add(reservaActualizada);
 
-                            Reserva reservaActualizada = new Reserva(resv.Cliente, cantPersonas, fechaIn, fechaFin);
-                            prop.ListaReservas.Add(reservaActualizada);
+                                MessageBox.Show("Reserva actualizada con exito");
+                            }
+                            else
+                            {
+                                prop.ListaReservas.Add(resv);
+                                MessageBox.Show("Fechas ya ocupadas");
+                            }
+
                         }
-                        else
+                        if( dR == DialogResult.Cancel )
                         {
                             prop.ListaReservas.Add(resv);
-                            MessageBox.Show("Fechas ya ocupadas");
+                            MessageBox.Show("Modificación Cancelada");
                         }
-
                     }
-                    MessageBox.Show("Reserva actualizada con exito");
+                    i++;
                 }
-                i++;
             }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Esta propiedad no posee reservas");
+            }
+
+
 
         }
 
@@ -639,7 +654,7 @@ namespace TP2_Lab
             openFileDialog1.Filter = "archivo de valores separados por coma (*.csv) | *.csv";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                
+
                 FileStream miArchivo = new FileStream(path, FileMode.Open, FileAccess.Read);
                 StreamReader sr = new StreamReader(miArchivo);
 
@@ -887,7 +902,7 @@ namespace TP2_Lab
                 nuevoTicket.lBticket.Items.Add("\nCosto total: $" + miReserva.PrecioFinal.ToString("00.0"));
 
                 Bitmap bitmap = new Bitmap(prop.Imagenes[0], new Size(125, 125));
-                nuevoTicket.pictureBox1.Image = bitmap;
+                nuevoTicket.pictureBox.Image = bitmap;
                 nuevoTicket.ShowDialog();
             }
             else

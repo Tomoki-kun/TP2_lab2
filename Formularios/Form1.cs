@@ -39,6 +39,7 @@ namespace TP2_Lab
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            //nuevoS = new Sistema();
             if (nuevoS.CantUsuarios == 0)
             {
                 usuario = new Administrador("Admin", "Admin");
@@ -57,7 +58,7 @@ namespace TP2_Lab
                     pos = -1;
                 while (pos < 0)
                 {
-                    MessageBox.Show("Usuario no econtrado", "Error", MessageBoxButtons.OK);
+                    MessageBox.Show("Usuario no encontrado", "Error", MessageBoxButtons.OK);
                     presiono = vLogin.ShowDialog();
                     if (presiono == DialogResult.Cancel)
                     {
@@ -546,23 +547,24 @@ namespace TP2_Lab
                         bool ocupado = nuevoS.Reservado(fechaIn, fechaFin, prop);
                         if (!ocupado)
                         {
-                            resv.FechaEntrada = fechaIn;
-                            resv.FechaSalida = fechaFin;
-                            resv.CantPersonas = cantPersonas;
+                            //resv.FechaEntrada = fechaIn;
+                            //resv.FechaSalida = fechaFin;
+                            //resv.CantPersonas = cantPersonas;
+
+                            Reserva reservaActualizada = new Reserva(resv.Cliente, cantPersonas, fechaIn, fechaFin);
+                            prop.ListaReservas.Add(reservaActualizada);
                         }
                         else
+                        {
                             prop.ListaReservas.Add(resv);
+                            MessageBox.Show("Fechas ya ocupadas");
+                        }
+
                     }
                     MessageBox.Show("Reserva actualizada con exito");
                 }
                 i++;
             }
-
-            if (!encontrada)
-            {
-                MessageBox.Show("Reserva no encontrada");
-            }
-
 
         }
 
@@ -626,6 +628,36 @@ namespace TP2_Lab
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 ImportarCalendarioDeReservas(openFileDialog1.FileName);
+            }
+            MostrarCalendario(openFileDialog1.FileName);
+        }
+
+        private void MostrarCalendario(string path)
+        {
+            FReservaImportada vReservaImportada = new FReservaImportada();
+            vReservaImportada.dGReservaImportada.RowHeadersVisible = false;
+            openFileDialog1.Filter = "archivo de valores separados por coma (*.csv) | *.csv";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                
+                FileStream miArchivo = new FileStream(path, FileMode.Open, FileAccess.Read);
+                StreamReader sr = new StreamReader(miArchivo);
+
+                string renglon;
+                while (!sr.EndOfStream)
+                {
+                    renglon = sr.ReadLine();
+                    int filaIndex = vReservaImportada.dGReservaImportada.Rows.Add();
+                    DataGridViewRow fila = vReservaImportada.dGReservaImportada.Rows[filaIndex];
+                    string[] datos = renglon.Split(';');
+                    for (int i = 0; i < datos.Length; i++)
+                    {
+                        fila.Cells[i].Value = datos[i];
+                    }
+                }
+                vReservaImportada.ShowDialog();
+                sr.Close();
+                miArchivo.Close();
             }
         }
 

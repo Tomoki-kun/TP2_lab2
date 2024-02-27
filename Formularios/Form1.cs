@@ -1136,6 +1136,11 @@ namespace TP2_Lab
             return buscado;
         }
 
+        private void cbHabilitar_CheckedChanged(object sender, EventArgs e)
+        {
+            Calendar.Enabled = !Calendar.Enabled;
+        }
+
         #endregion
 
         #region Ventana de Graficos
@@ -1249,9 +1254,5 @@ namespace TP2_Lab
         }
         #endregion
 
-        private void cbHabilitar_CheckedChanged(object sender, EventArgs e)
-        {
-            Calendar.Enabled = !Calendar.Enabled;
-        }
     }
 }

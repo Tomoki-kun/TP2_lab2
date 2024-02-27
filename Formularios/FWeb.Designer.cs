@@ -37,7 +37,7 @@
             // 
             this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.webBrowser1.Margin = new System.Windows.Forms.Padding(4);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(27, 25);
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(1067, 554);
@@ -47,7 +47,7 @@
             // 
             this.wBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.wBrowser.Location = new System.Drawing.Point(0, 0);
-            this.wBrowser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.wBrowser.Margin = new System.Windows.Forms.Padding(4);
             this.wBrowser.MinimumSize = new System.Drawing.Size(27, 25);
             this.wBrowser.Name = "wBrowser";
             this.wBrowser.Size = new System.Drawing.Size(1067, 554);
@@ -61,9 +61,9 @@
             this.Controls.Add(this.wBrowser);
             this.Controls.Add(this.webBrowser1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FWeb";
-            this.Text = "ReservasTech";
+            this.Text = "Reservas Tech";
             this.ResumeLayout(false);
 
         }

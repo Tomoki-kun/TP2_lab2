@@ -532,9 +532,9 @@ namespace TP2_Lab
             fModificarReserva modificar = new fModificarReserva();
             try
             {
-                string miCliente = DGReservas.SelectedRows[0].Cells[0].Value.ToString();
+                string miCliente = DGReservas.SelectedRows[0].Cells[1].Value.ToString();
                 Propiedad prop = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
-                int reservado = Convert.ToInt32(DGReservas.SelectedRows[0].Cells[1].Value);
+                int reservado = Convert.ToInt32(DGReservas.SelectedRows[0].Cells[2].Value);
                 int i = 0;
                 bool encontrado = false;
                 while (!encontrado && i < prop.ListaReservas.Count)
@@ -587,8 +587,9 @@ namespace TP2_Lab
         {
             if (DGReservas.Rows.Count > 0)
             {
-                string nombre = DGReservas.SelectedRows[0].Cells[0].Value.ToString();
-                int nroReserv = Convert.ToInt32(DGReservas.SelectedRows[0].Cells[1].Value);
+                Reserva reserva = (Reserva)DGReservas.SelectedRows[0].Cells[0].Value;
+                string nombre = reserva.Cliente.ToString();
+                int nroReserv = reserva.NumeroReserva;
                 Propiedad prop = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
                 int i = 0;
                 bool eliminado = false;
@@ -881,30 +882,37 @@ namespace TP2_Lab
         private void imprimirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FTicket nuevoTicket = new FTicket();
-            if (miReserva != null && prop != null)
+
+            try
             {
-                if (prop is Habitaciones)
-                    nuevoTicket.lBticket.Items.Add("\n\tNro de habitacion: " + prop.Nro.ToString() + "\n\tTipo de Habitacion" + ((Habitaciones)prop).TipoHabitacion);
-                else
+                Reserva miReserva = (Reserva)DGReservas.SelectedRows[0].Cells[0].Value;
+                Propiedad prop = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
 
-                    nuevoTicket.lBticket.Items.Add("\n\tNro: " + prop.Nro);
-                nuevoTicket.lBticket.Items.Add("Datos de alojamiento: \n\tDireccion:" + prop.Direccion);
-                nuevoTicket.lBticket.Items.Add("\nPersonas admitidas: " + miReserva.CantPersonas);
-                nuevoTicket.lBticket.Items.Add("--------------------------------------------------------------------------------------");
-                nuevoTicket.lBticket.Items.Add("\nCliente: \n\tNombre: " + miReserva.Cliente + "\n\tDNI: " + miReserva.Cliente.DNI.ToString());
-                nuevoTicket.lBticket.Items.Add("Fecha de Nacimiento: " + miReserva.Cliente.FechaNacimiento.ToString("dd/MM/yyyy"));
-                nuevoTicket.lBticket.Items.Add("--------------------------------------------------------------------------------------");
-                nuevoTicket.lBticket.Items.Add("\nFecha y Hora reserva: " + miReserva.Realizado.ToString("U"));
-                nuevoTicket.lBticket.Items.Add("\nFecha CheckIn: " + miReserva.FechaEntrada.ToString("dd/MM/yyyy") + "\nFecha CheckOut: " + miReserva.FechaSalida.ToString("dd/MM/yyyy"));
-                nuevoTicket.lBticket.Items.Add("--------------------------------------------------------------------------------------");
-                nuevoTicket.lBticket.Items.Add("\nCosto por día: $" + prop.PrecioBasico.ToString());
-                nuevoTicket.lBticket.Items.Add("\nCosto total: $" + miReserva.PrecioFinal.ToString("00.0"));
+                if (miReserva != null && prop != null)
+                {
+                    if (prop is Habitaciones)
+                        nuevoTicket.lBticket.Items.Add("\n\tNro de habitacion: " + prop.Nro.ToString() + "\n\tTipo de Habitacion" + ((Habitaciones)prop).TipoHabitacion);
+                    else
 
-                Bitmap bitmap = new Bitmap(prop.Imagenes[0], new Size(125, 125));
-                nuevoTicket.pictureBox.Image = bitmap;
-                nuevoTicket.ShowDialog();
+                        nuevoTicket.lBticket.Items.Add("\n\tNro: " + prop.Nro);
+                    nuevoTicket.lBticket.Items.Add("Datos de alojamiento: \n\tDireccion:" + prop.Direccion);
+                    nuevoTicket.lBticket.Items.Add("\nPersonas admitidas: " + miReserva.CantPersonas);
+                    nuevoTicket.lBticket.Items.Add("--------------------------------------------------------------------------------------");
+                    nuevoTicket.lBticket.Items.Add("\nCliente: \n\tNombre: " + miReserva.Cliente + "\n\tDNI: " + miReserva.Cliente.DNI.ToString());
+                    nuevoTicket.lBticket.Items.Add("Fecha de Nacimiento: " + miReserva.Cliente.FechaNacimiento.ToString("dd/MM/yyyy"));
+                    nuevoTicket.lBticket.Items.Add("--------------------------------------------------------------------------------------");
+                    nuevoTicket.lBticket.Items.Add("\nFecha y Hora reserva: " + miReserva.Realizado.ToString("U"));
+                    nuevoTicket.lBticket.Items.Add("\nFecha CheckIn: " + miReserva.FechaEntrada.ToString("dd/MM/yyyy") + "\nFecha CheckOut: " + miReserva.FechaSalida.ToString("dd/MM/yyyy"));
+                    nuevoTicket.lBticket.Items.Add("--------------------------------------------------------------------------------------");
+                    nuevoTicket.lBticket.Items.Add("\nCosto por día: $" + prop.PrecioBasico.ToString());
+                    nuevoTicket.lBticket.Items.Add("\nCosto total: $" + miReserva.PrecioFinal.ToString("00.0"));
+
+                    Bitmap bitmap = new Bitmap(prop.Imagenes[0], new Size(125, 125));
+                    nuevoTicket.pictureBox.Image = bitmap;
+                    nuevoTicket.ShowDialog();
+                }
             }
-            else
+            catch (ArgumentOutOfRangeException)
             {
                 MessageBox.Show("Error, no hay ninguna reserva");
             }
@@ -1142,12 +1150,13 @@ namespace TP2_Lab
                 int filaIndex = DGReservas.Rows.Add();
                 DataGridViewRow fila = DGReservas.Rows[filaIndex];
 
-                fila.Cells[0].Value = cliente;
-                fila.Cells[1].Value = nroReserva;
-                fila.Cells[2].Value = ingreso;
-                fila.Cells[3].Value = egreso;
-                fila.Cells[4].Value = reservacion;
-                fila.Cells[5].Value = cantHuesped;
+                fila.Cells[0].Value = reserva;
+                fila.Cells[1].Value = cliente;
+                fila.Cells[2].Value = nroReserva;
+                fila.Cells[3].Value = ingreso;
+                fila.Cells[4].Value = egreso;
+                fila.Cells[5].Value = reservacion;
+                fila.Cells[6].Value = cantHuesped;
             }
         }
 

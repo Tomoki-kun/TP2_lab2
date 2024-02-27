@@ -85,6 +85,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnModificarPropiedad = new System.Windows.Forms.Button();
             this.DGReservas = new System.Windows.Forms.DataGridView();
+            this.Reserva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NumReserva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ingreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -123,13 +124,14 @@
             // 
             // btnBuscar
             // 
+            this.btnBuscar.BackColor = System.Drawing.Color.Cyan;
             this.btnBuscar.Location = new System.Drawing.Point(63, 609);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(100, 49);
             this.btnBuscar.TabIndex = 2;
             this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.UseVisualStyleBackColor = false;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // Calendar
@@ -235,12 +237,13 @@
             // 
             // btnModificarReserva
             // 
+            this.btnModificarReserva.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.btnModificarReserva.Location = new System.Drawing.Point(188, 611);
             this.btnModificarReserva.Name = "btnModificarReserva";
             this.btnModificarReserva.Size = new System.Drawing.Size(100, 47);
             this.btnModificarReserva.TabIndex = 17;
             this.btnModificarReserva.Text = "Modificar Reserva";
-            this.btnModificarReserva.UseVisualStyleBackColor = true;
+            this.btnModificarReserva.UseVisualStyleBackColor = false;
             this.btnModificarReserva.Click += new System.EventHandler(this.btnModificarReserva_Click);
             // 
             // btnLimpiar
@@ -275,24 +278,26 @@
             // 
             // btnEliminarReserva
             // 
+            this.btnEliminarReserva.BackColor = System.Drawing.Color.Red;
             this.btnEliminarReserva.Location = new System.Drawing.Point(188, 664);
             this.btnEliminarReserva.Margin = new System.Windows.Forms.Padding(4);
             this.btnEliminarReserva.Name = "btnEliminarReserva";
             this.btnEliminarReserva.Size = new System.Drawing.Size(100, 49);
             this.btnEliminarReserva.TabIndex = 16;
             this.btnEliminarReserva.Text = "Eliminar Reserva";
-            this.btnEliminarReserva.UseVisualStyleBackColor = true;
+            this.btnEliminarReserva.UseVisualStyleBackColor = false;
             this.btnEliminarReserva.Click += new System.EventHandler(this.btnEliminarReserva_Click);
             // 
             // btnReservar
             // 
+            this.btnReservar.BackColor = System.Drawing.Color.Lime;
             this.btnReservar.Location = new System.Drawing.Point(63, 664);
             this.btnReservar.Margin = new System.Windows.Forms.Padding(4);
             this.btnReservar.Name = "btnReservar";
             this.btnReservar.Size = new System.Drawing.Size(100, 49);
             this.btnReservar.TabIndex = 15;
             this.btnReservar.Text = "Reservar";
-            this.btnReservar.UseVisualStyleBackColor = true;
+            this.btnReservar.UseVisualStyleBackColor = false;
             this.btnReservar.Click += new System.EventHandler(this.btnReservar_Click);
             // 
             // label4
@@ -458,6 +463,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.Black;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
@@ -466,19 +472,22 @@
             this.verToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1980, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(1980, 24);
             this.menuStrip1.TabIndex = 16;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // archivoToolStripMenuItem
             // 
+            this.archivoToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
             this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.calendarioToolStripMenuItem,
             this.imprimirToolStripMenuItem,
             this.exportarDatosToolStripMenuItem,
             this.salirToolStripMenuItem});
+            this.archivoToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 7.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.archivoToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(65, 21);
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.archivoToolStripMenuItem.Text = "Archivo";
             // 
             // calendarioToolStripMenuItem
@@ -487,41 +496,41 @@
             this.importarToolStripMenuItem,
             this.exportarToolStripMenuItem});
             this.calendarioToolStripMenuItem.Name = "calendarioToolStripMenuItem";
-            this.calendarioToolStripMenuItem.Size = new System.Drawing.Size(177, 26);
+            this.calendarioToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.calendarioToolStripMenuItem.Text = "Calendario";
             // 
             // importarToolStripMenuItem
             // 
             this.importarToolStripMenuItem.Name = "importarToolStripMenuItem";
-            this.importarToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
+            this.importarToolStripMenuItem.Size = new System.Drawing.Size(138, 26);
             this.importarToolStripMenuItem.Text = "Importar";
             this.importarToolStripMenuItem.Click += new System.EventHandler(this.importarToolStripMenuItem_Click);
             // 
             // exportarToolStripMenuItem
             // 
             this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
-            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
+            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(138, 26);
             this.exportarToolStripMenuItem.Text = "Exportar";
             this.exportarToolStripMenuItem.Click += new System.EventHandler(this.exportarToolStripMenuItem_Click);
             // 
             // imprimirToolStripMenuItem
             // 
             this.imprimirToolStripMenuItem.Name = "imprimirToolStripMenuItem";
-            this.imprimirToolStripMenuItem.Size = new System.Drawing.Size(177, 26);
+            this.imprimirToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.imprimirToolStripMenuItem.Text = "Imprimir";
             this.imprimirToolStripMenuItem.Click += new System.EventHandler(this.imprimirToolStripMenuItem_Click);
             // 
             // exportarDatosToolStripMenuItem
             // 
             this.exportarDatosToolStripMenuItem.Name = "exportarDatosToolStripMenuItem";
-            this.exportarDatosToolStripMenuItem.Size = new System.Drawing.Size(177, 26);
+            this.exportarDatosToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.exportarDatosToolStripMenuItem.Text = "Exportar datos";
             this.exportarDatosToolStripMenuItem.Click += new System.EventHandler(this.exportarDatosToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(177, 26);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -530,21 +539,23 @@
             this.ayudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.verAyudaToolStripMenuItem,
             this.acercaDeToolStripMenuItem});
+            this.ayudaToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 7.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ayudaToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
-            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(58, 21);
+            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.ayudaToolStripMenuItem.Text = "Ayuda";
             // 
             // verAyudaToolStripMenuItem
             // 
             this.verAyudaToolStripMenuItem.Name = "verAyudaToolStripMenuItem";
-            this.verAyudaToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
+            this.verAyudaToolStripMenuItem.Size = new System.Drawing.Size(143, 26);
             this.verAyudaToolStripMenuItem.Text = "Ver ayuda";
             this.verAyudaToolStripMenuItem.Click += new System.EventHandler(this.verAyudaToolStripMenuItem_Click);
             // 
             // acercaDeToolStripMenuItem
             // 
             this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(143, 26);
             this.acercaDeToolStripMenuItem.Text = "Acerca de";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
@@ -554,28 +565,30 @@
             this.crearUsuarioToolStripMenuItem,
             this.cambiarContraseñaToolStripMenuItem,
             this.eliminarUsuarioToolStripMenuItem});
+            this.usuarioToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 7.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usuarioToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.usuarioToolStripMenuItem.Name = "usuarioToolStripMenuItem";
-            this.usuarioToolStripMenuItem.Size = new System.Drawing.Size(67, 21);
+            this.usuarioToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
             this.usuarioToolStripMenuItem.Text = "Usuario";
             // 
             // crearUsuarioToolStripMenuItem
             // 
             this.crearUsuarioToolStripMenuItem.Name = "crearUsuarioToolStripMenuItem";
-            this.crearUsuarioToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
+            this.crearUsuarioToolStripMenuItem.Size = new System.Drawing.Size(197, 26);
             this.crearUsuarioToolStripMenuItem.Text = "Crear Usuario";
             this.crearUsuarioToolStripMenuItem.Click += new System.EventHandler(this.crearUsuarioToolStripMenuItem_Click);
             // 
             // cambiarContraseñaToolStripMenuItem
             // 
             this.cambiarContraseñaToolStripMenuItem.Name = "cambiarContraseñaToolStripMenuItem";
-            this.cambiarContraseñaToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
+            this.cambiarContraseñaToolStripMenuItem.Size = new System.Drawing.Size(197, 26);
             this.cambiarContraseñaToolStripMenuItem.Text = "Cambiar contraseña";
             this.cambiarContraseñaToolStripMenuItem.Click += new System.EventHandler(this.cambiarContraseñaToolStripMenuItem_Click);
             // 
             // eliminarUsuarioToolStripMenuItem
             // 
             this.eliminarUsuarioToolStripMenuItem.Name = "eliminarUsuarioToolStripMenuItem";
-            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
+            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(197, 26);
             this.eliminarUsuarioToolStripMenuItem.Text = "Eliminar Usuario";
             this.eliminarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.eliminarUsuarioToolStripMenuItem_Click);
             // 
@@ -583,8 +596,10 @@
             // 
             this.verToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.graficosToolStripMenuItem});
+            this.verToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 7.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.verToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.verToolStripMenuItem.Name = "verToolStripMenuItem";
-            this.verToolStripMenuItem.Size = new System.Drawing.Size(41, 21);
+            this.verToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.verToolStripMenuItem.Text = "Ver";
             // 
             // graficosToolStripMenuItem
@@ -593,20 +608,20 @@
             this.sectoresToolStripMenuItem,
             this.barraToolStripMenuItem});
             this.graficosToolStripMenuItem.Name = "graficosToolStripMenuItem";
-            this.graficosToolStripMenuItem.Size = new System.Drawing.Size(138, 26);
+            this.graficosToolStripMenuItem.Size = new System.Drawing.Size(134, 26);
             this.graficosToolStripMenuItem.Text = "Graficos";
             // 
             // sectoresToolStripMenuItem
             // 
             this.sectoresToolStripMenuItem.Name = "sectoresToolStripMenuItem";
-            this.sectoresToolStripMenuItem.Size = new System.Drawing.Size(140, 26);
+            this.sectoresToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.sectoresToolStripMenuItem.Text = "Sectores";
             this.sectoresToolStripMenuItem.Click += new System.EventHandler(this.sectoresToolStripMenuItem_Click);
             // 
             // barraToolStripMenuItem
             // 
             this.barraToolStripMenuItem.Name = "barraToolStripMenuItem";
-            this.barraToolStripMenuItem.Size = new System.Drawing.Size(140, 26);
+            this.barraToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.barraToolStripMenuItem.Text = "Barra";
             this.barraToolStripMenuItem.Click += new System.EventHandler(this.barraToolStripMenuItem_Click);
             // 
@@ -632,6 +647,7 @@
             this.DGReservas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGReservas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGReservas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Reserva,
             this.Cliente,
             this.NumReserva,
             this.Ingreso,
@@ -647,6 +663,14 @@
             this.DGReservas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGReservas.Size = new System.Drawing.Size(1500, 273);
             this.DGReservas.TabIndex = 19;
+            // 
+            // Reserva
+            // 
+            this.Reserva.HeaderText = "Reserva";
+            this.Reserva.MinimumWidth = 6;
+            this.Reserva.Name = "Reserva";
+            this.Reserva.ReadOnly = true;
+            this.Reserva.Visible = false;
             // 
             // Cliente
             // 
@@ -696,6 +720,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1980, 770);
             this.Controls.Add(this.DGReservas);
             this.Controls.Add(this.btnModificarPropiedad);
@@ -708,7 +733,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
-            this.Text = "Tech Arrendamientos";
+            this.Text = "Reservas Tech";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
@@ -779,14 +804,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Dueño;
         private System.Windows.Forms.DataGridViewButtonColumn VerImagen;
         private System.Windows.Forms.DataGridView DGReservas;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton rbHotel;
+        private System.Windows.Forms.CheckBox cbHabilitar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Reserva;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn NumReserva;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ingreso;
         private System.Windows.Forms.DataGridViewTextBoxColumn Egreso;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaReservacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn CantHuespedes;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton rbHotel;
-        private System.Windows.Forms.CheckBox cbHabilitar;
     }
 }

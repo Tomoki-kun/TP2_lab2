@@ -71,7 +71,7 @@ namespace TP2_Lab
             // dtFechaIn
             // 
             this.dtFechaIn.Location = new System.Drawing.Point(172, 89);
-            this.dtFechaIn.MaxDate = new System.DateTime(2024, 1, 31, 0, 0, 0, 0);
+            this.dtFechaIn.MaxDate = new System.DateTime(2024, 3, 31, 0, 0, 0, 0);
             this.dtFechaIn.MinDate = new System.DateTime(2023, 11, 1, 0, 0, 0, 0);
             this.dtFechaIn.Name = "dtFechaIn";
             this.dtFechaIn.Size = new System.Drawing.Size(200, 22);
@@ -81,7 +81,7 @@ namespace TP2_Lab
             // dtFechaFin
             // 
             this.dtFechaFin.Location = new System.Drawing.Point(172, 141);
-            this.dtFechaFin.MaxDate = new System.DateTime(2024, 1, 31, 0, 0, 0, 0);
+            this.dtFechaFin.MaxDate = new System.DateTime(2024, 3, 31, 0, 0, 0, 0);
             this.dtFechaFin.MinDate = new System.DateTime(2023, 11, 1, 0, 0, 0, 0);
             this.dtFechaFin.Name = "dtFechaFin";
             this.dtFechaFin.Size = new System.Drawing.Size(200, 22);

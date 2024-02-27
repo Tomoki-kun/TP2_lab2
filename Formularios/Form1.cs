@@ -39,7 +39,6 @@ namespace TP2_Lab
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            //nuevoS = new Sistema();
             if (nuevoS.CantUsuarios == 0)
             {
                 usuario = new Administrador("Admin", "Admin");
@@ -87,6 +86,13 @@ namespace TP2_Lab
                 }
                 RefreshDataGridView();
                 RefrescarDGReservas();
+
+                foreach(Propiedad propiedad in nuevoS.ListaPropiedad)
+                    foreach(Reserva reserva in propiedad.ListaReservas)
+                    {
+                        listaDatos.Add(reserva);
+                        listaDatos.Add(reserva.Cliente.Exportar());
+                    }
             }
             else if (presiono == DialogResult.Cancel)
             {
@@ -634,7 +640,7 @@ namespace TP2_Lab
 
         private void exportarDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ExportarDatos(listaDatos, miArchivo);
+            ExportarDatos(listaDatos, "ClientesReservas.dat");
             MessageBox.Show("Datos exportados correctamente", "Operacion exitosa");
         }
 

@@ -72,6 +72,7 @@ namespace TP2_Lab
         {
             if (images.Count == 0)
             {
+                try { 
                 if (rBCasas.Checked)
                 {
                     Image image = Image.FromFile(Application.StartupPath + "\\Resource\\CasaDefault.jpg");
@@ -81,6 +82,11 @@ namespace TP2_Lab
                 {
                     Image image = Image.FromFile( Application.StartupPath + "\\Resource\\HotelDefault.jpg");
                     images.Add(image);
+                }
+             }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
         }

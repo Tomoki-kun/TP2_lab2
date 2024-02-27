@@ -87,8 +87,8 @@ namespace TP2_Lab
                 RefreshDataGridView();
                 RefrescarDGReservas();
 
-                foreach(Propiedad propiedad in nuevoS.ListaPropiedad)
-                    foreach(Reserva reserva in propiedad.ListaReservas)
+                foreach (Propiedad propiedad in nuevoS.ListaPropiedad)
+                    foreach (Reserva reserva in propiedad.ListaReservas)
                     {
                         listaDatos.Add(reserva);
                         listaDatos.Add(reserva.Cliente);
@@ -390,9 +390,11 @@ namespace TP2_Lab
                     }
 
                     TimeSpan dias = Calendar.SelectionEnd - Calendar.SelectionStart;
-                    if (Calendar.Enabled)
+                    if (cbHabilitar.Checked)
+                    {
                         if (nuevoS.Reservado(Calendar.SelectionStart, Calendar.SelectionEnd, miProp))
                             fechas = false;
+                    }
 
                     if (numCantHuespedes.Value > 0 && numCantHuespedes.Value > miProp.CantCamas)
                         huespedes = false;
@@ -408,21 +410,27 @@ namespace TP2_Lab
                     }
                     else if (loc && fechas && huespedes && tipoCasa && miProp is Casa)
                     {
-                        if (dias.Days >= 1 && dias.Days <= 3 && miProp is CasaFindeSemana)
+                        if (cbHabilitar.Checked)
                         {
-                            bool esFinde = true;
-                            int j = 0;
-                            while (j < dias.Days && esFinde)
+
+                            if (dias.Days >= 1 && dias.Days <= 3 && miProp is CasaFindeSemana)
                             {
-                                if (!(Calendar.SelectionEnd.DayOfWeek == DayOfWeek.Friday ||
-                                    Calendar.SelectionEnd.DayOfWeek == DayOfWeek.Saturday ||
-                                    Calendar.SelectionEnd.DayOfWeek == DayOfWeek.Sunday))
-                                    esFinde = false;
-                                j++;
+                                bool esFinde = true;
+                                int j = 0;
+                                while (j < dias.Days && esFinde)
+                                {
+                                    if (!(Calendar.SelectionEnd.DayOfWeek == DayOfWeek.Friday ||
+                                        Calendar.SelectionEnd.DayOfWeek == DayOfWeek.Saturday ||
+                                        Calendar.SelectionEnd.DayOfWeek == DayOfWeek.Sunday))
+                                        esFinde = false;
+                                    j++;
+                                }
+                                if (esFinde)
+                                    disponibles.Add(miProp);
                             }
-                            if (esFinde)
-                                disponibles.Add(miProp);
                         }
+                        if (!cbHabilitar.Checked)
+                            disponibles.Add(miProp);
                         else if (!(miProp is CasaFindeSemana))
                             disponibles.Add((Casa)miProp);
 
@@ -472,10 +480,10 @@ namespace TP2_Lab
                         prop = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
                         if (!nuevoS.Reservado(inicio, fin, prop) && prop != null)
                         {
-                            if (prop is CasaFindeSemana && 
-                                ((inicio.DayOfWeek == DayOfWeek.Friday || inicio.DayOfWeek == DayOfWeek.Saturday|| inicio.DayOfWeek == DayOfWeek.Sunday) && 
-                                (fin.DayOfWeek == DayOfWeek.Friday || fin.DayOfWeek == DayOfWeek.Saturday || fin.DayOfWeek == DayOfWeek.Sunday ))
-                                 || prop is Casa && !(prop is CasaFindeSemana) && numeroDias >= ((Casa)prop).DiasPermitidos || prop is Habitaciones)
+                            if (prop is CasaFindeSemana &&
+                                ((inicio.DayOfWeek == DayOfWeek.Friday || inicio.DayOfWeek == DayOfWeek.Saturday || inicio.DayOfWeek == DayOfWeek.Sunday) &&
+                                (fin.DayOfWeek == DayOfWeek.Friday || fin.DayOfWeek == DayOfWeek.Saturday || fin.DayOfWeek == DayOfWeek.Sunday))
+                                 || prop is Casa && !(prop is CasaFindeSemana) || prop is Habitaciones)
                             {
                                 miReserva = new Reserva(miCliente, huespedes, inicio, fin);
                                 double costoFinal = 0;
@@ -571,7 +579,7 @@ namespace TP2_Lab
                             }
 
                         }
-                        if( dR == DialogResult.Cancel )
+                        if (dR == DialogResult.Cancel)
                         {
                             prop.ListaReservas.Add(resv);
                             MessageBox.Show("Modificación Cancelada");
@@ -1142,27 +1150,34 @@ namespace TP2_Lab
         private void RefrescarDGReservas()
         {
             DGReservas.Rows.Clear();
-
-            Propiedad propiedad = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
-            foreach (Reserva reserva in propiedad.ListaReservas)
+            try
             {
-                string cliente = reserva.Cliente.ToString();
-                string nroReserva = reserva.NumeroReserva.ToString();
-                string ingreso = reserva.FechaEntrada.ToString("U");
-                string egreso = reserva.FechaSalida.ToString("U");
-                string reservacion = reserva.Realizado.ToString("U");
-                string cantHuesped = reserva.CantPersonas.ToString();
+                Propiedad propiedad = (Propiedad)DGPropiedades.SelectedRows[0].Cells[0].Value;
+                foreach (Reserva reserva in propiedad.ListaReservas)
+                {
+                    string cliente = reserva.Cliente.ToString();
+                    string nroReserva = reserva.NumeroReserva.ToString();
+                    string ingreso = reserva.FechaEntrada.ToString("U");
+                    string egreso = reserva.FechaSalida.ToString("U");
+                    string reservacion = reserva.Realizado.ToString("U");
+                    string cantHuesped = reserva.CantPersonas.ToString();
 
-                int filaIndex = DGReservas.Rows.Add();
-                DataGridViewRow fila = DGReservas.Rows[filaIndex];
+                    int filaIndex = DGReservas.Rows.Add();
+                    DataGridViewRow fila = DGReservas.Rows[filaIndex];
 
-                fila.Cells[0].Value = reserva;
-                fila.Cells[1].Value = cliente;
-                fila.Cells[2].Value = nroReserva;
-                fila.Cells[3].Value = ingreso;
-                fila.Cells[4].Value = egreso;
-                fila.Cells[5].Value = reservacion;
-                fila.Cells[6].Value = cantHuesped;
+                    fila.Cells[0].Value = reserva;
+                    fila.Cells[1].Value = cliente;
+                    fila.Cells[2].Value = nroReserva;
+                    fila.Cells[3].Value = ingreso;
+                    fila.Cells[4].Value = egreso;
+                    fila.Cells[5].Value = reservacion;
+                    fila.Cells[6].Value = cantHuesped;
+                }
+
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+
             }
         }
 

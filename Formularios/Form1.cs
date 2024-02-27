@@ -91,7 +91,7 @@ namespace TP2_Lab
                     foreach(Reserva reserva in propiedad.ListaReservas)
                     {
                         listaDatos.Add(reserva);
-                        listaDatos.Add(reserva.Cliente.Exportar());
+                        listaDatos.Add(reserva.Cliente);
                     }
             }
             else if (presiono == DialogResult.Cancel)

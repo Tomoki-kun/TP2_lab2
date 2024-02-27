@@ -14,7 +14,7 @@ namespace TP2_Lab
     public class Reserva : IComparable, IExportable
     {
         private Cliente cliente;
-        private static int numStatic = 0;
+        static int numStatic = 0;
         private int numReserva;
         private DateTime fechaEntrada;
         private DateTime fechaSalida;
@@ -57,7 +57,6 @@ namespace TP2_Lab
         public int NumeroReserva
         {
             get { return numReserva; }
-            set {  numReserva = value; }
         }
         #endregion
 
@@ -65,10 +64,10 @@ namespace TP2_Lab
         public Reserva(Cliente cliente,  int cantidad, DateTime fechaEntrada, DateTime fechaSalida)
         {
             Cliente = cliente;
-            this.numReserva = numStatic;
             this.fechaEntrada = fechaEntrada;
             this.fechaSalida = fechaSalida;
             cantPersonas = cantidad;
+            numReserva= ++numStatic;
         }
 
         #region Metodos
@@ -78,7 +77,7 @@ namespace TP2_Lab
         }
         public override string ToString()
         {
-            return numReserva.ToString() + ";" + FechaEntrada.ToString() + ";" + 
+            return numReserva + ";" + FechaEntrada.ToString() + ";" + 
                 FechaSalida.ToString() + ";" + realizado.ToString() + ";" + cantPersonas.ToString() + ";" + cliente.DNI.ToString();
         }
 

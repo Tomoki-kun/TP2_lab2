@@ -693,7 +693,7 @@ namespace TP2_Lab
                 {
                     linea = sR.ReadLine();
                     datos = linea.Split(';');
-                    int numReserva = Convert.ToInt32(datos[0]);
+                    //int numReserva = Convert.ToInt32(datos[0]);
                     DateTime fechaI = Convert.ToDateTime(datos[1]);
                     DateTime fechaF = Convert.ToDateTime(datos[2]);
                     DateTime realizado = Convert.ToDateTime(datos[3]);
@@ -704,7 +704,6 @@ namespace TP2_Lab
                     if (nuevoCliente != null)
                     {
                         Reserva nuevaRes = new Reserva(nuevoCliente, cantidad, fechaI, fechaF);
-                        nuevaRes.NumeroReserva = numReserva;
                         reservas.Add(nuevaRes);
                         MessageBox.Show("Se ha importado correctamente su calendario");
                     }

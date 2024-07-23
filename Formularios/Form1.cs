@@ -423,7 +423,7 @@ namespace TP2_Lab
                         {
                             if (miProp is CasaFindeSemana)
                             {
-                                if(!(inicio.DayOfWeek != DayOfWeek.Friday || fin.DayOfWeek != DayOfWeek.Sunday && dias != 3))
+                                if (!(inicio.DayOfWeek != DayOfWeek.Friday || fin.DayOfWeek != DayOfWeek.Sunday && dias != 3))
                                 {
                                     disponibles.Add(miProp);
                                 }
@@ -502,40 +502,60 @@ namespace TP2_Lab
                 {
                     costoFinal = propiedadSeleccionada.CalcularPrecio();
                 }
-
-                if (nuevoC.ShowDialog() == DialogResult.OK)
+                bool dniInvalido = false;
+                bool cancelado = false;
+                do
                 {
-                    string nombre;
-                    long dni;
-                    DateTime fechaNac = new DateTime();
-                    if (nuevoC.tBnombreC.Text == "" || numCantHuespedes.Text == "")
+                    if (nuevoC.ShowDialog() == DialogResult.OK)
                     {
-                        MessageBox.Show("Faltan datos por rellenar");
+                        string nombre;
+                        long dni;
+                        DateTime fechaNac = new DateTime();
+                        if (nuevoC.tBnombreC.Text == "" || numCantHuespedes.Text == "")
+                        {
+                            MessageBox.Show("Faltan datos por rellenar");
+                        }
+                        else
+                        {
+
+                            try
+                            {
+                                nombre = nuevoC.tBnombreC.Text;
+                                dni = (long)nuevoC.numDNI.Value;
+                                fechaNac = nuevoC.dTfechaNac.Value;
+                                Cliente miCliente = new Cliente(nombre, dni, fechaNac);
+                                miReserva = new Reserva(miCliente, huespedes, inicio, fin);
+                                miReserva.PrecioFinal = costoFinal;
+                                miReserva.Realizado = DateTime.Now;
+                                miReserva.Comprobante(propiedadSeleccionada);
+                                propiedadSeleccionada.AgregarReserva(miReserva);
+                                listaDatos.Add(miReserva);
+                                listaDatos.Add(miCliente);
+                                nuevoS.ListaClientes.Add(miCliente);
+                                RefrescarDGReservas();
+                                dniInvalido = false;
+                            }
+                            catch (NumeroDniException ex)
+                            {
+                                nombre = nuevoC.tBnombreC.Text;
+                                dni = (long)nuevoC.numDNI.Value;
+                                fechaNac = nuevoC.dTfechaNac.Value;
+                                dniInvalido = true;
+                                MessageBox.Show(ex.Message);
+                                nuevoC.Dispose();
+                                nuevoC = new FCliente();
+                                nuevoC.tBnombreC.Text = nombre;
+                                nuevoC.numDNI.Value = dni;
+                                nuevoC.dTfechaNac.Value = fechaNac;
+                            }
+
+                        }
                     }
                     else
                     {
-                        try
-                        {
-                            nombre = nuevoC.tBnombreC.Text;
-                            dni = (long)nuevoC.numDNI.Value;
-                            fechaNac = nuevoC.dTfechaNac.Value;
-                            Cliente miCliente = new Cliente(nombre, dni, fechaNac);
-                            miReserva = new Reserva(miCliente, huespedes, inicio, fin);
-                            miReserva.PrecioFinal = costoFinal;
-                            miReserva.Realizado = DateTime.Now;
-                            miReserva.Comprobante(propiedadSeleccionada);
-                            propiedadSeleccionada.AgregarReserva(miReserva);
-                            listaDatos.Add(miReserva);
-                            listaDatos.Add(miCliente);
-                            nuevoS.ListaClientes.Add(miCliente);
-                            RefrescarDGReservas();
-                        }
-                        catch (NumeroDniException ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
+                        cancelado = true;
                     }
-                }
+                } while (dniInvalido && !cancelado);
                 nuevoC.Dispose();
             }
         }

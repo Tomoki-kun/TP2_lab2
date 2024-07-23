@@ -1,179 +1,74 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Casos de usos</title>
-    <link rel="stylesheet" href="styles.css" />
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayuda</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            color:white;
-            background-color: blue;
-            margin: 0;
-            padding: 0;
+            background-color: #7D2181; /* Color de fondo global */
+            font-family: Arial, sans-serif;
         }
 
-        caption {
-            font-size: 100px; 
-            font-weight: bold;
+        .encuadre {
+            background-color: #ffffff; /* Color de fondo de los cuadros */
+            border: 1px solid #cccccc;
+            margin: 40px auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 60%; /* Ancho de los cuadros */
         }
 
-        tr {
-            background-color: black;
+        .titulo {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 10px;
         }
 
+        .parrafo {
+            text-align: justify;
+        }
     </style>
 </head>
 <body>
-    <table style="width:100%" border="1">
-        <caption>
-            Casos de uso
-        </caption>
-        <tr>
-            <td align="center">
-                Caso de uso: Reservar una propiedad
-            </td>
-
-            <td>
-
-                Actor principal: Administrador<br />
-                Proposito: Reservar una propiedad a un cliente <br />
-                Poscondiciones: Queda reservada una propiedad y se registra un cliente<br />
-                Resumen: El administrador registra un cliente y designa una propiedad que no este reservada<br />
-                Curso normal:
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Actor <br />
-
-                1- El administrador busca una propiedad
-                disponible según necesidades del cliente <br />
-                3- El administrador selecciona una propiedad <br />
-                4- El administrador completa los datos del
-                cliente
-
-            </td>
-            <td>
-                Sistema <br />
-
-                2- Informa la lista de propiedades disponibles <br />
-                5- Se guardan los datos del cliente y la reserva
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                Excepciones: <br />
-                3- No se completan todos los datos
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                Curso Alternativo 1: <br />
-                El usuario cancela el proceso en cualquier momento
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                Curso Alternativo 2: <br />
-                No hay propiedades disponibles –Se cancela el proceso-
-            </td>
-        </tr>
-    </table>
-
-    <br />
-
-
-    <table style="width:100%" border="1">
-        <tr>
-            <td align="center">
-                Caso de uso: Cancelar una Reserva
-            </td>
-
-            <td>
-                Actor principal: Administrador <br />
-                Propósito: Cancelar una reserva <br />
-                Poscondiciones: Queda eliminada la reserva del sistema y la propiedad queda habilitada para recibir otras reservas <br />
-                Resumen: El administrador busca un cliente y se elimina la reserva echa con el nombre de esa persona <br />
-                Curso Normal:
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Actor <br />
-                1- El administrador ingresa los datos de la
-                persona <br />
-                2- El administrador selecciona la reserva a cancelar
-            </td>
-            <td>
-                Sistema <br />
-                3- Se cancela la reserva echa por el cliente <br />
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                Excepciones: <br />
-                1- No se completan todos los datos <br />
-                2- No hay reservas registradas
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                Curso Alternativo 1: <br />
-                El usuario cancela el proceso en cualquier momento
-            </td>
-        </tr>
-    </table>
-
-    <br />
-
-    <table style="width:100%" border="1">
-        <tr>
-            <td align="center">
-                Caso de uso: Registrar una propiedad
-            </td>
-
-            <td>
-                Actor principal: Administrador <br />
-                Propósito: Registrar una propiedad <br />
-                Poscondiciones: Queda registrada una propiedad y se registra un propietario si es casa <br />
-                Resumen: El administrador registra una propiedad y un propietario si es casa <br />
-                Curso Normal:
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Actor <br />
-                1- El administrador ingresa los datos de la
-                propiedad <br />
-                2 El administrador determina el tipo de
-                propiedad
-            </td>
-            <td>
-                Sistema <br />
-                3- Verifica el tipo de propiedad. <br />
-                4- Guarda los datos de la nueva propiedad
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                Excepciones: <br />
-                3- No se completan todos los datos
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                Curso Alternativo 1: <br />
-                El usuario cancela el proceso en cualquier momento
-            </td>
-        </tr>
-    </table>
+    <div class="encuadre">
+        <div class="titulo"><strong> Reservar una propiedad </strong></div>
+        <hr>
+        <div class="parrafo">
+            <p>
+                <strong>Acceso: Todos los usuarios</strong> <br />
+                Debe usted seleccionar en la grilla una propiedad <br />
+                Debe tener la caja de "Habilitar Calendario" seleccionada y luego marcar las fechas deseadas junto a la cantidad de huespedes que indicara en la caja numerica <br />
+                Si los datos ingresados son correctos se deplegara una nueva ventana donde debera rellenar los datos del cliente <br />
+                En el caso de que los datos del cliente sean correctos se desplegara una ventana donde visualizara los datos de la reserva y al aceptar podra ver la reserva en la grilla inferior.
+            </p>
+        </div>
+    </div>
+    <div class="encuadre">
+        <div class="titulo"><strong> Eliminar una Reserva </strong></div>
+        <hr>
+        <div class="parrafo">
+            <p>
+                <strong>Acceso: Todos los usuarios</strong> <br />
+                Teniendo usted seleccionado en la grilla una propiedad podra visualizar las reservas de la misma <br />
+                Debera luego seleccionar la reserva visualizada en la grilla inferior que desee eliminar <br />
+                Usted debera realizar click en el boton "Eliminar reserva" y dicha reserva se eliminara. <br />
+            </p>
+        </div>
+    </div>
+    <div class="encuadre">
+        <div class="titulo"><strong> Registrar una propiedad </strong></div>
+        <hr>
+        <div class="parrafo">
+            <p>
+                <strong>Acceso: Solo los administradores</strong><br />
+                Usted debe realizar el loggin como administrador ya que como empleado no podra agregar propiedades<br />
+                Una vez hecho esto se mostrara en pantalla una ventana donde debera hacer click en el boton "agregar propiedad" <br />
+                Luego de hacer click en el boton previamente dicho se desplegara una nueva ventana donde debera completar los datos de dicha propiedad a registrar <br />
+                Luego de completar los datos al aceptar se agregara la propiedad a la grilla y la visualizara, o cancelar el proceso y no se agregara la propiedad.
+            </p>
+        </div>
+    </div>
 </body>
 </html>

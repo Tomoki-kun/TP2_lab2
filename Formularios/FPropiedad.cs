@@ -90,5 +90,10 @@ namespace TP2_Lab
                 }
             }
         }
+
+        private void FPropiedad_Load(object sender, EventArgs e)
+        {
+            cBTipoHabitacion.SelectedIndex = 0;
+        }
     }
 }

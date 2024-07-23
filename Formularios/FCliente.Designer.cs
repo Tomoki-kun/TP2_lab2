@@ -44,20 +44,18 @@ namespace TP2_Lab
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 62);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(31, 50);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 17);
+            this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre:";
             // 
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(44, 199);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Location = new System.Drawing.Point(33, 162);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 28);
+            this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
             this.button1.Text = "Aceptar";
             this.button1.UseVisualStyleBackColor = true;
@@ -65,48 +63,40 @@ namespace TP2_Lab
             // button2
             // 
             this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.Location = new System.Drawing.Point(256, 196);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Location = new System.Drawing.Point(192, 159);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 28);
+            this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 3;
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // tBnombreC
             // 
-            this.tBnombreC.Location = new System.Drawing.Point(161, 62);
-            this.tBnombreC.Margin = new System.Windows.Forms.Padding(4);
+            this.tBnombreC.Location = new System.Drawing.Point(121, 50);
             this.tBnombreC.Name = "tBnombreC";
-            this.tBnombreC.Size = new System.Drawing.Size(195, 22);
+            this.tBnombreC.Size = new System.Drawing.Size(147, 20);
             this.tBnombreC.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(68, 96);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(51, 78);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 17);
+            this.label3.Size = new System.Drawing.Size(29, 13);
             this.label3.TabIndex = 7;
             this.label3.Text = "DNI:";
             // 
             // numDNI
             // 
-            this.numDNI.Location = new System.Drawing.Point(162, 96);
-            this.numDNI.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.numDNI.Location = new System.Drawing.Point(122, 78);
+            this.numDNI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.numDNI.Maximum = new decimal(new int[] {
-            99999999,
-            0,
-            0,
-            0});
-            this.numDNI.Minimum = new decimal(new int[] {
-            10000000,
+            999999999,
             0,
             0,
             0});
             this.numDNI.Name = "numDNI";
-            this.numDNI.Size = new System.Drawing.Size(194, 22);
+            this.numDNI.Size = new System.Drawing.Size(146, 20);
             this.numDNI.TabIndex = 8;
             this.numDNI.Value = new decimal(new int[] {
             10000000,
@@ -116,28 +106,30 @@ namespace TP2_Lab
             // 
             // dTfechaNac
             // 
-            this.dTfechaNac.Location = new System.Drawing.Point(161, 137);
+            this.dTfechaNac.Location = new System.Drawing.Point(121, 111);
+            this.dTfechaNac.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dTfechaNac.MaxDate = new System.DateTime(2018, 12, 31, 0, 0, 0, 0);
             this.dTfechaNac.MinDate = new System.DateTime(1953, 1, 1, 0, 0, 0, 0);
             this.dTfechaNac.Name = "dTfechaNac";
-            this.dTfechaNac.Size = new System.Drawing.Size(195, 22);
+            this.dTfechaNac.Size = new System.Drawing.Size(147, 20);
             this.dTfechaNac.TabIndex = 10;
             this.dTfechaNac.Value = new System.DateTime(2018, 12, 31, 0, 0, 0, 0);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 137);
+            this.label4.Location = new System.Drawing.Point(9, 111);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(143, 17);
+            this.label4.Size = new System.Drawing.Size(109, 13);
             this.label4.TabIndex = 11;
             this.label4.Text = "Fecha de nacimiento:";
             // 
             // FCliente
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(397, 240);
+            this.ClientSize = new System.Drawing.Size(298, 195);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dTfechaNac);
             this.Controls.Add(this.numDNI);
@@ -147,7 +139,6 @@ namespace TP2_Lab
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FCliente";
             this.Text = "FCliente";
             ((System.ComponentModel.ISupportInitialize)(this.numDNI)).EndInit();

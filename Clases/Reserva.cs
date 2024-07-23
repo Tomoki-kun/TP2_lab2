@@ -57,6 +57,7 @@ namespace TP2_Lab
         public int NumeroReserva
         {
             get { return numReserva; }
+            set {  numReserva = value; }
         }
         #endregion
 

@@ -12,7 +12,7 @@ namespace TP2_Lab
     public class Habitaciones:Propiedad
     {
         private int estrellas;
-        private string tipoHabitacion;
+        private int tipoHabitacion;
 
         #region Propiedades
         public int Estrellas
@@ -21,14 +21,14 @@ namespace TP2_Lab
             set { estrellas = value; }
         }
 
-        public string TipoHabitacion
+        public int TipoHabitacion
         {
             get { return tipoHabitacion; }
             set {  tipoHabitacion = value; }
         }
         #endregion
         public Habitaciones(int nro,int estrellas,double precio,string direccion,string localidad, bool[] servicios, int cantCamas,
-            string tipoHabitacion, List<Image> pics) : base(nro,precio,direccion, localidad, cantCamas,servicios, pics)
+            int tipoHabitacion, List<Image> pics) : base(nro,precio,direccion, localidad, cantCamas,servicios, pics)
         {
             this.estrellas = estrellas;
             this.tipoHabitacion = tipoHabitacion;
@@ -52,30 +52,30 @@ namespace TP2_Lab
 
             if (estrellas == 2)
             {
-                if(tipoHabitacion == "Simple")
+                if(tipoHabitacion == 1)
                 {
                     precio = precioBasico;
                 }
-                else if(tipoHabitacion == "Doble")
+                else if(tipoHabitacion == 2)
                 {
                     precio = precioBasico + (precioBasico * 0.8);
                 }
-                else if(tipoHabitacion == "Triple")
+                else if(tipoHabitacion == 3)
                 {
                     precio = precioBasico + (precioBasico * 1.5);
                 }
             }
             else
             {
-                if (tipoHabitacion == "Simple")
+                if (tipoHabitacion == 1)
                 {
                     precio = precioBasico + (precioBasico * 0.4);
                 }
-                else if (tipoHabitacion == "Doble")
+                else if (tipoHabitacion == 2)
                 {
                     precio = precioBasico + (precioBasico * 1.2);
                 }
-                else if (tipoHabitacion == "Triple")
+                else if (tipoHabitacion == 3)
                 {
                     precio = precioBasico + (precioBasico * 1.9);
                 }

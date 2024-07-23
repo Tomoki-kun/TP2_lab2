@@ -90,7 +90,12 @@ namespace TP2_Lab
 
         public int CompareTo(object obj)
         {
-            return this.direccion.CompareTo(((Propiedad)obj).direccion);
+            int ret = this.direccion.CompareTo(((Propiedad)obj).direccion);
+            if (ret == 0)
+            {
+                ret = this.Nro.CompareTo(((Propiedad)obj).Nro);
+            }
+            return ret;
         }
         #endregion
     }
